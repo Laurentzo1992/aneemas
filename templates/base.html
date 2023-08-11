@@ -1,0 +1,175 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<!--   Entête des methadonnées   -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="shortcut icon" href="{% static 'images/app_img/favicon.ico' %}" type="image/x-icon">
+  <link rel="icon" href="{% static 'media/app_img/favicon.ico' %}" type="image/x-icon">
+  <title>{% block title %}{% endblock %}</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.min.css"%}>
+  <link rel="stylesheet" type="text/css" href={% static "DataTables/datatables.min.css"%}/>
+  <!-- Our project just needs Font Awesome Free's Solid and Brand files -->
+  <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+  <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+  <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+  <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+  <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+  <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <!-- jquery cdn and js  local files -->
+  <script src="{% static 'js/scripts.js' %}"></script>
+   <!-- Latest compiled and minified CSS --> 
+   <!-- Latest compiled JavaScript --> 
+  </head>
+<body>
+	{% block navb %}
+	<!-------------Menu lateral gauche-------------------->
+	<div class="row bg-info mb-0 h-10">
+		<div class="dropdown dropstart">
+			<button class="btn btn-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+				<i class="fa-solid fa-user text-white"></i>
+				<span class="text-white font-italic font-weight-bold"></span>
+			</button>
+			<ul class="dropdown-menu bg-info">
+				<li><a class="dropdown-item bg-info text-white font-italic font-weight-bold" href="">changer son mot de passe</a></li>
+				<li><a class="dropdown-item bg-info text-white font-italic font-weight-bold" href="">logout</a></li>
+			</ul>
+		</div>
+	</div>
+		<div class="container-fluid">
+			<div class="row flex-nowrap">
+				<div class="col-auto col-md-3 col-xl-2 px-sm-2 bg-dark">
+
+					<div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
+						<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+							<li class="nav-item">
+								{% url 'home' as accueil %}
+ 								 {% if accueil %}
+								<a href="{{ accueil }}" class="nav-link align-middle px-0">
+									<i class="fas fa-house text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Home</span>
+								</a>
+								{% endif %}
+							</li>
+							
+							<li class="nav-item">
+								<a href="" class="nav-link align-middle px-0">
+									<i class="fas fa-cart-plus text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Niveau de stockage</span>
+								</a>
+							</li>
+							
+							<li class="nav-item">
+								<a href="" class="nav-link align-middle px-0">
+									<i class="fas fa-user text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Client</span>
+								</a>
+							</li>
+						
+							<li class="nav-item">
+								<a href="" class="nav-link align-middle px-0">
+									<i class="fas fa-car text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Transporteur</span>
+								</a>
+							</li>
+							
+							<li class="nav-item">
+								<a href="" class="nav-link align-middle px-0">
+									<i class="fa-solid fa-newspaper text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Article</span>
+								</a>
+							</li>
+							
+							<li class="nav-item">
+								<a href="" class="nav-link align-middle px-0">
+									<i class="fa-solid fa-arrow-trend-up text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Provisions</span>
+								</a>
+							</li>
+						
+							<li class="nav-item">
+								<a href="" class="nav-link align-middle px-0">
+									<i class="fa-solid fa-eye text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Lecture</span>
+								</a>
+							</li>
+							
+							<li class="nav-item">
+								<a href="" class="nav-link align-middle px-0">
+									<i class="fa-solid fa-server text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Commande</span>
+								</a>
+							</li>
+							
+							<li class="nav-item">
+								<a href="" class="nav-link align-middle px-0">
+									<i class="fa-solid fa-car text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Livraison</span>
+								</a>
+							</li>
+							
+							<li class="nav-item">
+								<a href="" class="nav-link align-middle px-0">
+									<i class="fa-solid fa-map text-success"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Suivi</span>
+								</a>
+							</li>
+						
+							
+							{% comment %} <li>
+								<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+									<i class="fas fa-link text-white"></i> <span class="ms-1 d-none d-sm-inline text-white">Gestion</span> </a>
+								<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+									<li class="w-100">
+										<a href="" class="nav-link px-0"> <i class="fas fa-car text-white"></i><span class="d-none d-sm-inline text-white">Niveau de stockage</span> </a>
+									</li>
+								</ul>
+							</li>  {% endcomment %}
+						</ul>
+					</div>
+				</div>
+        {% endblock navb %}
+				<div class="col py-3">
+			
+					{% block main %} 
+
+					{% block search %}
+					
+					{% endblock search %}
+					
+					{% endblock main %}
+
+
+				</div>
+			</div>
+		</div>
+
+        
+    {% block footer %}
+    <div class="container shadow-lg bg-body-tertiary rounded">
+      <footer class="py-1">
+        <div class="d-flex flex-column flex-sm-row justify-content-between py-1 my-1 border-top border-success border-5">
+          <p class="text-secondary font-weight-bold font-italic">&copy; {% now "D-d-M-Y" %} Company, Inc. All rights reserved</p>
+          <ul class="list-unstyled d-flex">
+            <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-facebook" style="font-size: 100%; color: blue;"></i></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-twitter" style="font-size: 100%; color: yellowgreen;"></i></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-whatsapp" style="font-size: 100%; color: green;"></i></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-linkedin" style="font-size: 100%; color: bluesky;"></i></a></li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+    {% endblock footer %}
+
+<script src="{% static 'js/htmx.min.js' %}" defer></script>
+<script src="{% static 'js/scripts.js' %}"></script>
+<!-- bootstrap5 js--> 
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}" ></script>
+  <!-- jquery--> 
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}" ></script>
+<!-- Datatables JS static --> 
+<script type="text/javascript" src="{% static 'DataTables/datatables.min.js' %}"></script>
+<!-- Datatables JS cdn -->
+
+
+
+</body>
+</html>

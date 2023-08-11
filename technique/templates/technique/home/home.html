@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+
+
+{% block main %}
+
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nom et Prenom</th>
+        <th scope="col">Lieu  de naissance</th>
+        <th scope="col">Date de naissance</th>
+        <th scope="col">Genre</th>
+        <th scope="col">Nationalité</th>
+        <th scope="col">Envoyé par</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for result in page_obj %}
+      <tr>
+        <td>{{ result.id }}</td>
+        <td>{{result.nom_prenom}}</td>
+        <td>{{result.Lieu_de_naissance}}</td>
+        <td>{{result.date_de_naissance}}</td>
+        <td>{{result.genre}}</td>
+        <td>{{result.nationalite}}</td>
+        <td>{{result.submitted_by}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; debut</a>
+            <a href="?page={{ page_obj.previous_page_number }}">précédent</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">suivant</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">fin &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+{% endblock main %}
