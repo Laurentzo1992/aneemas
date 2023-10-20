@@ -23,4 +23,4 @@ def home(request):
         context = {"page_obj":page_obj}
     else:
         print("la ressource n'est pas disponible")
-    return render(request, 'technique/home/home.html', context)
+    return render(request, 'technique/home/mobile.html', context)

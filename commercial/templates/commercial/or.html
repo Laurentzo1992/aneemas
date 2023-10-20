@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+
+{% block main %}
+
+
+<h4 class="text-center text-capitalize text-info mt-2">Cours de l'or  selon or.fr </h4>
+
+    <div class="container-fluid">
+        <div class="row">
+            {% for row in data %}
+            <div class="col-3">
+                <div class="card border-danger mb-3" style="max-width: 18rem;">
+                    <div class="card-header">{{row.Devise}}</div>
+                    <div class="card-body text-warning">
+                    <h5 class="card-title">Variation : {{row.Performance}}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>  
+
+
+
+<table class="table shadow-lg p-3 mt-3">
+    <thead>
+        <tr class="bg-success">
+            <th>Devise</th>
+            <th>Cours en once (1once = 31,1g)</th>
+            <th>Cours en K ilogramme</th>
+            <th>Cours1 en gramme</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in data %}
+        <tr>
+            <td>{{row.Devise}}</td>
+            <td>{{ row.once}}</td>  
+            <td>{{ row.kilogramme}}</td>  
+            <td>{{ row.gramme}}</td> 
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+
+{% endblock main %}
+

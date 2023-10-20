@@ -32,108 +32,108 @@
 <body>
 	{% block navb %}
 	<!-------------Menu lateral gauche-------------------->
-	<div class="row bg-info mb-0 h-10">
-		<div class="dropdown dropstart">
-			<button class="btn btn-white dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-				<i class="fa-solid fa-user text-white"></i>
-				<span class="text-white font-italic font-weight-bold"></span>
-			</button>
-			<ul class="dropdown-menu bg-info">
-				<li><a class="dropdown-item bg-info text-white font-italic font-weight-bold" href="">changer son mot de passe</a></li>
-				<li><a class="dropdown-item bg-info text-white font-italic font-weight-bold" href="">logout</a></li>
-			</ul>
-		</div>
-	</div>
+	
 		<div class="container-fluid">
 			<div class="row flex-nowrap">
-				<div class="col-auto col-md-3 col-xl-2 px-sm-2 bg-dark">
+				<div class="col-auto col-md-3 col-xl-2 px-sm-2 border border-5 border-warning shadow-lg p-3 mb-5 bg-body-tertiary rounded">
 
-					<div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 min-vh-100">
-						<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-							<li class="nav-item">
-								{% url 'home' as accueil %}
- 								 {% if accueil %}
-								<a href="{{ accueil }}" class="nav-link align-middle px-0">
-									<i class="fas fa-house text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Home</span>
-								</a>
-								{% endif %}
-							</li>
+						<div class="accordion" id="accordionPanelsStayOpenExample">
+							<div class="accordion-item">
+							  <h2 class="accordion-header">
+								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+								 Commercial
+								</button>
+							  </h2>
+							  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+								<div class="accordion-body">
+									<li class="list-unstyled">
+										<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+											<i class="fas fa-link text-success"></i> <span class="ms-1 d-none d-sm-inline text-success">Commercial</span> </a>
+										<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+											<li class="w-100">
+												<a href="{{ cours_or }}" class="nav-link px-0"> <i class="fas fa-car text-success"></i><span class="d-none d-sm-inline text-success">cours de l'or</span> </a>
+											</li>
+										</ul>
+									</li> 
+								</div>
+							  </div>
+							</div>
+							<div class="accordion-item">
+							  <h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+								 Technique
+								</button>
+							  </h2>
+							  <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+								<div class="accordion-body">
+									<li class="list-unstyled">
+										<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+											<i class="fas fa-link text-success"></i> <span class="ms-1 d-none d-sm-inline text-success">Techique</span> </a>
+										<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+											<li class="w-100">
+												<a href="{% url 'home' %}" class="nav-link px-0"> <i class="fas fa-car text-success"></i><span class="d-none d-sm-inline text-success">données</span> </a>
+											</li>
+										</ul>
+									</li> 
+								</div>
+							  </div>
+							</div>
+							<div class="accordion-item">
+							  <h2 class="accordion-header">
+								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+								 Environnement
+								</button>
+							  </h2>
+							  <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+								<div class="accordion-body">
+									<li class="list-unstyled">
+										<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+											<i class="fas fa-link text-success"></i> <span class="ms-1 d-none d-sm-inline text-success">Techique</span> </a>
+										<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+											<li class="w-100">
+												<a href="{% url 'home' %}" class="nav-link px-0"> <i class="fas fa-car text-success"></i><span class="d-none d-sm-inline text-success">données</span> </a>
+											</li>
+										</ul>
+									</li> 
+								</div>
+							  </div>
+							</div>
+						  </div>
+
+
 							
-							<li class="nav-item">
-								<a href="" class="nav-link align-middle px-0">
-									<i class="fas fa-cart-plus text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Niveau de stockage</span>
-								</a>
-							</li>
 							
-							<li class="nav-item">
-								<a href="" class="nav-link align-middle px-0">
-									<i class="fas fa-user text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Client</span>
-								</a>
-							</li>
-						
-							<li class="nav-item">
-								<a href="" class="nav-link align-middle px-0">
-									<i class="fas fa-car text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Transporteur</span>
-								</a>
-							</li>
 							
-							<li class="nav-item">
-								<a href="" class="nav-link align-middle px-0">
-									<i class="fa-solid fa-newspaper text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Article</span>
-								</a>
-							</li>
-							
-							<li class="nav-item">
-								<a href="" class="nav-link align-middle px-0">
-									<i class="fa-solid fa-arrow-trend-up text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Provisions</span>
-								</a>
-							</li>
-						
-							<li class="nav-item">
-								<a href="" class="nav-link align-middle px-0">
-									<i class="fa-solid fa-eye text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Lecture</span>
-								</a>
-							</li>
-							
-							<li class="nav-item">
-								<a href="" class="nav-link align-middle px-0">
-									<i class="fa-solid fa-server text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Commande</span>
-								</a>
-							</li>
-							
-							<li class="nav-item">
-								<a href="" class="nav-link align-middle px-0">
-									<i class="fa-solid fa-car text-white"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Livraison</span>
-								</a>
-							</li>
-							
-							<li class="nav-item">
-								<a href="" class="nav-link align-middle px-0">
-									<i class="fa-solid fa-map text-success"></i> <span class="ms-1 d-none d-sm-inline text-white font-italic font-weight-bold">Suivi</span>
-								</a>
-							</li>
-						
-							
-							{% comment %} <li>
-								<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-									<i class="fas fa-link text-white"></i> <span class="ms-1 d-none d-sm-inline text-white">Gestion</span> </a>
-								<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-									<li class="w-100">
-										<a href="" class="nav-link px-0"> <i class="fas fa-car text-white"></i><span class="d-none d-sm-inline text-white">Niveau de stockage</span> </a>
-									</li>
-								</ul>
-							</li>  {% endcomment %}
-						</ul>
-					</div>
+					
 				</div>
-        {% endblock navb %}
+        		{% endblock navb %}
+
 				<div class="col py-3">
+					<div class="collapse" id="navbarToggleExternalContent" data-bs-theme="success">
+						<div class="bg-success p-4">
+							<p ><a href="" class="text-white">Profile</a></p>
+							<p ><a href="" class="text-white">Profile</a></p>
+							<p ><a href="" class="text-white">Profile</a></p>
+						</div>
+					</div>
+					<nav class="navbar navbar-danger bg-danger">
+						<div class="container-fluid">
+						  <button class="navbar-toggler bg-warning" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						  </button>
+						</div>
+					</nav>
+
+
+
 			
 					{% block main %} 
+
 
 					{% block search %}
 					
 					{% endblock search %}
+
 					
 					{% endblock main %}
 
@@ -147,7 +147,7 @@
     <div class="container shadow-lg bg-body-tertiary rounded">
       <footer class="py-1">
         <div class="d-flex flex-column flex-sm-row justify-content-between py-1 my-1 border-top border-success border-5">
-          <p class="text-secondary font-weight-bold font-italic">&copy; {% now "D-d-M-Y" %} Company, Inc. All rights reserved</p>
+          <p class="text-secondary font-weight-bold font-italic">&copy; {% now "D-d-M-Y" %} aneemas. Tous droits reservés</p>
           <ul class="list-unstyled d-flex">
             <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-facebook" style="font-size: 100%; color: blue;"></i></a></li>
             <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-twitter" style="font-size: 100%; color: yellowgreen;"></i></a></li>
