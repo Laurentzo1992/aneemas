@@ -7,7 +7,7 @@ from django.core.paginator import Paginator
 
 
 
-def home(request):
+def donnees(request):
     header = {"Authorization": "Token 042467621a23d8e5e19c16beaa86f7c315bd649e"}
     kobo = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aKhBahvtHVg5PzzcYi3Nxb/data.json",headers=header)
     if kobo.status_code==200:

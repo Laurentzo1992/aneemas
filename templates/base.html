@@ -36,13 +36,20 @@
 		<div class="container-fluid">
 			<div class="row flex-nowrap">
 				<div class="col-auto col-md-3 col-xl-2 px-sm-2 border border-5 border-warning shadow-lg p-3 mb-5 bg-body-tertiary rounded">
-
-						<div class="accordion" id="accordionPanelsStayOpenExample">
+					<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+						<li class="nav-item">
+							<a href="{% url 'home' %}" class="nav-link align-middle px-0">
+								<i class="fas fa-house text-danger"></i> <span class="ms-1 d-none d-sm-inline text-danger font-italic font-weight-bold">Home</span>
+							</a>
+						</li>
+					</ul>
+						<div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
 							<div class="accordion-item">
 							  <h2 class="accordion-header">
 								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
 								 Commercial
 								</button>
+								
 							  </h2>
 							  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
 								<div class="accordion-body">
@@ -51,7 +58,7 @@
 											<i class="fas fa-link text-success"></i> <span class="ms-1 d-none d-sm-inline text-success">Commercial</span> </a>
 										<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 											<li class="w-100">
-												<a href="{{ cours_or }}" class="nav-link px-0"> <i class="fas fa-car text-success"></i><span class="d-none d-sm-inline text-success">cours de l'or</span> </a>
+												<a href="{{ home }}" class="nav-link px-0"> <i class="fas fa-car text-success"></i><span class="d-none d-sm-inline text-success">cours de l'or</span> </a>
 											</li>
 										</ul>
 									</li> 
@@ -71,7 +78,7 @@
 											<i class="fas fa-link text-success"></i> <span class="ms-1 d-none d-sm-inline text-success">Techique</span> </a>
 										<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 											<li class="w-100">
-												<a href="{% url 'home' %}" class="nav-link px-0"> <i class="fas fa-car text-success"></i><span class="d-none d-sm-inline text-success">données</span> </a>
+												<a href="{% url 'donnees' %}" class="nav-link px-0"> <i class="fas fa-car text-success"></i><span class="d-none d-sm-inline text-success">données</span> </a>
 											</li>
 										</ul>
 									</li> 
@@ -91,7 +98,7 @@
 											<i class="fas fa-link text-success"></i> <span class="ms-1 d-none d-sm-inline text-success">Techique</span> </a>
 										<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 											<li class="w-100">
-												<a href="{% url 'home' %}" class="nav-link px-0"> <i class="fas fa-car text-success"></i><span class="d-none d-sm-inline text-success">données</span> </a>
+												<a href="" class="nav-link px-0"> <i class="fas fa-car text-success"></i><span class="d-none d-sm-inline text-success">données</span> </a>
 											</li>
 										</ul>
 									</li> 
