@@ -39,14 +39,15 @@
 					<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 						<li class="nav-item">
 							<a href="{% url 'home' %}" class="nav-link align-middle px-0">
-								<i class="fas fa-house text-danger"></i> <span class="ms-1 d-none d-sm-inline text-danger font-italic font-weight-bold">Home</span>
+								<i class="fas fa-house text-danger"></i> <span class="ms-1 d-none d-sm-inline text-danger fw-bold">Home</span>
 							</a>
 						</li>
 					</ul>
 						<div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
 							<div class="accordion-item">
 							  <h2 class="accordion-header">
-								<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+								<button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+								<i class="fa-solid fa-money-check-dollar text-warning fw-bold"></i> &nbsp;
 								 Commercial
 								</button>
 								
@@ -55,19 +56,21 @@
 								<div class="accordion-body">
 									<li class="list-unstyled">
 										<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-											<i class="fas fa-link text-success"></i> <span class="ms-1 d-none d-sm-inline text-success">Commercial</span> </a>
+											<i class="fa-brands fa-sellcast"></i> <span class="ms-1 d-none d-sm-inline text-success">Vente</span> </a>
 										<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 											<li class="w-100">
-												<a href="{{ home }}" class="nav-link px-0"> <i class="fas fa-car text-success"></i><span class="d-none d-sm-inline text-success">cours de l'or</span> </a>
+												<a href="{{ home }}" class="nav-link px-0"> <i class="fa-solid fa-chart-bar"></i> <span class="d-none d-sm-inline text-success">cours de l'or</span> </a>
 											</li>
 										</ul>
 									</li> 
+
 								</div>
 							  </div>
 							</div>
 							<div class="accordion-item">
 							  <h2 class="accordion-header">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+								<button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+									<i class="fa-solid fa-map-pin text-secondary fw-bold"></i> &nbsp;
 								 Technique
 								</button>
 							  </h2>
@@ -87,7 +90,8 @@
 							</div>
 							<div class="accordion-item">
 							  <h2 class="accordion-header">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+								<button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+								<i class="fa-solid fa-seedling text-success fw-bold"></i> &nbsp; 
 								 Environnement
 								</button>
 							  </h2>
