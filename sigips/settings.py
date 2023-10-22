@@ -30,6 +30,9 @@ INSTALLED_APPS = [
     "technique",
     "environnement",
     "paramettre",
+    "authentication",
+    "rest_framework",
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -40,6 +43,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = "sigips.urls"
@@ -154,5 +159,24 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "sigips/static/media")
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+AUTH_USER_MODEL = 'authentication.User'
+
+# Twillo credential
+TWILIO_ACCOUNT_SID = 'AC15fbce0675e82420dce584d408ca97ce'
+#TWILIO_AUTH_TOKEN = '98bc0aa5112826c36639f84627a189ba'
+TWILIO_AUTH_TOKEN = 'ea62f51392a38eb31091d4261af275c1'
+
+# Pour retirer le slash à la fin
+
+APPEND_SLASH=True
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 5
+}
 
 

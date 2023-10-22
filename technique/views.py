@@ -2,8 +2,21 @@ from django.shortcuts import render
 import requests
 import json
 from django.core.paginator import Paginator
-
-
+from django.shortcuts import redirect, render
+from authentication.models import UserManager, User
+from authentication.serializers import UserRegistrationSerializer, UserSerializer, UserLoginSerilizer
+from rest_framework.viewsets import ModelViewSet
+from django.contrib.auth import  login, logout, authenticate
+from rest_framework import viewsets, permissions, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
+from twilio.rest import Client
+from django.conf import settings
+from django.contrib import messages
+from django.http import JsonResponse, HttpResponseRedirect
+from django.urls import reverse
 
 
 
@@ -24,3 +37,32 @@ def donnees(request):
     else:
         print("la ressource n'est pas disponible")
     return render(request, 'technique/home/mobile.html', context)
+
+
+        
+        
+def envoyer_message(request):
+    if request.method == 'POST':
+        message = request.POST.get('message')
+        destinataire = request.POST.get('destinataire')
+
+        # Initialiser le client Twilio
+        client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
+
+        # Envoyer le message
+        message = client.messages.create(
+            body=message,
+            from_='+18159348590', 
+            to=destinataire
+        )
+
+        return redirect('home')
+
+    return render(request, 'technique/message.html')
+
+
+
+            
+
+
+

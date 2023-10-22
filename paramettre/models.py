@@ -420,13 +420,6 @@ class Incidents(models.Model):
    
 
 
-class Logs(models.Model):
-    user_id = models.IntegerField()
-    statement = models.TextField()
-    created = models.DateTimeField()
-
- 
-
 
 class Provinces(models.Model):
     numero = models.CharField(max_length=10, blank=True, null=True)
@@ -599,24 +592,5 @@ class Typetaterrains(models.Model):
     modified = models.DateField(blank=True, null=True)
 
     
-
-
-class Usergroups(models.Model):
-    name = models.CharField(max_length=38)
-    accesslevel = models.CharField(db_column='accessLevel', max_length=50)  # Field name made lowercase.
-
-   
-
-
-class Users(models.Model):
-    usergroup_id = models.IntegerField()
-    name = models.CharField(max_length=128)
-    username = models.CharField(max_length=45)
-    password = models.CharField(max_length=45)
-    hpassword = models.CharField(db_column='hPassword', max_length=45)  # Field name made lowercase.
-    token = models.CharField(max_length=45)
-    email = models.CharField(max_length=150, blank=True, null=True)
-    formateur = models.IntegerField(blank=True, null=True)
-    participant_id = models.IntegerField(blank=True, null=True)
 
    
