@@ -45,11 +45,11 @@
         <td>{{result.ref_piece}}</td>
         <td>{{result.created}}</td>
         <td>
-          <a href="" type="button" class="btn btn-danger" title="Validé">
-            <i class="fas fa-check-circle"></i>
+          <a href="{% url 'edit_enrolement' result.id %}" type="button" class="btn btn-danger" title="modifier">
+            <i class="fas fa-pen"></i>
           </a>
-          <a href="" type="button" class="btn btn-secondary" title="detail">
-            <i class="fas fa-eye"></i>
+          <a href="{% url 'delete_client'  result.id %}" type="button" class="btn btn-secondary" title="supprimer">
+            <i class="fas fa-trash"></i>
           </a>
         </td>
       </tr>

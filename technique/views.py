@@ -81,7 +81,7 @@ def edit(request, id):
 
 
 
-def delete_client(request, id):
+def delete(request, id):
     enrolement = Fichenrolements.objects.get(id = id)
     if request.method=='POST':
         enrolement.delete()

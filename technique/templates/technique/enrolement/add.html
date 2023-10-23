@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 {% block title %} Ajout enrolment {% endblock %}
 
 {% comment %} {% load django_bootstrap5 %} {% endcomment %}
@@ -17,39 +17,36 @@
             {% comment %} {% bootstrap_form form %} {% endcomment %}
 
          <div class="row">
-            <div class="col-4">
-                <label for="rasion_sociale"> Nom article </label>
-                {{form.agent}}
-            </div>
-            <div class="col-4">{{form.typzone_id}}</div>
-            <div class="col-4" id="ville">{{form.nom}}</div>
+            <div class="col-4">{{form.agent|as_crispy_field}}</div>
+            <div class="col-4">{{form.typzone_id|as_crispy_field}}</div>
+            <div class="col-4" id="ville">{{form.nom|as_crispy_field}}</div>
          </div>
 
          <div class="row">
-            <div class="col-4">{{form.prenom}}</div>
-            <div class="col-4">{{form.type_carte}}</div>
-            <div class="col-4">{{form.date}}</div>
+            <div class="col-4">{{form.prenom|as_crispy_field}}</div>
+            <div class="col-4">{{form.type_carte|as_crispy_field}}</div>
+            <div class="col-4">{{form.date|as_crispy_field}}</div>
          </div>
 
 
          <div class="row">
-            <div class="col-4">{{form.localite}}</div>
-            <div class="col-4">{{form.telephone}}</div>
-            <div class="col-4">{{form.telephone2}}</div>
+            <div class="col-4">{{form.localite|as_crispy_field}}</div>
+            <div class="col-4">{{form.telephone|as_crispy_field}}</div>
+            <div class="col-4">{{form.telephone2|as_crispy_field}}</div>
          </div>
 
          <div class="row">
-            <div class="col-4">{{form.quittance}}</div>
-            <div class="col-4">{{form.engagement}}</div>
-            <div class="col-4">{{form.num_carte}}</div>
+            <div class="col-4">{{form.quittance|as_crispy_field}}</div>
+            <div class="col-4">{{form.engagement|as_crispy_field}}</div>
+            <div class="col-4">{{form.num_carte|as_crispy_field}}</div>
 
         </div>
 
 
 
         <div class="row">
-            <div class="col-6">{{form.observation}}</div>
-            <div class="col-6">{{form.ref_piece}}</div>
+            <div class="col-6">{{form.observation|as_crispy_field}}</div>
+            <div class="col-6">{{form.ref_piece|as_crispy_field}}</div>
         </div>
 
          <div class="mt-4" style="width: 100p%;">

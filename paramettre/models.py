@@ -1,5 +1,17 @@
 from django.db import models
 
+class Typecarte(models.Model):
+    libelle = models.CharField(max_length=1000, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+    
+    class Meta:
+        verbose_name = "Typecarte"
+        verbose_name_plural = "Type de carte"
+        
+    def __str__(self):
+        return self.libelle
 
 class Accidents(models.Model):
     burencadrement_id = models.IntegerField(blank=True, null=True)
@@ -242,11 +254,9 @@ class Demandeconventions(models.Model):
 
 
 class Fichenrolements(models.Model):
-    agent = models.CharField(max_length=1500, blank=True, null=True)
-    typzone_id = models.IntegerField(blank=True, null=True)
     nom = models.CharField(max_length=1000, blank=True, null=True)
     prenom = models.CharField(max_length=1000, blank=True, null=True)
-    type_carte = models.CharField(max_length=1000, blank=True, null=True)
+    type_carte = models.ForeignKey(Typecarte, verbose_name= 'Type de carte', on_delete=models.CASCADE, max_length=1000, blank=True, null=True)
     date = models.DateField(blank=True, null=True)
     localite = models.CharField(max_length=1000, blank=True, null=True)
     telephone = models.CharField(max_length=500, blank=True, null=True)
@@ -728,7 +738,7 @@ class Typesites(models.Model):
    
     class Meta:
         verbose_name = "Typesites"
-        verbose_name_plural = "Typesite"
+        verbose_name_plural = "Type de site"
         
     def __str__(self):
         return self.libelle
@@ -746,4 +756,8 @@ class Typetaterrains(models.Model):
         
     def __str__(self):
         return self.libelle
+    
+    
+    
+
    
