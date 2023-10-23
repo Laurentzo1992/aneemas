@@ -256,7 +256,7 @@ class Demandeconventions(models.Model):
 class Fichenrolements(models.Model):
     nom = models.CharField(max_length=1000, blank=True, null=True)
     prenom = models.CharField(max_length=1000, blank=True, null=True)
-    type_carte = models.ForeignKey(Typecarte, verbose_name= 'Type de carte', on_delete=models.CASCADE, max_length=1000, blank=True, null=True)
+    type_carte = models.ForeignKey(Typecarte,on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateField(blank=True, null=True)
     localite = models.CharField(max_length=1000, blank=True, null=True)
     telephone = models.CharField(max_length=500, blank=True, null=True)
@@ -605,8 +605,8 @@ class Statutsites(models.Model):
 
    
     class Meta:
-        verbose_name = "Statutsites"
-        verbose_name_plural = "Statutsite"
+        verbose_name = "Statut du sites"
+        verbose_name_plural = "Statut du site"
         
     def __str__(self):
         return self.libelle

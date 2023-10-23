@@ -23,6 +23,7 @@ admin.site.register(Typeproduitchimiques)
 admin.site.register(Typequipements)
 admin.site.register(Typesites)
 admin.site.register(Typetaterrains)
+admin.site.register(Typecarte)
 
 
 
