@@ -17,10 +17,11 @@ from django.conf import settings
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
+from technique.forms import *
 
 
 
-def donnees(request):
+""" def api(request):
     header = {"Authorization": "Token 042467621a23d8e5e19c16beaa86f7c315bd649e"}
     kobo = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aKhBahvtHVg5PzzcYi3Nxb/data.json",headers=header)
     if kobo.status_code==200:
@@ -36,11 +37,63 @@ def donnees(request):
         context = {"page_obj":page_obj}
     else:
         print("la ressource n'est pas disponible")
-    return render(request, 'technique/home/mobile.html', context)
+    return render(request, 'technique/enrolement/enrolement.html', context) """
 
 
-        
-        
+def index(request):
+    enrolements = Fichenrolements.objects.all().order_by('created')
+    paginator = Paginator(enrolements, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj":page_obj}
+    return render(request, 'technique/enrolement/enrolement.html', context)
+
+
+
+def add(request):
+    if request.method=="POST":
+        form = EnrolementForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Ajour effectué !")
+            return redirect('list_enrolement')
+        else:
+            return render(request, 'technique/enrolement/add.html', {"form":form})
+    else:
+        form = EnrolementForm()
+        return render(request, 'technique/enrolement/add.html', {"form":form})
+    
+
+
+def edit(request, id):
+    enrolement = Fichenrolements.objects.get(id=id)
+    if request.method == 'POST':
+        form = EnrolementForm(request.POST, instance=enrolement)
+        if form.is_valid():
+            form.save(id)
+            messages.success(request, "Modification effectué avec susccès!")
+            return redirect('list_enrolement')
+    else:
+        form = EnrolementForm(instance=enrolement)
+    return render(request, 'technique/enrolement/edit.html', {'enrolement':enrolement, 'form':form})
+
+
+
+
+
+def delete_client(request, id):
+    enrolement = Fichenrolements.objects.get(id = id)
+    if request.method=='POST':
+        enrolement.delete()
+        messages.success(request, 'supprimer avec susccès !')
+        return redirect("list_enrolement")
+    return render(request, 'technique/enrolement/delete.html', {"enrolement":enrolement})
+     
+
+
+
+
+
 def envoyer_message(request):
     if request.method == 'POST':
         message = request.POST.get('message')
@@ -58,7 +111,7 @@ def envoyer_message(request):
 
         return redirect('home')
 
-    return render(request, 'technique/message.html')
+    return render(request, 'technique/enrolement/message.html')
 
 
 

@@ -2,19 +2,33 @@
 
 
 
+{% block add %}
+
+<a href="{% url 'add_enrolement' %}" class="text-decoration-none fw-bold text-success">
+    Ajouter <i class="fa fa-plus text-success"></i>
+ </a>
+
+{% endblock add %}
+
+
+
+
 {% block main %}
+
 
 
 <table class="table table-striped shadow-lg p-3 mt-3">
     <thead>
       <tr class="bg-success">
         <th scope="col">Id</th>
-        <th scope="col">Nom et Prenom</th>
-        <th scope="col">Lieu  de naissance</th>
-        <th scope="col">Date de naissance</th>
-        <th scope="col">Genre</th>
-        <th scope="col">Nationalité</th>
-        <th scope="col">Envoyé par</th>
+        <th scope="col">Agent</th>
+        <th scope="col">Zone</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prenom</th>
+        <th scope="col">Type de Carte</th>
+        <th scope="col">Localite</th>
+        <th scope="col">ref_piece</th>
+        <th scope="col">Enrolé le</th>
         <th scope="col">action</th>
       </tr>
     </thead>
@@ -22,12 +36,14 @@
         {% for result in page_obj %}
       <tr>
         <td>{{ result.id }}</td>
-        <td>{{result.nom_prenom}}</td>
-        <td>{{result.Lieu_de_naissance}}</td>
-        <td>{{result.date_de_naissance}}</td>
-        <td>{{result.genre}}</td>
-        <td>{{result.nationalite}}</td>
-        <td>{{result.submitted_by}}</td>
+        <td>{{result.agent}}</td>
+        <td>{{result.typzone_id}}</td>
+        <td>{{result.nom}}</td>
+        <td>{{result.prenom}}</td>
+        <td>{{result.type_carte}}</td>
+        <td>{{result.localite}}</td>
+        <td>{{result.ref_piece}}</td>
+        <td>{{result.created}}</td>
         <td>
           <a href="" type="button" class="btn btn-danger" title="Validé">
             <i class="fas fa-check-circle"></i>

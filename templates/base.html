@@ -111,28 +111,28 @@
 												<i class="fa-solid fa-people-roof"></i> <span class="ms-1 d-none d-sm-inline text-success">Gestion</span> </a>
 											<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 												<li class="w-100">
-													<a href="{% url 'donnees' %}" class="nav-link px-0"> <i class="fa-solid fa-file-pen"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Enrolement</span> </a>
+													<a href="{% url 'list_enrolement' %}" class="nav-link px-0"> <i class="fa-solid fa-file-pen"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Enrolement</span> </a>
 												</li>
 												<li class="w-100">
-													<a href="{% url 'donnees' %}" class="nav-link px-0"> <i class="fa-solid fa-person-shelter"></i> &nbsp; <span class="d-none d-sm-inline text-success">Incident</span> </a>
+													<a href="" class="nav-link px-0"> <i class="fa-solid fa-person-shelter"></i> &nbsp; <span class="d-none d-sm-inline text-success">Incident</span> </a>
 												</li>
 												<li class="w-100">
-													<a href="{% url 'donnees' %}" class="nav-link px-0"> <i class="fa-solid fa-folder-open"></i> &nbsp; <span class="d-none d-sm-inline text-success">Convention</span> </a>
+													<a href="" class="nav-link px-0"> <i class="fa-solid fa-folder-open"></i> &nbsp; <span class="d-none d-sm-inline text-success">Convention</span> </a>
 												</li>
 												<li class="w-100">
-													<a href="{% url 'donnees' %}" class="nav-link px-0"> <i class="fa-solid fa-person-falling"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Accident</span> </a>
+													<a href="" class="nav-link px-0"> <i class="fa-solid fa-person-falling"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Accident</span> </a>
 												</li>
 												<li class="w-100">
-													<a href="{% url 'donnees' %}" class="nav-link px-0"> <i class="fa-solid fa-user-pen"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Visite de site</span> </a>
+													<a href="" class="nav-link px-0"> <i class="fa-solid fa-user-pen"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Visite de site</span> </a>
 												</li>
 												<li class="w-100">
-													<a href="{% url 'donnees' %}" class="nav-link px-0"> <i class="fa-solid fa-id-card"></i> &nbsp; <span class="d-none d-sm-inline text-success">Carte minier</span> </a>
+													<a href="" class="nav-link px-0"> <i class="fa-solid fa-id-card"></i> &nbsp; <span class="d-none d-sm-inline text-success">Carte minier</span> </a>
 												</li>
 												<li class="w-100">
-													<a href="{% url 'donnees' %}" class="nav-link px-0"> <i class="fa-solid fa-chart-pie"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Rapport</span> </a>
+													<a href="" class="nav-link px-0"> <i class="fa-solid fa-chart-pie"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Rapport</span> </a>
 												</li>
 												<li class="w-100">
-													<a href="{% url 'message' %}" class="nav-link px-0"> <i class="fa-solid fa-message"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Messsage</span> </a>
+													<a href="" class="nav-link px-0"> <i class="fa-solid fa-message"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Messsage</span> </a>
 												</li>
 											</ul>
 										</li> 
@@ -151,17 +151,33 @@
 				<div class="col py-3">
 					<div class="collapse" id="navbarToggleExternalContent" data-bs-theme="success">
 						<div class="bg-success p-4">
-							<p > <i class="fa-solid fa-user"></i> <a href="" class="text-white text-decoration-none fw-bold">{{request.user}}</a></p>
-							<p > <i class="fa-solid fa-right-from-bracket"></i> <a href="{% url 'logout_user' %}" class="text-white text-decoration-none fw-bold">Déconnxion</a></p>
+							<p >
+								<i class="fa-solid fa-right-from-bracket"></i> <a href="{% url 'logout_user' %}" class="text-white text-decoration-none fw-bold">Déconnxion</a>
+								&nbsp; <i class="fa-solid fa-pen"></i> <a href="" class="text-white text-decoration-none fw-bold">Profil</a>
+							</p>
 						</div>
 					</div>
-					<nav class="navbar navbar-danger bg-danger">
+					<nav class="navbar navbar-danger">
+						<div class="container-fluid">
+						  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+							<i class="fa fa-user text-danger">  &nbsp; </i><span class="fw-bold"> {{request.user}}</span>
+						  </button>
+
+						  {% block add %}
+						  
+						 {% endblock add %}
+
+						</div>
+						
+					</nav>
+
+					{% comment %} <nav class="navbar navbar-danger bg-danger">
 						<div class="container-fluid">
 						  <button class="navbar-toggler bg-warning" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
 							<i class="fa fa-user" aria-hidden="true"></i>
 						  </button>
 						</div>
-					</nav>
+					</nav> {% endcomment %}
 
 					{% endblock navb %}
 			

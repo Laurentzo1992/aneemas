@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %} Ajout enrolment {% endblock %}
+
+{% comment %} {% load django_bootstrap5 %} {% endcomment %}
+
+
+{% block main %}
+
+
+
+   <div class="container mt-3 w-80">
+      
+      <form method="POST" class="card p-3 mt-5"  action="{% url 'add_enrolement' %}" autocomplete="on" enctype="multipart/form-data"> 
+            {% csrf_token %}
+
+            {% comment %} {% bootstrap_form form %} {% endcomment %}
+
+         <div class="row">
+            <div class="col-4">
+                <label for="rasion_sociale"> Nom article </label>
+                {{form.agent}}
+            </div>
+            <div class="col-4">{{form.typzone_id}}</div>
+            <div class="col-4" id="ville">{{form.nom}}</div>
+         </div>
+
+         <div class="row">
+            <div class="col-4">{{form.prenom}}</div>
+            <div class="col-4">{{form.type_carte}}</div>
+            <div class="col-4">{{form.date}}</div>
+         </div>
+
+
+         <div class="row">
+            <div class="col-4">{{form.localite}}</div>
+            <div class="col-4">{{form.telephone}}</div>
+            <div class="col-4">{{form.telephone2}}</div>
+         </div>
+
+         <div class="row">
+            <div class="col-4">{{form.quittance}}</div>
+            <div class="col-4">{{form.engagement}}</div>
+            <div class="col-4">{{form.num_carte}}</div>
+
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-6">{{form.observation}}</div>
+            <div class="col-6">{{form.ref_piece}}</div>
+        </div>
+
+         <div class="mt-4" style="width: 100p%;">
+            <button style= "font-size: 15px;" type="submit" class="btn btn-success mb-3">
+            <i class="fas fa-plus"></i>&nbsp;&nbsp; Ajouter
+            </button>
+            <a style= "font-size: 15px;" href="{% url 'list_enrolement' %}" type="button" class="btn btn-outline-danger mb-3 ms-2" style="wdith: 50px;" title="Close">
+                  <i class="fas fa-times"></i>
+            </a>
+         </div> 
+          
+      </form>
+   </div>
+
+{% endblock main %}
+
+

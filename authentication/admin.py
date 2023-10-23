@@ -8,7 +8,7 @@ from .forms import UserAdminCreationForm, UserAdminChangeForm
 User = get_user_model()
 
 # Supprimer le modèle de groupe de l'administrateur. Nous ne l'utilisons pas.
-admin.site.unregister(Group)
+#admin.site.unregister(Group)
 
 class UserAdmin(BaseUserAdmin):
 # Les formulaires pour ajouter et modifier des instances d'utilisateur

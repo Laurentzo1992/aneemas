@@ -14,7 +14,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
   0%, 100% { opacity: 0; color: red; }
   25% { opacity: 1; color: green; }
   50% { opacity: 0; color: gold; }
-  75% { opacity: 1; color: navy; }
+  75% { opacity: 1; color: red; }
 }
 
 h2 {
@@ -29,6 +29,9 @@ h2 {
   justify-content: center;
   height: 100vh;
   background-image: url('{% static 'media/app_img/once.jpg' %}');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
 }
 
 button:hover {
@@ -165,6 +168,9 @@ span.psw {
      width: 100%;
   }
 }
+
+
+
 </style>
 </head>
 <body>
@@ -172,7 +178,8 @@ span.psw {
 </canvas>
 <div id="centered-content">
     <h2>Aneemas</h2>
-    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Connection</button>
+
+  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Connection</button>
 </div>
 
 <div id="id01" class="modal">
