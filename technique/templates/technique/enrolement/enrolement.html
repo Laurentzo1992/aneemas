@@ -21,8 +21,6 @@
     <thead>
       <tr class="bg-success">
         <th scope="col">Id</th>
-        <th scope="col">Agent</th>
-        <th scope="col">Zone</th>
         <th scope="col">Nom</th>
         <th scope="col">Prenom</th>
         <th scope="col">Type de Carte</th>
@@ -36,8 +34,6 @@
         {% for result in page_obj %}
       <tr>
         <td>{{ result.id }}</td>
-        <td>{{result.agent}}</td>
-        <td>{{result.typzone_id}}</td>
         <td>{{result.nom}}</td>
         <td>{{result.prenom}}</td>
         <td>{{result.type_carte}}</td>

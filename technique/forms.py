@@ -7,13 +7,13 @@ from django.core.validators import RegexValidator
 
 class EnrolementForm(forms.ModelForm):
     
-
-    type_carte = forms.CharField(
-        label='Type carte',
-        widget=forms.TextInput(attrs={'placeholder': 'Type carte'})
-    )
-
-
+    date = forms.DateField(
+    widget=forms.TextInput(     
+        attrs={'type': 'date'} 
+        )
+        ) 
+    
+    
     class Meta:
         model = Fichenrolements
         fields = '__all__'

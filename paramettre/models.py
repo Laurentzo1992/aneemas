@@ -7,7 +7,7 @@ class Typecarte(models.Model):
 
     
     class Meta:
-        verbose_name = "Typecarte"
+        verbose_name = "Type de carte"
         verbose_name_plural = "Type de carte"
         
     def __str__(self):
@@ -256,7 +256,7 @@ class Demandeconventions(models.Model):
 class Fichenrolements(models.Model):
     nom = models.CharField(max_length=1000, blank=True, null=True)
     prenom = models.CharField(max_length=1000, blank=True, null=True)
-    type_carte = models.ForeignKey(Typecarte,on_delete=models.CASCADE, null=True, blank=True)
+    type_carte = models.ForeignKey(Typecarte, on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateField(blank=True, null=True)
     localite = models.CharField(max_length=1000, blank=True, null=True)
     telephone = models.CharField(max_length=500, blank=True, null=True)
@@ -269,7 +269,8 @@ class Fichenrolements(models.Model):
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 
-    
+    def __str__(self):
+        return self.nom
 
 
 class Ficheprelevements(models.Model):
