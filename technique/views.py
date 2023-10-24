@@ -1,9 +1,7 @@
-from django.shortcuts import render
 import requests
 import json
 from django.core.paginator import Paginator
-from django.shortcuts import redirect, render
-from authentication.models import UserManager, User
+from django.shortcuts import redirect, render, get_object_or_404
 from authentication.serializers import UserRegistrationSerializer, UserSerializer, UserLoginSerilizer
 from rest_framework.viewsets import ModelViewSet
 from django.contrib.auth import  login, logout, authenticate
@@ -18,26 +16,78 @@ from django.contrib import messages
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
 from technique.forms import *
+from modules_externe.cours_or import get_data_by_api, get_api_data_id
+from modules_externe.api_url import FICHE_ENROLMENT_URL
 
 
 
-""" def api(request):
-    header = {"Authorization": "Token 042467621a23d8e5e19c16beaa86f7c315bd649e"}
-    kobo = requests.get("https://kf.kobotoolbox.org/api/v2/assets/aKhBahvtHVg5PzzcYi3Nxb/data.json",headers=header)
-    if kobo.status_code==200:
-        print("ok")
-        api_data = json.loads(kobo.content)
-        results = api_data.get('results', [])
-        for result in results:
-            result['id'] = result.pop('_id')
-            result['submitted_by'] = result.pop('_submitted_by')
-        paginator = Paginator(results, 8)
-        page_number = request.GET.get("page")
-        page_obj = paginator.get_page(page_number)
-        context = {"page_obj":page_obj}
+def api_enrolement(request):
+    data = get_data_by_api(FICHE_ENROLMENT_URL)
+    paginator = Paginator(data, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj":page_obj}
+    return render(request, 'technique/enrolement/api_data.html', context)
+
+
+
+
+def save_api_data_to_database(request, id):
+    # Obtenir l'élément de l'API en fonction de l'ID
+    result = get_api_data_id(FICHE_ENROLMENT_URL, id)
+
+    if result:
+        # Créez une instance de votre modèle avec les données de l'API
+        fiche = Fichenrolements(
+            identifiant=result['id'],
+            nom=result['nom'],
+            prenom=result['prenom'],
+            date=result['date'],
+            localite=result['localite'],
+            telephone=result['telephone'],
+            telephone2=result['telephone2'],
+            quittance=result['quittance'],
+            engagement=result['engagement'],
+            num_carte=result['num_carte'],
+            observation=result['observation'],
+            ref_piece=result['ref_piece']
+        )
+        # Enregistrez l'instance dans la base de données
+        if Fichenrolements.objects.filter(identifiant=id).exists():
+            fiche.save()
+            type_cartes = []
+        
+            for type_carte_name in result['type_carte']:
+                type_carte, created = Typecarte.objects.get_or_create(libelle=type_carte_name)
+                type_cartes.append(type_carte)
+            
+            for type_carte in type_cartes:
+                LigneTypeCarte.objects.create(carte=type_carte, fiche=fiche)
+            # Redirigez vers la page liste des enrolments
+            messages.success(request, "Données enregistrées avec succès !")
+            return redirect('list_enrolement')
+        
+        else:
+            messages.error(request, "données déja synchronisé !")
+        
     else:
-        print("la ressource n'est pas disponible")
-    return render(request, 'technique/enrolement/enrolement.html', context) """
+        # Gérer le cas où l'ID spécifié n'est pas trouvé
+        messages.error(request, "ID non trouvé !")
+        return redirect('api_enrolement')
+        
+
+
+
+
+
+def syn_detail(request, id):
+    result = get_api_data_id(FICHE_ENROLMENT_URL, id)
+    if result:
+        return render(request, 'technique/enrolement/detail.html', {"result":result})
+    else:
+        return render(request, 'technique/enrolement/erreur.html', {'message': 'ID non trouvé'})
+
+ 
 
 
 def index(request):
@@ -47,6 +97,13 @@ def index(request):
     page_obj = paginator.get_page(page_number)
     context = {"page_obj":page_obj}
     return render(request, 'technique/enrolement/enrolement.html', context)
+
+
+
+def carte(request, id):
+    pk = get_object_or_404(Fichenrolements, id=id)
+    result = LigneTypeCarte.objects.filter(fiche_id=pk)
+    return HttpResponseRedirect('list_enrolement')
 
 
 

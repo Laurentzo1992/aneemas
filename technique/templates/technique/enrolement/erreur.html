@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} erreur {% endblock %}
+
+{% block navb %} {% endblock navb %}
+
+{% block main%}
+
+<div class="container mt-3 text-center bg-light shadow-lg p-3 mb-5 bg-white" style="width: 50%; font-size: 14px">
+
+        <h4 class="mb-3 bg-gray-dark"> <i style="font-size: 15px;" class="fa-solid fa-triangle-exclamation"></i></h4>
+
+        <h6>{{ message}}</h6>
+  
+       
+</div>
+{% endblock main%}
+
+
+{% block footer %}
+
+{% endblock footer %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 class Typecarte(models.Model):
     libelle = models.CharField(max_length=1000, blank=True, null=True)
@@ -254,16 +255,17 @@ class Demandeconventions(models.Model):
 
 
 class Fichenrolements(models.Model):
+    identifiant = models.IntegerField(null=True, blank=True)
     nom = models.CharField(max_length=1000, blank=True, null=True)
     prenom = models.CharField(max_length=1000, blank=True, null=True)
-    type_carte = models.ForeignKey(Typecarte, on_delete=models.CASCADE, null=True, blank=True)
+    type_carte = models.ManyToManyField(Typecarte, through='LigneTypeCarte')
     date = models.DateField(blank=True, null=True)
     localite = models.CharField(max_length=1000, blank=True, null=True)
     telephone = models.CharField(max_length=500, blank=True, null=True)
     telephone2 = models.CharField(max_length=150, blank=True, null=True)
     quittance = models.CharField(max_length=500, blank=True, null=True)
     engagement = models.CharField(max_length=500, blank=True, null=True)
-    num_carte = models.IntegerField(blank=True, null=True)
+    num_carte = models.CharField(blank=True, null=True)
     observation = models.CharField(max_length=1000, blank=True, null=True)
     ref_piece = models.CharField(max_length=500, blank=True, null=True)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
@@ -271,6 +273,21 @@ class Fichenrolements(models.Model):
 
     def __str__(self):
         return self.nom
+    
+    """
+    def save(self, *args, **kwargs):
+        # Vérifiez si un enregistrement avec le même identifiant existe déjà
+        if Fichenrolements.objects.filter(identifiant=self.identifiant).exists():
+            raise ValidationError('Un enregistrement avec le même identifiant existe déjà.')
+        super(Fichenrolements, self).save(*args, **kwargs) """
+    
+    
+class LigneTypeCarte(models.Model):
+    carte = models.ForeignKey(Typecarte, null=True, blank=True, on_delete=models.CASCADE)
+    fiche = models.ForeignKey(Fichenrolements, null=True, blank=True, on_delete=models.CASCADE)
+    create_at = models.DateField(auto_now_add=True, null=True, blank=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
 
 
 class Ficheprelevements(models.Model):
