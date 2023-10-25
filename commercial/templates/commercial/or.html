@@ -4,6 +4,7 @@
 
 {% block main %}
 
+{% if data %}
 
 <h4 class="text-center text-capitalize text-info mt-2">Cours de l'or  selon or.fr </h4>
 
@@ -35,16 +36,22 @@
     </thead>
     <tbody>
         {% for row in data %}
+        
         <tr>
             <td>{{row.Devise}}</td>
             <td>{{ row.once}}</td>  
             <td>{{ row.kilogramme}}</td>  
             <td>{{ row.gramme}}</td> 
+        <tr>
+            
         {% endfor %}
     </tbody>
 </table>
 
+            {% else %}
+            <h4 class="text-center text-capitalize text-info mt-2">pas de données veuillez verifier le réseaux...</h4>
 
+            {% endif %}
 
 
 

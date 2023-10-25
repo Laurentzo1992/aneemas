@@ -4,12 +4,12 @@
 
 {% block add %}
 
-<a id="syncLink" href="{% url 'api_enrolement' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
+<a id="syncLink" href="" title="données du mobile" class="text-decoration-none fw-bold text-success">
   Synchronisation <i class="fa-solid fa-group-arrows-rotate"></i>
 </a>
 
 
-<a href="{% url 'add_enrolement' %}" class="text-decoration-none fw-bold text-success">
+<a href="{% url 'add_visite' %}" class="text-decoration-none fw-bold text-success">
     Ajouter <i class="fa fa-plus text-success"></i>
  </a>
 
@@ -26,12 +26,12 @@
     <thead>
       <tr class="bg-success">
         <th scope="col">Id</th>
-        <th scope="col">Nom</th>
-        <th scope="col">Prenom</th>
-        <th scope="col">Carte</th>
-        <th scope="col">Localite</th>
-        <th scope="col">ref_piece</th>
-        <th scope="col">Enrolé le</th>
+        <th scope="col">BE</th>
+        <th scope="col">Date de la visite</th>
+        <th scope="col">Date de la mission</th>
+        <th scope="col">Nombre Homme</th>
+        <th scope="col">Nombre Femme</th>
+        <th scope="col">Nombre Enfant</th>
         <th scope="col">action</th>
       </tr>
     </thead>
@@ -39,27 +39,23 @@
         {% for result in page_obj %}
       <tr>
         <td>{{result.id }}</td>
-        <td>{{result.nom}}</td>
-        <td>{{result.prenom}}</td>
-        <td class="text-center">
-          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{result.id}}">
-            <i class="fas fa-eye text-success"></i>
-          </a>
-        </td>
-        <td>{{result.localite}}</td>
-        <td>{{result.ref_piece}}</td>
-        <td>{{result.created}}</td>
+        <td>{{result.bureau}}</td>
+        <td>{{result.date_visite}}</td>
+        <td>{{result.date_miss}}</td>
+        <td>{{result.nbr_hom}}</td>
+        <td>{{result.nbr_fem}}</td>
+        <td>{{result.nbr_enfant}}</td>
         <td>
-          <a href="{% url 'edit_enrolement' result.id %}" type="button" class="btn btn-warning" title="modifier">
+          <a href="{% url 'edit_visite' result.id %}" type="button" class="btn btn-warning" title="modifier">
             <i class="fas fa-pen"></i>
           </a>
-          <a href="{% url 'delete_enrolement'  result.id %}" type="button" class="btn btn-danger" title="supprimer">
+          <a href="{% url 'delete_visite'  result.id %}" type="button" class="btn btn-danger" title="supprimer">
             <i class="fas fa-trash"></i>
           </a>
         </td>
       </tr>
 
-      {% include 'technique/enrolement/carte.html' %}
+      {% include 'technique/visite_activite/detail_visite.html' %}
       {% endfor %}
     </tbody>
   </table>
@@ -94,12 +90,12 @@
 {% if message.tags == 'error' %}
     <script>
         var m = "{{ message }}";
-          swal("Denied !", "Enter your data correctly.", "error")
+          swal("Refuser !", "Enter your data correctly.", "error")
     </script>
           {% elif message.tags == 'success' %}
     <script>
           var m = "{{ message }}";
-          swal("Perfect !", m, "success")
+          swal("succèss !", m, "success")
     </script>
 {% endif %}   
 {% endfor%}

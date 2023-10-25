@@ -1,6 +1,194 @@
 from django.db import models
 from django.core.exceptions import ValidationError
 
+
+class Typaccidents(models.Model):
+    libelle = models.CharField(max_length=500, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+   
+    class Meta:
+        verbose_name = "Typaccidents"
+        verbose_name_plural = "Type d'accident"
+        
+    def __str__(self):
+        return self.libelle
+
+
+class Typautorisations(models.Model):
+    libelle = models.CharField(max_length=1500, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+    
+    class Meta:
+        verbose_name = "Typautorisations"
+        verbose_name_plural = "Type d'autorisation"
+        
+    def __str__(self):
+        return self.libelle
+
+
+class Typdemandeurs(models.Model):
+    libelle = models.CharField(max_length=1500, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Typdemandeurs"
+        verbose_name_plural = "Type demandeur"
+        
+    def __str__(self):
+        return self.libelle
+
+
+class Typenatureminerais(models.Model):
+    libelle_type_nature_minerais = models.CharField(max_length=254, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+    
+    class Meta:
+        verbose_name = "Typenatureminerais"
+        verbose_name_plural = "Nature du minerai"
+        
+    def __str__(self):
+        return self.libelle_type_nature_minerais
+
+
+class Typenatureterrains(models.Model):
+    libelle = models.CharField(max_length=1000, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+  
+
+    class Meta:
+        verbose_name = "Typenatureterrains"
+        verbose_name_plural = "Nature terrain"
+        
+    def __str__(self):
+        return self.libelle
+    
+    
+
+class Typeorganisations(models.Model):
+    libelle = models.CharField(max_length=1000, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+   
+    class Meta:
+        verbose_name = "Typeorganisations"
+        verbose_name_plural = "Type d'organisation"
+        
+    def __str__(self):
+        return self.libelle
+
+class Typeproduitchimiques(models.Model):
+    libelle = models.CharField(max_length=1000, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+    
+    class Meta:
+        verbose_name = "Typeproduitchimiques"
+        verbose_name_plural = "Type de produit chimique"
+        
+    def __str__(self):
+        return self.libelle
+
+
+class Typequipements(models.Model):
+    libelle = models.CharField(max_length=1000, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+    
+    class Meta:
+        verbose_name = "Typequipements"
+        verbose_name_plural = "Type d'equipement"
+        
+    def __str__(self):
+        return self.libelle
+
+
+
+class Typesites(models.Model):
+    libelle = models.CharField(max_length=1000, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+   
+    class Meta:
+        verbose_name = "Typesites"
+        verbose_name_plural = "Type de site"
+        
+    def __str__(self):
+        return self.libelle
+
+class Typetaterrains(models.Model):
+    libelle = models.CharField(max_length=1000, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+    
+    class Meta:
+        verbose_name = "Typetaterrains"
+        verbose_name_plural = "Type de terrain"
+        
+    def __str__(self):
+        return self.libelle
+    
+    
+
+class Regions(models.Model):
+    nomreg = models.CharField(max_length=1000, blank=True, null=True)
+    cheflieu = models.CharField(max_length=1000, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    
+    
+    class Meta:
+        verbose_name = "Regions"
+        verbose_name_plural = "Region"
+        
+    def __str__(self):
+        return self.nomreg
+
+    
+
+
+class Provinces(models.Model):
+    nomprov = models.CharField(max_length=500, blank=True, null=True)
+    region_id = models.ForeignKey(Regions, blank=True, null=True, on_delete=models.CASCADE)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+    
+    class Meta:
+        verbose_name = "Provinces"
+        verbose_name_plural = "Province"
+        
+    def __str__(self):
+        return self.nomprov
+
+class Statutsites(models.Model):
+    libelle = models.CharField(max_length=1500, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+   
+    class Meta:
+        verbose_name = "Statut du sites"
+        verbose_name_plural = "Statut du site"
+        
+    def __str__(self):
+        return self.libelle
+    
+
+
 class Typecarte(models.Model):
     libelle = models.CharField(max_length=1000, blank=True, null=True)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
@@ -95,8 +283,7 @@ class Categories(models.Model):
 
 class Communes(models.Model):
     nomcom = models.CharField(max_length=1000, blank=True, null=True)
-    province_id = models.IntegerField(blank=True, null=True)
-    id_2 = models.IntegerField(blank=True, null=True)
+    province_id = models.ForeignKey(Provinces, blank=True, null=True, on_delete=models.CASCADE)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     
@@ -128,13 +315,14 @@ class Comptoires(models.Model):
 
 
 class Comsites(models.Model):
-    code_site = models.CharField(max_length=1000, blank=True, null=True)
+    code_site = models.ForeignKey(Typesites, blank=True, null=True, on_delete=models.CASCADE)
     nom_site = models.CharField(max_length=2500, blank=True, null=True)
-    latitude = models.CharField(max_length=1000, blank=True, null=True)
-    longitude = models.CharField(max_length=1000, blank=True, null=True)
+    commune = models.ForeignKey(Communes, blank=True, null=True, on_delete=models.CASCADE)
+    latitude = models.FloatField(max_length=1000, blank=True, null=True)
+    longitude = models.FloatField(max_length=1000, blank=True, null=True)
     date_deb_expl = models.DateField(blank=True, null=True)
     date_fin_exp = models.DateField(blank=True, null=True)
-    cat_site = models.IntegerField(blank=True, null=True)
+    cat_site = models.ForeignKey(Categories, blank=True, null=True, on_delete=models.CASCADE)
     statut = models.IntegerField(blank=True, null=True)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
@@ -166,7 +354,19 @@ class Comzones(models.Model):
         return self.nom_zone
 
 
-   
+class Incidents(models.Model):
+    libelle = models.CharField(max_length=1500, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Incidents"
+        verbose_name_plural = "Incident"
+        
+    def __str__(self):
+        return self.libelle
+    
+
 
 
 class Demandeconventions(models.Model):
@@ -324,24 +524,23 @@ class Ficheprelevements(models.Model):
 
 
 class Fichevisites(models.Model):
-    mission = models.CharField(max_length=1500, blank=True, null=True)
+    bureau = models.ForeignKey(Burencadrements, blank=True, null=True, on_delete=models.CASCADE)
     date_visite = models.DateField(blank=True, null=True)
     date_miss = models.DateField(blank=True, null=True)
-    fichier = models.CharField(max_length=1000, blank=True, null=True)
-    personne1 = models.CharField(max_length=2000, blank=True, null=True)
+    nom_des_visiteurs = models.TextField(max_length=2000, blank=True, null=True)
     qualite = models.CharField(max_length=1500, blank=True, null=True)
     service = models.CharField(max_length=1500, blank=True, null=True)
-    com_site = models.CharField(max_length=500, blank=True, null=True)
-    com_region = models.CharField(max_length=500, blank=True, null=True)
-    com_province = models.CharField(max_length=500, blank=True, null=True)
-    commune = models.CharField(max_length=500, blank=True, null=True)
-    point1 = models.CharField(max_length=2000, blank=True, null=True)
-    point2 = models.CharField(max_length=2000, blank=True, null=True)
-    point3 = models.CharField(max_length=2000, blank=True, null=True)
-    point4 = models.CharField(max_length=2000, blank=True, null=True)
-    nbr_hom = models.BigIntegerField(blank=True, null=True)
-    nbr_fem = models.BigIntegerField(blank=True, null=True)
-    nbr_enfant = models.BigIntegerField(blank=True, null=True)
+    com_site = models.ForeignKey(Typesites, null=True, blank=True, on_delete=models.CASCADE)
+    com_region = models.ForeignKey(Regions, null=True, blank=True, on_delete=models.CASCADE)
+    com_province = models.ForeignKey(Provinces, null=True, blank=True, on_delete=models.CASCADE)
+    commune = models.ForeignKey(Communes, blank=True, null=True, on_delete=models.CASCADE)
+    latitude = models.FloatField(blank=True, null=True)
+    longitude = models.FloatField(blank=True, null=True)
+    altitude = models.FloatField(blank=True, null=True)
+    precision = models.FloatField(blank=True, null=True)
+    nbr_hom = models.IntegerField(blank=True, null=True)
+    nbr_fem = models.IntegerField(blank=True, null=True)
+    nbr_enfant = models.IntegerField(blank=True, null=True)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 
@@ -447,34 +646,19 @@ class Fichexpminieres(models.Model):
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 
 
-    
-
-
-class Formdsracs(models.Model):
-    date_decl = models.DateField(blank=True, null=True)
-    den_compt = models.CharField(max_length=2000, blank=True, null=True)
-    ref_agre = models.CharField(max_length=1000, blank=True, null=True)
-    ifu = models.CharField(max_length=1000, blank=True, null=True)
-    declarant = models.CharField(max_length=2000, blank=True, null=True)
-    quantite_or_brut = models.FloatField(blank=True, null=True)
-    quantite_or_fin = models.FloatField(blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-  
-
 
 class Formguidautorites(models.Model):
-    region = models.CharField(max_length=1000, blank=True, null=True)
-    province = models.CharField(max_length=1000, blank=True, null=True)
-    commune = models.CharField(max_length=1000, blank=True, null=True)
-    village = models.CharField(max_length=1500, blank=True, null=True)
+    com_site = models.ForeignKey(Typesites, null=True, blank=True, on_delete=models.CASCADE)
+    com_region = models.ForeignKey(Regions, null=True, blank=True, on_delete=models.CASCADE)
+    com_province = models.ForeignKey(Provinces, null=True, blank=True, on_delete=models.CASCADE)
+    commune = models.ForeignKey(Communes, blank=True, null=True, on_delete=models.CASCADE)
     nom_prenom_enqueteur = models.CharField(max_length=2500, blank=True, null=True)
     nom_prenom_autorite = models.CharField(max_length=2500, blank=True, null=True)
     village_site = models.CharField(max_length=1000, blank=True, null=True)
-    nom_site = models.CharField(max_length=1000, blank=True, null=True)
+    nom_site = models.ForeignKey(Comsites, on_delete=models.CASCADE, blank=True, null=True)
     nom_prenom_ressouce = models.CharField(max_length=1000, blank=True, null=True)
-    statut_site = models.IntegerField(blank=True, null=True)
+    date_visite = models.DateField(blank=True, null=True)
+    statut_site = models.ForeignKey(Statutsites, blank=True, null=True, on_delete=models.CASCADE)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 
@@ -502,38 +686,7 @@ class Formincidents(models.Model):
 
     
 
-
-class Incidents(models.Model):
-    libelle = models.CharField(max_length=1500, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-    class Meta:
-        verbose_name = "Incidents"
-        verbose_name_plural = "Incident"
-        
-    def __str__(self):
-        return self.libelle
    
-
-
-
-class Provinces(models.Model):
-    numero = models.CharField(max_length=10, blank=True, null=True)
-    nomprov = models.CharField(max_length=500, blank=True, null=True)
-    region_id = models.IntegerField(blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-    
-    class Meta:
-        verbose_name = "Provinces"
-        verbose_name_plural = "Province"
-        
-    def __str__(self):
-        return self.nomprov
-    
-    
     
 
 class Rapaccidents(models.Model):
@@ -595,187 +748,7 @@ class Rapactivites(models.Model):
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 
 
-   
 
-
-class Regions(models.Model):
-    numero = models.CharField(unique=True, max_length=2, blank=True, null=True)
-    nomreg = models.CharField(max_length=1000, blank=True, null=True)
-    cheflieu = models.CharField(max_length=1000, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    
-    
-    class Meta:
-        verbose_name = "Regions"
-        verbose_name_plural = "Region"
-        
-    def __str__(self):
-        return self.nomreg
-
-    
-
-
-class Statutsites(models.Model):
-    libelle = models.CharField(max_length=1500, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-   
-    class Meta:
-        verbose_name = "Statut du sites"
-        verbose_name_plural = "Statut du site"
-        
-    def __str__(self):
-        return self.libelle
-    
-    
-
-class Typaccidents(models.Model):
-    libelle = models.CharField(max_length=500, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-   
-    class Meta:
-        verbose_name = "Typaccidents"
-        verbose_name_plural = "Type d'accident"
-        
-    def __str__(self):
-        return self.libelle
-
-
-class Typautorisations(models.Model):
-    libelle = models.CharField(max_length=1500, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-    
-    class Meta:
-        verbose_name = "Typautorisations"
-        verbose_name_plural = "Type d'autorisation"
-        
-    def __str__(self):
-        return self.libelle
-
-
-class Typdemandeurs(models.Model):
-    libelle = models.CharField(max_length=1500, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-    class Meta:
-        verbose_name = "Typdemandeurs"
-        verbose_name_plural = "Type demandeur"
-        
-    def __str__(self):
-        return self.libelle
-
-
-class Typenatureminerais(models.Model):
-    libelle_type_nature_minerais = models.CharField(max_length=254, blank=True, null=True)
-    flag_actif = models.IntegerField(blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-    
-    class Meta:
-        verbose_name = "Typenatureminerais"
-        verbose_name_plural = "Nature du minerai"
-        
-    def __str__(self):
-        return self.libelle_type_nature_minerais
-
-
-class Typenatureterrains(models.Model):
-    libelle = models.CharField(max_length=1000, blank=True, null=True)
-    flag_actif = models.CharField(max_length=50, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-  
-
-    class Meta:
-        verbose_name = "Typenatureterrains"
-        verbose_name_plural = "Nature terrain"
-        
-    def __str__(self):
-        return self.libelle
-    
-    
-
-class Typeorganisations(models.Model):
-    libelle = models.CharField(max_length=1000, blank=True, null=True)
-    flag_actif = models.CharField(max_length=50, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-   
-    class Meta:
-        verbose_name = "Typeorganisations"
-        verbose_name_plural = "Type d'organisation"
-        
-    def __str__(self):
-        return self.libelle
-
-class Typeproduitchimiques(models.Model):
-    libelle = models.CharField(max_length=1000, blank=True, null=True)
-    flag_actif = models.CharField(max_length=50, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-    
-    class Meta:
-        verbose_name = "Typeproduitchimiques"
-        verbose_name_plural = "Type de produit chimique"
-        
-    def __str__(self):
-        return self.libelle
-
-
-class Typequipements(models.Model):
-    libelle = models.CharField(max_length=1000, blank=True, null=True)
-    flag_actif = models.CharField(max_length=50, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-    
-    class Meta:
-        verbose_name = "Typequipements"
-        verbose_name_plural = "Type d'equipement"
-        
-    def __str__(self):
-        return self.libelle
-
-class Typesites(models.Model):
-    libelle = models.CharField(max_length=1000, blank=True, null=True)
-    flag_actif = models.CharField(max_length=50, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-   
-    class Meta:
-        verbose_name = "Typesites"
-        verbose_name_plural = "Type de site"
-        
-    def __str__(self):
-        return self.libelle
-
-class Typetaterrains(models.Model):
-    libelle = models.CharField(max_length=1000, blank=True, null=True)
-    flag_actif = models.CharField(max_length=50, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-    
-    class Meta:
-        verbose_name = "Typetaterrains"
-        verbose_name_plural = "Type de terrain"
-        
-    def __str__(self):
-        return self.libelle
-    
-    
     
 
    

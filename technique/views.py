@@ -10,8 +10,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
-from twilio.rest import Client
-from django.conf import settings
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
@@ -21,6 +19,10 @@ from modules_externe.api_url import FICHE_ENROLMENT_URL
 
 
 
+#########################################################################
+# Fiche de visite
+#########################################################################
+
 def api_enrolement(request):
     data = get_data_by_api(FICHE_ENROLMENT_URL)
     paginator = Paginator(data, 8)
@@ -28,7 +30,6 @@ def api_enrolement(request):
     page_obj = paginator.get_page(page_number)
     context = {"page_obj":page_obj}
     return render(request, 'technique/enrolement/api_data.html', context)
-
 
 
 
@@ -75,9 +76,6 @@ def save_api_data_to_database(request, id):
         messages.error(request, "ID non trouvé !")
         return redirect('api_enrolement')
         
-
-
-
 
 
 def syn_detail(request, id):
@@ -150,29 +148,166 @@ def delete(request, id):
 
 
 
+#########################################################################
+# Fiche guide autorité
+#########################################################################
 
-def envoyer_message(request):
+def index1(request):
+    guides = Formguidautorites.objects.all().order_by('created')
+    paginator = Paginator(guides, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj":page_obj}
+    return render(request, 'technique/visite_activite/guide_fiche_liste.html', context)
+
+
+def add_guide(request):
+    if request.method=="POST":
+        form = FormguidautoritesForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Ajour effectué !")
+            return redirect('guide_fiche')
+        else:
+            return render(request, 'technique/visite_activite/add_guide.html', {"form":form})
+    else:
+        form = FormguidautoritesForm()
+        return render(request, 'technique/visite_activite/add_guide.html', {"form":form})
+
+
+
+def edit_guide(request, id):
+    guide = Formguidautorites.objects.get(id=id)
     if request.method == 'POST':
-        message = request.POST.get('message')
-        destinataire = request.POST.get('destinataire')
-
-        # Initialiser le client Twilio
-        client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
-
-        # Envoyer le message
-        message = client.messages.create(
-            body=message,
-            from_='+18159348590', 
-            to=destinataire
-        )
-
-        return redirect('home')
-
-    return render(request, 'technique/enrolement/message.html')
+        form = FormguidautoritesForm(request.POST, instance=guide)
+        if form.is_valid():
+            form.save(id)
+            messages.success(request, "Modification effectué avec susccès!")
+            return redirect('guide_fiche')
+    else:
+        form = FormguidautoritesForm(instance=guide)
+    return render(request, 'technique/visite_activite/edit_guide.html', {'guide':guide, 'form':form})
 
 
 
-            
+
+
+def delete_guide(request, id):
+    guide = Formguidautorites.objects.get(id = id)
+    if request.method=='POST':
+        guide.delete()
+        messages.success(request, 'supprimer avec susccès !')
+        return redirect("guide_fiche")
+    return render(request, 'technique/visite_activite/delete_guide.html', {"guide":guide})
+     
+
+
+#########################################################################
+# Fiche viste
+#########################################################################
+
+def index2(request):
+    vistes = Fichevisites.objects.all().order_by('created')
+    paginator = Paginator(vistes, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj":page_obj}
+    return render(request, 'technique/visite_activite/visite_fiche_liste.html', context)
+
+
+def add_visite(request):
+    if request.method=="POST":
+        form = FichevisitesForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Ajour effectué !")
+            return redirect('visite_fiche')
+        else:
+            return render(request, 'technique/visite_activite/add_visite.html', {"form":form})
+    else:
+        form = FichevisitesForm()
+        return render(request, 'technique/visite_activite/add_visite.html', {"form":form})
 
 
 
+def edit_visite(request, id):
+    viste = Fichevisites.objects.get(id=id)
+    if request.method == 'POST':
+        form = FichevisitesForm(request.POST, instance=viste)
+        if form.is_valid():
+            form.save(id)
+            messages.success(request, "Modification effectué avec susccès!")
+            return redirect('visite_fiche')
+    else:
+        form = FichevisitesForm(instance=viste)
+    return render(request, 'technique/visite_activite/edit_visite.html', {'viste':viste, 'form':form})
+
+
+
+
+
+def delete_visite(request, id):
+    viste = Fichevisites.objects.get(id = id)
+    if request.method=='POST':
+        viste.delete()
+        messages.success(request, 'supprimer avec susccès !')
+        return redirect("visite_fiche")
+    return render(request, 'technique/visite_activite/delete_visite.html', {"viste":viste})
+
+
+
+
+
+
+#########################################################################
+# Fiche de demande convention
+#########################################################################
+
+def index3(request):
+    vistes = Fichevisites.objects.all().order_by('created')
+    paginator = Paginator(vistes, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj":page_obj}
+    return render(request, 'technique/visite_activite/visite_fiche_liste.html', context)
+
+
+def add_convention(request):
+    if request.method=="POST":
+        form = FichevisitesForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Ajour effectué !")
+            return redirect('visite_fiche')
+        else:
+            return render(request, 'technique/visite_activite/add_visite.html', {"form":form})
+    else:
+        form = FichevisitesForm()
+        return render(request, 'technique/visite_activite/add_visite.html', {"form":form})
+
+
+
+def edit_convention(request, id):
+    viste = Fichevisites.objects.get(id=id)
+    if request.method == 'POST':
+        form = FichevisitesForm(request.POST, instance=viste)
+        if form.is_valid():
+            form.save(id)
+            messages.success(request, "Modification effectué avec susccès!")
+            return redirect('visite_fiche')
+    else:
+        form = FichevisitesForm(instance=viste)
+    return render(request, 'technique/visite_activite/edit_visite.html', {'viste':viste, 'form':form})
+
+
+
+
+
+def delete_convention(request, id):
+    viste = Fichevisites.objects.get(id = id)
+    if request.method=='POST':
+        viste.delete()
+        messages.success(request, 'supprimer avec susccès !')
+        return redirect("visite_fiche")
+    return render(request, 'technique/visite_activite/delete_visite.html', {"viste":viste})
+     
