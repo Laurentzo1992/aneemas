@@ -264,50 +264,50 @@ def delete_visite(request, id):
 #########################################################################
 
 def index3(request):
-    vistes = Fichevisites.objects.all().order_by('created')
-    paginator = Paginator(vistes, 8)
+    conventions = Demandeconventions.objects.all().order_by('created')
+    paginator = Paginator(conventions, 8)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     context = {"page_obj":page_obj}
-    return render(request, 'technique/visite_activite/visite_fiche_liste.html', context)
+    return render(request, 'technique/convention/index.html', context)
 
 
 def add_convention(request):
     if request.method=="POST":
-        form = FichevisitesForm(request.POST, request.FILES)
+        form = DemandeconventionsForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, "Ajour effectué !")
-            return redirect('visite_fiche')
+            return redirect('convention')
         else:
-            return render(request, 'technique/visite_activite/add_visite.html', {"form":form})
+            return render(request, 'technique/convention/add.html', {"form":form})
     else:
-        form = FichevisitesForm()
-        return render(request, 'technique/visite_activite/add_visite.html', {"form":form})
+        form = DemandeconventionsForm()
+        return render(request, 'technique/convention/add.html', {"form":form})
 
 
 
 def edit_convention(request, id):
-    viste = Fichevisites.objects.get(id=id)
+    convention = Demandeconventions.objects.get(id=id)
     if request.method == 'POST':
-        form = FichevisitesForm(request.POST, instance=viste)
+        form = DemandeconventionsForm(request.POST, instance=convention)
         if form.is_valid():
             form.save(id)
             messages.success(request, "Modification effectué avec susccès!")
-            return redirect('visite_fiche')
+            return redirect('convention')
     else:
-        form = FichevisitesForm(instance=viste)
-    return render(request, 'technique/visite_activite/edit_visite.html', {'viste':viste, 'form':form})
+        form = DemandeconventionsForm(instance=convention)
+    return render(request, 'technique/convention/edit.html', {'convention':convention, 'form':form})
 
 
 
 
 
 def delete_convention(request, id):
-    viste = Fichevisites.objects.get(id = id)
+    convention = Demandeconventions.objects.get(id = id)
     if request.method=='POST':
-        viste.delete()
+        convention.delete()
         messages.success(request, 'supprimer avec susccès !')
-        return redirect("visite_fiche")
-    return render(request, 'technique/visite_activite/delete_visite.html', {"viste":viste})
+        return redirect("convention")
+    return render(request, 'technique/convention/delete.html', {"convention":convention})
      

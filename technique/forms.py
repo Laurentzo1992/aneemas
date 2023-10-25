@@ -1,4 +1,6 @@
 from django import forms
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Row, Column
 from paramettre.models import *
 from django.core.validators import RegexValidator
 
@@ -57,12 +59,29 @@ class FormguidautoritesForm(forms.ModelForm):
         
         
 class DemandeconventionsForm(forms.ModelForm):
-    
-    
     class Meta:
         model = Demandeconventions
         fields = '__all__'
-        
-        
 
-        
+    def __init__(self, *args, **kwargs):
+        super(DemandeconventionsForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout()
+
+        # Nombre de colonnes dans une rangée
+        colonnes_par_rangee = 4
+
+        champ_index = 0
+        row = Row()
+
+        for champ_name, champ in self.fields.items():
+            if champ_index % colonnes_par_rangee == 0:
+                if champ_index > 0:
+                    self.helper.layout.append(row)
+                row = Row()
+            
+            row.append(Column(champ_name, css_class='col-3'))
+            champ_index += 1
+
+        if champ_index > 0:
+            self.helper.layout.append(row)

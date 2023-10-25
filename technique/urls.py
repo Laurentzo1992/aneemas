@@ -29,10 +29,10 @@ urlpatterns = [
     
     
     #Url de la fiche de demande de convention
-    path('visite', views.index2, name='visite_fiche'),
-    path('visite/add', views.add_visite, name='add_visite'),
-    path('visite/edit/<int:id>', views.edit_visite, name='edit_visite'),
-    path('visite/delete/<int:id>', views.delete_visite, name='delete_visite'),
+    path('convention', views.index3, name='convention'),
+    path('convention/add', views.add_convention, name='add_convention'),
+    path('convention/edit/<int:id>', views.edit_convention, name='edit_convention'),
+    path('convention/delete/<int:id>', views.delete_convention, name='delete_convention'),
     
     
 ]
