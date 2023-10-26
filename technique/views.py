@@ -290,7 +290,7 @@ def add_convention(request):
 def edit_convention(request, id):
     convention = Demandeconventions.objects.get(id=id)
     if request.method == 'POST':
-        form = DemandeconventionsForm(request.POST, instance=convention)
+        form = DemandeconventionsForm(request.POST,request.FILES, instance=convention)
         if form.is_valid():
             form.save(id)
             messages.success(request, "Modification effectué avec susccès!")

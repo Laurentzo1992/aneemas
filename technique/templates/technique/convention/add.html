@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-{% block title %} Ajout enrolment {% endblock %}
+{% block title %} Ajout convention {% endblock %}
 
 {% comment %} {% load django_bootstrap5 %} {% endcomment %}
 
@@ -16,7 +16,7 @@
 
          {% comment %} {% bootstrap_form form %} {% endcomment %}
 
-         <h4 class=" text-center fw-bold text-danger">Information sur la zone </h4>
+         <h5 class="text-center fw-bold text-white bg-secondary">Information sur la zone </h5>
          <div class="row">
             <div class="col-3">{{form.num_ordre|as_crispy_field}}</div>
             <div class="col-3">{{form.type_autorisation|as_crispy_field}}</div>
@@ -32,7 +32,7 @@
          <div class="row">
             <div class="col-12">{{form.demande|as_crispy_field}}</div>
          </div>
-         <h4 class=" text-center fw-bold text-danger">Information du Demandeur </h4>
+         <h5 class="text-center fw-bold text-white bg-secondary">Information du Demandeur </h5>
          <div class="row">
             <div class="col-3">{{form.nom_demandeur|as_crispy_field}}</div>
             <div class="col-3">{{form.nom_localite2|as_crispy_field}}</div>
@@ -50,12 +50,12 @@
             <div class="col-4">{{form.email|as_crispy_field}}</div>
             <div class="col-4">{{form.site|as_crispy_field}}</div>
          </div>
-         <h4 class=" text-center fw-bold text-danger">Information complementaire </h4>
+         <h5 class="text-center fw-bold text-white bg-secondary">Information complementaire </h5>
          <div class="row">
             <div class="col-12">{{form.substance1|as_crispy_field}}</div>
          </div>
          <div class="row">
-            <div class="col-12">{{form.fichier1|as_crispy_field}}</div>
+            <div class="col-12">{{form.fichier|as_crispy_field}}</div>
          </div>
          <div class="row">
             <div class="col-3">{{form.longitude|as_crispy_field}}</div>

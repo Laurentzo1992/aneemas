@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+
+
+{% block add %}
+
+<a id="syncLink" href="{% url 'api_prelevement' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
+  Synchronisation <i class="fa-solid fa-group-arrows-rotate"></i>
+</a>
+
+
+<a href="{% url 'add' %}" class="text-decoration-none fw-bold text-success">
+    Ajouter <i class="fa fa-plus text-success"></i>
+ </a>
+
+{% endblock add %}
+
+
+
+
+{% block main %}
+
+
+
+<table class="table table-striped shadow-lg p-3 mt-3">
+    <thead>
+      <tr class="bg-success">
+        <th scope="col">Id</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Prenom</th>
+        <th scope="col">Carte</th>
+        <th scope="col">Localite</th>
+        <th scope="col">ref_piece</th>
+        <th scope="col">Enrolé le</th>
+        <th scope="col">action</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for result in page_obj %}
+      <tr>
+        <td>{{result.id }}</td>
+        <td>{{result.nom}}</td>
+        <td>{{result.prenom}}</td>
+        <td class="text-center">
+          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{result.id}}">
+            <i class="fas fa-eye text-success"></i>
+          </a>
+        </td>
+        <td>{{result.localite}}</td>
+        <td>{{result.ref_piece}}</td>
+        <td>{{result.created}}</td>
+        <td>
+          <a href="{% url 'edit' result.id %}" type="button" class="btn btn-warning" title="modifier">
+            <i class="fas fa-pen"></i>
+          </a>
+          <a href="{% url 'delete'  result.id %}" type="button" class="btn btn-danger" title="supprimer">
+            <i class="fas fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+
+      {% include 'technique/prelevement/detail.html' %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; debut</a>
+            <a href="?page={{ page_obj.previous_page_number }}">précédent</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">suivant</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">fin &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
+
+
+
+{% for message in messages %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if message.tags == 'error' %}
+    <script>
+        var m = "{{ message }}";
+          swal("Denied !", "Enter your data correctly.", "error")
+    </script>
+          {% elif message.tags == 'success' %}
+    <script>
+          var m = "{{ message }}";
+          swal("Perfect !", m, "success")
+    </script>
+{% endif %}   
+{% endfor%}
+
+
+{% endblock main %}

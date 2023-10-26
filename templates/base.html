@@ -37,7 +37,7 @@
 	
 		<div class="container-fluid mt-2">
 			<div class="row flex-nowrap">
-				<div class="col-auto col-md-3 col-xl-2 px-sm-2 border border-5 border-warning shadow-lg p-3 mb-5 bg-body-tertiary rounded ms-2">
+				<div class="col-auto col-md-3 col-xl-2 px-sm-2 border border-5 shadow-lg p-3 mb-5 bg-body-tertiary rounded ms-2">
 					<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 						<li class="nav-item">
 							<a href="{% url 'home' %}" class="nav-link align-middle px-0">
@@ -89,7 +89,7 @@
 											  <i class="fa-solid fa-people-roof"></i> <span class="ms-1 d-none d-sm-inline text-success">Gestion</span> </a>
 										  <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
 											  <li class="w-100">
-												  <a href="" class="nav-link px-0"><i class="fa-solid fa-vial"></i> &nbsp; <span class="d-none d-sm-inline text-success">Prélèvement</span> </a>
+												  <a href="{% url 'prelevement' %}" class="nav-link px-0"><i class="fa-solid fa-vial"></i> &nbsp; <span class="d-none d-sm-inline text-success">Prélèvement</span> </a>
 											  </li>
 											  <li class="w-100">
 												  <a href="" class="nav-link px-0"> <i class="fa-solid fa-glasses"></i> &nbsp; <span class="d-none d-sm-inline text-success">Suivi Artisanal</span> </a>

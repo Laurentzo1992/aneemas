@@ -381,16 +381,16 @@ class Demandeconventions(models.Model):
     type_autorisation = models.CharField(max_length=400, blank=True, null=True)
     nomnre_carre = models.CharField(max_length=400, blank=True, null=True)
     nom_localite1 = models.CharField(max_length=400, blank=True, null=True)
-    region = models.CharField(max_length=400, blank=True, null=True)
-    province = models.CharField(max_length=400, blank=True, null=True)
-    commune = models.CharField(max_length=400, blank=True, null=True)
+    region = models.ForeignKey(Regions, on_delete=models.CASCADE , blank=True, null=True)
+    province = models.ForeignKey(Provinces, on_delete=models.CASCADE, blank=True, null=True)
+    commune = models.ForeignKey(Communes, on_delete=models.CASCADE, blank=True, null=True)
     identifiaction = models.CharField(max_length=400, blank=True, null=True)
     demande = models.CharField(max_length=10, blank=True, null=True, choices=DEMANDE, default=NON)
     nom_demandeur = models.CharField(max_length=400, blank=True, null=True)
     nom_localite2 = models.CharField(max_length=400, blank=True, null=True)
-    region = models.CharField(max_length=400, blank=True, null=True)
-    province = models.CharField(max_length=400, blank=True, null=True)
-    commune = models.CharField(max_length=400, blank=True, null=True)
+    region = models.ForeignKey(Regions, on_delete=models.CASCADE , blank=True, null=True)
+    province = models.ForeignKey(Provinces, on_delete=models.CASCADE, blank=True, null=True)
+    commune = models.ForeignKey(Communes, on_delete=models.CASCADE, blank=True, null=True)
     pays = models.CharField(max_length=400, blank=True, null=True)
     telephone = models.CharField(max_length=400, blank=True, null=True)
     telephone1 = models.CharField(max_length=400, blank=True, null=True)
@@ -398,7 +398,7 @@ class Demandeconventions(models.Model):
     email = models.CharField(max_length=350, blank=True, null=True)
     site = models.CharField(max_length=350, blank=True, null=True)
     substance1 = models.TextField(max_length=400, blank=True, null=True)
-    fichier1 = models.ImageField(max_length=400, blank=True, null=True)
+    fichier = models.FileField(max_length=400, blank=True, null=True, upload_to='uploads')
     longitude = models.FloatField(max_length=50, blank=True, null=True)
     latitude = models.FloatField(max_length=50, blank=True, null=True)
     altitude = models.FloatField(max_length=50, blank=True, null=True)
@@ -434,7 +434,13 @@ class Demandeconventions(models.Model):
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 
-    
+    @property
+    def fileURL(self):
+        try:
+            url = self.fichier.url
+        except:
+            url = ''
+        return url
 
 
 class Fichenrolements(models.Model):
@@ -474,21 +480,18 @@ class LigneTypeCarte(models.Model):
 
 
 class Ficheprelevements(models.Model):
-    date_prelev = models.DateField(blank=True, null=True)
-    commune_id = models.CharField(max_length=1000, blank=True, null=True)
-    point = models.CharField(max_length=1000, blank=True, null=True)
-    coord_gps = models.CharField(max_length=500, blank=True, null=True)
-    latitude = models.CharField(max_length=1000, blank=True, null=True)
-    longitude = models.CharField(max_length=1000, blank=True, null=True)
-    altitude = models.CharField(max_length=1000, blank=True, null=True)
-    precision = models.CharField(max_length=1000, blank=True, null=True)
-    coord_man_x = models.CharField(max_length=500, blank=True, null=True)
-    coord_man_y = models.CharField(max_length=500, blank=True, null=True)
+    date_prelevement = models.DateField(blank=True, null=True)
+    commune = models.ForeignKey(Communes, on_delete=models.CASCADE, blank=True, null=True)
+    point_prelevement = models.CharField(max_length=1000, blank=True, null=True)
+    longitude = models.FloatField(max_length=1000, blank=True, null=True)
+    latitude = models.FloatField(max_length=1000, blank=True, null=True)
+    altitude = models.FloatField(max_length=1000, blank=True, null=True)
+    precision = models.FloatField(max_length=1000, blank=True, null=True)
     lieu = models.CharField(max_length=1500, blank=True, null=True)
     motif = models.TextField(blank=True, null=True)
     quantite = models.FloatField(blank=True, null=True)
-    nb_flacons_v = models.IntegerField(blank=True, null=True)
-    nb_flacons_p = models.IntegerField(blank=True, null=True)
+    nombre_flacons_verre = models.IntegerField(blank=True, null=True)
+    nombre_flacons_plastique = models.IntegerField(blank=True, null=True)
     type_nature_echant = models.CharField(max_length=1000, blank=True, null=True)
     conductivite = models.FloatField(blank=True, null=True)
     ph = models.FloatField(blank=True, null=True)
@@ -498,9 +501,8 @@ class Ficheprelevements(models.Model):
     bruit = models.CharField(max_length=1000, blank=True, null=True)
     odeur = models.CharField(max_length=1000, blank=True, null=True)
     lumiere = models.CharField(max_length=1000, blank=True, null=True)
-    nom_personne1 = models.CharField(max_length=1500, blank=True, null=True)
-    nom_personne2 = models.CharField(max_length=1500, blank=True, null=True)
-    adresse = models.TextField(blank=True, null=True)
+    nom_personnes_commandiaire = models.TextField(max_length=1500, blank=True, null=True)
+    adresse_personnes_commandiaire = models.TextField(blank=True, null=True)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 
