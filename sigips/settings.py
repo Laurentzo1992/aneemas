@@ -97,7 +97,18 @@ DATABASES = {
     }
 }
 """
-
+"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'aneemas',
+        'USER': 'ubuntu',
+        'PASSWORD': 'pago@2023',
+        'HOST': '94.23.165.51',
+        'PORT': '5432',
+    }
+}
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
