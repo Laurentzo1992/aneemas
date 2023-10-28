@@ -16,3 +16,17 @@ class FicheprelevementsForm(forms.ModelForm):
             'adresse_personnes_commandiaire': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
             'date_prelevement': forms.DateInput(attrs={'type': 'date'}),
         }
+
+
+
+class FichexpminieresForm(forms.ModelForm):
+    class Meta:
+        model = Fichexpminieres
+        fields = '__all__'
+        
+        widgets = {
+            'comentaire': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'resultat': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'but_mission': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'date_la_mission': forms.DateInput(attrs={'type': 'date'}),
+        }

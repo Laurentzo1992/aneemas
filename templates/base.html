@@ -85,14 +85,14 @@
 								<div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
 								  <div class="accordion-body">
 									  <li class="list-unstyled">
-										  <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+										  <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
 											  <i class="fa-solid fa-people-roof"></i> <span class="ms-1 d-none d-sm-inline text-success">Gestion</span> </a>
-										  <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+										  <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
 											  <li class="w-100">
 												  <a href="{% url 'prelevement' %}" class="nav-link px-0"><i class="fa-solid fa-vial"></i> &nbsp; <span class="d-none d-sm-inline text-success">Prélèvement</span> </a>
 											  </li>
 											  <li class="w-100">
-												  <a href="" class="nav-link px-0"> <i class="fa-solid fa-glasses"></i> &nbsp; <span class="d-none d-sm-inline text-success">Suivi Artisanal</span> </a>
+												  <a href="{% url 'exploitation' %}" class="nav-link px-0"> <i class="fa-solid fa-glasses"></i> &nbsp; <span class="d-none d-sm-inline text-success">Suivi Artisanal</span> </a>
 											  </li>
 										  </ul>
 									  </li> 
@@ -110,9 +110,9 @@
 							  	<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
 									<div class="accordion-body">
 										<li class="list-unstyled">
-											<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+											<a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
 												<i class="fa-solid fa-people-roof"></i> <span class="ms-1 d-none d-sm-inline text-success">Gestion</span> </a>
-											<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+											<ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
 												<li class="w-100">
 													<a href="{% url 'list_enrolement' %}" class="nav-link px-0"> <i class="fa-solid fa-file-pen"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Enrolement</span> </a>
 												</li>
@@ -167,7 +167,7 @@
 						  </button>
 
 						  {% block add %}
-						  
+						  	
 						 {% endblock add %}
 
 						</div>

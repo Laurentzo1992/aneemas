@@ -120,7 +120,7 @@ def add(request):
 def edit(request, id):
     prelevement = Ficheprelevements.objects.get(id=id)
     if request.method == 'POST':
-        form = EnrolementForm(request.POST, instance=prelevement)
+        form = FicheprelevementsForm(request.POST, instance=prelevement)
         if form.is_valid():
             form.save(id)
             messages.success(request, "Modification effectué avec susccès!")
@@ -135,12 +135,125 @@ def edit(request, id):
 
 def delete(request, id):
     prelevement = Ficheprelevements.objects.get(id = id)
-    if request.method=='POST':
-        prelevement.delete()
-        messages.success(request, 'supprimer avec susccès !')
-        return redirect("prelevement")
-    return render(request, 'environnement/prelevement/delete.html', {"prelevement":prelevement})
+    prelevement.delete()
+    messages.success(request, 'supprimer avec susccès !')
+    return HttpResponseRedirect(reverse("prelevement"))
+
      
 
 
 
+#######################################################################################
+# Fiche de suivie des exploitation artisanale
+#######################################################################################
+def api_exploitation(request):
+    data = get_data_by_api(FICHE_ENROLMENT_URL)
+    paginator = Paginator(data, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj":page_obj}
+    return render(request, 'environnement/exploitation/api_data.html', context)
+
+
+
+def save_api_data_to_database1(request, id):
+    # Obtenir l'élément de l'API en fonction de l'ID
+    result = get_api_data_id(FICHE_ENROLMENT_URL, id)
+
+    if result:
+        # Créez une instance de votre modèle avec les données de l'API
+        fiche = Fichenrolements(
+            identifiant=result['id'],
+            nom=result['nom'],
+            prenom=result['prenom'],
+            date=result['date'],
+            localite=result['localite'],
+            telephone=result['telephone'],
+            telephone2=result['telephone2'],
+            quittance=result['quittance'],
+            engagement=result['engagement'],
+            num_carte=result['num_carte'],
+            observation=result['observation'],
+            ref_piece=result['ref_piece']
+        )
+        # Enregistrez l'instance dans la base de données
+        if Fichenrolements.objects.filter(identifiant=id).exists():
+            fiche.save()
+            type_cartes = []
+        
+            for type_carte_name in result['type_carte']:
+                type_carte, created = Typecarte.objects.get_or_create(libelle=type_carte_name)
+                type_cartes.append(type_carte)
+            
+            for type_carte in type_cartes:
+                LigneTypeCarte.objects.create(carte=type_carte, fiche=fiche)
+            # Redirigez vers la page liste des enrolments
+            messages.success(request, "Données enregistrées avec succès !")
+            return redirect('exploitation')
+        
+        else:
+            messages.error(request, "données déja synchronisé !")
+        
+    else:
+        # Gérer le cas où l'ID spécifié n'est pas trouvé
+        messages.error(request, "ID non trouvé !")
+        return redirect('api_exploitation1')
+        
+
+
+def syn_detail1(request, id):
+    result = get_api_data_id(FICHE_ENROLMENT_URL, id)
+    if result:
+        return render(request, 'environnement/exploitation/detail.html', {"result":result})
+    else:
+        return render(request, 'environnement/exploitation/erreur.html', {'message': 'ID non trouvé'})
+
+
+def index1(request):
+    prelevements = Fichexpminieres.objects.all().order_by('created')
+    paginator = Paginator(prelevements, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj":page_obj}
+    return render(request, 'environnement/exploitation/exploitation.html', context)
+
+
+
+
+
+def add1(request):
+    if request.method=="POST":
+        form = FichexpminieresForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Ajour effectué !")
+            return redirect('exploitation')
+        else:
+            return render(request, 'environnement/exploitation/add.html', {"form":form})
+    else:
+        form = FichexpminieresForm()
+        return render(request, 'environnement/exploitation/add.html', {"form":form})
+    
+
+
+def edit1(request, id):
+    exploitation = Fichexpminieres.objects.get(id=id)
+    if request.method == 'POST':
+        form = FichexpminieresForm(request.POST, instance=exploitation)
+        if form.is_valid():
+            form.save(id)
+            messages.success(request, "Modification effectué avec susccès!")
+            return redirect('prelevement')
+    else:
+        form = FichexpminieresForm(instance=exploitation)
+    return render(request, 'environnement/exploitation/edit.html', {'exploitation':exploitation, 'form':form})
+
+
+
+
+
+def delete1(request, id):
+    prelevement = Fichexpminieres.objects.get(id = id)
+    prelevement.delete()
+    messages.success(request, 'supprimer avec susccès !')
+    return HttpResponseRedirect(reverse("exploitation"))
