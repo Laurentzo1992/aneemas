@@ -150,3 +150,31 @@ class Pesee(models.Model):
     @property
     def densite(self):
         return self.poids_brut / (self.poids_brut - self.poids_immerge)
+
+
+class Factures(models.Model):
+    id = models.AutoField(primary_key=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    fiche_tarification = models.ForeignKey(Lingot,  on_delete=models.SET_NULL, null=True)
+
+    # Generer un numero de Facture
+    def generate_numero_facture(self):
+        last_two_digits_of_year = str(self.date_reception.year)[-2:]
+        self.numero_lingo = f"{self.id}.zfill(4)-{last_two_digits_of_year}"
+    
+    # Surcharge de la méthode save pour appeler la fonction generate_numero_fiche_control
+    def save(self, *args, **kwargs):
+        if not self.id:
+            # Si la fiche n'a pas encore d'ID, il n'est pas encore enregistré dans la base de données
+            temp_facture = Factures.objects.create()  # Créer un Lingot non enregistré pour obtenir un ID
+            self.id = temp_facture.id  # Assigner l'ID généré a la fiche actuel
+            self.generate_numero_facture()
+
+        super().save(*args, **kwargs)
+    
+    # stocker le numéro de la facture
+    numero_facture = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.generate_numero_facture
