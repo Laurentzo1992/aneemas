@@ -10,7 +10,6 @@ from authentication.models import User
 
 from django.utils import timezone
 
-
 # Create your models here.
 
 class Fichecontrol(models.Model):
@@ -55,6 +54,22 @@ class FicheTarification(models.Model):
     def __str__(self):
         return self.numero
 
+class TypeLingot(models.Model):
+    libelle = models.CharField(max_length=60)
+    description = models.TextField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.libelle
+
+class EmplacementLingot(models.Model):
+    nom = models.CharField(max_length=100, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return self.nom
+    
 class Lingot(models.Model):
     id = models.AutoField(primary_key=True)
     poids_brut = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2,)
@@ -67,6 +82,9 @@ class Lingot(models.Model):
     observation = models.CharField(blank=True, null=True, max_length=256)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    emplacement = models.ForeignKey(EmplacementLingot, on_delete=models.SET_NULL, null=True, blank=True)
+    type_lingot = models.ForeignKey(TypeLingot, on_delete=models.SET_NULL, null=True, blank=True)
+
 
     # Lien vers la fiche de contrôle
     fiche_control = models.ForeignKey(Fichecontrol, on_delete=models.SET_NULL, null=True, blank=True)
@@ -178,3 +196,75 @@ class Factures(models.Model):
 
     def __str__(self):
         return self.generate_numero_facture
+
+
+class TypeClient(models.Model):
+    libelle = models.CharField(max_length=60)
+    description = models.CharField(blank=True, null=True, max_length=256)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return self.libelle
+
+class Client(models.Model):
+    nom = models.CharField(blank=True, null=True, max_length=60)
+    prenom = models.CharField(blank=True, null=True, max_length=60)
+    description = models.CharField(blank=True, null=True, max_length=256)
+    type_client = models.ForeignKey(TypeClient,  on_delete=models.CASCADE, null=False, blank=False)
+    cartartisan = models.ForeignKey(Cartartisants, blank=True, null=True, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.description
+    
+
+
+class MovementLingot(models.Model):
+    type_lingot = models.ForeignKey(TypeLingot, on_delete=models.CASCADE) 
+    origin = models.ForeignKey(EmplacementLingot, related_name='mouvements_origin', on_delete=models.CASCADE)
+    destination = models.ForeignKey(EmplacementLingot, related_name='mouvements_destination', on_delete=models.CASCADE)
+    ETAT_CHOICES = [
+        ('debut', 'Début'),
+        ('encours', 'En cours'),
+        ('arrive', 'Arrivé'),
+    ]
+    etat = models.CharField(max_length=20, choices=ETAT_CHOICES)
+    date_debut = models.DateTimeField(auto_now_add=True)
+    date_arrive = models.DateTimeField(blank=True, null=True, auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+class Direction(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    type_lingot = models.ForeignKey(TypeLingot, on_delete=models.CASCADE)
+    origin = models.ForeignKey(EmplacementLingot, related_name='directions_origin', on_delete=models.CASCADE)
+    destination = models.ForeignKey(EmplacementLingot, related_name='directions_destination', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    
+
+class StragieTarification(models.Model):
+    nom = models.CharField(max_length=100)
+    description = models.TextField()
+    priority = models.IntegerField()
+    start_date = models.DateField(default=date.today)
+    end_date = models.DateField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    actif = models.BooleanField(default=True)
+    globale = models.BooleanField(default=False)
+    marge = models.DecimalField(max_digits=10, decimal_places=2)
+    cours = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=4)
+    cours_auto = models.BooleanField(blank=True, null=True, default=True)
+    marge_auto = models.BooleanField(blank=True, null=True, default=True)
+
+    def has_expired(self):
+        today = date.today()
+        return self.start_date <= today and (self.end_date is None or self.end_date >= today)
+
+    def __str__(self):
+        return self.name
+
