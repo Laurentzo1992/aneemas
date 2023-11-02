@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Client, Factures, Fichecontrol, Lingot, MovementLingot, Pesee, FicheTarification, StragieTarification, TypeClient
+from .models import Client, DirectionLingot, EmplacementLingot, Factures, Fichecontrol, Lingot, MovementLingot, Pesee, FicheTarification, StragieTarification, TypeClient
 from django.urls import path, reverse
 from django.utils.html import format_html
 from jet.admin import CompactInline
@@ -86,11 +86,27 @@ class LingotAdmin(admin.ModelAdmin):
     actions = ['tarifier']  # Add your custom action here
 
     def tarifier(self, request, queryset):
-        # Perform your custom action here
         selected_ids = queryset.values_list('id', flat=True)
         # Do something with selected_ids
 
     tarifier.short_description = 'Controller'
+
+class ClientAdmin(admin.ModelAdmin):
+    inlines = []
+    list_display = ['nom', 'type_client']
+    exclude = []
+
+    def custom_action_button(self, obj):
+        return format_html('<a class="button" href="#">Modifier</a> <a class="button default" href="#">Archiver</a>')
+    custom_action_button.allow_tags = True
+    custom_action_button.short_description = 'Actions'  # Set a description for the column
+    
+    actions = ['Archiver']  # Add your custom action here
+
+    def tarifier(self, request, queryset):
+        selected_ids = queryset.values_list('id', flat=True)
+
+    tarifier.short_description = 'Archiver'
 
 class CommercialAdmin(AdminSite):
     site_header = "Gestion commmercial"
@@ -119,6 +135,9 @@ commercial_admin.register(FicheTarification)
 commercial_admin.register(Lingot, LingotAdmin)
 commercial_admin.register(Factures)
 commercial_admin.register(StragieTarification)
-commercial_admin.register(Client)
+commercial_admin.register(Client, ClientAdmin)
+commercial_admin.register(TypeClient)
+commercial_admin.register(DirectionLingot)
 commercial_admin.register(MovementLingot)
+commercial_admin.register(EmplacementLingot)
 

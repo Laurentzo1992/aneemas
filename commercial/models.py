@@ -73,8 +73,12 @@ class EmplacementLingot(models.Model):
     nom = models.CharField(max_length=100, unique=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Emplacements Lingots"
+
     def __str__(self):
-        return self.nom
+        return self.nom if self.nom is not None else "N/A"
     
 class Lingot(models.Model):
     id = models.AutoField(primary_key=True)
@@ -222,7 +226,7 @@ class TypeClient(models.Model):
         verbose_name_plural = "Type de client"
 
     def __str__(self):
-        return self.libelle
+        return self.libelle if self.libelle is not None else "N/A"
 
 class Client(models.Model):
     nom = models.CharField(blank=True, null=True, max_length=60)
@@ -237,7 +241,7 @@ class Client(models.Model):
         verbose_name_plural = "Clients"
 
     def __str__(self):
-        return self.description
+        return self.nom
     
 
 
@@ -259,11 +263,14 @@ class MovementLingot(models.Model):
     class Meta:
         verbose_name_plural = "Mouvements Lingots"
 
-class Direction(models.Model):
+class DirectionLingot(models.Model):
     name = models.CharField(max_length=100, unique=True)
     type_lingot = models.ForeignKey(TypeLingot, on_delete=models.CASCADE)
     origin = models.ForeignKey(EmplacementLingot, related_name='directions_origin', on_delete=models.CASCADE)
     destination = models.ForeignKey(EmplacementLingot, related_name='directions_destination', on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name_plural = "Directions Lingots"
 
     def __str__(self):
         return self.name
@@ -271,18 +278,19 @@ class Direction(models.Model):
 
 class StragieTarification(models.Model):
     nom = models.CharField(max_length=100)
-    description = models.TextField()
     priority = models.IntegerField()
-    start_date = models.DateField(default=date.today)
-    end_date = models.DateField(null=True, blank=True)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     actif = models.BooleanField(default=True)
-    globale = models.BooleanField(default=False)
     marge = models.DecimalField(max_digits=10, decimal_places=2)
+    marge_auto = models.BooleanField(blank=True, null=True, default=True)
     cours = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=4)
     cours_auto = models.BooleanField(blank=True, null=True, default=True)
-    marge_auto = models.BooleanField(blank=True, null=True, default=True)
+    globale = models.BooleanField(default=False)
+    type_client = models.ForeignKey(TypeClient,  on_delete=models.CASCADE, null=True, blank=True)
+    description = models.TextField()
 
     class Meta:
         verbose_name_plural = "Strategies de tarifications"
