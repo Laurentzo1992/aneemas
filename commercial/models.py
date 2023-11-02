@@ -71,6 +71,7 @@ class TypeLingot(models.Model):
 
 class EmplacementLingot(models.Model):
     nom = models.CharField(max_length=100, unique=True)
+    description = models.CharField(blank=True, null=True, max_length=256)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
@@ -265,7 +266,7 @@ class MovementLingot(models.Model):
 
 class DirectionLingot(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    type_lingot = models.ForeignKey(TypeLingot, on_delete=models.CASCADE)
+    type_lingot = models.ForeignKey(TypeLingot, on_delete=models.CASCADE, blank=True, null=True)
     origin = models.ForeignKey(EmplacementLingot, related_name='directions_origin', on_delete=models.CASCADE)
     destination = models.ForeignKey(EmplacementLingot, related_name='directions_destination', on_delete=models.CASCADE)
 
