@@ -4,11 +4,8 @@ from django.urls import path, include
 from  django.conf.urls.static import  static
 from  django.conf import settings
 
-from sigips.admin import commercial_admin
-
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("commercial/", commercial_admin.urls),
     path('', include('technique.urls')),
     path('', include('commercial.urls')),
     path('', include('environnement.urls')),

@@ -21,6 +21,9 @@ class Fichecontrol(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name_plural = "Fiches de Control"
+
     @property
     def numero(self):
         if self.id:
@@ -42,6 +45,9 @@ class FicheTarification(models.Model):
     modified = models.DateTimeField(auto_now=True)
 
     fiche_control = models.ForeignKey(Fichecontrol, on_delete=models.SET_NULL, null=True, blank=True)
+
+    class Meta:
+        verbose_name_plural = "Fiches de Tarification"
 
     @property
     def numero(self):
@@ -95,6 +101,8 @@ class Lingot(models.Model):
     # Association avec le modèle User (Celui qui enregistre le lingot)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
+    class Meta:
+        verbose_name_plural = "Lingots"
 
     @property
     def numero(self):
@@ -142,6 +150,9 @@ class Pesee(models.Model):
     # Les caractristique du lingot est la moyenne des resultat pour chaque pesé
     # Indique si ce pesé est utilisé dans le calcul de caracteristique du lingot
     valide = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = "Pesees"
 
     def get_numero_pesee(self):
         pesees_precedentes = Pesee.objects.filter(lingot=self.lingot, date_pesee__lte=self.date_pesee)
@@ -194,6 +205,9 @@ class Factures(models.Model):
     # stocker le numéro de la facture
     numero_facture = models.CharField(max_length=50, blank=True, null=True)
 
+    class Meta:
+        verbose_name_plural = "Factures"
+
     def __str__(self):
         return self.generate_numero_facture
 
@@ -204,6 +218,9 @@ class TypeClient(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        verbose_name_plural = "Type de client"
+
     def __str__(self):
         return self.libelle
 
@@ -215,6 +232,9 @@ class Client(models.Model):
     cartartisan = models.ForeignKey(Cartartisants, blank=True, null=True, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Clients"
 
     def __str__(self):
         return self.description
@@ -235,6 +255,9 @@ class MovementLingot(models.Model):
     date_arrive = models.DateTimeField(blank=True, null=True, auto_now_add=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name_plural = "Mouvements Lingots"
 
 class Direction(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -260,6 +283,9 @@ class StragieTarification(models.Model):
     cours = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=4)
     cours_auto = models.BooleanField(blank=True, null=True, default=True)
     marge_auto = models.BooleanField(blank=True, null=True, default=True)
+
+    class Meta:
+        verbose_name_plural = "Strategies de tarifications"
 
     def has_expired(self):
         today = date.today()

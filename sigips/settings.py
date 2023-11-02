@@ -20,6 +20,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    "jet.dashboard",
+    "jet",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -198,3 +200,5 @@ REST_FRAMEWORK = {
 }
 
 
+JET_DEFAULT_THEME = 'green'
+JET_SIDE_MENU_COMPACT = True
