@@ -11,6 +11,7 @@ from authentication.models import User
 
 from django.utils import timezone
 
+#Type client
 class TypeClient(models.Model):
     libelle = models.CharField(max_length=60)
     description = models.CharField(blank=True, null=True, max_length=256)
