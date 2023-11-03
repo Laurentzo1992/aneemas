@@ -41,7 +41,7 @@ class LingotForm(forms.ModelForm):
 class PeseeForm(forms.ModelForm):
     class Meta:
         model = Pesee
-        fields = ['poids_brut', 'poids_immerge', 'titre_carat', 'quantite_or_fin', 'date_pesee', 'observation']
+        fields = ['poids_brut', 'poids_immerge', 'date_pesee', 'observation']
     
     def __init__(self, *args, **kwargs):
         super(PeseeForm, self).__init__(*args, **kwargs)
@@ -50,8 +50,6 @@ class PeseeForm(forms.ModelForm):
         self.helper.layout = Layout(
             Field('poids_brut', css_class='form-control'),
             Field('poids_immerge', css_class='form-control'),
-            Field('titre_carat', css_class='form-control'),
-            Field('quantite_or_fin', css_class='form-control'),
             Field('date_pesee', css_class='form-control'),
             Field('observation', css_class='form-control'),
         )

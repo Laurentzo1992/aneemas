@@ -164,7 +164,7 @@
                                         <li><strong>ANEMAS</strong></li>
                                         <li>TYPE CLIENT</li>
                                         <li>ADDRESS</li>
-                                        <li>EMAIL: user@user.com </li>
+                                        <li>EMAIL: user@user.com</li>
                                         <li>TEL: 00 00 00 00 / 00 00 00 00 </li>
                                     </ul>
                                 </div>
@@ -209,10 +209,11 @@
                             <thead>
                                 <tr>
                                     <th>Lingots No.</th>
-                                    <th class="text-center colfix">Pesees</th>
+                                    <th class="text-center colfix">Pesee</th>
                                     <th class="text-center colfix">Pds brut(g)</th>
                                     <th class="text-center colfix">Pds immerge(g)</th>
                                     <th class="text-center colfix">Ecart</th>
+                                    <th class="text-center colfix">Densite</th>
                                     <th class="text-center colfix">Titre</th>
                                     <th class="text-center colfix">Qte or fin(g)</th>
                                 </tr>
@@ -246,12 +247,17 @@
                                         <small class="text-muted"></small>
                                     </td>
                                     <td class="text-right">
-                                        <span class="mono">{{ lingot.titre }}</span>
+                                        <strong class="mono">{{ lingot.densite }}</strong>
                                         <br>
-                                        <small class="text-muted"></small>
+                                        <small class="text-muted mono"></small>
                                     </td>
                                     <td class="text-right">
-                                        <strong class="mono">{{ lingot.iitre_carat }}</strong>
+                                        <strong class="mono">{{ lingot.titre }}</strong>
+                                        <br>
+                                        <small class="text-muted mono"></small>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong class="mono">{{ lingot.or_fin }}</strong>
                                         <br>
                                         <small class="text-muted mono"></small>
                                     </td>
@@ -286,12 +292,17 @@
                                         <small class="text-muted"></small>
                                     </td>
                                     <td class="text-right">
-                                        <span class="mono">{{ pesee.titre }}</span>
+                                        <span class="mono">{{ pesee.densite }}</span>
                                         <br>
                                         <small class="text-muted"></small>
                                     </td>
                                     <td class="text-right">
-                                        <strong class="mono">{{ pesee.titre_carat }}</strong>
+                                        <strong class="mono">{{ pesee.titre }}</strong>
+                                        <br>
+                                        <small class="text-muted mono"></small>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong class="mono">{{ pesee.or_fin }}</strong>
                                         <br>
                                         <small class="text-muted mono"></small>
                                     </td>
@@ -302,7 +313,8 @@
                             </tbody>
                             <tfoot class="full-width">
                                 <tr>
-                                    <th> Total: </th>
+                                    <th><strong class="mono"> Total: </strong></th>
+                                    <th colspan="1"><strong></strong></th>
                                     <th colspan="1">-</th>
                                     <th colspan="1">-</th>
                                     <th colspan="1">-</th>
@@ -344,21 +356,6 @@
     <footer>
         <p>Footer Content</p>
     </footer>
-    <script>
-        document.querySelectorAll('.printButton').forEach(function (button) {
-            button.addEventListener('click', function () {
-                const url = this.getAttribute('data-url');
-                const printFrame = document.getElementById('printFrame');
-                printFrame.src = url;
-
-                // Wait for the content to fully load before printing
-                printFrame.onload = function () {
-                    printFrame.contentWindow.print();
-                };
-            });
-        });
-    </script>
-    <iframe id="printFrame" style="display:none;"></iframe>
 </body>
 
 </html>

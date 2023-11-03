@@ -97,7 +97,7 @@ def generate_fiche_control(request, pk):
     template = get_template('commercial/fichecontrol/print/template2.html')
     context = serializer.data
     html_content = template.render(context)
-    return JsonResponse(serializer.data)
+    # return JsonResponse(serializer.data)
     return render(request, "commercial/fichecontrol/print/template2.html", context)
     
     html_string = render_to_string('commercial/fichecontrol/print/template2.html', context, request=request)

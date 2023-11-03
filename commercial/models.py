@@ -1,9 +1,10 @@
+from decimal import Decimal
 from django.db.models.signals import post_save, post_delete
 from django.db import models
 from datetime import date
 
 from django.dispatch import receiver
-from django.db.models.signals import post_save, post_delete
+from django.db.models.signals import post_save, post_delete, pre_save
 
 from paramettre.models import Typecarte, Comptoires, Cartartisants
 from authentication.models import User
@@ -152,8 +153,8 @@ class Lingot(models.Model):
     poids_immerge = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
     ecart = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
     densite = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
-    titre_carat = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
-    quantite_or_fin = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
+    titre = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
+    or_fin = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
     date_reception = models.DateTimeField(blank=True)
     observation = models.CharField(blank=True, null=True, max_length=256)
     created = models.DateTimeField(auto_now_add=True)
@@ -195,12 +196,12 @@ class Lingot(models.Model):
                 self.ecart = sum(psee.ecart for psee in pesees) / len(pesees)
                 self.poids_brut = sum(psee.poids_brut for psee in pesees) / len(pesees)
                 self.poids_immerge = sum(psee.poids_immerge for psee in pesees) / len(pesees)
-                self.titre_carats = sum(psee.titre_carat for psee in pesees) / len(pesees)
+                self.titre = sum(psee.titre for psee in pesees) / len(pesees)
             else:
                 self.ecart = 0
                 self.poids_brut = 0
                 self.poids_immerge = 0
-                self.titre_carats = 0
+                self.titre = 0
 
             self.save()
 
@@ -210,10 +211,6 @@ class Lingot(models.Model):
 class Pesee(models.Model):
     poids_brut = models.DecimalField(max_digits=10, decimal_places=2)
     poids_immerge = models.DecimalField(max_digits=10, decimal_places=2)
-    ecart = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
-    densite = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
-    titre_carat = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=2)  # Modifié en champ décimal
-    quantite_or_fin = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2)
     date_pesee = models.DateField(blank=True, null=True, )
     observation = models.CharField(blank=True, null=True, max_length=256)
     created = models.DateTimeField(auto_now_add=True)
@@ -223,7 +220,7 @@ class Pesee(models.Model):
 
     # Les caractristique du lingot est la moyenne des resultat pour chaque pesé
     # Indique si ce pesé est utilisé dans le calcul de caracteristique du lingot
-    valide = models.BooleanField(default=True)
+    actif = models.BooleanField(default=True)
 
     class Meta:
         verbose_name_plural = "Pesees"
@@ -252,7 +249,43 @@ class Pesee(models.Model):
 
     @property
     def densite(self):
-        return self.poids_brut / (self.poids_brut - self.poids_immerge)
+        return 1 if self.ecart == 0 else self.poids_brut / self.ecart
+
+    @property
+    def titre(self):
+        return Decimal('20.6')
+        
+
+    @property
+    def or_fin(self):
+        return "{:.2f}".format(self.titre * self.poids_brut/24)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        
+        if self.actif:
+            # If pricing is enabled, update Livraison fields
+            self.lingot.poids_brut = self.poids_brut
+            self.lingot.poids_immerge = self.poids_immerge
+            self.lingot.ecart = self.ecart
+            self.lingot.densite = self.densite
+            self.lingot.titre = self.titre
+            self.lingot.or_fin = self.or_fin
+            self.lingot.save()
+    
+    def delete(self, *args, **kwargs):
+        was_active = self.active
+        super().delete(*args, **kwargs)
+        
+        if was_active:
+            # If deleted pricing was enabled, update Livraison fields
+            self.lingot.poids_brut = 0
+            self.lingot.poids_immerge = 0
+            self.lingot.ecart = 0
+            self.lingot.densite = 0
+            self.lingot.titre = 0
+            self.lingot.or_fin = 0
+            self.lingot.save()
 
 
 class Factures(models.Model):
@@ -373,3 +406,9 @@ class Paiements(models.Model):
     client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True, blank=True)
     class Meta:
         verbose_name_plural = "Modes de paiements"
+
+@receiver(pre_save, sender=Pesee)
+def ensure_single_enabled_pesee(sender, instance, **kwargs):
+    if instance.actif:
+        # Disable all other Pricing objects related to the same Lingot
+        Pesee.objects.filter(lingot=instance.lingot, actif=True).exclude(pk=instance.pk).update(actif=False)
