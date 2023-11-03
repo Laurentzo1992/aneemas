@@ -22,6 +22,8 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     "dal",
     "dal_select2",
+    "jet.dashboard",
+    "jet",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -200,4 +202,56 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 5
 }
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
+JET_DEFAULT_THEME = 'green'
+JET_SIDE_MENU_COMPACT = True
+
+JET_SIDE_MENU_ITEMS = {
+        'gesco': [
+            {'label': 'Gestion', 'app_label': 'commerical', 'items': [
+                {'name': 'commercial.fichecontrol'},
+                {'name': 'commercial.fichetarification'},
+                {'name': 'commercial.factures'},
+                {'name': 'commercial.client'},
+                {'name': 'commercial.mouvementlingot'},
+                {'name': 'commercial.lingot'},
+                # {'name': 'commercial.paiement'},
+                {'name': 'commercial.fichecontrol'},
+                {'name': 'commercial.fonte'},
+            ]},
+            {'label': 'Parametrage', 'app_label': 'commercial', 'items': [
+                {'name': 'commercial.typelingot'},
+                {'name': 'commercial.typeclient'},
+                {'name': 'commercial.directionlingot'},
+                {'name': 'commercial.emplacementlingot'},
+                {'name': 'commercial.stragietarification'},
+                {'name': 'commercial.modepaiement'},
+            ]},
+        ],
+        'admin': [
+            {'label': 'Paramettre', 'app_label': 'paramettre', 'items': [
+                {'name': 'paramettre.burencadrements'},
+                {'name': 'paramettre.categories'},
+                {'name': 'paramettre.communes'},
+                {'name': 'paramettre.comptoires'},
+                {'name': 'paramettre.comsites'},
+                {'name': 'paramettre.comzones'},
+                {'name': 'paramettre.provinces'},
+                {'name': 'paramettre.regions'},
+                {'name': 'paramettre.statutsites'},
+                {'name': 'paramettre.typaccidents'},
+                {'name': 'paramettre.typautorisations'},
+                {'name': 'paramettre.typdemandeurs'},
+                {'name': 'paramettre.typenatureminerais'},
+                {'name': 'paramettre.typenatureterrains'},
+                {'name': 'paramettre.typeorganisations'},
+                {'name': 'paramettre.typeproduitchimiques'},
+                {'name': 'paramettre.typequipements'},
+                {'name': 'paramettre.typesites'},
+                {'name': 'paramettre.typetaterrains'},
+                {'name': 'paramettre.typecarte'},
+            ]}
+        ]
+    }
+    
