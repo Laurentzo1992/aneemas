@@ -10,16 +10,47 @@ from authentication.models import User
 
 from django.utils import timezone
 
-# Create your models here.
+class TypeClient(models.Model):
+    libelle = models.CharField(max_length=60)
+    description = models.CharField(blank=True, null=True, max_length=256)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name_plural = "Types de clients"
+
+    def __str__(self):
+        return self.libelle if self.libelle is not None else "N/A"
+
+class Client(models.Model):
+    nom = models.CharField(blank=True, null=True, max_length=60)
+    prenom = models.CharField(blank=True, null=True, max_length=60)
+    description = models.CharField(blank=True, null=True, max_length=256)
+    type_client = models.ForeignKey(TypeClient,  on_delete=models.CASCADE, null=False, blank=False)
+    cartartisan = models.ForeignKey(Cartartisants, blank=True, null=True, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Clients"
+
+    def __str__(self):
+        return self.nom
+    
 
 class Fichecontrol(models.Model):
     id = models.AutoField(primary_key=True)
     # Association avec le modèle User (Celui qui enregistre le lingot)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True)
     observation = models.CharField(max_length=256)
     date_control = models.DateTimeField()
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+
+    # Association avec le modèle User (Celui qui enregistre le lingot)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Fiches de Control"
@@ -49,6 +80,10 @@ class FicheTarification(models.Model):
     class Meta:
         verbose_name_plural = "Fiches de Tarification"
 
+    # Association avec le modèle User (Celui qui enregistre le lingot)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True, blank=True)
+
     @property
     def numero(self):
         if self.id:
@@ -66,6 +101,9 @@ class TypeLingot(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        verbose_name_plural = "Types de Lingots"
+
     def __str__(self):
         return self.libelle
 
@@ -80,7 +118,34 @@ class EmplacementLingot(models.Model):
 
     def __str__(self):
         return self.nom if self.nom is not None else "N/A"
+
+class Fonte(models.Model):
+    date_debut = models.DateField()
+    date_fin = models.DateField(null=True, blank=True)
+    etat = models.CharField(max_length=10, choices=[
+        ('debut', 'Début'),
+        ('en_cours', 'En cours'),
+        ('termine', 'Terminé')
+    ])
+    observation = models.CharField(blank=True, null=True, max_length=256)
+
+    # Association avec le modèle User (Celui qui enregistre le lingot)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    @property
+    def numero(self):
+        if self.id:
+            year = self.created.year
+            last_two_digits_of_year = str(year)[-2:]
+            return f"FT{str(self.id).zfill(4)}-{last_two_digits_of_year}"
+        return None
+    
+    def __str__(self):
+        return f"Debut {self.date_debut} fin: {self.date_fin}"
+
 class Lingot(models.Model):
     id = models.AutoField(primary_key=True)
     poids_brut = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=2,)
@@ -103,8 +168,12 @@ class Lingot(models.Model):
     # Lien vers la fiche de contrôle
     fiche_tarification = models.ForeignKey(FicheTarification, on_delete=models.SET_NULL, null=True, blank=True)
 
+    # Fonte à laquelle ce lingot est associé
+    fonte = models.ForeignKey(Fonte, null=True, blank=True, on_delete=models.CASCADE)
+
     # Association avec le modèle User (Celui qui enregistre le lingot)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "Lingots"
@@ -217,36 +286,9 @@ class Factures(models.Model):
         return self.generate_numero_facture
 
 
-class TypeClient(models.Model):
-    libelle = models.CharField(max_length=60)
-    description = models.CharField(blank=True, null=True, max_length=256)
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-    
-    class Meta:
-        verbose_name_plural = "Type de client"
-
-    def __str__(self):
-        return self.libelle if self.libelle is not None else "N/A"
-
-class Client(models.Model):
-    nom = models.CharField(blank=True, null=True, max_length=60)
-    prenom = models.CharField(blank=True, null=True, max_length=60)
-    description = models.CharField(blank=True, null=True, max_length=256)
-    type_client = models.ForeignKey(TypeClient,  on_delete=models.CASCADE, null=False, blank=False)
-    cartartisan = models.ForeignKey(Cartartisants, blank=True, null=True, on_delete=models.CASCADE)
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name_plural = "Clients"
-
-    def __str__(self):
-        return self.nom
-    
 
 
-class MovementLingot(models.Model):
+class MouvementLingot(models.Model):
     type_lingot = models.ForeignKey(TypeLingot, on_delete=models.CASCADE) 
     origin = models.ForeignKey(EmplacementLingot, related_name='mouvements_origin', on_delete=models.CASCADE)
     destination = models.ForeignKey(EmplacementLingot, related_name='mouvements_destination', on_delete=models.CASCADE)
@@ -282,16 +324,17 @@ class StragieTarification(models.Model):
     priority = models.IntegerField()
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(null=True, blank=True)
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
     actif = models.BooleanField(default=True)
+    application_auto = models.BooleanField(default=False)
     marge = models.DecimalField(max_digits=10, decimal_places=2)
-    marge_auto = models.BooleanField(blank=True, null=True, default=True)
+    marge_auto = models.BooleanField(default=True)
     cours = models.DecimalField(blank=True, null=True, max_digits=10, decimal_places=4)
-    cours_auto = models.BooleanField(blank=True, null=True, default=True)
+    cours_auto = models.BooleanField(default=True)
     globale = models.BooleanField(default=False)
     type_client = models.ForeignKey(TypeClient,  on_delete=models.CASCADE, null=True, blank=True)
-    description = models.TextField()
+    description = models.CharField(blank=True, null=True, max_length=256)
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = "Strategies de tarifications"
@@ -303,3 +346,30 @@ class StragieTarification(models.Model):
     def __str__(self):
         return self.name
 
+
+
+class ModePayement(models.Model):
+    libelle = models.CharField(max_length=60)
+    actif = models.BooleanField(default=True)
+    description = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = "Modes de paiements"
+
+
+class Paiements(models.Model):
+    description = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    # Lien vers la fiche de contrôle
+    fiche_tarification = models.ForeignKey(FicheTarification, on_delete=models.SET_NULL, null=True, blank=True)
+
+
+    # Association avec le modèle User (Celui qui enregistre le lingot)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    client = models.ForeignKey(Client, on_delete=models.SET_NULL, null=True, blank=True)
+    class Meta:
+        verbose_name_plural = "Modes de paiements"

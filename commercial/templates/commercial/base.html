@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block app_css %}
+{{ block.super }}
+{% endblock %}
+
+{% block app_js %}
+{{ block.super }}
+<script src="{% static 'commercial/js/htmx-1.9.6.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block main %}
+  {# Contenu specifique a commercial #}
+  {% block app_content %}{% endblock %}
+{% endblock %}

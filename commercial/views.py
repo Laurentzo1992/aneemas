@@ -1,5 +1,15 @@
+from django.shortcuts import render, redirect, get_object_or_404
+from commercial.forms import LingotForm
+from commercial.models import Fichecontrol, Lingot
+from commercial.serializers import FichecontrolSerializer
+from modules_externe.cours_or import get_data_by_url
+
+from django.shortcuts import render
+from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
+from django.template.loader import get_template, render_to_string
 from django.shortcuts import render
 from modules_externe.cours_or import get_data_by_url
+
 
 
 
@@ -87,7 +97,7 @@ def generate_fiche_control(request, pk):
     template = get_template('commercial/fichecontrol/print/template2.html')
     context = serializer.data
     html_content = template.render(context)
-    # return JsonResponse(serializer.data)
+    return JsonResponse(serializer.data)
     return render(request, "commercial/fichecontrol/print/template2.html", context)
     
     html_string = render_to_string('commercial/fichecontrol/print/template2.html', context, request=request)

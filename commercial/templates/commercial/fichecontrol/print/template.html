@@ -1,0 +1,105 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <link rel="stylesheet" href="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% static 'commercial/css/fichecontrol_template.css' %}"/>
+    <!-- <link rel="stylesheet" href="{% static 'commercial/lib/bootstrap-5.0.2-dist/css/bootstrap.min.css' %}"/> -->
+    <!-- <script type="javascript" scr="{% static 'commercial/lib/bootstrap-5.0.2-dist/js/bootstrap.bundle.js' %}"></script> -->
+</head>
+
+<body>
+    <header>
+        <div class="entete" style="display: flex; flex: 1">
+            <div class="colonne">
+                <div class="adresse">
+                    <p>MINISTERE DE L’ENERGIE, DES MINES ET DES CARRIERES</p>
+                    <p>-------------------------------</p>
+                    <p>AGENCE NATIONALE D'ENCADREMENT DES EXPLOITATIONS MINIERES ARTISANALES ET SEMI-MECANISEES</p>
+                    <p>-------------------------------</p>
+                    <p>DIRECTION DU SUIVI DE LA REGLEMENTATION, DE L’ACHAT ET DE LA COMMERCIALISATION</p>
+                    <p>-------------------------------</p>
+                    <p style="padding-top: 20px;">BUREAU D’ACHAT DE : ___________________________</p>
+                </div>
+            </div>
+            <div class="colonne" style="flex: 0">
+                <img class="logo" src="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}/media/logo.png" alt="Logo ANEMAS">
+            </div>
+            <div class="colonne" style="flex: 1">
+                <div class="nom-pays">
+                    <p>BURKINA FASO</p>
+                </div>
+                <div class="devise">
+                    <p>Unité - Progès - Justice</p>
+                </div>
+            </div>
+        </div>
+        <h1 style="text-align: center;">Fiche de control: No.{{ numero }}</h1>
+        <!-- Add your header content here -->
+    </header>
+    <style>
+        
+    </style>
+
+    <section class="customer-info">
+        <!-- Customer information goes here -->
+        <p>Fournisseur: {{ user.name }}</p>
+        <p>Carte ({{ user.type }}) No.: {{ customer_address }}</p>
+        <p>CNIB: {{ customer_address }}</p>
+        <p>Tel: {{ customer_address }}</p>
+        <!-- Add more customer info fields as needed -->
+    </section>
+
+    <section class="item-list">
+        <!-- Table for listing items -->
+        <table>
+            <tr>
+                <th style="background-color: transparent; border: transparent"></th>
+                <th>Numero</th>
+                <th>Poids Immergé (g)</th>
+                <th>Poids brut (g)</th>
+                <th>Ecart</th>
+                <th>Titre (carat)</th>
+                <th>Qté or fin (g)</th>
+            </tr>
+            {% for lingot in lingots %}
+            <tr class="category-row">
+                <td>Lingot</td>
+                <td>{{ lingot.numero }}</td>
+                <td>{{ lingot.poids_brut }}</td>
+                <td>{{ lingot.poids_immerge }}</td>
+                <td>{{ lingot.ecart }}</td>
+                <td>{{ lingot.titre_carat }}</td>
+                <td>{{ lingot.poids_immerge }}</td>
+            </tr>
+            {% for pesee in lingot.pesees %}
+            <tr>
+                <td></td>
+                <td>{{ pesee.numero }} {{ pesee.actif}}</td>
+                <td>{{ pesee.poids_brut }}</td>
+                <td>{{ pesee.poids_immerge }}</td>
+                <td>{{ pesee.ecart }}</td>
+                <td>{{ pesee.titre_carat }}</td>
+                <td>{{ pesee.poids_immerge }}</td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </table>
+    </section>
+
+    <section class="totals">
+        <!-- Total calculation -->
+        <p>Total: {{ total_amount }}</p>
+    </section>
+
+    <footer>
+        <p>Le controleur: {{ user.name }}</p>
+        <p> </p>
+        <p>Signature: ___________________</p>
+    </footer>
+</body>
+
+</html>
+

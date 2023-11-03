@@ -1,0 +1,36 @@
+{% extends 'commercial/base.html' %}
+{% load static %}
+
+{% block app_css %}
+  <link rel="stylesheet" href="{% static 'commercial/css/styles.css' %}">
+{% endblock %}
+
+{% block app_js %}
+{{ block.super }}
+{% endblock %}
+
+{% block app_content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="h3 mb-0">
+                Create lingot {{ fichecontrol }}
+            </h2>
+        </div>
+        <div class="col-md-4 mt-2 text-end">
+            <button type="button" hx-get="{% url 'add-lingot-form' %}" hx-target="#lingotforms" hx-swap="beforeend"
+                class="btn btn-primary">
+                Add form
+            </button>
+        </div>
+    </div>
+
+    <div id="lingotforms" class="py-5 mt-5"></div>
+
+    <div class="mt-5 py-5 border-top border-gray-100">
+        {% for lingot in lingots %}
+        {% include "commercial/lingot/partials/lingot_detail.html" %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
