@@ -25,6 +25,7 @@ def login_page(request):
             )
             if user is not None:
                 login(request, user)
+                messages.success(request, 'connexion reussi!')
                 return HttpResponseRedirect(reverse('home'))  # Redirection vers la page d'accueil
             else:
                 messages.error(request, 'Identifiants invalides')
@@ -34,6 +35,7 @@ def login_page(request):
 
 def logout_user(request):
     logout(request)
+    messages.warning(request, 'Deconnexion!')
     return redirect('login')
     
 

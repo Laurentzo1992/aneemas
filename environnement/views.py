@@ -16,7 +16,6 @@ from django.urls import reverse
 from technique.forms import *
 from paramettre.models import *
 from environnement.forms import *
-from modules_externe.cours_or import get_data_by_api, get_api_data_id
 from modules_externe.api_url import *
 
 

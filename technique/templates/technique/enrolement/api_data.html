@@ -4,9 +4,6 @@
 
 {% block add %}
 
-<a href="" title="données du mobile" class="text-decoration-none fw-bold text-success">
-  <i class="fa-solid fa-group-arrows-rotate"></i>
-</a>
 
 
 {% endblock add %}
@@ -37,7 +34,7 @@
     <tbody>
         {% for result in page_obj %}
       <tr>
-        <td>{{ result.id }}</td>
+        <td>{{ result.identifiant }}</td>
         <td>{{result.nom}}</td>
         <td>{{result.prenom}}</td>
         <td>{{result.localite}}</td>
@@ -50,12 +47,12 @@
         {% endif %}
         <td>
           
-          <a href="{% url 'syn' result.id %}" title="validé">
+          <a href="{% url 'syn' result.identifiant %}" title="validé">
             <i class="fas fa-check-circle text-danger"></i>
           </a>
           &nbsp;
 
-          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{result.id}}">
+          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{result.identifiant}}">
             <i class="fas fa-eye text-secondary"></i>
           </a>
 

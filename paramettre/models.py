@@ -144,6 +144,7 @@ class Typetaterrains(models.Model):
     
 
 class Regions(models.Model):
+    numero = models.CharField(max_length=1000, blank=True, null=True)
     nomreg = models.CharField(max_length=1000, blank=True, null=True)
     cheflieu = models.CharField(max_length=1000, blank=True, null=True)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
@@ -161,6 +162,7 @@ class Regions(models.Model):
 
 
 class Provinces(models.Model):
+    numero = models.CharField(max_length=1000, blank=True, null=True)
     nomprov = models.CharField(max_length=500, blank=True, null=True)
     region_id = models.ForeignKey(Regions, blank=True, null=True, on_delete=models.CASCADE)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
@@ -282,7 +284,7 @@ class Categories(models.Model):
 
 
 class Communes(models.Model):
-    nomcom = models.CharField(max_length=1000, blank=True, null=True)
+    commune = models.CharField(max_length=1000, blank=True, null=True)
     province_id = models.ForeignKey(Provinces, blank=True, null=True, on_delete=models.CASCADE)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
@@ -293,7 +295,7 @@ class Communes(models.Model):
         verbose_name_plural = "Commune"
         
     def __str__(self):
-        return self.nomcom
+        return self.commune
 
     
 
@@ -377,36 +379,48 @@ class Demandeconventions(models.Model):
         (OUI, "oui"),
         (NON, "non"),
     ]
-    num_ordre = models.BigIntegerField(blank=True, null=True)
-    type_autorisation = models.CharField(max_length=400, blank=True, null=True)
-    nomnre_carre = models.CharField(max_length=400, blank=True, null=True)
-    nom_localite1 = models.CharField(max_length=400, blank=True, null=True)
-    region = models.ForeignKey(Regions, on_delete=models.CASCADE , blank=True, null=True)
-    province = models.ForeignKey(Provinces, on_delete=models.CASCADE, blank=True, null=True)
-    commune = models.ForeignKey(Communes, on_delete=models.CASCADE, blank=True, null=True)
-    identifiaction = models.CharField(max_length=400, blank=True, null=True)
+    
+    
+    
+    PHYSIQUE = "PHYSIQUE"
+    MORALE = "MORALE"
+    
+    TYPE = [
+        (PHYSIQUE, "PERSONNE PHYSIQUE"),
+        (MORALE, "PERSONNE MORALE"),
+    ]
+    
+    identifiant = models.IntegerField(null=True, blank=True)
+    num_ordre = models.CharField(max_length=400, blank=True, null=True)
+    type_autorisation = models.ManyToManyField(Typautorisations, through='LigneTypeAutorisation')
+    nombre_hectare = models.IntegerField(blank=True, null=True)
+    localite = models.CharField(max_length=400, blank=True, null=True, verbose_name='Localité demandé')
+    region = models.ForeignKey(Regions, on_delete=models.CASCADE , blank=True, null=True, related_name='region1', verbose_name='Region demandé')
+    province = models.ForeignKey(Provinces, on_delete=models.CASCADE, blank=True, null=True, related_name='province1', verbose_name='Province demandé')
+    #commune = models.ForeignKey(Communes, on_delete=models.CASCADE, blank=True, null=True, related_name='commune1')
+    commune = models.CharField(max_length=400, blank=True, null=True)
+    identifiaction = models.CharField(max_length=400, blank=True, null=True, choices=TYPE, default=PHYSIQUE)
     demande = models.CharField(max_length=10, blank=True, null=True, choices=DEMANDE, default=NON)
     nom_demandeur = models.CharField(max_length=400, blank=True, null=True)
-    nom_localite2 = models.CharField(max_length=400, blank=True, null=True)
-    region = models.ForeignKey(Regions, on_delete=models.CASCADE , blank=True, null=True)
-    province = models.ForeignKey(Provinces, on_delete=models.CASCADE, blank=True, null=True)
-    commune = models.ForeignKey(Communes, on_delete=models.CASCADE, blank=True, null=True)
+    ref_piece = models.CharField(max_length=400, blank=True, null=True)
+    localite_demandeur = models.CharField(max_length=400, blank=True, null=True, verbose_name='Localié du demandeur')
+    region_demandeur = models.ForeignKey(Regions, on_delete=models.CASCADE , blank=True, null=True, related_name='region2', verbose_name='Region du demandeur')
+    province_demandeur = models.ForeignKey(Provinces, on_delete=models.CASCADE, blank=True, null=True, related_name='province2', verbose_name='Province du demandeur')
+    #commune_demandeur = models.ForeignKey(Communes, on_delete=models.CASCADE, blank=True, null=True,related_name='commune2')
+    commune_demandeur = models.CharField(max_length=400, blank=True, null=True, verbose_name='Commune du demandeur')
     pays = models.CharField(max_length=400, blank=True, null=True)
     telephone = models.CharField(max_length=400, blank=True, null=True)
     telephone1 = models.CharField(max_length=400, blank=True, null=True)
-    fax = models.CharField(max_length=400, blank=True, null=True)
-    email = models.CharField(max_length=350, blank=True, null=True)
-    site = models.CharField(max_length=350, blank=True, null=True)
-    substance1 = models.TextField(max_length=400, blank=True, null=True)
-    fichier = models.FileField(max_length=400, blank=True, null=True, upload_to='uploads')
-    longitude = models.FloatField(max_length=50, blank=True, null=True)
-    latitude = models.FloatField(max_length=50, blank=True, null=True)
-    altitude = models.FloatField(max_length=50, blank=True, null=True)
-    precision = models.FloatField(max_length=50, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    site_web = models.CharField(max_length=350, blank=True, null=True)
+    substances = models.TextField(max_length=400, blank=True, null=True)
+    docs = models.FileField(upload_to='uploads', blank=True, null=True, verbose_name='Document Annexes')
+    point = models.CharField(max_length=50, blank=True, null=True, verbose_name='Coordonées du site')
+    pointforme = models.CharField(max_length=500, blank=True, null=True, verbose_name='Coordonées de la surface')
     nom_convntion = models.CharField(max_length=1000, blank=True, null=True)
     date_depot = models.DateField(blank=True, null=True)
-    heure_depot = models.CharField(max_length=150, blank=True, null=True)
-    deposant = models.CharField(max_length=400, blank=True, null=True)
+    heure_depot = models.TimeField(max_length=150, blank=True, null=True)
+    deposant = models.CharField(max_length=400, blank=True, null=True, verbose_name='Nom du deposant')
     
     
     reconnaissance = models.CharField(max_length=1, blank=True, null=True)
@@ -437,10 +451,17 @@ class Demandeconventions(models.Model):
     @property
     def fileURL(self):
         try:
-            url = self.fichier.url
+            url = self.docs.url
         except:
             url = ''
         return url
+    
+class LigneTypeAutorisation(models.Model):
+    autorisation = models.ForeignKey(Typautorisations, null=True, blank=True, on_delete=models.CASCADE)
+    demande = models.ForeignKey(Demandeconventions, null=True, blank=True, on_delete=models.CASCADE)
+    create_at = models.DateField(auto_now_add=True, null=True, blank=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
 
 
 class Fichenrolements(models.Model):
@@ -653,88 +674,124 @@ class Formguidautorites(models.Model):
 
 
 class Formincidents(models.Model):
-    code_incident = models.CharField(max_length=1000, blank=True, null=True)
-    nom_site = models.CharField(max_length=2500, blank=True, null=True)
+    
+    accident = "accident"
+    incident = "incident"
+    
+    TYPE = [
+        (accident, "ACCIDENT"),
+        (incident, "INCIDENT"),
+    ]
+    
+    
+    faible = "faible"
+    moyen = "moyen"
+    grave = "grave"
+    tres_grave = "tres_grave"
+
+    
+    DEGRE = [
+        (faible, "FAIBLE"),
+        (moyen, "MOYEN"),
+        (grave, "GRAVE"),
+        (tres_grave, "TRES GRAVE"),
+    ]
+    
+    exploitants = "exploitants"
+    fournisseur = "fournisseur"
+    commercants = "commercants"
+    collecteurs = "collecteurs"
+    visiteurs = "visiteurs"
+    
+    IMPLICATION = [(exploitants, "exploitants"),
+                   (fournisseur, "fournisseur"),
+                   (commercants, "commercants"),
+                   (collecteurs, "collecteurs"),
+                   (visiteurs, "visiteurs"),
+                   ]
+    identifiant = models.IntegerField(blank=True, null=True)
+    region = models.ForeignKey(Regions, on_delete=models.CASCADE , blank=True, null=True)
+    province = models.ForeignKey(Provinces, on_delete=models.CASCADE, blank=True, null=True)
+    commune = models.CharField(max_length=400, blank=True, null=True)
     nom_localite = models.CharField(max_length=2500, blank=True, null=True)
-    com_region = models.CharField(max_length=1000, blank=True, null=True)
-    com_province = models.CharField(max_length=1000, blank=True, null=True)
-    commune = models.CharField(max_length=1000, blank=True, null=True)
-    type_nature_incident = models.CharField(max_length=1500, blank=True, null=True)
+    nom_site = models.CharField(max_length=2500, blank=True, null=True)
+    type_rapport = models.CharField(max_length=1500, blank=True, null=True, choices=TYPE, default='exploitants')
     date_incident = models.DateField(blank=True, null=True)
-    vict_hom = models.IntegerField(blank=True, null=True)
-    vict_fem = models.IntegerField()
-    vict_enf = models.IntegerField()
-    mort_hom = models.IntegerField()
-    mort_fem = models.IntegerField()
-    mort_enf = models.IntegerField()
+    heure_incident = models.TimeField(blank=True, null=True)
+    type = models.CharField(max_length=2500, blank=True, null=True, verbose_name='Type accident ou incident')
+    zone = models.CharField(max_length=2500, blank=True, null=True)
+    lieu =  models.CharField(max_length=2500, blank=True, null=True)
+    degres = models.CharField(max_length=2500, blank=True, null=True, choices=DEGRE, default="MOYEN")
+    implication = models.CharField(max_length=2500, blank=True, null=True, choices=IMPLICATION, default="MOYEN")
+    description = models.TextField(blank=True, null=True)
+    personne_implique = models.TextField(blank=True, null=True)
+    equipement_implique = models.TextField(blank=True, null=True)
+    cause = models.TextField(blank=True, null=True)
+    action_corrective = models.TextField(blank=True, null=True)
+    mesure_de_securite = models.TextField(blank=True, null=True)
+    vict_hom = models.IntegerField(blank=True, null=True, verbose_name='Nombre Victime Homme', default=0)
+    vict_fem = models.IntegerField(blank=True, null=True, verbose_name='Nombre Victime Femme', default=0)
+    vict_enf = models.IntegerField(blank=True, null=True, verbose_name='Nombre Victime Enfant', default=0)
+    mort_hom = models.IntegerField(blank=True, null=True, verbose_name='Nombre de Mort Homme', default=0)
+    mort_fem = models.IntegerField(blank=True, null=True, verbose_name='Nombre de Mort Femme', default=0)
+    mort_enf = models.IntegerField(blank=True, null=True, verbose_name='Nombre de Mort Enfant', default=0)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 
     
 
    
-    
-
-class Rapaccidents(models.Model):
-    date_acc = models.DateField(blank=True, null=True)
-    nature_acc = models.CharField(max_length=1000, blank=True, null=True)
-    heure_acc = models.CharField(max_length=250, blank=True, null=True)
-    zone_acc = models.TextField(blank=True, null=True)
-    lieu_acc = models.CharField(max_length=1500, blank=True, null=True)
-    deg_grav = models.CharField(max_length=1500, blank=True, null=True)
-    partie_imp = models.TextField(blank=True, null=True)
-    personne_imp = models.TextField(blank=True, null=True)
-    equipe_imp = models.TextField(blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
-    cause = models.TextField(blank=True, null=True)
-    action = models.TextField(blank=True, null=True)
-    mesure = models.TextField(blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-    
-
 
 class Rapactivites(models.Model):
-    burencadrement_id = models.IntegerField(blank=True, null=True)
-    numero = models.CharField(max_length=1000, blank=True, null=True)
-    periode = models.DateField(blank=True, null=True)
-    nbr_conv = models.IntegerField(blank=True, null=True)
-    nbr_cart_art = models.IntegerField(blank=True, null=True)
-    type_cart_art = models.CharField(max_length=2000, blank=True, null=True)
-    autre1 = models.TextField(blank=True, null=True)
-    observation1 = models.TextField(blank=True, null=True)
-    acte = models.CharField(max_length=1000, blank=True, null=True)
-    autre2 = models.TextField(blank=True, null=True)
-    observation2 = models.TextField(blank=True, null=True)
-    nbr_site = models.IntegerField(blank=True, null=True)
-    nbr_commite = models.IntegerField(blank=True, null=True)
-    nbr_site_org = models.IntegerField(blank=True, null=True)
-    nbr_coop = models.IntegerField(blank=True, null=True)
-    travail_enf = models.CharField(max_length=25, blank=True, null=True)
-    nbr_enf = models.IntegerField(blank=True, null=True)
-    observation3 = models.TextField(blank=True, null=True)
-    mercure = models.CharField(max_length=25, blank=True, null=True)
-    cyanure = models.CharField(max_length=25, blank=True, null=True)
-    acide = models.CharField(max_length=25, blank=True, null=True)
-    borate = models.CharField(max_length=25, blank=True, null=True)
-    chaux = models.CharField(max_length=25, blank=True, null=True)
-    explosif = models.CharField(max_length=25, blank=True, null=True)
+    
+    
+    achat = "achat"
+    vente = "vente"
+    fonte = "fonte"
+               
+    type_com = [(achat, "achat"),
+               (vente, "vente"),
+               (fonte, "fonte")]
+
+    identifiant = models.IntegerField(blank=True, null=True)
+    burencadrement_id = models.ForeignKey(Burencadrements, blank=True, null=True, verbose_name='BE', on_delete=models.CASCADE)
+    periode1 = models.DateField(blank=True, null=True, verbose_name='periode du')
+    periode2 = models.DateField(blank=True, null=True, verbose_name='au')
+    nbr_conv = models.IntegerField(blank=True, null=True, verbose_name='nombre de convention')
+    type_cart_art = models.ManyToManyField(Typecarte, through='LigneTypeRapactivitesCarte')
+    nbr_cart_art = models.IntegerField(blank=True, null=True, verbose_name="nombre de carte d'artisant minier")
+    autre1 = models.TextField(blank=True, null=True, verbose_name="si autre preciser")
+    nbr_site = models.IntegerField(blank=True, null=True, verbose_name="nombre de site visité")
+    nbr_commite = models.IntegerField(blank=True, null=True, verbose_name="nombre de commité de gestion")
+    nbr_site_org = models.IntegerField(blank=True, null=True, verbose_name="nombre de site visité")
+    nbr_coop = models.IntegerField(blank=True, null=True, verbose_name="nombre de cooperative")
+    nbr_enf = models.IntegerField(blank=True, null=True, verbose_name="nombre d'enfant sur le site")
+    mercure = models.CharField(max_length=25, blank=True, null=True, verbose_name="nombre mercure")
+    cyanure = models.CharField(max_length=25, blank=True, null=True, verbose_name="nombre cyanure")
+    acide = models.CharField(max_length=25, blank=True, null=True, verbose_name="nombre acide")
+    borate = models.CharField(max_length=25, blank=True, null=True, verbose_name="nombre boraxe")
+    chaux = models.CharField(max_length=25, blank=True, null=True, verbose_name="nombre chaux eteinte")
+    explosif = models.CharField(max_length=25, blank=True, null=True, verbose_name="nombre explosif")
     autre = models.TextField(blank=True, null=True)
-    observation4 = models.TextField(blank=True, null=True)
-    nouveau_site = models.IntegerField(blank=True, null=True)
-    site_ferme = models.IntegerField(blank=True, null=True)
-    site_reactive = models.IntegerField(blank=True, null=True)
-    site_rehabilite = models.IntegerField(blank=True, null=True)
-    observation5 = models.TextField(blank=True, null=True)
-    minerai = models.CharField(max_length=1000, blank=True, null=True)
-    type_com = models.CharField(max_length=1000, blank=True, null=True)
+    nouveau_site = models.IntegerField(blank=True, null=True, verbose_name="nombre nouveaux sites")
+    site_ferme = models.IntegerField(blank=True, null=True, verbose_name="nombre sites fermés")
+    site_reactive = models.IntegerField(blank=True, null=True, verbose_name="nombre sites reactivés")
+    site_rehabilite = models.IntegerField(blank=True, null=True, verbose_name="nombre sites réhabilité")
+    minerai = models.CharField(max_length=1000, blank=True, null=True, verbose_name="minerais disponible")
+    type_com = models.CharField(max_length=1000, blank=True, null=True, choices=type_com, verbose_name="Type commercial")
     quantite = models.BigIntegerField(blank=True, null=True)
+    obs = models.TextField(blank=True, null=True)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 
 
 
     
+class LigneTypeRapactivitesCarte(models.Model):
+    typecarte = models.ForeignKey(Typecarte, null=True, blank=True, on_delete=models.CASCADE)
+    activite = models.ForeignKey(Rapactivites, null=True, blank=True, on_delete=models.CASCADE)
+    create_at = models.DateField(auto_now_add=True, null=True, blank=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
 
    

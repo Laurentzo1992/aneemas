@@ -17,14 +17,15 @@
             {% comment %} {% bootstrap_form form %} {% endcomment %}
 
          <div class="row">
-            <div class="col-6" id="ville">{{form.nom|as_crispy_field}}</div>
-            <div class="col-6">{{form.prenom|as_crispy_field}}</div>
+            <div class="col-4" id="ville">{{form.nom|as_crispy_field}}</div>
+            <div class="col-4">{{form.prenom|as_crispy_field}}</div>
+            <div class="col-4">{{form.date|as_crispy_field}}</div>
          </div>
 
          <div class="row">
           
-            <div class="col-6">{{form.type_carte|as_crispy_field}}</div>
-            <div class="col-6">{{form.date|as_crispy_field}}</div>
+            <div class="col-12">{{form.type_carte|as_crispy_field}}</div>
+          
          </div>
 
 

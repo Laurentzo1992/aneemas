@@ -1,0 +1,21 @@
+
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal{{result.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h4 class="modal-title fs-5" id="deleteModalLabel"><i class="fa fa-trash"></i> </h4>
+        <button type="button" class="btn-close text-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+    
+        <h4 class="fw-bold text-danger">Voulez vous supprimer?</h4>
+
+      </div>
+      <div class="modal-footer">
+          <a href="{% url 'delete_enrolement'  result.id %}" class="btn btn-outline-danger btn-sm btn-modal">Valider</a>
+      </div>
+    </div>
+  </div>
+</div>

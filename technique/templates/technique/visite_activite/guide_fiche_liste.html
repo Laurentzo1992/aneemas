@@ -4,14 +4,22 @@
 
 {% block add %}
 
-<a id="syncLink" href="" title="données du mobile" class="text-decoration-none fw-bold text-success">
-  Synchronisation <i class="fa-solid fa-group-arrows-rotate"></i>
-</a>
+
+<h4>
+
+  <a id="syncLink" href="" title="données du mobile" class="text-decoration-none fw-bold text-success">
+    <i class="fa-solid fa-group-arrows-rotate"></i>
+  </a>
+  
+  
+  <a href="{% url 'add_guide' %}" class="text-decoration-none fw-bold text-success">
+       <i class="fa fa-plus text-success"></i>
+   </a>
+  
+   
+  </H4>
 
 
-<a href="{% url 'add_guide' %}" class="text-decoration-none fw-bold text-success">
-    Ajouter <i class="fa fa-plus text-success"></i>
- </a>
 
 {% endblock add %}
 
@@ -50,16 +58,24 @@
         <td>{{result.nom_prenom_enqueteur}}</td>
         <td>{{result.date_visite}}</td>
         <td>
-          <a href="{% url 'edit_guide' result.id %}" type="button" class="btn btn-warning" title="modifier">
-            <i class="fas fa-pen"></i>
+          <a href="{% url 'edit_guide' result.id %}" title="modifier">
+            <i class="fas fa-pen text-warning"></i>
           </a>
-          <a href="{% url 'delete_guide'  result.id %}" type="button" class="btn btn-danger" title="supprimer">
-            <i class="fas fa-trash"></i>
+
+          <a data-bs-toggle="modal" data-bs-target="#deleteModal{{result.id}}" title="supprimer">
+            <i class="fas fa-trash text-danger"></i> 
           </a>
+
         </td>
       </tr>
 
       {% include 'technique/visite_activite/detail_guide.html' %}
+
+     
+      
+
+      {% include 'technique/visite_activite/detele_guide.html' %}
+
       {% endfor %}
     </tbody>
   </table>

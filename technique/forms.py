@@ -9,16 +9,14 @@ from django.core.validators import RegexValidator
 
 class EnrolementForm(forms.ModelForm):
     
-    date = forms.DateField(
-    widget=forms.TextInput(     
-        attrs={'type': 'date'} 
-        )
-        ) 
-    
     
     class Meta:
         model = Fichenrolements
         fields = '__all__'
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date'}),
+            'type_carte': forms.CheckboxSelectMultiple(attrs={'class': 'checkbox-select-multiple'}),
+        }
         
         
 
@@ -64,7 +62,45 @@ class DemandeconventionsForm(forms.ModelForm):
         fields = '__all__'
         
         widgets = {
-            'substance1': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'substances': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
             'date_depot': forms.DateInput(attrs={'type': 'date'}),
+            'type_autorisation': forms.CheckboxSelectMultiple(attrs={'class': 'checkbox-select-multiple'}),
         }
         
+
+
+class FormincidentsForm(forms.ModelForm):
+    class Meta:
+        model = Formincidents
+        fields = '__all__'
+        
+        widgets = {
+            'equipement_implique': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'personne_implique': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'description': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'cause': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'action_corrective': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'mesure_de_securite': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'date_incident': forms.DateInput(attrs={'type': 'date'}),
+            'type_autorisation': forms.CheckboxSelectMultiple(attrs={'class': 'checkbox-select-multiple'}),
+        }
+
+
+
+
+class RapactivitesForm(forms.ModelForm):
+    class Meta:
+        model = Rapactivites
+        fields = '__all__'
+        
+        widgets = {
+            'autre1': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'autre': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'obs': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'cause': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'action_corrective': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'mesure_de_securite': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'periode1': forms.DateInput(attrs={'type': 'date'}),
+            'periode2': forms.DateInput(attrs={'type': 'date'}),
+            'type_cart_art': forms.CheckboxSelectMultiple(attrs={'class': 'checkbox-select-multiple'}),
+        }

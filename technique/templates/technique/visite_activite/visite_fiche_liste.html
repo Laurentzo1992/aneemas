@@ -4,14 +4,21 @@
 
 {% block add %}
 
-<a id="syncLink" href="" title="données du mobile" class="text-decoration-none fw-bold text-success">
-  Synchronisation <i class="fa-solid fa-group-arrows-rotate"></i>
-</a>
 
 
-<a href="{% url 'add_visite' %}" class="text-decoration-none fw-bold text-success">
-    Ajouter <i class="fa fa-plus text-success"></i>
- </a>
+ <h4>
+
+  <a id="syncLink" href="" title="données du mobile" class="text-decoration-none fw-bold text-success">
+    <i class="fa-solid fa-group-arrows-rotate"></i>
+  </a>
+  
+  
+  <a href="{% url 'add_visite' %}" class="text-decoration-none fw-bold text-success">
+       <i class="fa fa-plus text-success"></i>
+   </a>
+  
+  </H4>
+
 
 {% endblock add %}
 
@@ -46,11 +53,11 @@
         <td>{{result.nbr_fem}}</td>
         <td>{{result.nbr_enfant}}</td>
         <td>
-          <a href="{% url 'edit_visite' result.id %}" type="button" class="btn btn-warning" title="modifier">
-            <i class="fas fa-pen"></i>
+          <a href="{% url 'edit_visite' result.id %}" title="modifier">
+            <i class="fas fa-pen text-warning"></i>
           </a>
-          <a href="{% url 'delete_visite'  result.id %}" type="button" class="btn btn-danger" title="supprimer">
-            <i class="fas fa-trash"></i>
+          <a href="{% url 'delete_visite'  result.id %}" title="supprimer">
+            <i class="fas fa-trash text-danger"></i>
           </a>
         </td>
       </tr>

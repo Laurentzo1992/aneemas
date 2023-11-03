@@ -1,0 +1,83 @@
+
+<!-- Modal -->
+<div class="modal fade" id="detailModal{{result.identifiant}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="detailModalLabel">Fiche de M {{result.nom}} {{result.prenom}} </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <div class="modal-body">  
+             <div class="row">
+                <div class="col-6">
+                   <div class="input-group mb-1">
+                      <span class="input-group-text" id="inputGroupPrepend2">Nom</span>
+                      <input type="email" value="{{result.nom}}" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                   </div>
+                   <div class="input-group mb-1">
+                      <span class="input-group-text" id="inputGroupPrepend2">Prenom</span>
+                      <input type="email" value="{{result.prenom}}" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                   </div>
+                   <div class="input-group mb-1">
+                      <span class="input-group-text" id="inputGroupPrepend2">Carte</span>
+                      <input type="email" value="{{result.type_carte}}" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                   </div>
+                   <div class="input-group mb-1">
+                      <span class="input-group-text" id="inputGroupPrepend2">Date</span>
+                      <input type="email" value="{{result.date}}" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                   </div>
+                   <div class="input-group mb-1">
+                      <span class="input-group-text" id="inputGroupPrepend2">Localité</span>
+                      <input type="email" value="{{result.localite}}" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                   </div>
+                </div>
+                <div class="col-6">
+                   <div class="input-group mb-1">
+                      <span class="input-group-text" id="inputGroupPrepend2">Tel</span>
+                      <input type="email" value="{{result.telephone}}" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                   </div>
+                   <div class="input-group  mb-1">
+                      <span class="input-group-text" id="inputGroupPrepend2">Tel 2</span>
+                      <input type="email" value="{{result.telephone2}}" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                   </div>
+                   <div class="input-group  mb-1">
+                      <span class="input-group-text" id="inputGroupPrepend2">Quitance</span>
+                      <input type="email" value="{{result.quittance}}" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                   </div>
+                   <div class="input-group  mb-1">
+                      <span class="input-group-text" id="inputGroupPrepend2">Engament</span>
+                      <input type="email" value="{{result.engagement}}" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                   </div>
+                   <div class="input-group  mb-1">
+                      <span class="input-group-text" id="inputGroupPrepend2">Num carte</span>
+                      <input type="email" value="{{result.num_carte}}" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                   </div>
+                </div>
+             </div>
+             <div class="row">
+                <div class="col-6">
+                   <div class="input-group  mb-1">
+                      <span class="input-group-text" id="inputGroupPrepend2">Obervation</span>
+                      <input type="email" value="{{result.observation}}" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                   </div>
+                </div>
+                <div class="col-6">
+                   <div class="input-group  mb-1">
+                      <span class="input-group-text" id="inputGroupPrepend2">CNIB/Passeport</span>
+                      <input type="email" value="{{result.ref_piece}}" class="form-control" id="floatingInputDisabled" placeholder="name@example.com" disabled>
+                   </div>
+                </div>
+             </div>
+          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+ 
+       
+ 
+ 
+ 

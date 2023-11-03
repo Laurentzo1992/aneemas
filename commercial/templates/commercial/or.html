@@ -6,6 +6,9 @@
 
 {% if data %}
 
+
+
+
 <h4 class="text-center text-capitalize text-info mt-2">Cours de l'or  selon or.fr </h4>
 
     <div class="container-fluid">
@@ -48,12 +51,28 @@
     </tbody>
 </table>
 
+
             {% else %}
             <h4 class="text-center text-capitalize text-info mt-2">pas de données veuillez verifier le réseaux...</h4>
 
             {% endif %}
 
 
+            {% for message in messages %}
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            {% if message.tags == 'error' %}
+                <script>
+                    var m = "{{ message }}";
+                      swal("Refusé !", m, "error")
+                </script>
+                      {% elif message.tags == 'success' %}
+                <script>
+                      var m = "{{ message }}";
+                      swal("success !", m, "success")
+                </script>
+            {% endif %}   
+            {% endfor%}
 
+            
 {% endblock main %}
 

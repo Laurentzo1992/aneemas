@@ -1,0 +1,82 @@
+
+
+<table class="table table-striped shadow-lg p-3 mt-3">
+    <thead>
+      <tr class="bg-success">
+        <th scope="col">Id</th>
+        <th scope="col">Numero</th>
+        <th scope="col">Nom du demandeur</th>
+        <th scope="col">Commune</th>
+        <th scope="col">Localite</th>
+        <th scope="col">Date de depot</th>
+        <th scope="col">Status</th>
+        <th scope="col">Fichier</th>
+        <th scope="col">action</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for result in page_obj %}
+        {% if result.statut == "demande" %}
+      <tr>
+        <td>{{result.id }}</td>
+        <td>{{result.num_ordre}}</td>
+        <td>{{result.nom_demandeur}}</td>
+        <td>{{result.commune}}</td>
+        <td>{{result.nom_localite1}}</td>
+        <td>{{result.date_depot}}</td>
+        <td class="fw-bold text-success">{{result.statut}}</td>
+        {% if result.docs.url %}
+        <td>
+          <a href="{{result.docs.url}}" title="lire">
+            <i class="fa-solid fa-file"></i>
+        </a>
+        </td>
+        {% else %}
+        <td> <i class="fas fa-close text-danger"></i></td>
+        {% endif %}
+        <td>
+          <a href="{% url 'edit_convention' result.id %}" title="modifier">
+            <i class="fas fa-pen text-warning"></i>
+          </a>
+          &nbsp;
+          <a data-bs-toggle="modal" data-bs-target="#deleteModal{{result.id}}" title="supprimer">
+            <i class="fas fa-trash text-danger"></i> 
+          </a>
+          &nbsp;
+          <a data-bs-toggle="modal" data-bs-target="#valideModal{{result.id}}" title="instruire">
+            <i class="fas fa-check-circle text-success"></i>
+          </a>
+
+        </td>
+      </tr>
+
+      {% include 'technique/convention/valid.html' %} 
+      {% include 'technique/convention/delete.html' %}
+         
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; debut</a>
+            <a href="?page={{ page_obj.previous_page_number }}">précédent</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">suivant</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">fin &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+

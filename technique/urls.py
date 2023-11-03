@@ -4,9 +4,9 @@ from  . import views
 urlpatterns = [
     #Url de la fiche d'enrolment
     path('enrolement', views.index, name='list_enrolement'),
-    path('enrolement/api_data', views.api_enrolement, name='api_enrolement'),
-    path('syn_detail/<int:id>', views.syn_detail, name='syn_detail'),
-    path('syn/<int:id>', views.save_api_data_to_database, name='syn'),
+    path('enrolement/api_data', views.get_api_enrolement, name='api_enrolement'),
+    path('syn_detail/<int:identifiant>', views.syn_detail, name='syn_detail'),
+    path('syn/<int:identifiant>', views.save_api_data_to_database, name='syn'),
     path('enrolement/add', views.add, name='add_enrolement'),
     path('enrolement/edit/<int:id>', views.edit, name='edit_enrolement'),
     path('enrolement/delete/<int:id>', views.delete, name='delete_enrolement'),
@@ -29,10 +29,40 @@ urlpatterns = [
     
     
     #Url de la fiche de demande de convention
+    path('convention/api_data', views.api_enrolement_conv, name='api_enrolement_conv'),
+    path('convention/syn_detail/<int:identifiant>', views.syn_detail_conv, name='syn_detail_conv'),
+    path('convention/syn/<int:identifiant>', views.save_api_data_to_database_conv, name='syn1'),
+   
     path('convention', views.index3, name='convention'),
+    path('instruire/<int:id>', views.instruire, name='instruire'),
     path('convention/add', views.add_convention, name='add_convention'),
     path('convention/edit/<int:id>', views.edit_convention, name='edit_convention'),
     path('convention/delete/<int:id>', views.delete_convention, name='delete_convention'),
+    
+    
+    
+    #Url de la fiche de rapport d'accident et incident
+    path('incident/api_data', views.get_api_accident, name='api_accident'),
+    path('incident/syn_detail/<int:identifiant>', views.syn_detail_acc, name='syn_detail_acc'),
+    path('incident/syn/<int:identifiant>', views.save_api_data_to_database_acc, name='syn2'),
+   
+    path('incident', views.index4, name='incident'),
+    path('incident/add', views.add_incident, name='add_incident'),
+    path('incident/edit/<int:id>', views.edit_incident, name='edit_incident'),
+    path('incident/delete/<int:id>', views.delete_incident, name='delete_incident'),
+    
+    
+    
+     #Url de la fiche de rapport d'activité
+    path('rapport/api_data', views.get_api_rapport, name='api_rapport'),
+    path('rapport/syn_detail/<int:identifiant>', views.syn_detail_rapp, name='syn_detail_rapp'),
+    path('rapport/syn/<int:identifiant>', views.save_api_data_to_database_rapp, name='syn3'),
+   
+    path('rapport', views.index5, name='rapport'),
+    path('rapport/add', views.add_rapport, name='add_rapport'),
+    path('rapport/edit/<int:id>', views.edit_rapport, name='edit_rapport'),
+    path('rapport/delete/<int:id>', views.delete_rapport, name='delete_rapport'),
+
     
     
 ]

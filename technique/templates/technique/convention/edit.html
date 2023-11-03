@@ -18,10 +18,12 @@
 
          <h5 class="text-center fw-bold text-white bg-secondary">Information sur la zone </h5>
          <div class="row">
-            <div class="col-3">{{form.num_ordre|as_crispy_field}}</div>
-            <div class="col-3">{{form.type_autorisation|as_crispy_field}}</div>
-            <div class="col-3">{{form.nomnre_carre|as_crispy_field}}</div>
-            <div class="col-3">{{form.nom_localite1|as_crispy_field}}</div>
+            <div class="col-4">{{form.num_ordre|as_crispy_field}}</div>
+            <div class="col-4">{{form.nombre_hectare|as_crispy_field}}</div>
+            <div class="col-4">{{form.localite|as_crispy_field}}</div>
+         </div>
+         <div class="row">
+            <div class="col-12">{{form.type_autorisation|as_crispy_field}}</div>
          </div>
          <div class="row">
             <div class="col-3">{{form.region|as_crispy_field}}</div>
@@ -35,33 +37,32 @@
          <h5 class="text-center fw-bold text-white bg-secondary">Information du Demandeur </h5>
          <div class="row">
             <div class="col-3">{{form.nom_demandeur|as_crispy_field}}</div>
-            <div class="col-3">{{form.nom_localite2|as_crispy_field}}</div>
-            <div class="col-3">{{form.region|as_crispy_field}}</div>
-            <div class="col-3">{{form.province|as_crispy_field}}</div>
+            <div class="col-3">{{form.localite_demandeur|as_crispy_field}}</div>
+            <div class="col-3">{{form.region_demandeur|as_crispy_field}}</div>
+            <div class="col-3">{{form.province_demandeur|as_crispy_field}}</div>
          </div>
          <div class="row">
-            <div class="col-3">{{form.commune|as_crispy_field}}</div>
+            <div class="col-3">{{form.commune_demandeur|as_crispy_field}}</div>
             <div class="col-3">{{form.pays|as_crispy_field}}</div>
-            <div class="col-3">{{form.telephone1|as_crispy_field}}</div>
+            <div class="col-3">{{form.telephone|as_crispy_field}}</div>
             <div class="col-3">{{form.telephone1|as_crispy_field}}</div>
          </div>
          <div class="row">
-            <div class="col-4">{{form.fax|as_crispy_field}}</div>
-            <div class="col-4">{{form.email|as_crispy_field}}</div>
-            <div class="col-4">{{form.site|as_crispy_field}}</div>
+            <div class="col-6">{{form.email|as_crispy_field}}</div>
+            <div class="col-6">{{form.site_web|as_crispy_field}}</div>
          </div>
          <h5 class="text-center fw-bold text-white bg-secondary">Information complementaire </h5>
          <div class="row">
-            <div class="col-12">{{form.substance1|as_crispy_field}}</div>
+            <div class="col-12">{{form.substances|as_crispy_field}}</div>
          </div>
          <div class="row">
-            <div class="col-12">{{form.fichier|as_crispy_field}}</div>
+            <div class="col-6">{{form.docs|as_crispy_field}}</div>
          </div>
          <div class="row">
-            <div class="col-3">{{form.longitude|as_crispy_field}}</div>
-            <div class="col-3">{{form.latitude|as_crispy_field}}</div>
-            <div class="col-3">{{form.altitude|as_crispy_field}}</div>
-            <div class="col-3">{{form.precision|as_crispy_field}}</div>
+            <div class="col-12">{{form.point|as_crispy_field}}</div>
+         </div>
+         <div class="row">
+            <div class="col-12">{{form.pointforme|as_crispy_field}}</div>
          </div>
          <div class="row">
             <div class="col-3">{{form.nom_convntion|as_crispy_field}}</div>
@@ -71,7 +72,7 @@
          </div>
 
          <div class="mt-4" style="width: 100p%;">
-            <button style= "font-size: 15px;" type="submit" class="btn btn-success mb-3">
+            <button style= "font-size: 15px;" type="submit" class="btn btn-warning mb-3">
             <i class="fas fa-plus"></i>&nbsp;&nbsp; Modifier
             </button>
             <a style= "font-size: 15px;" href="{% url 'convention' %}" type="button" class="btn btn-outline-danger mb-3 ms-2" style="wdith: 50px;" title="Close">

@@ -46,12 +46,12 @@
         <td>{{result.nom}}</td>
         <td>{{result.prenom}}</td>
         <td class="text-center">
-          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{result.id}}">
+          <a data-bs-toggle="modal" data-bs-target="#carteModal{{result.id}}">
             <i class="fas fa-eye text-success"></i>
           </a>
         </td>
         <td>{{result.localite}}</td>
-        <td>{{result.ref_piece}}</td>
+        <td>B{{result.ref_piece}}</td>
         <td>{{result.created}}</td>
         <td>
           <a href="{% url 'edit_enrolement' result.id %}" title="modifier">
@@ -59,13 +59,17 @@
           </a>
         </td>
         <td>
-          <a href="{% url 'delete_enrolement'  result.id %}" title="supprimer">
-            <i class="fas fa-trash text-danger"></i>
+
+          <a data-bs-toggle="modal" data-bs-target="#deleteModal{{result.id}}" title="supprimer">
+            <i class="fas fa-trash text-danger"></i> 
           </a>
+
         </td>
       </tr>
 
       {% include 'technique/enrolement/carte.html' %}
+      {% include 'technique/enrolement/detele.html' %}
+      
       {% endfor %}
     </tbody>
   </table>
@@ -100,12 +104,12 @@
 {% if message.tags == 'error' %}
     <script>
         var m = "{{ message }}";
-          swal("Denied !", "Enter your data correctly.", "error")
+          swal("Refusé !", m, "error")
     </script>
           {% elif message.tags == 'success' %}
     <script>
           var m = "{{ message }}";
-          swal("Perfect !", m, "success")
+          swal("success !", m, "success")
     </script>
 {% endif %}   
 {% endfor%}

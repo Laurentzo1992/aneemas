@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Ajout convention {% endblock %}
+
+{% comment %} {% load django_bootstrap5 %} {% endcomment %}
+
+
+{% block main %}
+
+
+
+   <div class="container mt-3 w-80">
+      
+      <form method="POST" class="card p-3 mt-5" autocomplete="on" enctype="multipart/form-data"> 
+            {% csrf_token %}
+
+         {% comment %} {% bootstrap_form form %} {% endcomment %}
+
+         <div class="row">
+            <div class="col-4">{{form.burencadrement_id|as_crispy_field}}</div>
+            <div class="col-4">{{form.periode1|as_crispy_field}}</div>
+            <div class="col-4">{{form.periode2|as_crispy_field}}</div>
+         </div>
+         <div class="row">
+            <div class="col-12">{{form.type_cart_art|as_crispy_field}}</div>
+         </div>
+         <div class="row">
+            <div class="col-12">{{form.autre1|as_crispy_field}}</div>
+         </div>
+         <div class="row">
+            <div class="col-3">{{form.nbr_conv|as_crispy_field}}</div>
+            <div class="col-3">{{form.nbr_cart_art|as_crispy_field}}</div>
+         </div>
+         
+         <div class="row">
+            <div class="col-3">{{form.nbr_site|as_crispy_field}}</div>
+            <div class="col-3">{{form.nbr_commite|as_crispy_field}}</div>
+            <div class="col-3">{{form.nbr_site_org|as_crispy_field}}</div>
+            <div class="col-3">{{form.nbr_coop|as_crispy_field}}</div>
+         </div>
+         <div class="row">
+            <div class="col-3">{{form.nbr_enf|as_crispy_field}}</div>
+            <div class="col-3">{{form.mercure|as_crispy_field}}</div>
+            <div class="col-3">{{form.cyanure|as_crispy_field}}</div>
+            <div class="col-3">{{form.acide|as_crispy_field}}</div>
+         </div>
+         <div class="row">
+            <div class="col-4">{{form.borate|as_crispy_field}}</div>
+            <div class="col-4">{{form.chaux|as_crispy_field}}</div>
+            <div class="col-4">{{form.explosif|as_crispy_field}}</div>
+         </div>
+
+         <div class="row">
+            <div class="col-12">{{form.autre|as_crispy_field}}</div>
+         </div>
+
+         <div class="row">
+            <div class="col-3">{{form.nouveau_site|as_crispy_field}}</div>
+            <div class="col-3">{{form.site_ferme|as_crispy_field}}</div>
+            <div class="col-3">{{form.site_reactive|as_crispy_field}}</div>
+            <div class="col-3">{{form.site_rehabilite|as_crispy_field}}</div>
+         </div>
+         
+
+         <div class="row">
+            <div class="col-4">{{form.minerai|as_crispy_field}}</div>
+            <div class="col-4">{{form.type_com|as_crispy_field}}</div>
+            <div class="col-4">{{form.quantite|as_crispy_field}}</div>
+         </div>
+         
+         <div class="row">
+            <div class="col-12">{{form.obs|as_crispy_field}}</div>
+         </div>
+         
+
+         <div class="mt-4" style="width: 100p%;">
+            <button style= "font-size: 15px;" type="submit" class="btn btn-success mb-3">
+            <i class="fas fa-plus"></i>&nbsp;&nbsp; Modifier
+            </button>
+            <a style= "font-size: 15px;" href="{% url 'rapport' %}" type="button" class="btn btn-outline-danger mb-3 ms-2" style="wdith: 50px;" title="Close">
+                  <i class="fas fa-times"></i>
+            </a>
+         </div> 
+          
+      </form>
+   </div>
+
+{% endblock main %}
+
+

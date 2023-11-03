@@ -176,7 +176,7 @@ span.psw {
   
 </canvas>
 <div id="centered-content">
-    <h2>Aneemas</h2>
+    <h2>SONASP</h2>
 
   <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Connection</button>
 </div>
@@ -221,6 +221,30 @@ window.onclick = function(event) {
 
 
 </script>
+
+
+
+
+{% for message in messages %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if message.tags == 'error' %}
+    <script>
+        var m = "{{ message }}";
+          swal("Refusé !", m, "error")
+    </script>
+          {% elif message.tags == 'success' %}
+    <script>
+          var m = "{{ message }}";
+          swal("success !", m, "success")
+    </script>
+
+    {% elif message.tags == 'warning' %}
+    <script>
+          var m = "{{ message }}";
+          swal("", m, "warning")
+    </script>
+{% endif %}   
+{% endfor%}
 
 </body>
 </html>

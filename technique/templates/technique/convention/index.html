@@ -4,14 +4,20 @@
 
 {% block add %}
 
-<a id="syncLink" href="" title="données du mobile" class="text-decoration-none fw-bold text-success">
-  Synchronisation <i class="fa-solid fa-group-arrows-rotate"></i>
-</a>
 
+ <h4>
 
-<a href="{% url 'add_convention' %}" class="text-decoration-none fw-bold text-success">
-    Ajouter <i class="fa fa-plus text-success"></i>
- </a>
+ 
+  <a id="syncLink" href="{% url 'api_enrolement_conv' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
+    <i class="fa-solid fa-group-arrows-rotate"></i>
+  </a>
+  
+  
+  <a href="{% url 'add_convention' %}" class="text-decoration-none fw-bold text-success">
+      <i class="fa fa-plus-circle text-success"></i>
+   </a>
+   
+  </H4>
 
 {% endblock add %}
 
@@ -33,19 +39,19 @@
             <a class="nav-link" id="status-tab" data-bs-toggle="tab" href="#status" role="tab" aria-controls="result" aria-selected="false">Signature</a>
           </li>
           <li class="nav-item" role="presentation">
-            <a class="nav-link" id="valid-tab" data-bs-toggle="tab" href="#valid" role="tab" aria-controls="valid" aria-selected="false">Signés</a>
+            <a class="nav-link" id="valid-tab" data-bs-toggle="tab" href="#valid" role="tab" aria-controls="valid" aria-selected="false">convention</a>
           </li>
         </ul>
     
         <div class="tab-content  mt-2" id="myTabContent">
             <div class="tab-pane fade show active" id="types" role="tabpanel" aria-labelledby="home-tab">
-               {% include "technique/convention/convention.html" %}
+               {% include "technique/convention/demande.html" %}
             </div>
             <div class="tab-pane fade" id="emplacement" role="tabpanel" aria-labelledby="profile-tab">
-                {% include "technique/convention/convention.html" %}
+                {% include "technique/convention/instruction.html" %}
             </div>
             <div class="tab-pane fade" id="status" role="tabpanel" aria-labelledby="status-tab">
-                {% include "technique/convention/convention.html" %}
+                {% include "technique/convention/signature.html" %}
             </div>
 
             <div class="tab-pane fade" id="valid" role="tabpanel" aria-labelledby="valid-tab">

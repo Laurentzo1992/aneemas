@@ -26,6 +26,7 @@
   <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
   <!-- jquery cdn and js  local files -->
   <script src="{% static 'js/scripts.js' %}"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.6" integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni" crossorigin="anonymous"></script>
   </head>
   
 
@@ -117,25 +118,21 @@
 													<a href="{% url 'list_enrolement' %}" class="nav-link px-0"> <i class="fa-solid fa-file-pen"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Enrolement</span> </a>
 												</li>
 												<li class="w-100">
-													<a href="" class="nav-link px-0"> <i class="fa-solid fa-person-shelter"></i> &nbsp; <span class="d-none d-sm-inline text-success">Incident</span> </a>
+													<a href="{% url 'incident' %}" class="nav-link px-0"> <i class="fa-solid fa-person-shelter"></i> &nbsp; <span class="d-none d-sm-inline text-success">Incident</span> </a>
 												</li>
 												<li class="w-100">
 													<a href="{% url 'convention' %}" class="nav-link px-0"> <i class="fa-solid fa-folder-open"></i> &nbsp; <span class="d-none d-sm-inline text-success">Convention</span> </a>
 												</li>
-												<li class="w-100">
-													<a href="" class="nav-link px-0"> <i class="fa-solid fa-person-falling"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Accident</span> </a>
-												</li>
+										
 												<li class="w-100">
 													<a href="{% url 'visite_fiche' %}" class="nav-link px-0"> <i class="fa-solid fa-user-pen"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Visite de site</span> </a>
 												</li>
 												<li class="w-100">
 													<a href="{% url 'guide_fiche' %}" class="nav-link px-0"> <i class="fa-solid fa-users"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Guide autorité</span> </a>
 												</li>
+												
 												<li class="w-100">
-													<a href="" class="nav-link px-0"> <i class="fa-solid fa-id-card"></i> &nbsp; <span class="d-none d-sm-inline text-success">Carte minier</span> </a>
-												</li>
-												<li class="w-100">
-													<a href="" class="nav-link px-0"> <i class="fa-solid fa-chart-pie"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Rapport</span> </a>
+													<a href="{% url 'rapport' %}" class="nav-link px-0"> <i class="fa-solid fa-chart-pie"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Rapport</span> </a>
 												</li>
 											</ul>
 										</li> 
