@@ -1,0 +1,15 @@
+<div class="mt-3 py-3 px-3 bg-white shadow-sm border border-1 border-light">
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        {% if fichecontrol %}
+        <button type="submit" formaction="{% url 'update-lingot' lingot.id %}"
+            class="btn btn-primary">
+            Soumettre
+        </button>
+        <a href="{% url 'detail-lingot' lingot.id %}" class="btn btn-secondary">Annuler</a>
+        {% else %}
+        <button type="submit" class="btn btn-primary">Soumettre</button>
+        {% endif %}
+    </form>
+</div>

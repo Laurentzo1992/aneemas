@@ -1,0 +1,16 @@
+<div hx-target="this" class="mt-3 py-3 px-3 bg-white shadow border border-1 border-light">
+    <h3 class="h5 mb-2">
+        Numero lingot: {{ lingot }}
+    </h3>
+    <p class="text-secondary mb-3">Titre du lingot: {{ lingot.titre_carat }}</p>
+    <div class="d-flex">
+        <button hx-get="{% url 'update-lingot' lingot.id %}" hx-swap="outerHTML"
+            class="btn btn-outline-primary btn-sm me-2">
+            Update
+        </button>
+        <button hx-post="{% url 'delete-lingot' lingot.id %}" hx-swap="outerHTML swap:1s"
+            class="btn btn-outline-danger btn-sm">
+            Delete
+        </button>
+    </div>
+</div>
