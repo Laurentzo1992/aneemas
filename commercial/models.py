@@ -121,32 +121,6 @@ class EmplacementLingot(models.Model):
     def __str__(self):
         return self.nom if self.nom is not None else "N/A"
 
-class Fonte(models.Model):
-    date_debut = models.DateField()
-    date_fin = models.DateField(null=True, blank=True)
-    etat = models.CharField(max_length=10, choices=[
-        ('debut', 'Début'),
-        ('en_cours', 'En cours'),
-        ('termine', 'Terminé')
-    ])
-    observation = models.CharField(blank=True, null=True, max_length=256)
-
-    # Association avec le modèle User (Celui qui enregistre le lingot)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
-    
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-
-    @property
-    def numero(self):
-        if self.id:
-            year = self.created.year
-            last_two_digits_of_year = str(year)[-2:]
-            return f"FT{str(self.id).zfill(4)}-{last_two_digits_of_year}"
-        return None
-    
-    def __str__(self):
-        return f"Debut {self.date_debut} fin: {self.date_fin}"
 
 class Lingot(models.Model):
     id = models.AutoField(primary_key=True)
@@ -169,9 +143,6 @@ class Lingot(models.Model):
 
     # Lien vers la fiche de contrôle
     fiche_tarification = models.ForeignKey(FicheTarification, on_delete=models.SET_NULL, null=True, blank=True)
-
-    # Fonte à laquelle ce lingot est associé
-    fonte = models.ForeignKey(Fonte, null=True, blank=True, on_delete=models.CASCADE)
 
     # Association avec le modèle User (Celui qui enregistre le lingot)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
@@ -208,6 +179,34 @@ class Lingot(models.Model):
 
     def __str__(self):
         return self.numero
+class Fonte(models.Model):
+    date_debut = models.DateField()
+    date_fin = models.DateField(null=True, blank=True)
+    etat = models.CharField(max_length=10, choices=[
+        ('debut', 'Début'),
+        ('en_cours', 'En cours'),
+        ('termine', 'Terminé')
+    ])
+    observation = models.CharField(blank=True, null=True, max_length=256)
+
+    lingots = models.ManyToManyField(Lingot)
+
+    # Association avec le modèle User (Celui qui enregistre le lingot)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+    @property
+    def numero(self):
+        if self.id:
+            year = self.created.year
+            last_two_digits_of_year = str(year)[-2:]
+            return f"FT{str(self.id).zfill(4)}-{last_two_digits_of_year}"
+        return None
+    
+    def __str__(self):
+        return f"Debut {self.date_debut} fin: {self.date_fin}"
     
 class Pesee(models.Model):
     poids_brut = models.DecimalField(max_digits=10, decimal_places=2)
@@ -250,7 +249,7 @@ class Pesee(models.Model):
 
     @property
     def densite(self):
-        return 1 if self.ecart == 0 else self.poids_brut / self.ecart
+        return round(1 if self.ecart == 0 else self.poids_brut / self.ecart, 2)
 
     @property
     def titre(self):

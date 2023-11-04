@@ -8,16 +8,13 @@ from django.forms.models import inlineformset_factory
 from django.contrib import admin
 from .models import Lingot, Fonte
 
+    
 class FonteForm(forms.ModelForm):
-    Lingots = forms.ModelChoiceField(
-        queryset=Lingot.objects.all(),
-        widget=admin.widgets.FilteredSelectMultiple('Lingot', True),
-        required=False,
-    )
-
     class Meta:
         model = Fonte
-        fields = '__all__'
+        fields = ['lingots', 'date_debut', 'date_fin', 'etat']
+
+
 
 class FicheControlForm(forms.ModelForm):
     class Meta:
@@ -27,6 +24,7 @@ class FicheControlForm(forms.ModelForm):
             'observation',
             'date_control'
         )
+
 
 class LingotForm(forms.ModelForm):
     class Meta:
