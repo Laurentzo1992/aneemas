@@ -4,7 +4,6 @@ from django.urls import path, reverse
 from django.utils.html import format_html
 from jet.admin import CompactInline
 
-from django.contrib.admin import AdminSite
 from django.urls import path, include
 from technique import views
 from commercial import forms
@@ -23,6 +22,21 @@ class LingotInLineAdmin(CompactInline):
         'user'
     ]
     read_only_fields = ['user']
+
+# Inline Pour les relation many to many
+class FonteLingotInLineAdmin(CompactInline):
+    model = Fonte.lingots.through
+    extra = 1
+    show_change_link = True
+    exclude = [
+        'titre_carat',
+        'ecart',
+        'quantite_or_fin',
+        'densite',
+        'fiche_tarification',
+        'user'
+    ]
+    read_only_fields = ['user', 'lingot']
 
 class LingotSimpleInLineAdmin(admin.TabularInline):
     model = Lingot
@@ -60,10 +74,17 @@ class FicheTarificationInlineAdmin(CompactInline):
 
 
 class FonteAdmin(admin.ModelAdmin):
+    inlines = [FonteLingotInLineAdmin]
     form = forms.FonteForm
     list_display = ['numero', 'date_fin', 'user', 'etat']
     exclude = ['user']
-    show_change_link = True,
+    show_change_link = True
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == 'lingots':
+            # Limiter les lingot aux non associées
+            kwargs['queryset'] = Lingot.objects.filter(fonte__isnull=True)
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
     
 
 class FichecontrolAdmin(admin.ModelAdmin):
@@ -143,40 +164,4 @@ class ClientAdmin(admin.ModelAdmin):
         selected_ids = queryset.values_list('id', flat=True)
 
     tarifier.short_description = 'Archiver'
-
-class CommercialAdmin(AdminSite):
-    site_header = "Gestion commmercial"
-    site_title = "Site gestion commercial"
-    index_title = "Bievenue surGestion commmercial"
-
-    name = "commercial_admin"
-    label = "commercial_admin"
-    site_name = "commercial_admin"
-
-    def get_urls(self):
-        urls = super().get_urls()
-        custom_urls = []
-    
-        return urls + custom_urls
-
-
-commercial_admin = CommercialAdmin(name="gesco")
-
-
-admin.site.register(Fichecontrol, FichecontrolAdmin)
-
-
-commercial_admin.register(Fichecontrol, FichecontrolAdmin)
-commercial_admin.register(FicheTarification, FicheTarificationAdmin)
-commercial_admin.register(Lingot, LingotAdmin)
-commercial_admin.register(TypeLingot)
-commercial_admin.register(Factures)
-commercial_admin.register(StragieTarification)
-commercial_admin.register(Client, ClientAdmin)
-commercial_admin.register(TypeClient)
-commercial_admin.register(DirectionLingot)
-commercial_admin.register(MouvementLingot)
-commercial_admin.register(EmplacementLingot)
-commercial_admin.register(ModePayement)
-commercial_admin.register(Fonte, FonteAdmin)
 
