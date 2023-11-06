@@ -47,6 +47,7 @@
 						</li>
 					</ul>
 						<div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
+							{% comment %} 
 							<div class="accordion-item">
 							  <h2 class="accordion-header">
 								<button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -55,27 +56,29 @@
 								</button>
 								
 							  </h2>
-							  <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-								<div class="accordion-body">
-									<li class="list-unstyled">
-										<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-											<i class="fa-solid fa-people-roof"></i> <span class="ms-1 d-none d-sm-inline text-success">Gestion</span> </a>
-										<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-											<li class="w-100">
-												<a href="{{ home }}" class="nav-link px-0"> <i class="fa-brands fa-sellcast"></i> &nbsp; <span class="d-none d-sm-inline text-success">vente</span> </a>
-											</li>
-											<li class="w-100">
-												<a href="{{ home }}" class="nav-link px-0"> <i class="fa-solid fa-house-flag"></i> &nbsp; <span class="d-none d-sm-inline text-success">comptoir</span> </a>
-											</li>
-											<li class="w-100">
-												<a href="{{ home }}" class="nav-link px-0"> <i class="fa-solid fa-ring"></i> &nbsp; <span class="d-none d-sm-inline text-success">collecteur</span> </a>
-											</li>
-										</ul>
-									</li> 
+								<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+									<div class="accordion-body">
+										<li class="list-unstyled">
+											<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
+												<i class="fa-solid fa-people-roof"></i> <span class="ms-1 d-none d-sm-inline text-success">Gestion</span> </a>
+											<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+												<li class="w-100">
+													<a href="{{ home }}" class="nav-link px-0"> <i class="fa-brands fa-sellcast"></i> &nbsp; <span class="d-none d-sm-inline text-success">vente</span> </a>
+												</li>
+												<li class="w-100">
+													<a href="{{ home }}" class="nav-link px-0"> <i class="fa-solid fa-house-flag"></i> &nbsp; <span class="d-none d-sm-inline text-success">comptoir</span> </a>
+												</li>
+												<li class="w-100">
+													<a href="{{ home }}" class="nav-link px-0"> <i class="fa-solid fa-ring"></i> &nbsp; <span class="d-none d-sm-inline text-success">collecteur</span> </a>
+												</li>
+											</ul>
+										</li> 
 
-								</div>
-							  </div>
-							</div>
+									</div>
+							  	</div>
+							</div> 
+							{% endcomment %}
+							
 							<div class="accordion-item">
 								<h2 class="accordion-header">
 								  <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
