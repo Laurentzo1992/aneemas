@@ -351,12 +351,37 @@ def syn_detail_conv(request, identifiant):
 
 
 def index3(request):
-    demandes = Demandeconventions.objects.all().order_by('created')
-    paginator = Paginator(demandes, 5)
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
-    #context = {"demandes":demandes}
-    context = {"page_obj":page_obj}
+    demandes = Demandeconventions.objects.filter(statut="demande").order_by('created')
+    paginator1 = Paginator(demandes, 10)
+    page_number1 = request.GET.get("page")
+    page_obj1 = paginator1.get_page(page_number1)
+    
+    instructions = Demandeconventions.objects.filter(statut="instruction").order_by('created')
+    paginator2 = Paginator(instructions, 10)
+    page_number2 = request.GET.get("page")
+    page_obj2 = paginator2.get_page(page_number2)
+    
+    
+    
+    signatures = Demandeconventions.objects.filter(statut="signature").order_by('created')
+    paginator3 = Paginator(signatures, 10)
+    page_number3 = request.GET.get("page")
+    page_obj3 = paginator3.get_page(page_number3)
+    
+    
+    conventions = Demandeconventions.objects.filter(statut="convention").order_by('created')
+    paginator4 = Paginator(conventions, 10)
+    page_number4 = request.GET.get("page")
+    page_obj4 = paginator4.get_page(page_number4)
+    
+    
+    nulls = Demandeconventions.objects.filter(statut="anuler").order_by('created')
+    paginator5 = Paginator(nulls, 10)
+    page_number5 = request.GET.get("page")
+    page_obj5 = paginator5.get_page(page_number5)
+    
+    
+    context = {"page_obj5":page_obj5, "page_obj1":page_obj1, "page_obj2":page_obj2, "page_obj3":page_obj3, "page_obj4":page_obj4}
     return render(request, 'technique/convention/index.html', context)
 
 
@@ -366,7 +391,68 @@ def instruire(request, id):
         instruction.statut = "instruction"
         # Mettre à jour les autres informations de livraison ici
         instruction.save()
-        messages.success(request, "Votre demande passe à l'etape instruction")
+        messages.success(request, "Votre demande passe à instruction")
+        return HttpResponseRedirect(reverse("convention"))
+    else:
+        return render(request, 'technique/convention/index.html')
+    
+    
+def instruire_anull(request, id):
+    instruction_anl = Demandeconventions.objects.get(id=id)
+    if instruction_anl:
+        instruction_anl.statut = "demande"
+        # Mettre à jour les autres informations de livraison ici
+        instruction_anl.save()
+        messages.success(request, "Votre instruction est annulée ")
+        return HttpResponseRedirect(reverse("convention"))
+    else:
+        return render(request, 'technique/convention/index.html')
+    
+    
+def signature_anull(request, id):
+    signature_anul = Demandeconventions.objects.get(id=id)
+    if signature_anul:
+        signature_anul.statut = "instruction"
+        # Mettre à jour les autres informations de livraison ici
+        signature_anul.save()
+        messages.success(request, "Renvois pour instruction")
+        return HttpResponseRedirect(reverse("convention"))
+    else:
+        return render(request, 'technique/convention/index.html')
+    
+    
+    
+def signature_anull1(request, id):
+    signature_anul = Demandeconventions.objects.get(id=id)
+    if signature_anul:
+        signature_anul.statut = "anuler"
+        # Mettre à jour les autres informations de livraison ici
+        signature_anul.save()
+        messages.success(request, "Demande de convention annulée ")
+        return HttpResponseRedirect(reverse("convention"))
+    else:
+        return render(request, 'technique/convention/index.html')
+    
+    
+def signature(request, id):
+    signature = Demandeconventions.objects.get(id=id)
+    if signature:
+        signature.statut = "signature"
+        # Mettre à jour les autres informations de livraison ici
+        signature.save()
+        messages.success(request, "Votre demande passe à la signature")
+        return HttpResponseRedirect(reverse("convention"))
+    else:
+        return render(request, 'technique/convention/index.html')
+    
+    
+def signe(request, id):
+    signature = Demandeconventions.objects.get(id=id)
+    if signature:
+        signature.statut = "convention"
+        # Mettre à jour les autres informations de livraison ici
+        signature.save()
+        messages.success(request, "Votre demande est  signe")
         return HttpResponseRedirect(reverse("convention"))
     else:
         return render(request, 'technique/convention/index.html')

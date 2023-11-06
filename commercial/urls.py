@@ -4,7 +4,6 @@ from django.urls import path, include
 from .admin import commercial_admin
 
 urlpatterns = [
-   path('home', cours_or_by_api, name='home'),
    path(r'jet/', include('jet.urls', 'jet')),  # Django JET URLS
    path(r'jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')), # Django JET dashboard URLS
    path(r'commercial-admin/', commercial_admin.urls),

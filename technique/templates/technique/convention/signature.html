@@ -1,77 +1,96 @@
 
-
+{% if page_obj3 %}
 <table class="table table-striped shadow-lg p-3 mt-3">
-  <thead>
-    <tr class="bg-success">
-      <th scope="col">Id</th>
-      <th scope="col">Numero</th>
-      <th scope="col">Nom du demandeur</th>
-      <th scope="col">Commune</th>
-      <th scope="col">Localite</th>
-      <th scope="col">Date de depot</th>
-      <th scope="col">Status</th>
-      <th scope="col">Fichier</th>
-      <th scope="col">action</th>
-    </tr>
-  </thead>
-  <tbody>
-      {% for result in page_obj %}
-      {% if result.statut == "signature" %}
-    <tr>
-      <td>{{result.id }}</td>
-      <td>{{result.num_ordre}}</td>
-      <td>{{result.nom_demandeur}}</td>
-      <td>{{result.commune}}</td>
-      <td>{{result.nom_localite1}}</td>
-      <td>{{result.date_depot}}</td>
-      <td class="fw-bold text-success">{{result.statut}}</td>
-      {% if result.docs.url %}
-      <td>
-        <a href="{{result.docs.url}}" title="lire">
-          <i class="fa-solid fa-file"></i>
-      </a>
-      </td>
-      {% else %}
-      <td> <i class="fas fa-close text-danger"></i></td>
-      {% endif %}
-      <td>
-
-        <a href="{% url 'edit_convention' result.id %}" title="Rejeter">
-          <i class="fas fa-arrow-left text-danger"></i>
+    <thead>
+      <tr class="bg-success">
+        <th scope="col">Id</th>
+        <th scope="col">Numero</th>
+        <th scope="col">Nom du demandeur</th>
+        <th scope="col">Commune</th>
+        <th scope="col">Localite</th>
+        <th scope="col">Date de depot</th>
+        <th scope="col">Status</th>
+        <th scope="col">Fichier</th>
+        <th scope="col">action</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for result in page_obj3 %}
+      <tr>
+        <td>{{result.id }}</td>
+        <td>{{result.num_ordre}}</td>
+        <td>{{result.nom_demandeur}}</td>
+        <td>{{result.commune}}</td>
+        <td>{{result.nom_localite1}}</td>
+        <td>{{result.date_depot}}</td>
+        {% if result.statut == "signature" %}
+        <td class="fw-bold text-success"> En cours de signature <i class="fa-solid fa-circle-notch"></i>&nbsp;</td>
+        {% endif %}
+        {% if result.docs %}
+        <td>
+          <a href="{{result.docs.url}}" title="lire">
+            <i class="fa-solid fa-file"></i>
         </a>
-            &nbsp;
-        <a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{result.id}}" title="instruire">
-          <i class="fas fa-check-circle text-success"></i>
-        </a>
+        </td>
+        {% else %}
+        <td> <i class="fas fa-close text-danger"></i></td>
+        {% endif %}
+        <td>
+          {% comment %} <a href="{% url 'edit_convention' result.id %}" title="modifier">
+            <i class="fas fa-pen text-warning"></i>
+          </a>
+          &nbsp;
+          <a data-bs-toggle="modal" data-bs-target="#deleteModal{{result.id}}" title="supprimer">
+            <i class="fas fa-trash text-danger"></i> 
+          </a> {% endcomment %}
+          &nbsp;
+          <a data-bs-toggle="modal" data-bs-target="#signeModal{{result.id}}" title="Signé">
+            <i class="fas fa-check-circle text-success"></i>
+          </a>
 
-      </td>
-    </tr>
+          &nbsp;
+          <a data-bs-toggle="modal" data-bs-target="#anulinstructionModal{{result.id}}" title="renvoyer pour instruction">
+            <i class="fas fa-arrow-left text-danger"></i>
+          </a>
 
-    {% include 'technique/convention/valid.html' %} 
-       
-    {% endif %}
-    {% endfor %}
-  </tbody>
-</table>
+          &nbsp;
+          <a data-bs-toggle="modal" data-bs-target="#anuldemandeModal{{result.id}}" title="Anuller la demande">
+            <i class="fas fa-close text-warning"></i>
+          </a>
 
 
+        </td>
+      </tr>
 
-<div class="pagination">
-  <span class="step-links">
-      {% if page_obj.has_previous %}
-          <a href="?page=1">&laquo; debut</a>
-          <a href="?page={{ page_obj.previous_page_number }}">précédent</a>
-      {% endif %}
+      {% include 'technique/convention/valid3.html' %} 
+      {% include 'technique/convention/anul2.html' %} 
+      {% include 'technique/convention/anuler.html' %} 
+         
 
-      <span class="current">
-          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-      </span>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+<H4 class="fw-bold text-success"> <i class="fas fa-warning text-warning"></i> Aucune demande de convention en cours de signature </H4>
+{% endif %}
 
-      {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}">suivant</a>
-          <a href="?page={{ page_obj.paginator.num_pages }}">fin &raquo;</a>
-      {% endif %}
-  </span>
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj3.has_previous %}
+            <a href="?page=1">&laquo; debut</a>
+            <a href="?page={{ page_obj3.previous_page_number }}">précédent</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj3.number }} of {{ page_obj3.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj3.has_next %}
+            <a href="?page={{ page_obj3.next_page_number }}">suivant</a>
+            <a href="?page={{ page_obj3.paginator.num_pages }}">fin &raquo;</a>
+        {% endif %}
+    </span>
 </div>
 
 

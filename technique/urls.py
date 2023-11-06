@@ -35,6 +35,11 @@ urlpatterns = [
    
     path('convention', views.index3, name='convention'),
     path('instruire/<int:id>', views.instruire, name='instruire'),
+    path('instruire_anull/<int:id>', views.instruire_anull, name='instruire_anull'),
+    path('signature_anull/<int:id>', views.signature_anull, name='signature_anull'),
+    path('signature_anull1/<int:id>', views.signature_anull1, name='signature_anull1'),
+    path('signature/<int:id>', views.signature, name='signature'),
+    path('signe/<int:id>', views.signe, name='signe'),
     path('convention/add', views.add_convention, name='add_convention'),
     path('convention/edit/<int:id>', views.edit_convention, name='edit_convention'),
     path('convention/delete/<int:id>', views.delete_convention, name='delete_convention'),

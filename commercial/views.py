@@ -3,18 +3,10 @@ from commercial.forms import LingotForm
 from commercial.models import Fichecontrol, Lingot
 from commercial.serializers import FichecontrolSerializer
 from modules_externe.cours_or import get_data_by_url
-
-from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse, HttpResponseNotAllowed
 from django.template.loader import get_template, render_to_string
-from django.shortcuts import render
-from modules_externe.cours_or import get_data_by_url
-from django.http import JsonResponse
-from django.http import JsonResponse
 from paramettre.models import Regions
 import json
-
-
 
 
 
@@ -29,6 +21,8 @@ def cours_or_by_api(request):
         print("pas de données")
    
     return render(request, 'commercial/or.html', context)
+
+
 
 def add_lingot(request, pk):
     fiche_control = Fichecontrol.objects.get(id=pk)
