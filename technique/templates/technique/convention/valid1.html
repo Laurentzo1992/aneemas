@@ -3,12 +3,147 @@
   <div class="modal fade" id="instructionModal{{result.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="instructionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="instructionModalLabel">Modal title</h1>
+        <div class="modal-header bg-success">
+          <h1 class="modal-title fs-5" id="instructionModalLabel">Envois pour instruction</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+           
+
+            <div class="container mt-3 w-80">
+                
+                  <h5 class="text-center fw-bold text-white bg-secondary">Information sur la zone </h5>
+                  <div class="row">
+                      <div class="col-4">
+                        <label for="inputPassword6" class="col-form-label">Numero d'odre : </label>
+                        {{result.num_ordre}}
+                      </div>
+                      <div class="col-4">
+                        <label for="formFile" class="form-label">Nombre d'hectare : </label>
+                        {{result.nombre_hectare}}
+                      </div>
+                      <div class="col-4">
+                        <label for="formFile" class="form-label">Localité demandé : </label>
+                        {{result.localite}}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12">
+                        <label for="formFile" class="form-label">Type d'autorisation : </label>
+                        {{result.type_autorisation}}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Region demandé : </label>
+                        {{result.region}}
+                      </div>
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Province demandé : </label>
+                        {{result.province}}
+                      </div>
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Commune demandé : </label>
+                        {{result.commune}}
+                      </div>
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Type d'Identification : </label>
+                        {{result.identifiaction}}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12">
+                        <label for="formFile" class="form-label">Es ce une première demande? : </label>
+                        {{result.demande}}
+                      </div>
+                  </div>
+                  <h5 class="text-center fw-bold text-white bg-secondary">Information du Demandeur </h5>
+                  <div class="row">
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Nom du demandeur : </label>
+                        {{result.nom_demandeur}}
+                      </div>
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Localité du demandeur : </label>
+                        {{result.localite_demandeur}}
+                      </div>
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Region du demandeur : </label>
+                        {{result.region_demandeur}}
+                      </div>
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Province du demandeur : </label>
+                        {{result.province_demandeur}}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Commune du demandeur : </label>
+                        {{result.commune_demandeur}}
+                      </div>
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Pays du demandeur : </label>
+                        {{result.pays}}
+                      </div>
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Téléphone : </label>
+                        {{result.telephone}}
+                      </div>
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Téléphone  : </label>
+                        {{result.telephone1}}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-6">{{result.email}}</div>
+                      <div class="col-6">{{result.site_web}}</div>
+                  </div>
+                  <h5 class="text-center fw-bold text-white bg-secondary">Information complementaire </h5>
+                  <div class="row">
+                      <div class="col-12">
+                        <label for="formFile" class="form-label">Substances : </label>
+                        {{result.substances}}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-6">
+                        <label for="formFile" class="form-label">Docs : </label>
+                        {{result.docs}}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12">
+                        <label for="formFile" class="form-label">Coordonnées du site : </label>
+                        {{result.point}}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-12">
+                        <label for="formFile" class="form-label">Coordonnées forme du site : </label>
+                        {{result.pointforme}}
+                      </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Nom de la covention : </label>
+                        {{result.nom_convntion}}
+                      </div>
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Date de depôt : </label>
+                        {{result.date_depot}}
+                      </div>
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Heure de depôt : </label>
+                        {{result.heure_depot}}
+                      </div>
+                      <div class="col-3">
+                        <label for="formFile" class="form-label">Nom du deposant : </label>
+                        {{result.deposant}}
+                      </div>
+                  </div>
+            </div>
+
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Fermer</button>

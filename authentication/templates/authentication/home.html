@@ -10,25 +10,33 @@
 <div class="container d-flex flex-column mb-2">
   
       <div class="row mb-2">
-            <div class="col-4">
+            <div class="col-3">
                   <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-secondary">Convention demandé</div>
+                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-success">Artisans</div>
                         <div class="card-body">
-                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book text-success"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{convs}} </h1>
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book text-success"></i>&nbsp;&nbsp;&nbsp;&nbsp; 0 </h1>
                         </div>
                   </div>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                   <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-secondary">Convention signé</div>
+                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-success">Exploitation</div>
                         <div class="card-body">
                               <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book-bookmark text-info"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{conv_sigs}} </h1>
                         </div>
                   </div>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                   <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-secondary">Convention anuler</div>
+                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-success">Collecte</div>
+                        <div class="card-body">
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book text-danger"></i>&nbsp;&nbsp;&nbsp;&nbsp;  {{conv_anuls}} </h1>
+                        </div>
+                  </div>
+            </div>
+            <div class="col-3">
+                  <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
+                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-success">Incident</div>
                         <div class="card-body">
                               <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book text-danger"></i>&nbsp;&nbsp;&nbsp;&nbsp;  {{conv_anuls}} </h1>
                         </div>
@@ -36,57 +44,169 @@
             </div>
       </div>
       <div class="row mb-2">
+            <div class="ms-1">
+                <form method="get" action="{% url 'home' %}">
+                    <label for="" class="form-label font-italic font-weight-bold text-info">Du</label>
+                    <input type="date" value="{{date_depart}}"name="date_depart" id="date_depart" class="text-info font-italic font-weight-bold">
+                    <label for="" class="form-label font-italic font-weight-bold text-info">Au</label>
+                    <input type="date" value="{{date_arrive}}" name="date_arrive" id="date_arrive" class="text-info font-italic font-weight-bold">
+                    <button type="submit" id="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
+                    <a href="{% url 'home' %}?reset" class="btn btn-danger"><i class="fa fa-refresh"></i></a>
+                 </form>
+            </div>
+        </div>
 
-            {% if conventions %}
-            <table class="table table-striped shadow-lg p-3 mt-3">
-                <thead>
-                  <tr class="bg-success">
-                    <th scope="col">Id</th>
-                    <th scope="col">Numero</th>
-                    <th scope="col">Nom du demandeur</th>
-                    <th scope="col">Commune</th>
-                    <th scope="col">Localite</th>
-                    <th scope="col">Date de depot</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Fichier</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for result in conventions %}
-                  <tr>
-                    <td>{{result.id }}</td>
-                    <td>{{result.num_ordre}}</td>
-                    <td>{{result.nom_demandeur}}</td>
-                    <td>{{result.commune}}</td>
-                    <td>{{result.nom_localite1}}</td>
-                    <td>{{result.date_depot}}</td>
-                    {% if result.statut == "convention" %}
-                    <td class="fw-bold text-success">Signé <i class="fa-solid fa-circle-check"></i>&nbsp;</td>
-                    {% endif %}
-                    {% if result.docs %}
-                    <td>
-                      <a href="{{result.docs.url}}" title="lire">
-                        <i class="fas fa-folder-open text-warning"></i>
-                    </a>
-                    </td>
-                    {% else %}
-                    <td> <i class="fas fa-close text-danger"></i></td>
-                    {% endif %}
-                  
-            
-                    </td>
-                  </tr>
-            
-                  {% endfor %}
-                </tbody>
-              </table>
-            {% else %}
-            <H4 class="fw-bold text-success"> <i class="fas fa-warning text-warning"></i> Aucune demande de convention signée ! </H4>
-            {% endif %}
-            
-
+      <div class="row ms-2" id="acceuil_bg">
+            <div class="col-6">
+                <button id="export-btn"><i class="fa fa-file-image text-success"></i></button>
+                    <canvas id="myChart" width="200" height="200"></canvas>
+                    <script>
+    
+                        const exportBtn = document.getElementById('export-btn');
+                        const canvas = document.getElementById('myChart');
+                        
+                        exportBtn.addEventListener('click', () => {
+                          html2canvas(canvas).then((canvas) => {
+                            const imgData = canvas.toDataURL('image/png');
+                            const link = document.createElement('a');
+                            link.download = 'ClientRegulier.png';
+                            link.href = imgData;
+                            link.click();
+                          });
+                        });
+                        
+                          
+                        function generateRandomColors1(numColors1) {
+                            var colors1 = [];
+                            for (var i = 0; i < numColors1; i++) {
+                              var color1 = 'rgba(' + Math.floor(Math.random() * 256) + ','
+                                                  + Math.floor(Math.random() * 256) + ','
+                                                  + Math.floor(Math.random() * 256) + ','
+                                                  + '1)';
+                              colors1.push(color1);
+                            }
+                            return colors1;
+                          }
+                    
+                          var barres1 = {{ barres1 }}; // récupère la valeur de barres passée depuis la vue Django
+                          var barColors1 = generateRandomColors1(barres1);
+    
+                        var ctx = document.getElementById('myChart').getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'pie',
+                            data: {
+                                labels: [{% for etat in etats1 %}'{{etat.client__rasion_sociale}}', {% endfor %}],
+                                datasets: [{
+                                    label: 'Meilleur client',
+                                    data: [{% for etat in etats1 %}{{ etat.total }}, {% endfor %}],
+                                    backgroundColor: barColors1,
+                                    borderColor: barColors1,
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                <h6 class="text-info font-italic font-weight-bold">Le client le plus fréquant</h6>
+            </div>
+    
+    
+            <div class="col-6">
+                <button id="export-chart1"><i class="fa fa-file-image text-success"></i></button>
+                    <canvas id="myChart1" width="200" height="200"></canvas>
+                    <script>
+                       
+                        const exportBtn1 = document.getElementById('export-chart1');
+                        const canvas1 = document.getElementById('myChart1');
+                        
+                        exportBtn1.addEventListener('click', () => {
+                          html2canvas(canvas1).then((canvas1) => {
+                            const imgData1 = canvas1.toDataURL('image/png');
+                            const link1 = document.createElement('a');
+                            link1.download = 'ArticlePlusSortant.png';
+                            link1.href = imgData1;
+                            link1.click();
+                          });
+                        });
+                        
+    
+                          
+                        function generateRandomColors(numColors) {
+                            var colors = [];
+                            for (var i = 0; i < numColors; i++) {
+                              var color = 'rgba(' + Math.floor(Math.random() * 256) + ','
+                                                  + Math.floor(Math.random() * 256) + ','
+                                                  + Math.floor(Math.random() * 256) + ','
+                                                  + '1)';
+                              colors.push(color);
+                            }
+                            return colors;
+                          }
+                    
+                          var barres = {{ barres }}; // récupère la valeur de barres passée depuis la vue Django
+                          var barColors = generateRandomColors(barres);
+    
+    
+                        var ctx1 = document.getElementById('myChart1').getContext('2d');
+                        var myChart1 = new Chart(ctx1, {
+                            type: 'bar',
+                            data: {
+                                labels: [{% for etat in etats %}'{{ etat.article__code }}', {% endfor %}],
+                                datasets: [{
+                                    label: 'Quantité d\'article par commande',
+                                    data: [{% for etat in etats %}{{ etat.quantite }}, {% endfor %}],
+                                    backgroundColor: barColors,
+                                    borderColor: barColors,
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </script>
+                <h6 class="text-info font-italic font-weight-bold">Produit le plus commandé</h6>
+            </div>
       </div>
 </div>
+
+
+
+{% for message in messages %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if message.tags == 'error' %}
+    <script>
+        var m = "{{ message }}";
+          swal("Refusé !", m, "error")
+    </script>
+          {% elif message.tags == 'success' %}
+    <script>
+          var m = "{{ message }}";
+          swal("success !", m, "success")
+    </script>
+
+    {% elif message.tags == 'warning' %}
+    <script>
+          var m = "{{ message }}";
+          swal("", m, "warning")
+    </script>
+{% endif %}   
+{% endfor%}
+
 
 
 {% endblock main %}
