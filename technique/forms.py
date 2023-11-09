@@ -104,3 +104,17 @@ class RapactivitesForm(forms.ModelForm):
             'periode2': forms.DateInput(attrs={'type': 'date'}),
             'type_cart_art': forms.CheckboxSelectMultiple(attrs={'class': 'checkbox-select-multiple'}),
         }
+
+
+class ComsitesForm(forms.ModelForm):
+    class Meta:
+        model = Comsites
+        fields = '__all__'
+        
+        widgets = {
+            
+            'action_corrective': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'mesure_de_securite': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'date_deb_expl': forms.DateInput(attrs={'type': 'date'}),
+            'date_fin_exp': forms.DateInput(attrs={'type': 'date'}),
+        }

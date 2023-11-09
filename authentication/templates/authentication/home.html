@@ -12,45 +12,45 @@
       <div class="row mb-2">
             <div class="col-3">
                   <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-success">Artisans</div>
+                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Artisans</div>
                         <div class="card-body">
-                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book text-success"></i>&nbsp;&nbsp;&nbsp;&nbsp; 0 </h1>
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-id-card-clip" style="color:#FFD700;"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{artisants}} </h1>
                         </div>
                   </div>
             </div>
             <div class="col-3">
                   <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-success">Exploitation</div>
+                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Exploitation</div>
                         <div class="card-body">
-                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book-bookmark text-info"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{conv_sigs}} </h1>
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book-bookmark" style="color:#0b4291;"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{collecteurs}} </h1>
                         </div>
                   </div>
             </div>
             <div class="col-3">
                   <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-success">Collecte</div>
+                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Collecteur</div>
                         <div class="card-body">
-                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book text-danger"></i>&nbsp;&nbsp;&nbsp;&nbsp;  {{conv_anuls}} </h1>
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book" style="color:#0b4291;"></i>&nbsp;&nbsp;&nbsp;&nbsp;  {{collecteurs}} </h1>
                         </div>
                   </div>
             </div>
             <div class="col-3">
                   <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-success">Incident</div>
+                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Incident</div>
                         <div class="card-body">
-                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book text-danger"></i>&nbsp;&nbsp;&nbsp;&nbsp;  {{conv_anuls}} </h1>
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-person-falling text-danger"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{incidents}} </h1>
                         </div>
                   </div>
             </div>
-      </div>
-      <div class="row mb-2">
+        </div>
+        <div class="row mb-2">
             <div class="ms-1">
                 <form method="get" action="{% url 'home' %}">
-                    <label for="" class="form-label font-italic font-weight-bold text-info">Du</label>
-                    <input type="date" value="{{date_depart}}"name="date_depart" id="date_depart" class="text-info font-italic font-weight-bold">
-                    <label for="" class="form-label font-italic font-weight-bold text-info">Au</label>
-                    <input type="date" value="{{date_arrive}}" name="date_arrive" id="date_arrive" class="text-info font-italic font-weight-bold">
-                    <button type="submit" id="submit" class="btn btn-info"><i class="fa fa-search"></i></button>
+                    <label for="" class="form-label font-italic font-weight-bold text-success">Du</label>
+                    <input type="date" value="{{date_depart}}"name="date_depart" id="date_depart" class="text-success font-italic font-weight-bold">
+                    <label for="" class="form-label font-italic font-weight-bold text-success">Au</label>
+                    <input type="date" value="{{date_arrive}}" name="date_arrive" id="date_arrive" class="text-success font-italic font-weight-bold">
+                    <button type="submit" id="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
                     <a href="{% url 'home' %}?reset" class="btn btn-danger"><i class="fa fa-refresh"></i></a>
                  </form>
             </div>
@@ -115,7 +115,7 @@
                             }
                         });
                     </script>
-                <h6 class="text-info font-italic font-weight-bold">Le client le plus fréquant</h6>
+                <h6 class="text-info font-italic font-weight-bold">Incident par periode</h6>
             </div>
     
     
@@ -179,7 +179,7 @@
                             }
                         });
                     </script>
-                <h6 class="text-info font-italic font-weight-bold">Produit le plus commandé</h6>
+                <h6 class="text-info font-italic font-weight-bold">Accident par periode</h6>
             </div>
       </div>
 </div>

@@ -4,15 +4,17 @@
 
 {% block add %}
 
-<a id="syncLink" href="{% url 'api_prelevement' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
-  Synchronisation <i class="fa-solid fa-group-arrows-rotate"></i>
-</a>
-
-
-<a href="{% url 'add' %}" class="text-decoration-none fw-bold text-success">
-    Ajouter <i class="fa fa-plus text-success"></i>
- </a>
-
+ <h4>
+  <a id="syncLink" href="{% url 'api_prelevement' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
+     <i class="fa-solid fa-group-arrows-rotate"></i>
+  </a>
+  
+  
+  <a href="{% url 'add_prelevement' %}" class="text-decoration-none fw-bold text-success">
+      <i class="fa fa-plus text-success"></i>
+   </a>
+  
+  </H4>
 {% endblock add %}
 
 
@@ -28,23 +30,27 @@
         <th scope="col">Id</th>
         <th scope="col">Date prelevement</th>
         <th scope="col">Commune</th>
-        <th scope="col">Point de premevement</th>
+        <th scope="col">Lieu</th>
         <th scope="col">Motif</th>
-        <th scope="col">Quantité</th>
-        <th scope="col">action</th>
+        <th scope="col">Preleveur</th>
+        <th scope="col">Commaditaire</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">action &nbsp;</th>
       </tr>
     </thead>
     <tbody>
         {% for result in page_obj %}
       <tr>
-        <td>{{result.id }}</td>
+        <td>{{ result.identifiant }}</td>
         <td>{{result.date_prelevement}}</td>
         <td>{{result.commune}}</td>
-        <td>{{result.point_prelevement}}</td>
+        <td>{{result.lieu}}</td>
         <td>{{result.motif}}</td>
-        <td>{{result.quantite}}</td>
+        <td>{{result.nom_preleveur}}</td>
+        <td>{{result.nom_personnes_commandiaire}}</td>
+        <td>{{result.adresse_personnes_commandiaire}}</td>
         <td>
-          <a href="{% url 'edit' result.id %}" title="modifier">
+          <a href="{% url 'edit_prelevement' result.id %}" title="modifier">
             <i class="fas fa-pen text-warning"></i> 
           </a>
 

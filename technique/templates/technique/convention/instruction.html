@@ -51,12 +51,16 @@
           <a data-bs-toggle="modal" data-bs-target="#signatureModal{{result.id}}" title="Envois pour signature">
             <i class="fas fa-check-circle text-success"></i>
           </a>
+          <a data-bs-toggle="modal" data-bs-target="#anuldemandeModal{{result.id}}" title="Anuller la demande">
+            <i class="fas fa-close text-warning"></i>
+          </a>
 
         </td>
       </tr>
 
       {% include 'technique/convention/valid2.html' %} 
-      {% include 'technique/convention/anul1.html' %} 
+      {% include 'technique/convention/anul1.html' %}
+      {% include 'technique/convention/anuler3.html' %}
          
 
       {% endfor %}

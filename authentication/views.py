@@ -11,18 +11,25 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib import messages
 from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
-from paramettre.models import Demandeconventions
+from paramettre.models import Demandeconventions, Formincidents, Cartartisants
+from django.contrib.auth.decorators import login_required
+from  django.views.decorators.cache import cache_control 
 
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def home(request):
-    convs = Demandeconventions.objects.filter(statut="demande").order_by('created').count()
-    conv_sigs = Demandeconventions.objects.filter(statut="convention").order_by('created').count()
-    conv_anuls = Demandeconventions.objects.filter(statut="anuler").order_by('created').count()
-    conventions = Demandeconventions.objects.filter(statut="convention").order_by('created')[:5]
-    context = {"conventions":conventions, "convs":convs, "conv_sigs":conv_sigs, "conv_anuls":conv_anuls}
+    artisants = Cartartisants.objects.all().count()
+    collecteurs = Demandeconventions.objects.filter(statut="convention").order_by('created').count()
+    incidents = Formincidents.objects.filter(type_rapport="incident").count()
+    context = {"artisants":artisants, "collecteurs":collecteurs, "incidents":incidents}
     return render(request, 'authentication/home.html', context)
+
+
+def bi(request):
+    context = {}
+    return render(request, 'authentication/bi/bi.html', context)
 
 
 

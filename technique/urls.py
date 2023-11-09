@@ -2,6 +2,11 @@ from  django.urls import  path
 from  . import views
 
 urlpatterns = [
+    
+    path('site', views.site, name='site'),
+    path('site/add', views.add_site, name='add_site'),
+    path('site/edit/<int:id>', views.edit_site, name='edit_site'),
+    path('site/delete/<int:id>', views.delete_site, name='delete_site'),
     #Url de la fiche d'enrolment
     path('enrolement', views.index, name='list_enrolement'),
     path('enrolement/api_data', views.get_api_enrolement, name='api_enrolement'),

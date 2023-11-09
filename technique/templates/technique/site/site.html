@@ -3,17 +3,14 @@
 
 
 {% block add %}
- 
- <h4>
-  <a id="syncLink" href="{% url 'api_exploitation' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
-    <i class="fa-solid fa-group-arrows-rotate"></i>
-</a>
+<h4>
 
 
-<a href="{% url 'add_exploitation' %}" class="text-decoration-none fw-bold text-success">
-    <i class="fa fa-plus text-success"></i>
+<a href="{% url 'add_site' %}" class="text-decoration-none fw-bold text-success">
+    <i class="fa fa-plus-circle text-success"></i>
  </a>
-  </H4>
+ 
+</H4>
 {% endblock add %}
 
 
@@ -27,47 +24,43 @@
     <thead>
       <tr class="bg-success">
         <th scope="col">Id</th>
+        <th scope="col">Code du site</th>
         <th scope="col">Nom du site</th>
-        <th scope="col">But de la mission</th>
         <th scope="col">Commune</th>
-        <th scope="col">Departement</th>
-        <th scope="col">Village</th>
-        <th scope="col">Octroie</th>
-        <th scope="col">Renouvelment</th>
-        <th scope="col">Fin</th>
-        <th scope="col">action</th>
+        <th scope="col">Statut</th>
+        <th scope="col">Categorie</th>
+        <th scope="col">Date de din d'exploitation</th>
+        <th scope="col"><i class="fas fa-pen text-warning"></i></th>
+        <th scope="col"> <i class="fas fa-trash text-danger"></i></th>
       </tr>
     </thead>
     <tbody>
         {% for result in page_obj %}
       <tr>
         <td>{{result.id }}</td>
+        <td>{{result.code_site}}</td>
         <td>{{result.nom_site}}</td>
-        <td>{{result.but_mission}}</td>
         <td>{{result.commune}}</td>
-        <td>{{result.departement}}</td>
-        <td>{{result.village }}</td>
-        <td>{{result.d_octroi}}</td>
-        <td>{{result.d_renouv}}</td>
-        <td>{{result.d_fin}}</td>
+        <td>{{result.statut}}</td>
+        <td>{{result.cat_site}}</td>
+        <td>{{result.date_fin_exp}}</td>
         <td>
-          <a href="{% url 'edit_exploitation' result.id %}" title="modifier">
-            <i class="fas fa-pen text-warning"></i> 
+          <a href="{% url 'edit_site' result.id %}" title="modifier">
+            <i class="fas fa-pen text-warning"></i>
           </a>
+        </td>
+        <td>
 
           <a data-bs-toggle="modal" data-bs-target="#deleteModal{{result.id}}" title="supprimer">
             <i class="fas fa-trash text-danger"></i> 
           </a>
 
-          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{result.id}}" title="detail">
-            <i class="fas fa-eye text-success"></i> 
-          </a>
-
         </td>
       </tr>
 
-      {% include 'environnement/exploitation/detail.html' %}
-      {% include 'environnement/exploitation/delete.html' %}
+      {% include 'technique/rapport/detele.html' %}
+      
+      
       {% endfor %}
     </tbody>
   </table>
@@ -102,12 +95,12 @@
 {% if message.tags == 'error' %}
     <script>
         var m = "{{ message }}";
-          swal("Denied !", "Enter your data correctly.", "error")
+          swal("Refusé !", m, "error")
     </script>
           {% elif message.tags == 'success' %}
     <script>
           var m = "{{ message }}";
-          swal("Perfect !", m, "success")
+          swal("success !", m, "success")
     </script>
 {% endif %}   
 {% endfor%}

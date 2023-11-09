@@ -46,6 +46,13 @@
 							</a>
 						</li>
 					</ul>
+					<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+						<li class="nav-item">
+							<a href="{% url 'bi' %}" class="nav-link align-middle px-0">
+								<i class="fa-solid fa-gauge text-success"></i> <span class="ms-1 d-none d-sm-inline text-success fw-bold">Busness Itelligence</span>
+							</a>
+						</li>
+					</ul>
 						<div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
 							{% comment %} 
 							<div class="accordion-item">
@@ -96,7 +103,7 @@
 												  <a href="{% url 'prelevement' %}" class="nav-link px-0"><i class="fa-solid fa-vial"></i> &nbsp; <span class="d-none d-sm-inline text-success">Prélèvement</span> </a>
 											  </li>
 											  <li class="w-100">
-												  <a href="{% url 'exploitation' %}" class="nav-link px-0"> <i class="fa-solid fa-glasses"></i> &nbsp; <span class="d-none d-sm-inline text-success">Suivi Artisanal</span> </a>
+												  <a href="{% url 'exploitation' %}" class="nav-link px-0"> <i class="fa-solid fa-glasses"></i> &nbsp; <span class="d-none d-sm-inline text-success">Exploitation</span> </a>
 											  </li>
 										  </ul>
 									  </li> 
@@ -117,6 +124,9 @@
 											<a href="#submenu4" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
 												<i class="fa-solid fa-people-roof"></i> <span class="ms-1 d-none d-sm-inline text-success">Gestion</span> </a>
 											<ul class="collapse nav flex-column ms-1" id="submenu4" data-bs-parent="#menu">
+												<li class="w-100">
+													<a href="{% url 'site' %}" class="nav-link px-0"> <i class="fa-solid fa-sitemap"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Sites</span> </a>
+												</li>
 												<li class="w-100">
 													<a href="{% url 'list_enrolement' %}" class="nav-link px-0"> <i class="fa-solid fa-file-pen"></i>  &nbsp; <span class="d-none d-sm-inline text-success">Enrolement</span> </a>
 												</li>
@@ -204,13 +214,15 @@
     <div class="container bg-body-tertiary rounded">
       <footer class="py-1">
         <div class="d-flex flex-column flex-sm-row justify-content-between py-1 my-1 border-top border-success border-5">
-          <p class="text-secondary font-weight-bold font-italic">&copy; {% now "D-d-M-Y" %} aneemas. Tous droits reservés</p>
-          <ul class="list-unstyled d-flex">
-            <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-facebook" style="font-size: 100%; color: blue;"></i></a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-twitter" style="font-size: 100%; color: yellowgreen;"></i></a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-whatsapp" style="font-size: 100%; color: green;"></i></a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-linkedin" style="font-size: 100%; color: bluesky;"></i></a></li>
-          </ul>
+          	<p class="text-secondary font-weight-bold font-italic">&copy; {% now "D-d-M-Y" %} aneemas. Tous droits reservés</p>
+          	{% comment %} 
+		  	<ul class="list-unstyled d-flex">
+				<li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-facebook" style="font-size: 100%; color: blue;"></i></a></li>
+				<li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-twitter" style="font-size: 100%; color: yellowgreen;"></i></a></li>
+				<li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-whatsapp" style="font-size: 100%; color: green;"></i></a></li>
+				<li class="ms-3"><a class="text-muted" href="#"><i class="fa-brands fa-linkedin" style="font-size: 100%; color: bluesky;"></i></a></li>
+          	</ul> 
+		  	{% endcomment %}
         </div>
       </footer>
     </div>

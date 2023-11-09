@@ -11,23 +11,21 @@
 
    <div class="container mt-3 w-80">
       
-      <form method="POST" class="card p-3 mt-5 border border-primary"  action="{% url 'add' %}" autocomplete="on" enctype="multipart/form-data"> 
+      <form method="POST" class="card p-3 mt-5 border border-primary"  action="{% url 'add_prelevement' %}" autocomplete="on" enctype="multipart/form-data"> 
             {% csrf_token %}
 
             {% comment %} {% bootstrap_form form %} {% endcomment %}
 
          <div class="row">
-            <div class="col-4" id="ville">{{form.date_prelevement|as_crispy_field}}</div>
+            <div class="col-4">{{form.date_prelevement|as_crispy_field}}</div>
             <div class="col-4">{{form.commune|as_crispy_field}}</div>
             <div class="col-4">{{form.point_prelevement|as_crispy_field}}</div>
          </div>
 
         
          <div class="row">
-            <div class="col-3">{{form.longitude|as_crispy_field}}</div>
-            <div class="col-3">{{form.latitude|as_crispy_field}}</div>
-            <div class="col-3">{{form.altitude|as_crispy_field}}</div>
-            <div class="col-3">{{form.precision|as_crispy_field}}</div>
+            <div class="col-6">{{form.coordonnees|as_crispy_field}}</div>
+            <div class="col-6">{{form.coordonnees_manu|as_crispy_field}}</div>
          </div>
 
          <div class="row">
@@ -64,8 +62,9 @@
         </div>
 
         <div class="row">
-            <div class="col-6">{{form.nom_personnes_commandiaire|as_crispy_field}}</div>
-            <div class="col-6">{{form.adresse_personnes_commandiaire|as_crispy_field}}</div>
+            <div class="col-4">{{form.nom_preleveur|as_crispy_field}}</div>
+            <div class="col-4">{{form.nom_personnes_commandiaire|as_crispy_field}}</div>
+            <div class="col-4">{{form.adresse_personnes_commandiaire|as_crispy_field}}</div>
         </div>
 
          <div class="mt-4" style="width: 100p%;">
