@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "authentication",
     "rest_framework",
     "corsheaders",
+    "django_pandas",
 ]
 
 MIDDLEWARE = [

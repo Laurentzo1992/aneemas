@@ -13,7 +13,12 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.urls import reverse
 from paramettre.models import Demandeconventions, Formincidents, Cartartisants
 from django.contrib.auth.decorators import login_required
-from  django.views.decorators.cache import cache_control 
+from  django.views.decorators.cache import cache_control
+from django.shortcuts import render
+from django_pandas.io import read_frame
+import matplotlib.pyplot as plt
+from django.db.models import Sum, F
+from django.db.models.functions import TruncMonth
 
 
 
@@ -28,7 +33,26 @@ def home(request):
 
 
 def bi(request):
-    context = {}
+    
+    type_rapport = Formincidents.objects.all()
+    date_depart = request.GET.get('date_depart')
+    date_arrive = request.GET.get('date_arrive')
+
+    etats2 = Formincidents.objects.filter(type_rapport='accident', date_incident__range=(date_depart, date_arrive)).annotate(month=TruncMonth('date_incident')).values('month').annotate(total_victimes=Sum(F('vict_hom') + F('vict_fem') + F('vict_enf'))).order_by('month')
+   
+    etats = Formincidents.objects.filter(type_rapport='incident', date_incident__range=(date_depart, date_arrive)).annotate(month=TruncMonth('date_incident')).values('month').annotate(total_victimes=Sum(F('vict_hom') + F('vict_fem') + F('vict_enf'))).order_by('month')
+    labels = [entry['month'] for entry in etats]
+    print(labels)
+    labels2 = [entry['month'] for entry in etats2]
+    data = [entry['total_victimes'] for entry in etats]
+    data2 = [entry['total_victimes'] for entry in etats2]
+
+    barres = len(etats)
+    context = {"type_rapport": type_rapport, "date_depart": date_depart, "date_arrive": date_arrive, "barres": barres, "etats": etats,  "etats2": etats2, "labels": labels,"labels2": labels2, "data": data, "data2": data2}
+
+    # on reinitialise le filtre
+    if 'reset' in request.GET:
+        return redirect('bi')
     return render(request, 'authentication/bi/bi.html', context)
 
 

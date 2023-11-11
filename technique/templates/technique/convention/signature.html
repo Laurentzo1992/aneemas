@@ -26,9 +26,9 @@
         {% if result.statut == "signature" %}
         <td class="fw-bold text-success"> En cours de signature <i class="fa-solid fa-circle-notch"></i>&nbsp;</td>
         {% endif %}
-        {% if result.docs %}
+        {% if result.dossiers %}
         <td>
-          <a href="{{result.docs.url}}" title="lire">
+          <a href="{{result.dossiers.url}}" title="lire">
             <i class="fa-solid fa-file"></i>
         </a>
         </td>
@@ -36,9 +36,10 @@
         <td> <i class="fas fa-close text-danger"></i></td>
         {% endif %}
         <td>
-          {% comment %} <a href="{% url 'edit_convention' result.id %}" title="modifier">
-            <i class="fas fa-pen text-warning"></i>
+          <a href="{% url 'edit_convention2' result.id %}" title="traitement signature">
+            <i class="fas fa-gear text-danger"></i>
           </a>
+          {% comment %} 
           &nbsp;
           <a data-bs-toggle="modal" data-bs-target="#deleteModal{{result.id}}" title="supprimer">
             <i class="fas fa-trash text-danger"></i> 

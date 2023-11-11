@@ -22,6 +22,8 @@ from modules_externe.api_rapport import get_data_by_api_rapport, get_api_data_id
 from modules_externe.api_url import FICHE_ENROLMENT_URL, FICHE_CONVENTION_URL, FICHE_ACCIDENT_URL, FICHE_RAPPORT_URL
 
 
+def webmapp(request):
+    return render(request, 'technique/site/carte.html')
 
 def site(request):
     sites = Comsites.objects.all().order_by('created')
@@ -594,6 +596,38 @@ def edit_convention(request, id):
         form = DemandeconventionsForm(instance=convention)
     return render(request, 'technique/convention/edit.html', {'convention':convention, 'form':form})
 
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def edit_convention1(request, id):
+    convention = Demandeconventions.objects.get(id=id)
+    if request.method == 'POST':
+        form = DemandeconventionsForm(request.POST,request.FILES, instance=convention)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.statut = 'instruction'
+            instance.save()
+            messages.success(request, "Traitement effectué avec susccès!")
+            return redirect('convention')
+    else:
+        form = DemandeconventionsForm(instance=convention)
+    return render(request, 'technique/convention/edit1.html', {'convention':convention, 'form':form})
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def edit_convention2(request, id):
+    convention = Demandeconventions.objects.get(id=id)
+    if request.method == 'POST':
+        form = DemandeconventionsForm(request.POST,request.FILES, instance=convention)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.statut = 'signature'
+            instance.save()
+            messages.success(request, "Traitement effectué avec susccès!")
+            return redirect('convention')
+    else:
+        form = DemandeconventionsForm(instance=convention)
+    return render(request, 'technique/convention/edit2.html', {'convention':convention, 'form':form})
 
 
 

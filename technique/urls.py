@@ -4,6 +4,7 @@ from  . import views
 urlpatterns = [
     
     path('site', views.site, name='site'),
+    path('webmapp', views.webmapp, name='webmapp'),
     path('site/add', views.add_site, name='add_site'),
     path('site/edit/<int:id>', views.edit_site, name='edit_site'),
     path('site/delete/<int:id>', views.delete_site, name='delete_site'),
@@ -47,6 +48,8 @@ urlpatterns = [
     path('signe/<int:id>', views.signe, name='signe'),
     path('convention/add', views.add_convention, name='add_convention'),
     path('convention/edit/<int:id>', views.edit_convention, name='edit_convention'),
+    path('convention/edit1/<int:id>', views.edit_convention1, name='edit_convention1'),
+    path('convention/edit2/<int:id>', views.edit_convention2, name='edit_convention2'),
     path('convention/delete/<int:id>', views.delete_convention, name='delete_convention'),
     
     

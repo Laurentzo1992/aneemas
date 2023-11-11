@@ -353,6 +353,7 @@ class Demandeconventions(models.Model):
         (MORALE, "PERSONNE MORALE"),
     ]
     
+    # Demande
     identifiant = models.IntegerField(null=True, blank=True)
     num_ordre = models.CharField(max_length=400, blank=True, null=True)
     type_autorisation = models.ManyToManyField(Typautorisations, through='LigneTypeAutorisation')
@@ -385,39 +386,37 @@ class Demandeconventions(models.Model):
     heure_depot = models.TimeField(max_length=150, blank=True, null=True)
     deposant = models.CharField(max_length=400, blank=True, null=True, verbose_name='Nom du deposant')
     
+    #instruction
+    reconnaissance = models.BooleanField(default=False, blank=True, null=True)
+    concertation = models.BooleanField(default=False, blank=True, null=True)
+    organisation = models.BooleanField(default=False, blank=True, null=True)
+    plan_masse = models.BooleanField(default=False, blank=True, null=True)
+    pv_constat = models.BooleanField(default=False, blank=True, null=True)
     
-    reconnaissance = models.CharField(max_length=1, blank=True, null=True)
-    concertation = models.CharField(max_length=1, blank=True, null=True)
-    organisation = models.CharField(max_length=1, blank=True, null=True)
-    plan_masse = models.CharField(max_length=1, blank=True, null=True)
-    pv_constat = models.CharField(max_length=1, blank=True, null=True)
     nbr_puit = models.BigIntegerField(blank=True, null=True)
     nbr_puit_actif = models.BigIntegerField(blank=True, null=True)
     nbr_collecteur = models.BigIntegerField(blank=True, null=True)
     qte_or_puit = models.BigIntegerField(blank=True, null=True)
     qte_or_collecteur = models.BigIntegerField(blank=True, null=True)
-    fournisseur = models.CharField(max_length=400, blank=True, null=True)
-    exploitant = models.CharField(max_length=400, blank=True, null=True)
+    fournisseur = models.BooleanField(default=False, blank=True, null=True)
+    exploitant = models.BooleanField(default=False, blank=True, null=True)
+    fichier = models.FileField(upload_to='uploads', blank=True, null=True, verbose_name="Document Annexes à l'instruction")
+   
+    #Signature
     date_signature = models.DateField(blank=True, null=True)
     date_effet_sign = models.DateField(blank=True, null=True)
-    fichier = models.CharField(max_length=300, blank=True, null=True)
+   
     date_exp = models.DateField(blank=True, null=True)
     date_premier_vers = models.DateField(blank=True, null=True)
     date_relance = models.DateField(blank=True, null=True)
-    expire = models.CharField(max_length=1, blank=True, null=True)
-    retire = models.CharField(max_length=1, blank=True, null=True)
-    renonce = models.CharField(max_length=1, blank=True, null=True)
+    
+    dossiers = models.FileField(upload_to='uploads', blank=True, null=True, verbose_name="Document Annexes à l'instruction")
+   
     statut = models.CharField(max_length=100, blank=True, null=True)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 
-    @property
-    def fileURL(self):
-        try:
-            url = self.docs.url
-        except:
-            url = ''
-        return url
+    
     
 class LigneTypeAutorisation(models.Model):
     autorisation = models.ForeignKey(Typautorisations, null=True, blank=True, on_delete=models.CASCADE)
@@ -756,7 +755,7 @@ class Formincidents(models.Model):
     province = models.ForeignKey(Provinces, on_delete=models.CASCADE, blank=True, null=True)
     commune = models.CharField(max_length=400, blank=True, null=True)
     nom_localite = models.CharField(max_length=2500, blank=True, null=True)
-    nom_site = models.CharField(max_length=2500, blank=True, null=True)
+    nom_site = models.ForeignKey(Comsites, max_length=2500, blank=True, null=True, on_delete=models.CASCADE)
     type_rapport = models.CharField(max_length=1500, blank=True, null=True, choices=TYPE, default='incident')
     date_incident = models.DateField(blank=True, null=True)
     heure_incident = models.TimeField(blank=True, null=True)
