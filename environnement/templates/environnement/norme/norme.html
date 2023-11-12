@@ -5,12 +5,8 @@
 {% block add %}
 
  <h4>
-  <a id="syncLink" href="{% url 'api_prelevement' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
-     <i class="fa-solid fa-group-arrows-rotate"></i>
-  </a>
-  
-  
-  <a href="{% url 'add_prelevement' %}" class="text-decoration-none fw-bold text-success">
+ 
+  <a href="{% url 'add_norme' %}" class="text-decoration-none fw-bold text-success">
       <i class="fa fa-plus text-success"></i>
    </a>
   
@@ -28,12 +24,9 @@
     <thead>
       <tr class="bg-success">
         <th scope="col">Id</th>
-        <th scope="col">Date</th>
-        <th scope="col">Commune</th>
-        <th scope="col">Lieu</th>
-        <th scope="col">Motif</th>
-        <th scope="col">Preleveur</th>
-        <th scope="col">nature</th>
+        <th scope="col">Paramettre</th>
+        <th scope="col">Valeur</th>
+        <th scope="col">Unité</th>
         <th scope="col">action</th>
       </tr>
     </thead>
@@ -41,33 +34,22 @@
         {% for result in page_obj %}
       <tr>
         <td>{{ result.id }}</td>
-        <td>{{result.date_prelevement}}</td>
-        <td>{{result.commune}}</td>
-        <td>{{result.lieu}}</td>
-        <td>{{result.motif}}</td>
-        <td>{{result.nom_preleveur}}</td>
-        <td>{{result.type_nature_echant}}</td>
+        <td>{{result.paramettre}}</td>
+        <td>{{result.valeur}}</td>
+        <td>{{result.unites}}</td>
         <td>
-          <a href="{% url 'add_analyse' result.id %}" title="ajouter resultat d'analyse">
-            <i class="fas fa-plus text-primary"></i> 
-          </a>
-
-          <a href="{% url 'edit_prelevement' result.id %}" title="modifier">
+          
+          <a href="{% url 'edit_norme' result.id %}" title="modifier">
             <i class="fas fa-pen text-warning"></i> 
           </a>
           <a data-bs-toggle="modal" data-bs-target="#deleteModal{{result.id}}" title="supprimer">
             <i class="fas fa-trash text-danger"></i> 
           </a>
 
-          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{result.id}}" title="detail">
-            <i class="fas fa-eye text-success"></i> 
-          </a>
-
         </td>
       </tr>
 
-      {% include 'environnement/prelevement/detail.html' %}
-      {% include 'environnement/prelevement/delete.html' %}
+      {% include 'environnement/norme/delete.html' %}
       {% endfor %}
     </tbody>
   </table>

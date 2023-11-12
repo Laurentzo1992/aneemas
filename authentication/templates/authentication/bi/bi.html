@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}bi{% endblock %}
+{% block title %}Acceuil{% endblock %}
 
 
 {% block main %} 
@@ -8,164 +8,59 @@
 
 
 <div class="container d-flex flex-column mb-2">
+  
+      <div class="row mb-2">
+            <div class="col-3">
+                  <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
+                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Artisans</div>
+                        <div class="card-body">
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-id-card-clip" style="color:#FFD700;"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{artisants}} </h1>
+                        </div>
+                  </div>
+            </div>
+            <div class="col-3">
+                  <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
+                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Exploitation</div>
+                        <div class="card-body">
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book-bookmark" style="color:#0b4291;"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{collecteurs}} </h1>
+                        </div>
+                  </div>
+            </div>
+            <div class="col-3">
+                  <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
+                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Collecteur</div>
+                        <div class="card-body">
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book" style="color:#0b4291;"></i>&nbsp;&nbsp;&nbsp;&nbsp;  {{collecteurs}} </h1>
+                        </div>
+                  </div>
+            </div>
+            <div class="col-3">
+                  <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
+                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Incident</div>
+                        <div class="card-body">
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-person-falling text-danger"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{incidents}} </h1>
+                        </div>
+                  </div>
+            </div>
+        </div>
         <div class="row mb-2">
             <div class="ms-1">
                 <form method="get" action="{% url 'bi' %}">
-                    <label for="date_depart" class="form-label font-italic font-weight-bold text-success">Du</label>
-                    <input type="date" value="{{ date_depart }}" name="date_depart" id="date_depart" class="text-success font-italic font-weight-bold">
-                
-                    <label for="date_arrive" class="form-label font-italic font-weight-bold text-success">Au</label>
-                    <input type="date" value="{{ date_arrive }}" name="date_arrive" id="date_arrive" class="text-success font-italic font-weight-bold">
-                
-                    <button type="submit" id="submit" class="btn btn-success"><i class="fa fa-search"></i></button>
-                    <a href="{% url 'bi' %}?reset" class="btn btn-danger"><i class="fa fa-refresh"></i></a>
-                </form>
-                
+                    <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
+                    <input type="date" value="{{date_depart}}"name="date_depart" id="date_depart" class="text-success font-italic font-weight-bold">
+                    <label for="" class="form-label font-italic font-weight-bold text-success">au</label>
+                    <input type="date" value="{{date_arrive}}" name="date_arrive" id="date_arrive" class="text-success font-italic font-weight-bold">
+                    <button type="submit" id="submit"><i class="fa fa-search"></i></button>
+                    <a href="{% url 'home' %}?reset"><i class="fa fa-refresh"></i></a>
+                 </form>
             </div>
         </div>
 
       <div class="row ms-2" id="acceuil_bg">
-            <div class="col-6">
-                <button id="export-btn"><i class="fa fa-file-image text-success"></i></button>
-                    <canvas id="myChart" width="200" height="200"></canvas>
-                    <script>
-    
-                        const exportBtn = document.getElementById('export-btn');
-                        const canvas = document.getElementById('myChart');
-                        
-                        exportBtn.addEventListener('click', () => {
-                          html2canvas(canvas).then((canvas) => {
-                            const imgData = canvas.toDataURL('image/png');
-                            const link = document.createElement('a');
-                            link.download = 'incident.png';
-                            link.href = imgData;
-                            link.click();
-                          });
-                        });
-                        
-                          
-                        function generateRandomColors1(numColors1) {
-                            var colors1 = [];
-                            for (var i = 0; i < numColors1; i++) {
-                              var color1 = 'rgba(' + Math.floor(Math.random() * 256) + ','
-                                                  + Math.floor(Math.random() * 256) + ','
-                                                  + Math.floor(Math.random() * 256) + ','
-                                                  + '1)';
-                              colors1.push(color1);
-                            }
-                            return colors1;
-                          }
-                    
-                          var barres = {{ barres }}; // récupère la valeur de barres passée depuis la vue Django
-                          var barColors1 = generateRandomColors1(barres);
-    
-                        document.addEventListener('DOMContentLoaded', function () {
-                        var ctx = document.getElementById('myChart').getContext('2d');
-                        var myChart = new Chart(ctx, {
-                            type: 'pie',
-                            data: {
-                                labels: {{ labels|safe }},
-                                datasets: [{
-                                    label: 'Évolution des incidents',
-                                    data: {{ data|safe }},
-                                    borderColor: 'rgba(75, 192, 192, 1)',
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    x: {
-                                        type: 'time',
-                                        time: {
-                                            parser: 'YYYY-MM-DD',  // Format de date attendu par Moment.js
-                                            unit: 'month',
-                                            displayFormats: {
-                                                month: 'MMM YYYY'
-                                            }
-                                        }
-                                    },
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            }
-                        });
-                    });
-                    </script>
-                <h6 class="text-info font-italic font-weight-bold">Incident par periode</h6>
-            </div>
-    
-    
-            <div class="col-6">
-                <button id="export-chart1"><i class="fa fa-file-image text-success"></i></button>
-                    <canvas id="myChart1" width="200" height="200"></canvas>
-                    <script>
-                       
-                        const exportBtn1 = document.getElementById('export-chart1');
-                        const canvas1 = document.getElementById('myChart1');
-                        
-                        exportBtn1.addEventListener('click', () => {
-                          html2canvas(canvas1).then((canvas1) => {
-                            const imgData1 = canvas1.toDataURL('image/png');
-                            const link1 = document.createElement('a');
-                            link1.download = 'accident.png';
-                            link1.href = imgData1;
-                            link1.click();
-                          });
-                        });
-                        
-    
-                          
-                        function generateRandomColors(numColors) {
-                            var colors = [];
-                            for (var i = 0; i < numColors; i++) {
-                              var color = 'rgba(' + Math.floor(Math.random() * 256) + ','
-                                                  + Math.floor(Math.random() * 256) + ','
-                                                  + Math.floor(Math.random() * 256) + ','
-                                                  + '1)';
-                              colors.push(color);
-                            }
-                            return colors;
-                          }
-                    
-                          var barres = {{barres}}; // récupère la valeur de barres passée depuis la vue Django
-                          var barColors = generateRandomColors(barres);
-    
-    
-                        var ctx1 = document.getElementById('myChart1').getContext('2d');
-                        var myChart1 = new Chart(ctx1, {
-                            type: 'bar',
-                            data: {
-                                labels: {{labels|safe}},
-                                datasets: [{
-                                    label: 'Quantité d\'article par commande',
-                                    data: {{ data|safe }},
-                                    backgroundColor: barColors,
-                                    borderColor: barColors,
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    x: {
-                                        type: 'time',
-                                        time: {
-                                            parser: 'YYYY-MM-DD',  // Format de date attendu par Moment.js
-                                            unit: 'month',
-                                            displayFormats: {
-                                                month: 'MMM YYYY'
-                                            }
-                                        }
-                                    },
-                                    y: {
-                                        beginAtZero: true
-                                    }
-                                }
-                            }
-                        });
-                    </script>
-                <h6 class="text-info font-italic font-weight-bold">Accident par periode</h6>
-            </div>
+            {% if chart %}
+                  <img src="data:image/png;base64, {{chart|safe}}"></i> 
+
+            {% endif %}
       </div>
 </div>
 
@@ -192,15 +87,7 @@
 {% endif %}   
 {% endfor%}
 
-
-
 {% endblock main %}
-
-
-
-
-
-
 
 
 

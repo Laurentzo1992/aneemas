@@ -1,59 +1,159 @@
-from django.shortcuts import redirect, render
-from authentication.models import UserManager, User
-from authentication.serializers import UserRegistrationSerializer, UserSerializer, UserLoginSerilizer
-from rest_framework.viewsets import ModelViewSet
-from django.contrib.auth import  login, logout, authenticate
-from rest_framework import viewsets, permissions, status
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-from django.contrib import messages
-from django.http import JsonResponse, HttpResponseRedirect
-from django.urls import reverse
-from paramettre.models import Demandeconventions, Formincidents, Cartartisants
-from django.contrib.auth.decorators import login_required
-from  django.views.decorators.cache import cache_control
-from django.shortcuts import render
-from django_pandas.io import read_frame
-import matplotlib.pyplot as plt
-from django.db.models import Sum, F
-from django.db.models.functions import TruncMonth
-
+from modules_externe.imports import *
+from django.utils.translation import gettext as _
 
 
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def home(request):
-    artisants = Cartartisants.objects.all().count()
-    collecteurs = Demandeconventions.objects.filter(statut="convention").order_by('created').count()
-    incidents = Formincidents.objects.filter(type_rapport="incident").count()
-    context = {"artisants":artisants, "collecteurs":collecteurs, "incidents":incidents}
+    try:
+        # Récupérer les données venant du formulaire pour filtrer les dates
+        if request.method == 'POST':
+            date_depart = request.POST.get('date_depart')
+            date_arrive = request.POST.get('date_arrive')
+        else:
+            date_depart = request.GET.get('date_depart')
+            date_arrive = request.GET.get('date_arrive')
+
+        # Validation des dates (assurez-vous que vous avez des validations appropriées dans vos modèles)
+        if date_depart and date_arrive:
+            date_depart = Formincidents._meta.get_field('date_incident').to_python(date_depart)
+            date_arrive = Formincidents._meta.get_field('date_incident').to_python(date_arrive)
+
+        artisants = Cartartisants.objects.all().count()
+        collecteurs = Demandeconventions.objects.filter(statut="convention").order_by('created').count()
+        incidents = Formincidents.objects.filter(type_rapport="accident", date_incident__range=[date_depart, date_arrive]).count()
+
+        # Agréger les données par date
+        resultats = Formincidents.objects.filter(date_incident__range=[date_depart, date_arrive], type_rapport='accident')\
+            .values('date_incident')\
+            .annotate(total_hommes=Sum('vict_hom'))\
+            .annotate(total_femmes=Sum('vict_fem'))\
+            .annotate(total_enfants=Sum('vict_enf'))\
+            .order_by('date_incident')
+
+        # Créer des listes pour les données du graphique
+        dates = [resultat['date_incident'] for resultat in resultats]
+        total_hommes = [resultat['total_hommes'] for resultat in resultats]
+        total_femmes = [resultat['total_femmes'] for resultat in resultats]
+        total_enfants = [resultat['total_enfants'] for resultat in resultats]
+
+        plt.switch_backend('AGG')
+        plt.figure(figsize=(10, 4))
+
+        # Créer les courbes d'évolution pour chaque série de données
+        plt.plot(dates, total_hommes, marker='x', linestyle='dashed', color='b', label='Hommes')
+        plt.plot(dates, total_femmes, marker="3", linestyle='solid', color='r', label='Femmes')
+        plt.plot(dates, total_enfants, marker='$f$', linestyle='dashdot', color='g', label='Enfants')
+
+        plt.xlabel("periode")
+        plt.ylabel('Nombre total de victimes')
+        plt.title('Évolution du nombre de victimes des accidents par cat de personne')
+        # Ajouter une légende
+        plt.legend()
+        # Formatter l'axe x pour afficher les mois
+        plt.gca().xaxis.set_major_locator(MonthLocator())
+        plt.gca().xaxis.set_major_formatter(DateFormatter('%b'))
+        buffer = BytesIO()
+        plt.savefig(buffer, format='png')
+        buffer.seek(0)
+        # Convertir l'image en base64 pour l'inclure dans le modèle
+        chart = base64.b64encode(buffer.read()).decode('utf-8')
+
+        context = {
+            "date_arrive": date_arrive,
+            "date_depart": date_depart,
+            "artisants": artisants,
+            "collecteurs": collecteurs,
+            "incidents": incidents,
+            "chart": chart,
+        }
+
+    except ValidationError as e:
+        # Gérer l'erreur de validation des dates
+        context = {
+            "error_message": _('Erreur de validation des dates.'),
+        }
+
     return render(request, 'authentication/home.html', context)
 
 
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def bi(request):
-    
-    type_rapport = Formincidents.objects.all()
-    date_depart = request.GET.get('date_depart')
-    date_arrive = request.GET.get('date_arrive')
+    try:
+        # Récupérer les données venant du formulaire pour filtrer les dates
+        if request.method == 'POST':
+            date_depart = request.POST.get('date_depart')
+            date_arrive = request.POST.get('date_arrive')
+        else:
+            date_depart = request.GET.get('date_depart')
+            date_arrive = request.GET.get('date_arrive')
 
-    etats2 = Formincidents.objects.filter(type_rapport='accident', date_incident__range=(date_depart, date_arrive)).annotate(month=TruncMonth('date_incident')).values('month').annotate(total_victimes=Sum(F('vict_hom') + F('vict_fem') + F('vict_enf'))).order_by('month')
-   
-    etats = Formincidents.objects.filter(type_rapport='incident', date_incident__range=(date_depart, date_arrive)).annotate(month=TruncMonth('date_incident')).values('month').annotate(total_victimes=Sum(F('vict_hom') + F('vict_fem') + F('vict_enf'))).order_by('month')
-    labels = [entry['month'] for entry in etats]
-    print(labels)
-    labels2 = [entry['month'] for entry in etats2]
-    data = [entry['total_victimes'] for entry in etats]
-    data2 = [entry['total_victimes'] for entry in etats2]
+        # Validation des dates (assurez-vous que vous avez des validations appropriées dans vos modèles)
+        if date_depart and date_arrive:
+            date_depart = Formincidents._meta.get_field('date_incident').to_python(date_depart)
+            date_arrive = Formincidents._meta.get_field('date_incident').to_python(date_arrive)
 
-    barres = len(etats)
-    context = {"type_rapport": type_rapport, "date_depart": date_depart, "date_arrive": date_arrive, "barres": barres, "etats": etats,  "etats2": etats2, "labels": labels,"labels2": labels2, "data": data, "data2": data2}
+        artisants = Cartartisants.objects.all().count()
+        collecteurs = Demandeconventions.objects.filter(statut="convention").order_by('created').count()
+        incidents = Formincidents.objects.filter(type_rapport="accident", date_incident__range=[date_depart, date_arrive]).count()
 
-    # on reinitialise le filtre
-    if 'reset' in request.GET:
-        return redirect('bi')
+        # Agréger les données par date
+        resultats = Formincidents.objects.filter(date_incident__range=[date_depart, date_arrive], type_rapport='incident')\
+            .values('date_incident')\
+            .annotate(total_hommes=Sum('vict_hom'))\
+            .annotate(total_femmes=Sum('vict_fem'))\
+            .annotate(total_enfants=Sum('vict_enf'))\
+            .order_by('date_incident')
+
+        # Créer des listes pour les données du graphique
+        dates = [resultat['date_incident'] for resultat in resultats]
+        total_hommes = [resultat['total_hommes'] for resultat in resultats]
+        total_femmes = [resultat['total_femmes'] for resultat in resultats]
+        total_enfants = [resultat['total_enfants'] for resultat in resultats]
+
+        plt.switch_backend('AGG')
+        plt.figure(figsize=(10, 3))
+
+        # Créer les courbes d'évolution pour chaque série de données
+        plt.plot(dates, total_hommes, marker='o', linestyle='-', color='b', label='Hommes')
+        plt.plot(dates, total_femmes, marker='o', linestyle='-', color='r', label='Femmes')
+        plt.plot(dates, total_enfants, marker='o', linestyle='-', color='g', label='Enfants')
+
+        plt.xlabel("Date d'incident")
+        plt.ylabel('Nombre total de victimes')
+        plt.title('Évolution du nombre total de victimes au fil du temps')
+
+        # Ajouter une légende
+        plt.legend('EFH')
+
+        buffer = BytesIO()
+        plt.savefig(buffer, format='png')
+        buffer.seek(0)
+
+        # Convertir l'image en base64 pour l'inclure dans le modèle
+        chart = base64.b64encode(buffer.read()).decode('utf-8')
+
+        context = {
+            "date_arrive": date_arrive,
+            "date_depart": date_depart,
+            "artisants": artisants,
+            "collecteurs": collecteurs,
+            "incidents": incidents,
+            "chart": chart
+        }
+
+    except ValidationError as e:
+        # Gérer l'erreur de validation des dates
+        context = {
+            "error_message": _('Erreur de validation des dates.'),
+        }
+
     return render(request, 'authentication/bi/bi.html', context)
+
+ 
+
+
 
 
 

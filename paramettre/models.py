@@ -463,6 +463,20 @@ class LigneTypeCarte(models.Model):
 
 
 class Ficheprelevements(models.Model):
+    
+    eaux = "eaux"
+    sol = "sol"
+    
+    nature = [(eaux, "eaux"),
+              (sol, "sol"),]
+    
+    
+    surface = "surface"
+    souterrain = "souterrain"
+    
+    nature_eau = [(surface, "surface"),
+              (souterrain, "souterrain"),]
+    
     identifiant = models.IntegerField(blank=True, null=True)
     date_prelevement = models.DateField(blank=True, null=True)
     commune = models.CharField(max_length=2000, blank=True, null=True)
@@ -474,7 +488,8 @@ class Ficheprelevements(models.Model):
     quantite = models.FloatField(blank=True, null=True)
     nombre_flacons_verre = models.IntegerField(blank=True, null=True)
     nombre_flacons_plastique = models.IntegerField(blank=True, null=True)
-    type_nature_echant = models.CharField(max_length=1000, blank=True, null=True)
+    type_nature_echant = models.CharField(max_length=1000, blank=True, null=True, choices=nature, verbose_name="Nature echantillon")
+    nat_eau = models.CharField(max_length=1000, blank=True, null=True, choices=nature_eau, verbose_name="Nature eaux")
     conductivite = models.FloatField(blank=True, null=True)
     ph = models.FloatField(blank=True, null=True)
     tds = models.FloatField(blank=True, null=True)
@@ -486,6 +501,31 @@ class Ficheprelevements(models.Model):
     nom_preleveur = models.TextField(max_length=1500, blank=True, null=True, verbose_name='Nom et Prenom du preleveur')
     nom_personnes_commandiaire = models.TextField(max_length=1500, blank=True, null=True, verbose_name='Nom et Prenom du commanditaire')
     adresse_personnes_commandiaire = models.TextField(blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+
+
+class Analyse(models.Model):
+    prelevement = models.ForeignKey(Ficheprelevements, null=True, blank=True, on_delete=models.CASCADE)
+    conductivite = models.FloatField(blank=True, null=True)
+    ph = models.FloatField(blank=True, null=True)
+    tds = models.FloatField(blank=True, null=True)
+    oxigene_dissous = models.FloatField(blank=True, null=True)
+    turbidite = models.FloatField(blank=True, null=True)
+    bruit = models.CharField(max_length=1000, blank=True, null=True)
+    odeur = models.CharField(max_length=1000, blank=True, null=True)
+    lumiere = models.CharField(max_length=1000, blank=True, null=True)
+    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
+
+    
+    
+    
+class Norme(models.Model):
+    paramettre = models.CharField(max_length=100, null=True, blank=True)
+    valeur = models.FloatField(null=True, blank=True)
+    unites = models.CharField(max_length=10, null=True, blank=True)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 

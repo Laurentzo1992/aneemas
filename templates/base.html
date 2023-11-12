@@ -55,7 +55,7 @@
 					<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 						<li class="nav-item">
 							<a href="{% url 'bi' %}" class="nav-link align-middle px-0">
-								<i class="fa-solid fa-gauge text-success"></i> <span class="ms-1 d-none d-sm-inline text-success fw-bold">Busness Itelligence</span>
+								<i class="fa-solid fa-gauge text-success"></i> <span class="ms-1 d-none d-sm-inline fw-bold">BI</span>
 							</a>
 						</li>
 					</ul>
@@ -63,42 +63,11 @@
 					<ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
 						<li class="nav-item">
 							<a href="{% url 'webmapp' %}" class="nav-link align-middle px-0">
-								<i class="fa-solid fa-map text-success"></i> <span class="ms-1 d-none d-sm-inline text-success fw-bold">Webmapping</span>
+								<i class="fa-solid fa-map text-success"></i> <span class="ms-1 d-none d-sm-inline fw-bold">Webmaping</span>
 							</a>
 						</li>
 					</ul>
 						<div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
-							{% comment %} 
-							<div class="accordion-item">
-							  <h2 class="accordion-header">
-								<button class="accordion-button fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-								<i class="fa-solid fa-money-check-dollar text-warning fw-bold"></i> &nbsp;
-								 Commercial
-								</button>
-								
-							  </h2>
-								<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-									<div class="accordion-body">
-										<li class="list-unstyled">
-											<a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-												<i class="fa-solid fa-people-roof"></i> <span class="ms-1 d-none d-sm-inline text-success">Gestion</span> </a>
-											<ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-												<li class="w-100">
-													<a href="{{ home }}" class="nav-link px-0"> <i class="fa-brands fa-sellcast"></i> &nbsp; <span class="d-none d-sm-inline text-success">vente</span> </a>
-												</li>
-												<li class="w-100">
-													<a href="{{ home }}" class="nav-link px-0"> <i class="fa-solid fa-house-flag"></i> &nbsp; <span class="d-none d-sm-inline text-success">comptoir</span> </a>
-												</li>
-												<li class="w-100">
-													<a href="{{ home }}" class="nav-link px-0"> <i class="fa-solid fa-ring"></i> &nbsp; <span class="d-none d-sm-inline text-success">collecteur</span> </a>
-												</li>
-											</ul>
-										</li> 
-
-									</div>
-							  	</div>
-							</div> 
-							{% endcomment %}
 							
 							<div class="accordion-item">
 								<h2 class="accordion-header">
@@ -113,11 +82,14 @@
 										  <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
 											  <i class="fa-solid fa-people-roof"></i> <span class="ms-1 d-none d-sm-inline text-success">Gestion</span> </a>
 										  <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
+											<li class="w-100">
+												<a href="{% url 'norme' %}" class="nav-link px-0"><i class="fa-solid fa-scale-balanced"></i> &nbsp; <span class="d-none d-sm-inline text-success">Normes</span> </a>
+											</li>
 											  <li class="w-100">
 												  <a href="{% url 'prelevement' %}" class="nav-link px-0"><i class="fa-solid fa-vial"></i> &nbsp; <span class="d-none d-sm-inline text-success">Prélèvement</span> </a>
 											  </li>
 											  <li class="w-100">
-												  <a href="{% url 'exploitation' %}" class="nav-link px-0"> <i class="fa-solid fa-glasses"></i> &nbsp; <span class="d-none d-sm-inline text-success">Exploitation</span> </a>
+												  <a href="{% url 'exploitation' %}" class="nav-link px-0"> <i class="fa-solid fa-eye"></i> &nbsp; <span class="d-none d-sm-inline text-success">Exploitation</span> </a>
 											  </li>
 										  </ul>
 									  </li> 

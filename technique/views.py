@@ -25,6 +25,9 @@ from modules_externe.api_url import FICHE_ENROLMENT_URL, FICHE_CONVENTION_URL, F
 def webmapp(request):
     return render(request, 'technique/site/carte.html')
 
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def site(request):
     sites = Comsites.objects.all().order_by('created')
     paginator = Paginator(sites, 8)

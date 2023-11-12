@@ -6,6 +6,38 @@ from django.core.validators import RegexValidator
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Submit
 
+class NormeForm(forms.ModelForm):
+    class Meta:
+        model = Norme
+        fields = '__all__'
+        
+        """ widgets = {
+            'motif': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'nom_preleveur': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'nom_personnes_commandiaire': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'adresse_personnes_commandiaire': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'date_prelevement': forms.DateInput(attrs={'type': 'date'}),
+        }
+         """
+
+
+class AnalyseForm(forms.ModelForm):
+    class Meta:
+        model = Analyse
+        fields = '__all__'
+        exclude = ['prelevement']
+        
+        """ widgets = {
+            'motif': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'nom_preleveur': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'nom_personnes_commandiaire': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'adresse_personnes_commandiaire': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'date_prelevement': forms.DateInput(attrs={'type': 'date'}),
+        }
+         """
+        
+        
+        
 class FicheprelevementsForm(forms.ModelForm):
     class Meta:
         model = Ficheprelevements

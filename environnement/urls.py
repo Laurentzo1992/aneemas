@@ -23,4 +23,25 @@ urlpatterns = [
     path('exploitation/edit/<int:id>', views.edit_exploitation, name='edit_exploitation'),
     path('exploitation/delete/<int:id>', views.delete_exploitation, name='delete_exploitation'),
     
+    
+    
+     # url norme
+    
+    path('norme', views.norme, name='norme'),
+    path('norme/add', views.add_norme, name='add_norme'),
+    path('norme/edit/<int:id>', views.edit_norme, name='edit_norme'),
+    path('norme/delete/<int:id>', views.delete_norme, name='delete_norme'),
+    
+    
+     # url norme
+    
+    path('prelevement/analyse/<int:id>', views.add_analyse, name='add_analyse'),
+    #path('prelevement/<int:prelevement_id>/edit_analyse/<int:analyse_id>/', views.edit_analyse, name='edit_analyse'),
+
+    
 ]
+
+
+
+
+    

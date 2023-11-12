@@ -134,6 +134,11 @@ def add_prelevement(request):
     else:
         form = FicheprelevementsForm()
         return render(request, 'environnement/prelevement/add.html', {"form":form})
+
+
+
+
+
     
 
 @login_required
@@ -285,3 +290,120 @@ def delete_exploitation(request, id):
     exploitation.delete()
     messages.success(request, 'supprimer avec susccès !')
     return HttpResponseRedirect(reverse("exploitation"))
+
+
+
+
+
+
+
+##############################################################################################
+# Normes
+##############################################################################################
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def norme(request):
+    normes = Norme.objects.all().order_by('created')
+    paginator = Paginator(normes, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj":page_obj}
+    return render(request, 'environnement/norme/norme.html', context)
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def add_norme(request):
+    if request.method=="POST":
+        form = NormeForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Ajour effectué !")
+            return redirect('norme')
+        else:
+            return render(request, 'environnement/norme/add.html', {"form":form})
+    else:
+        form = NormeForm()
+        return render(request, 'environnement/norme/add.html', {"form":form})
+    
+    
+    
+    
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def edit_norme(request, id):
+    norme = Norme.objects.get(id=id)
+    if request.method == 'POST':
+        form = NormeForm(request.POST, instance=norme)
+        if form.is_valid():
+            form.save(id)
+            messages.success(request, "Modification effectué avec susccès!")
+            return redirect('norme')
+    else:
+        form = NormeForm(instance=norme)
+    return render(request, 'environnement/norme/edit.html', {'norme':norme, 'form':form})
+
+
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def delete_norme(request, id):
+    norme = Norme.objects.get(id = id)
+    norme.delete()
+    messages.success(request, 'supprimer avec susccès !')
+    return HttpResponseRedirect(reverse("norme"))
+
+
+
+
+###############################################################################################
+#Analyse
+###############################################################################################
+
+
+
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def add_analyse(request, id):
+    prelevement = Ficheprelevements.objects.get(id=id)
+    analyses = Analyse.objects.filter(prelevement_id=prelevement).order_by('created')
+    paginator = Paginator(analyses, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    if request.method == "POST":
+        form = AnalyseForm(request.POST)
+        if form.is_valid():
+            analyse = form.save(commit=False)  
+            analyse.prelevement = prelevement 
+            analyse.save() 
+            messages.success(request, "Ajout effectué !")
+            return redirect('prelevement')
+        else:
+            return render(request, 'environnement/prelevement/add_analyse.html', {"page_obj":page_obj,"form": form})
+    else:
+        form = AnalyseForm()
+        return render(request, 'environnement/prelevement/add_analyse.html', {"page_obj":page_obj,"form": form})
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def edit_analyse(request, prelevement_id, analyse_id):
+    prelevement = get_object_or_404(Ficheprelevements, id=prelevement_id)
+    analyse = get_object_or_404(Analyse, id=analyse_id, prelevement_id=prelevement)
+
+    if request.method == "POST":
+        form = AnalyseForm(request.POST, instance=analyse)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Modification effectuée !")
+            return redirect('prelevement')
+        else:
+            return render(request, 'environnement/prelevement/edit_analyse.html', {"form": form, "prelevement": prelevement, "analyse": analyse})
+    else:
+        form = AnalyseForm(instance=analyse)
+        return render(request, 'environnement/prelevement/edit_analyse.html', {"form": form, "prelevement": prelevement, "analyse": analyse})
