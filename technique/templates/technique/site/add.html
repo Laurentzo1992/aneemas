@@ -31,3 +31,17 @@
 {% endblock main %}
 
 
+
+{% block srcipts %}
+
+<script>
+  $("#id_region").select2({
+   placeholder: "selectionner la region",
+   allowClear: true
+  });
+  $("#id_province").select2({
+   placeholder: "selectionner la province",
+   allowClear: true
+  });
+</script>
+{% endblock srcipts %}

@@ -110,6 +110,7 @@ class FormincidentsForm(forms.ModelForm):
         fields = '__all__'
         
         widgets = {
+            'heure_incident': forms.TimeInput(attrs={'type': 'time'}),
             'equipement_implique': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
             'personne_implique': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
             'description': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
@@ -148,8 +149,8 @@ class ComsitesForm(forms.ModelForm):
         
         widgets = {
             
-            'action_corrective': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
-            'mesure_de_securite': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'obs_geo': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'machine': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
             'date_deb_expl': forms.DateInput(attrs={'type': 'date'}),
             'date_fin_exp': forms.DateInput(attrs={'type': 'date'}),
         }

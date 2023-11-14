@@ -685,6 +685,8 @@ def save_api_data_to_database_acc(request, identifiant):
     if result:
         region = Regions.objects.get(id=int(result['com_region']))
         province = Provinces.objects.get(id=int(result['com_province']))
+        
+        nom_site = Comsites.objects.get(id=int(result['nom_site']))
         # Créez une instance de votre modèle avec les données de l'API
         fiche = Formincidents(
             identifiant=result['identifiant'],
@@ -692,11 +694,10 @@ def save_api_data_to_database_acc(request, identifiant):
             province = province,
             commune =result['commune'],
             nom_localite = result['nom_localite'],
-            nom_site = result['nom_site'],
+            nom_site = nom_site,
             type_rapport = result['type_rapport'],
             date_incident = result['question5'],
             heure_incident = result['question6'],
-            type = result['type'],
             zone = result['question'],
             lieu =  result['question14'],
             degres = result['question7'],

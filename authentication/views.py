@@ -48,6 +48,7 @@ def home(request):
         plt.xlabel("periode")
         plt.ylabel('Nombre total de victimes')
         plt.title('Évolution du nombre de victimes des accidents par cat de personne')
+        plt.grid(True)
         # Ajouter une légende
         plt.legend()
         # Formatter l'axe x pour afficher les mois
@@ -94,9 +95,6 @@ def bi(request):
             date_depart = Formincidents._meta.get_field('date_incident').to_python(date_depart)
             date_arrive = Formincidents._meta.get_field('date_incident').to_python(date_arrive)
 
-        artisants = Cartartisants.objects.all().count()
-        collecteurs = Demandeconventions.objects.filter(statut="convention").order_by('created').count()
-        incidents = Formincidents.objects.filter(type_rapport="accident", date_incident__range=[date_depart, date_arrive]).count()
 
         # Agréger les données par date
         resultats = Formincidents.objects.filter(date_incident__range=[date_depart, date_arrive], type_rapport='incident')\
@@ -113,7 +111,7 @@ def bi(request):
         total_enfants = [resultat['total_enfants'] for resultat in resultats]
 
         plt.switch_backend('AGG')
-        plt.figure(figsize=(10, 3))
+        plt.figure(figsize=(10, 4))
 
         # Créer les courbes d'évolution pour chaque série de données
         plt.plot(dates, total_hommes, marker='o', linestyle='-', color='b', label='Hommes')
@@ -137,9 +135,6 @@ def bi(request):
         context = {
             "date_arrive": date_arrive,
             "date_depart": date_depart,
-            "artisants": artisants,
-            "collecteurs": collecteurs,
-            "incidents": incidents,
             "chart": chart
         }
 

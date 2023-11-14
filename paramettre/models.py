@@ -273,7 +273,6 @@ class Communes(models.Model):
 
 
 
-
 class Comptoires(models.Model):
     nom_comptoire = models.CharField(max_length=1000)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
@@ -287,21 +286,43 @@ class Comptoires(models.Model):
     def __str__(self):
         return self.nom_comptoire
 
-    
+
+
 
 
 class Comsites(models.Model):
-    code_site = models.ForeignKey(Typesites, blank=True, null=True, on_delete=models.CASCADE, verbose_name="Type de site")
-    nom_site = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Npm du de site")
-    commune = models.ForeignKey(Communes, blank=True, null=True, on_delete=models.CASCADE)
-    longitude = models.FloatField(blank=True, null=True)
-    latitude = models.FloatField(blank=True, null=True)
-    altitude = models.FloatField(blank=True, null=True)
-    precision = models.FloatField(blank=True, null=True)
-    date_deb_expl = models.DateField(blank=True, null=True,verbose_name="Date debut d'exploitation")
-    date_fin_exp = models.DateField(blank=True, null=True, verbose_name="Date de fin d'exploitation")
-    cat_site = models.ForeignKey(Categories, blank=True, null=True, on_delete=models.CASCADE, verbose_name="Categorie de site")
+    code_site = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Code du site")
+    date_creation = models.DateField( blank=True, null=True, verbose_name="date creation")
+    nom_site = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Nom du site")
+    region = models.ForeignKey(Regions, on_delete=models.CASCADE , blank=True, null=True, verbose_name='Region')
+    province = models.ForeignKey(Provinces, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Province')
+    commune = models.CharField(max_length=2500, blank=True, null=True)
+    village = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Village")
+    typesite = models.ForeignKey(Typesites, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Type de site')
     statut = models.ForeignKey(Statutsites, blank=True, null=True,  on_delete=models.CASCADE, verbose_name="Stut de site")
+    nbre_puit_actif = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Nombre de puits actif")
+    nbre_puit_total = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Nombre de puits total", default=0)
+    annee_exploitation = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Nombre d'année d'exploitation")
+    poulation = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Nombre de population approximative")
+    nom_detenteur = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Nom du detenteur")
+    personne_resource1 = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Personne resource 1(Nom et prenom)")
+    contact_resource1 = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Personne resource 1(Contact)")
+    personne_resource2 = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Personne resource 2 (Nom et prenom)")
+    contact_resource2 = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Personne resource 1(Contact)")
+    zone = models.IntegerField(blank=True, null=True, verbose_name="Zone de projection")
+    longitude = models.CharField(max_length=2500, blank=True, null=True, verbose_name="X")
+    latitude = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Y")
+    longitude1 = models.CharField(max_length=2500, blank=True, null=True, verbose_name="X2")
+    latitude1 = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Y2")
+    etendu = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Etendu du site en (m)")
+    p_chimique = models.BooleanField(blank=True, null=True, verbose_name="Presence de produit chimique")
+    p_explosif = models.BooleanField(blank=True, null=True, verbose_name="Presence d'explosif")
+    machine = models.TextField(blank=True, null=True, verbose_name="Machine")
+    conflit = models.BooleanField(blank=True, null=True, verbose_name="Conflit")
+    obs_geo = models.TextField(blank=True, null=True, verbose_name="Observation geologique")
+    #date_deb_expl = models.DateField(blank=True, null=True,verbose_name="Date debut d'exploitation")
+    #date_fin_exp = models.DateField(blank=True, null=True, verbose_name="Date de fin d'exploitation")
+    #cat_site = models.ForeignKey(Categories, blank=True, null=True, on_delete=models.CASCADE, verbose_name="Categorie de site")
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     
@@ -313,7 +334,7 @@ class Comsites(models.Model):
         return self.nom_site
 
    
-
+    
 
 class Comzones(models.Model):
     code_zone = models.CharField(max_length=1000, blank=True, null=True)
@@ -799,7 +820,6 @@ class Formincidents(models.Model):
     type_rapport = models.CharField(max_length=1500, blank=True, null=True, choices=TYPE, default='incident')
     date_incident = models.DateField(blank=True, null=True)
     heure_incident = models.TimeField(blank=True, null=True)
-    type = models.CharField(max_length=2500, blank=True, null=True, verbose_name='Type accident ou incident')
     zone = models.CharField(max_length=2500, blank=True, null=True)
     lieu =  models.CharField(max_length=2500, blank=True, null=True)
     degres = models.CharField(max_length=2500, blank=True, null=True, choices=DEGRE, default="MOYEN")

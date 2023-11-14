@@ -7,86 +7,45 @@
 
 
 
-<div class="container d-flex flex-column mb-2">
-  
-      <div class="row mb-2">
-            <div class="col-3">
-                  <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Artisans</div>
-                        <div class="card-body">
-                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-id-card-clip" style="color:#FFD700;"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{artisants}} </h1>
-                        </div>
-                  </div>
-            </div>
-            <div class="col-3">
-                  <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Exploitation</div>
-                        <div class="card-body">
-                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book-bookmark" style="color:#0b4291;"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{collecteurs}} </h1>
-                        </div>
-                  </div>
-            </div>
-            <div class="col-3">
-                  <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Collecteur</div>
-                        <div class="card-body">
-                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book" style="color:#0b4291;"></i>&nbsp;&nbsp;&nbsp;&nbsp;  {{collecteurs}} </h1>
-                        </div>
-                  </div>
-            </div>
-            <div class="col-3">
-                  <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Incident</div>
-                        <div class="card-body">
-                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-person-falling text-danger"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{incidents}} </h1>
-                        </div>
-                  </div>
-            </div>
-        </div>
-        <div class="row mb-2">
-            <div class="ms-1">
-                <form method="get" action="{% url 'bi' %}">
-                    <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
-                    <input type="date" value="{{date_depart}}"name="date_depart" id="date_depart" class="text-success font-italic font-weight-bold">
-                    <label for="" class="form-label font-italic font-weight-bold text-success">au</label>
-                    <input type="date" value="{{date_arrive}}" name="date_arrive" id="date_arrive" class="text-success font-italic font-weight-bold">
-                    <button type="submit" id="submit"><i class="fa fa-search"></i></button>
-                    <a href="{% url 'home' %}?reset"><i class="fa fa-refresh"></i></a>
-                 </form>
-            </div>
-        </div>
+<div class="shadow-lg p-3 mb-5 bg-body rounded">
+      <a  class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#biModal{{result.id}}" title="voir">
+            <i class="fa-solid fa-chart-simple"></i>
+            Rapport d'incident
+      </a>
 
-      <div class="row ms-2" id="acceuil_bg">
-            {% if chart %}
-                  <img src="data:image/png;base64, {{chart|safe}}"></i> 
+    
+</div>
+<div class="shadow-lg p-3 mb-5 bg-body rounded">
+      <a  class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#biModal{{result.id}}" title="voir">
+            <i class="fa-solid fa-chart-simple"></i>
+            Rapport d'incident
+      </a>
 
-            {% endif %}
-      </div>
+    
+</div>
+
+<div class="shadow-lg p-3 mb-5 bg-body rounded">
+      <a  class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#biModal{{result.id}}" title="voir">
+            <i class="fa-solid fa-chart-simple"></i>
+            Rapport d'incident
+      </a>
+
+    
+</div>
+
+<div class="shadow-lg p-3 mb-5 bg-body rounded">
+      <a  class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#biModal{{result.id}}" title="voir">
+            <i class="fa-solid fa-chart-simple"></i>
+            Rapport d'incident
+      </a>
+
+    
 </div>
 
 
 
-{% for message in messages %}
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-{% if message.tags == 'error' %}
-    <script>
-        var m = "{{ message }}";
-          swal("Refusé !", m, "error")
-    </script>
-          {% elif message.tags == 'success' %}
-    <script>
-          var m = "{{ message }}";
-          swal("success !", m, "success")
-    </script>
 
-    {% elif message.tags == 'warning' %}
-    <script>
-          var m = "{{ message }}";
-          swal("", m, "warning")
-    </script>
-{% endif %}   
-{% endfor%}
-
+ {% include "authentication/bi/bi_tech.html" %}
 {% endblock main %}
 
 
