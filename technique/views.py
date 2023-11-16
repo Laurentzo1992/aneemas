@@ -1,30 +1,89 @@
-import requests
-import json
-from django.core.paginator import Paginator
-from django.shortcuts import redirect, render, get_object_or_404
-from authentication.serializers import UserRegistrationSerializer, UserSerializer, UserLoginSerilizer
-from rest_framework.viewsets import ModelViewSet
-from rest_framework import viewsets, permissions, status
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-from django.contrib import messages
-from django.http import JsonResponse, HttpResponseRedirect
-from django.urls import reverse
-from technique.forms import *
-from modules_externe.api_enrolment import get_data_by_api_enrolement, get_api_data_id_enrolement
-from modules_externe.api_convention import get_data_by_api_convention, get_api_data_id_convention
-from modules_externe.api_accident import get_data_by_api_accident, get_api_data_id_accident
-from modules_externe.api_rapport import get_data_by_api_rapport, get_api_data_id_rapport
-from modules_externe.api_url import FICHE_ENROLMENT_URL, FICHE_CONVENTION_URL, FICHE_ACCIDENT_URL, FICHE_RAPPORT_URL
+from modules_externe.imports import *
+from technique.serializers import ComsitesSerializer
+
+##################################################################################################
+# Webmapping
+##################################################################################################
+
+def webmapp(request):
+    sites = Comsites.objects.all()
+    # Serialize infrastructures to JSON
+    sites = list(sites.values())
+    context = {'sites': sites}
+    return render(request, 'technique/site/carte.html', context)
+
+
+
+class ComsitesViewset(ModelViewSet):
+    serializer_class = ComsitesSerializer
+    def get_queryset(self):
+        return Comsites.objects.all()
+
+
+##################################################################################################
+# Site 
+##################################################################################################
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def site(request):
+    sites = Comsites.objects.all().order_by('created')
+    paginator = Paginator(sites, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj":page_obj}
+    return render(request, 'technique/site/site.html', context)
+
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def add_site(request):
+    if request.method=="POST":
+        form = ComsitesForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Ajour effectué !")
+            return redirect('site')
+        else:
+            return render(request, 'technique/site/add.html', {"form":form})
+    else:
+        form = ComsitesForm()
+        return render(request, 'technique/site/add.html', {"form":form})
+    
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def edit_site(request, id):
+    site = Comsites.objects.get(id=id)
+    if request.method == 'POST':
+        form = ComsitesForm(request.POST, instance=site)
+        if form.is_valid():
+            form.save(id)
+            messages.success(request, "Modification effectué avec susccès!")
+            return redirect('site')
+    else:
+        form = ComsitesForm(instance=site)
+    return render(request, 'technique/site/edit.html', {'site':site, 'form':form})
+
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)  
+def delete_site(request, id):
+    site = Comsites.objects.get(id = id)
+    site.delete()
+    messages.success(request, 'supprimer avec susccès !')
+    return HttpResponseRedirect(reverse("site"))
 
 
 
 #########################################################################
 # Fiche de enrolement
 #########################################################################
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def get_api_enrolement(request):
     #recuperer les données de l'api 
     data = get_data_by_api_enrolement(FICHE_ENROLMENT_URL)
@@ -39,7 +98,8 @@ def get_api_enrolement(request):
     return render(request, 'technique/enrolement/api_data.html', context)
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def save_api_data_to_database(request, identifiant):
     # Vérifiez si l'identifiant existe déjà dans la base de données
     if Fichenrolements.objects.filter(identifiant=identifiant).exists():
@@ -82,7 +142,8 @@ def save_api_data_to_database(request, identifiant):
         return redirect('api_enrolement')
  
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def syn_detail(request, identifiant):
     result = get_api_data_id_enrolement(FICHE_ENROLMENT_URL, identifiant)
     if result:
@@ -92,7 +153,8 @@ def syn_detail(request, identifiant):
 
  
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def index(request):
     enrolements = Fichenrolements.objects.all().order_by('created')
     paginator = Paginator(enrolements, 8)
@@ -102,14 +164,16 @@ def index(request):
     return render(request, 'technique/enrolement/enrolement.html', context)
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def carte(request, id):
     result  = get_object_or_404(Fichenrolements, id=id)
     fiche = LigneTypeCarte.objects.filter(fiche=result)
     return render(request, 'technique/enrolement/carte.html', {'result': result, 'types_de_carte': types_de_carte})
     
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def add(request):
     if request.method=="POST":
         form = EnrolementForm(request.POST, request.FILES)
@@ -124,7 +188,8 @@ def add(request):
         return render(request, 'technique/enrolement/add.html', {"form":form})
     
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def edit(request, id):
     enrolement = Fichenrolements.objects.get(id=id)
     if request.method == 'POST':
@@ -140,7 +205,8 @@ def edit(request, id):
 
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def delete(request, id):
     enrolement = Fichenrolements.objects.get(id = id)
     enrolement.delete()
@@ -154,7 +220,8 @@ def delete(request, id):
 #########################################################################
 # Fiche guide guide autorité
 #########################################################################
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def index1(request):
     guides = Formguidautorites.objects.all().order_by('created')
     paginator = Paginator(guides, 8)
@@ -163,7 +230,8 @@ def index1(request):
     context = {"page_obj":page_obj}
     return render(request, 'technique/visite_activite/guide_fiche_liste.html', context)
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def add_guide(request):
     if request.method=="POST":
         form = FormguidautoritesForm(request.POST, request.FILES)
@@ -178,7 +246,8 @@ def add_guide(request):
         return render(request, 'technique/visite_activite/add_guide.html', {"form":form})
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def edit_guide(request, id):
     guide = Formguidautorites.objects.get(id=id)
     if request.method == 'POST':
@@ -192,7 +261,8 @@ def edit_guide(request, id):
     return render(request, 'technique/visite_activite/edit_guide.html', {'guide':guide, 'form':form})
 
 
-     
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)  
 def delete_guide(request, id):
     guide = Formguidautorites.objects.get(id = id)
     guide.delete()
@@ -202,7 +272,8 @@ def delete_guide(request, id):
 #########################################################################
 # Fiche viste
 #########################################################################
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def index2(request):
     vistes = Fichevisites.objects.all().order_by('created')
     paginator = Paginator(vistes, 8)
@@ -211,7 +282,8 @@ def index2(request):
     context = {"page_obj":page_obj}
     return render(request, 'technique/visite_activite/visite_fiche_liste.html', context)
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def add_visite(request):
     if request.method=="POST":
         form = FichevisitesForm(request.POST, request.FILES)
@@ -226,7 +298,8 @@ def add_visite(request):
         return render(request, 'technique/visite_activite/add_visite.html', {"form":form})
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def edit_visite(request, id):
     viste = Fichevisites.objects.get(id=id)
     if request.method == 'POST':
@@ -242,7 +315,8 @@ def edit_visite(request, id):
 
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def delete_visite(request, id):
     viste = Fichevisites.objects.get(id = id)
     if request.method=='POST':
@@ -260,7 +334,8 @@ def delete_visite(request, id):
 # Fiche de demande convention
 #########################################################################
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def api_enrolement_conv(request):
     #recuperer les données de l'api 
     data = get_data_by_api_convention(FICHE_CONVENTION_URL)
@@ -275,7 +350,8 @@ def api_enrolement_conv(request):
     return render(request, 'technique/convention/api_data.html', context)
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def save_api_data_to_database_conv(request, identifiant):
     # Vérifiez si l'identifiant existe déjà dans la base de données
     if Demandeconventions.objects.filter(identifiant=identifiant).exists():
@@ -340,7 +416,8 @@ def save_api_data_to_database_conv(request, identifiant):
         return redirect('api_enrolement_conv')
  
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def syn_detail_conv(request, identifiant):
     result = get_api_data_id_convention(FICHE_CONVENTION_URL, identifiant)
     if result:
@@ -349,7 +426,8 @@ def syn_detail_conv(request, identifiant):
         return render(request, 'technique/convention/erreur.html', {'message': 'ID non trouvé'})
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def index3(request):
     demandes = Demandeconventions.objects.filter(statut="demande").order_by('created')
     paginator1 = Paginator(demandes, 10)
@@ -384,7 +462,8 @@ def index3(request):
     context = {"page_obj5":page_obj5, "page_obj1":page_obj1, "page_obj2":page_obj2, "page_obj3":page_obj3, "page_obj4":page_obj4}
     return render(request, 'technique/convention/index.html', context)
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def instruire(request, id):
     instruction = Demandeconventions.objects.get(id=id)
     if instruction:
@@ -397,6 +476,10 @@ def instruire(request, id):
         return render(request, 'technique/convention/index.html')
     
     
+    
+    
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def instruire_anull(request, id):
     instruction_anl = Demandeconventions.objects.get(id=id)
     if instruction_anl:
@@ -409,6 +492,11 @@ def instruire_anull(request, id):
         return render(request, 'technique/convention/index.html')
     
     
+    
+    
+    
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def signature_anull(request, id):
     signature_anul = Demandeconventions.objects.get(id=id)
     if signature_anul:
@@ -419,9 +507,13 @@ def signature_anull(request, id):
         return HttpResponseRedirect(reverse("convention"))
     else:
         return render(request, 'technique/convention/index.html')
+ 
+ 
+ 
     
     
-    
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)   
 def signature_anull1(request, id):
     signature_anul = Demandeconventions.objects.get(id=id)
     if signature_anul:
@@ -434,6 +526,10 @@ def signature_anull1(request, id):
         return render(request, 'technique/convention/index.html')
     
     
+    
+    
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)   
 def signature(request, id):
     signature = Demandeconventions.objects.get(id=id)
     if signature:
@@ -444,8 +540,13 @@ def signature(request, id):
         return HttpResponseRedirect(reverse("convention"))
     else:
         return render(request, 'technique/convention/index.html')
+   
+   
+   
+   
     
-    
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)    
 def signe(request, id):
     signature = Demandeconventions.objects.get(id=id)
     if signature:
@@ -458,6 +559,10 @@ def signe(request, id):
         return render(request, 'technique/convention/index.html')
 
 
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def add_convention(request):
     if request.method=="POST":
         form = DemandeconventionsForm(request.POST, request.FILES)
@@ -475,6 +580,10 @@ def add_convention(request):
 
 
 
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def edit_convention(request, id):
     convention = Demandeconventions.objects.get(id=id)
     if request.method == 'POST':
@@ -489,9 +598,45 @@ def edit_convention(request, id):
         form = DemandeconventionsForm(instance=convention)
     return render(request, 'technique/convention/edit.html', {'convention':convention, 'form':form})
 
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def edit_convention1(request, id):
+    convention = Demandeconventions.objects.get(id=id)
+    if request.method == 'POST':
+        form = DemandeconventionsForm(request.POST,request.FILES, instance=convention)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.statut = 'instruction'
+            instance.save()
+            messages.success(request, "Traitement effectué avec susccès!")
+            return redirect('convention')
+    else:
+        form = DemandeconventionsForm(instance=convention)
+    return render(request, 'technique/convention/edit1.html', {'convention':convention, 'form':form})
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def edit_convention2(request, id):
+    convention = Demandeconventions.objects.get(id=id)
+    if request.method == 'POST':
+        form = DemandeconventionsForm(request.POST,request.FILES, instance=convention)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.statut = 'signature'
+            instance.save()
+            messages.success(request, "Traitement effectué avec susccès!")
+            return redirect('convention')
+    else:
+        form = DemandeconventionsForm(instance=convention)
+    return render(request, 'technique/convention/edit2.html', {'convention':convention, 'form':form})
 
 
 
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def delete_convention(request, id):
     convention = Demandeconventions.objects.get(id = id)
     convention.delete()
@@ -506,6 +651,9 @@ def delete_convention(request, id):
 # Fiche de accident - incident
 #########################################################################
 
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def get_api_accident(request):
     #recuperer les données de l'api 
     data = get_data_by_api_accident(FICHE_ACCIDENT_URL)
@@ -521,6 +669,9 @@ def get_api_accident(request):
 
 
 
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def save_api_data_to_database_acc(request, identifiant):
     # Vérifiez si l'identifiant existe déjà dans la base de données
     if Formincidents.objects.filter(identifiant=identifiant).exists():
@@ -533,6 +684,8 @@ def save_api_data_to_database_acc(request, identifiant):
     if result:
         region = Regions.objects.get(id=int(result['com_region']))
         province = Provinces.objects.get(id=int(result['com_province']))
+        
+        nom_site = Comsites.objects.get(id=int(result['nom_site']))
         # Créez une instance de votre modèle avec les données de l'API
         fiche = Formincidents(
             identifiant=result['identifiant'],
@@ -540,11 +693,10 @@ def save_api_data_to_database_acc(request, identifiant):
             province = province,
             commune =result['commune'],
             nom_localite = result['nom_localite'],
-            nom_site = result['nom_site'],
+            nom_site = nom_site,
             type_rapport = result['type_rapport'],
             date_incident = result['question5'],
             heure_incident = result['question6'],
-            type = result['type'],
             zone = result['question'],
             lieu =  result['question14'],
             degres = result['question7'],
@@ -577,6 +729,10 @@ def save_api_data_to_database_acc(request, identifiant):
  
 
 
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def syn_detail_acc(request, identifiant):
     result = get_api_data_id_accident(FICHE_ACCIDENT_URL, identifiant)
     if result:
@@ -586,7 +742,8 @@ def syn_detail_acc(request, identifiant):
 
  
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def index4(request):
     incidents = Formincidents.objects.all().order_by('created')
     paginator = Paginator(incidents, 8)
@@ -598,7 +755,8 @@ def index4(request):
 
     
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def add_incident(request):
     if request.method=="POST":
         form = FormincidentsForm(request.POST, request.FILES)
@@ -613,7 +771,8 @@ def add_incident(request):
         return render(request, 'technique/accident/add.html', {"form":form})
     
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def edit_incident(request, id):
     incident = Formincidents.objects.get(id=id)
     if request.method == 'POST':
@@ -629,7 +788,8 @@ def edit_incident(request, id):
 
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def delete_incident(request, id):
     incident = Formincidents.objects.get(id = id)
     incident.delete()
@@ -639,13 +799,11 @@ def delete_incident(request, id):
 
 
 
-
-
-
 #########################################################################
 # Fiche rapport d'activité
 #########################################################################
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def get_api_rapport(request):
     #recuperer les données de l'api 
     data = get_data_by_api_rapport(FICHE_RAPPORT_URL)
@@ -660,7 +818,8 @@ def get_api_rapport(request):
     return render(request, 'technique/rapport/api_data.html', context)
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def save_api_data_to_database_rapp(request, identifiant):
     # Vérifiez si l'identifiant existe déjà dans la base de données
     if Rapactivites.objects.filter(identifiant=identifiant).exists():
@@ -718,7 +877,8 @@ def save_api_data_to_database_rapp(request, identifiant):
         return redirect('api_rapport')
  
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def syn_detail_rapp(request, identifiant):
     result = get_api_data_id_rapport(FICHE_RAPPORT_URL, identifiant)
     if result:
@@ -728,7 +888,8 @@ def syn_detail_rapp(request, identifiant):
 
  
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def index5(request):
     incidents = Rapactivites.objects.all().order_by('created')
     paginator = Paginator(incidents, 8)
@@ -740,7 +901,8 @@ def index5(request):
 
     
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def add_rapport(request):
     if request.method=="POST":
         form = RapactivitesForm(request.POST, request.FILES)
@@ -755,7 +917,8 @@ def add_rapport(request):
         return render(request, 'technique/rapport/add.html', {"form":form})
     
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def edit_rapport(request, id):
     rapport = Rapactivites.objects.get(id=id)
     if request.method == 'POST':
@@ -771,9 +934,13 @@ def edit_rapport(request, id):
 
 
 
-
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def delete_rapport(request, id):
     rapport = Rapactivites.objects.get(id = id)
     rapport.delete()
     messages.success(request, 'supprimer avec susccès !')
     return HttpResponseRedirect(reverse("rapport"))
+
+
+

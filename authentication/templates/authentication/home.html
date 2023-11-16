@@ -10,84 +10,117 @@
 <div class="container d-flex flex-column mb-2">
   
       <div class="row mb-2">
-            <div class="col-4">
+            <div class="col-3">
                   <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-secondary">Convention demandé</div>
+                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Artisans</div>
                         <div class="card-body">
-                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book text-success"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{convs}} </h1>
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-id-card-clip" style="color:#FFD700;"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{artisants}} </h1>
                         </div>
                   </div>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                   <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-secondary">Convention signé</div>
+                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Exploitation</div>
                         <div class="card-body">
-                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book-bookmark text-info"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{conv_sigs}} </h1>
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book-bookmark" style="color:#0b4291;"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{collecteurs}} </h1>
                         </div>
                   </div>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                   <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
-                        <div class="card-header text-white text-center text-uppercase font-weight-bold bg-secondary">Convention anuler</div>
+                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Collecteur</div>
                         <div class="card-body">
-                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book text-danger"></i>&nbsp;&nbsp;&nbsp;&nbsp;  {{conv_anuls}} </h1>
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-book" style="color:#0b4291;"></i>&nbsp;&nbsp;&nbsp;&nbsp;  {{collecteurs}} </h1>
                         </div>
                   </div>
             </div>
-      </div>
-      <div class="row mb-2">
+            <div class="col-3">
+                  <div class="card text-bg-primary mb-2 mt-2 shadow-lg">
+                        <div class="card-header text-white text-center text-uppercase fw-bolder" style="background-color:#5d3d36;">Incident</div>
+                        <div class="card-body">
+                              <h1 class="card-title text-center text-secondary"><i class="fa-solid fa-person-falling text-danger"></i>&nbsp;&nbsp;&nbsp;&nbsp; {{incidents}} </h1>
+                        </div>
+                  </div>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="ms-1">
+                <form method="get" action="{% url 'home' %}">
+                    <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
+                    <input type="date" value="{{date_depart}}"name="date_depart" id="date_depart" class="text-success font-italic font-weight-bold">
+                    <label for="" class="form-label font-italic font-weight-bold text-success">au</label>
+                    <input type="date" value="{{date_arrive}}" name="date_arrive" id="date_arrive" class="text-success font-italic font-weight-bold">
+                    &nbsp; &nbsp;
+                    <button type="submit" id="submit"><i class="fa fa-search"></i></button>
+                    &nbsp;  &nbsp;
+                    <a href="{% url 'home' %}?reset"><i class="fa fa-refresh"></i></a>
+                    &nbsp;  &nbsp;
+                    <a href="" id="export_image"><i class="fa fa-print"></i></a>
+                    
+                 </form>
+               
+        </div>
 
-            {% if conventions %}
-            <table class="table table-striped shadow-lg p-3 mt-3">
-                <thead>
-                  <tr class="bg-success">
-                    <th scope="col">Id</th>
-                    <th scope="col">Numero</th>
-                    <th scope="col">Nom du demandeur</th>
-                    <th scope="col">Commune</th>
-                    <th scope="col">Localite</th>
-                    <th scope="col">Date de depot</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Fichier</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    {% for result in conventions %}
-                  <tr>
-                    <td>{{result.id }}</td>
-                    <td>{{result.num_ordre}}</td>
-                    <td>{{result.nom_demandeur}}</td>
-                    <td>{{result.commune}}</td>
-                    <td>{{result.nom_localite1}}</td>
-                    <td>{{result.date_depot}}</td>
-                    {% if result.statut == "convention" %}
-                    <td class="fw-bold text-success">Signé <i class="fa-solid fa-circle-check"></i>&nbsp;</td>
-                    {% endif %}
-                    {% if result.docs %}
-                    <td>
-                      <a href="{{result.docs.url}}" title="lire">
-                        <i class="fas fa-folder-open text-warning"></i>
-                    </a>
-                    </td>
-                    {% else %}
-                    <td> <i class="fas fa-close text-danger"></i></td>
-                    {% endif %}
-                  
-            
-                    </td>
-                  </tr>
-            
-                  {% endfor %}
-                </tbody>
-              </table>
-            {% else %}
-            <H4 class="fw-bold text-success"> <i class="fas fa-warning text-warning"></i> Aucune demande de convention signée ! </H4>
+      <div class="row ms-2" id="fig">
+            {% if chart %}
+                  <img src="data:image/png;base64, {{chart|safe}}" id="accident">
             {% endif %}
-            
-
       </div>
 </div>
 
+
+  
+ 
+<script>
+      document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("export_image").addEventListener("click", function() {
+          var chartImage = document.getElementById("accident");
+    
+          if (chartImage) {
+            var downloadLink = document.createElement("a");
+            downloadLink.href = chartImage.src;
+            downloadLink.download = "chart_image.png";
+            downloadLink.click();
+          }
+        });
+      });
+    </script>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+{% for message in messages %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if message.tags == 'error' %}
+    <script>
+        var m = "{{ message }}";
+          swal("Refusé !", m, "error")
+    </script>
+          {% elif message.tags == 'success' %}
+    <script>
+          var m = "{{ message }}";
+          swal("success !", m, "success")
+    </script>
+
+    {% elif message.tags == 'warning' %}
+    <script>
+          var m = "{{ message }}";
+          swal("", m, "warning")
+    </script>
+{% endif %}   
+{% endfor%}
 
 {% endblock main %}
 

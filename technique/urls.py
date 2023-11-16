@@ -1,7 +1,22 @@
-from  django.urls import  path
+from django.urls import path, include
+from rest_framework import routers
 from  . import views
+from technique.views import ComsitesViewset
+
+
+router = routers.SimpleRouter()
+router.register('infrastructures', ComsitesViewset, basename='infrastructures')
 
 urlpatterns = [
+    # gestion site
+    path('site', views.site, name='site'),
+    path('webmapp', views.webmapp, name='webmapp'),
+    path('api/', include(router.urls)),
+    
+    
+    path('site/add', views.add_site, name='add_site'),
+    path('site/edit/<int:id>', views.edit_site, name='edit_site'),
+    path('site/delete/<int:id>', views.delete_site, name='delete_site'),
     #Url de la fiche d'enrolment
     path('enrolement', views.index, name='list_enrolement'),
     path('enrolement/api_data', views.get_api_enrolement, name='api_enrolement'),
@@ -42,6 +57,8 @@ urlpatterns = [
     path('signe/<int:id>', views.signe, name='signe'),
     path('convention/add', views.add_convention, name='add_convention'),
     path('convention/edit/<int:id>', views.edit_convention, name='edit_convention'),
+    path('convention/edit1/<int:id>', views.edit_convention1, name='edit_convention1'),
+    path('convention/edit2/<int:id>', views.edit_convention2, name='edit_convention2'),
     path('convention/delete/<int:id>', views.delete_convention, name='delete_convention'),
     
     

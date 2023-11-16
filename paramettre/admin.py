@@ -4,6 +4,7 @@ from paramettre.models import *
 
 
 
+admin.site.register(Legend)
 admin.site.register(Burencadrements)
 admin.site.register(Categories)
 admin.site.register(Communes)
@@ -13,7 +14,6 @@ admin.site.register(Comzones)
 admin.site.register(Provinces)
 admin.site.register(Regions)
 admin.site.register(Statutsites)
-admin.site.register(Typaccidents)
 admin.site.register(Typautorisations)
 admin.site.register(Typdemandeurs)
 admin.site.register(Typenatureminerais)

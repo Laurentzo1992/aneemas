@@ -18,8 +18,7 @@
     <thead>
       <tr class="bg-success">
         <th scope="col">Id</th>
-        <th scope="col">Localité</th>
-        <th scope="col">Nom du site</th>
+        <th scope="col">Site</th>
         <th scope="col">Rapport</th>
         <th scope="col">Date</th>
         <th scope="col">Heure</th>
@@ -38,7 +37,6 @@
         {% for result in page_obj %}
       <tr>
         <td>{{ result.identifiant }}</td>
-        <td>{{result.nom_localite}}</td>
         <td>{{result.nom_site}}</td>
         <td>{{result.type_rapport}}</td>
         <td>{{result.question5}}</td>

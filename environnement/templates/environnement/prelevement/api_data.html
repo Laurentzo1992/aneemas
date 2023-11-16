@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+
+
+{% block add %}
+
+
+{% endblock add %}
+
+{% block main %}
+
+
+<table class="table table-striped shadow-lg p-3 mt-3">
+    <thead>
+      <tr class="bg-success">
+        <th scope="col">Id</th>
+        <th scope="col">Date prelevement</th>
+        <th scope="col">Commune</th>
+        <th scope="col">Lieu</th>
+        <th scope="col">Motif</th>
+        <th scope="col">Preleveur</th>
+        <th scope="col">Commaditaire</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">BE</th>
+        <th scope="col">
+          action &nbsp;
+          
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for result in page_obj %}
+      <tr>
+        <td>{{ result.identifiant }}</td>
+        <td>{{result.date_prelev}}</td>
+        <td>{{result.commune}}</td>
+        <td>{{result.lieu}}</td>
+        <td>{{result.motif}}</td>
+        <td>{{result.nom_personne1}}</td>
+        <td>{{result.nom_personne2}}</td>
+        <td>{{result.adresse}}</td>
+        {% if result.submitted_by %}
+        <td>{{result.submitted_by}}</td>
+        {% else %}
+        <td><i class="fa-brands fa-discord"></i></td>
+        {% endif %}
+        <td>
+          
+          <a href="{% url 'syn_prelevement' result.identifiant %}" title="validé">
+            <i class="fas fa-check-circle text-danger"></i>
+          </a>
+          &nbsp;
+
+          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{result.identifiant}}">
+            <i class="fas fa-eye text-secondary"></i>
+          </a>
+
+        </td>
+      </tr>
+
+      {% include 'technique/enrolement/detail.html' %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; debut</a>
+            <a href="?page={{ page_obj.previous_page_number }}">précédent</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">suivant</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">fin &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
+{% endblock main %}

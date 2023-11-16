@@ -33,10 +33,9 @@
          </div>
          
          <div class="row">
-            <div class="col-3">{{form.type|as_crispy_field}}</div>
-            <div class="col-3">{{form.zone|as_crispy_field}}</div>
-            <div class="col-3">{{form.lieu|as_crispy_field}}</div>
-            <div class="col-3">{{form.degres|as_crispy_field}}</div>
+            <div class="col-4">{{form.zone|as_crispy_field}}</div>
+            <div class="col-4">{{form.lieu|as_crispy_field}}</div>
+            <div class="col-4">{{form.degres|as_crispy_field}}</div>
          </div>
          <div class="row">
             <div class="col-6">{{form.implication|as_crispy_field}}</div>
@@ -78,6 +77,23 @@
       </form>
    </div>
 
+
 {% endblock main %}
+
+
+
+{% block srcipts %}
+
+<script>
+  $("#id_region").select2({
+   placeholder: "selectionner la region",
+   allowClear: true
+  });
+  $("#id_province").select2({
+   placeholder: "selectionner la province",
+   allowClear: true
+  });
+</script>
+{% endblock srcipts %}
 
 

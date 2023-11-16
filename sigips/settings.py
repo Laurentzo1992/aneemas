@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "authentication",
     "rest_framework",
     "corsheaders",
+    "django_pandas",
 ]
 
 MIDDLEWARE = [
@@ -54,6 +55,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "sigips.urls"
+
+
+# settings.py
+
+
+
 
 TEMPLATES = [
     {
@@ -186,6 +193,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = 'authentication.User'
 
+LOGIN_URL = 'login'
+
+LOGIN_REDIRECT_URL = 'home'
+
 # Twillo credential
 TWILIO_ACCOUNT_SID = 'AC15fbce0675e82420dce584d408ca97ce'
 #TWILIO_AUTH_TOKEN = '98bc0aa5112826c36639f84627a189ba'
@@ -199,7 +210,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 5
+    'PAGE_SIZE': 100
 }
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'

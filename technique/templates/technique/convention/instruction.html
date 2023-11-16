@@ -27,9 +27,9 @@
         <td class="fw-bold text-success"> Instruction <i class="fa-solid fa-circle-notch"></i>&nbsp;</td>
         {% endif %}
        
-        {% if result.docs %}
+        {% if result.fichier %}
         <td>
-          <a href="{{result.docs.url}}" title="lire">
+          <a href="{{result.fichier.url}}" title="lire">
             <i class="fa-solid fa-file"></i>
         </a>
         </td>
@@ -37,9 +37,10 @@
         <td> <i class="fas fa-close text-danger"></i></td>
         {% endif %}
         <td>
-          {% comment %} <a href="{% url 'edit_convention' result.id %}" title="modifier">
-            <i class="fas fa-pen text-warning"></i>
+           <a href="{% url 'edit_convention1' result.id %}" title="traitement instruction">
+            <i class="fas fa-gear text-danger"></i>
           </a>
+          {% comment %}
           &nbsp;
           <a data-bs-toggle="modal" data-bs-target="#deleteModal{{result.id}}" title="supprimer">
             <i class="fas fa-trash text-danger"></i> 
@@ -51,12 +52,16 @@
           <a data-bs-toggle="modal" data-bs-target="#signatureModal{{result.id}}" title="Envois pour signature">
             <i class="fas fa-check-circle text-success"></i>
           </a>
+          <a data-bs-toggle="modal" data-bs-target="#anuldemandeModal{{result.id}}" title="Anuller la demande">
+            <i class="fas fa-close text-warning"></i>
+          </a>
 
         </td>
       </tr>
 
       {% include 'technique/convention/valid2.html' %} 
-      {% include 'technique/convention/anul1.html' %} 
+      {% include 'technique/convention/anul1.html' %}
+      {% include 'technique/convention/anuler3.html' %}
          
 
       {% endfor %}

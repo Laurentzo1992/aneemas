@@ -112,12 +112,12 @@
 {% if message.tags == 'error' %}
     <script>
         var m = "{{ message }}";
-          swal("Refusé !", m, "error")
+          swal("Refusé !", m, "error");
     </script>
-          {% elif message.tags == 'success' %}
+          {% elif message.tags == 'success' %};
     <script>
           var m = "{{ message }}";
-          swal("success !", m, "success")
+          swal("success !", m, "success");
     </script>
 {% endif %}   
 {% endfor%}
