@@ -1,10 +1,19 @@
-from  django.urls import  path
+from django.urls import path, include
+from rest_framework import routers
 from  . import views
+from technique.views import ComsitesViewset
+
+
+router = routers.SimpleRouter()
+router.register('infrastructures', ComsitesViewset, basename='infrastructures')
 
 urlpatterns = [
-    
+    # gestion site
     path('site', views.site, name='site'),
     path('webmapp', views.webmapp, name='webmapp'),
+    path('api/', include(router.urls)),
+    
+    
     path('site/add', views.add_site, name='add_site'),
     path('site/edit/<int:id>', views.edit_site, name='edit_site'),
     path('site/delete/<int:id>', views.delete_site, name='delete_site'),

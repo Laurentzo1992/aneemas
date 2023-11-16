@@ -1,20 +1,5 @@
 [
 {
-    "type": "header",
-    "version": "4.9.2",
-    "comment": "Export to JSON plugin for PHPMyAdmin"
-},
-{
-    "type": "database",
-    "name": "sigipsweb_bd"
-},
-{
-    "type": "table",
-    "name": "communes",
-    "database": "sigipsweb_bd",
-    "data": 
-[
-{
     "id": "1",
     "nomcom": "NAMISSIGUIMA",
     "province_id": "15",
@@ -56,7 +41,7 @@
 },
 {
     "id": "6",
-    "nomcom": "SIGLÉ",
+    "nomcom": "SIGLE",
     "province_id": "16",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -120,7 +105,7 @@
 },
 {
     "id": "14",
-    "nomcom": "ROUKÔ",
+    "nomcom": "ROUKO",
     "province_id": "13",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -128,7 +113,7 @@
 },
 {
     "id": "15",
-    "nomcom": "BALAVÉ",
+    "nomcom": "BALAVE",
     "province_id": "2",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -176,7 +161,7 @@
 },
 {
     "id": "21",
-    "nomcom": "DÉDOUGOU",
+    "nomcom": "DEDOUGOU",
     "province_id": "4",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -240,7 +225,7 @@
 },
 {
     "id": "29",
-    "nomcom": "SÔNÔ",
+    "nomcom": "SONO",
     "province_id": "3",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -304,7 +289,7 @@
 },
 {
     "id": "37",
-    "nomcom": "DAKÔRÔ",
+    "nomcom": "DAKORO",
     "province_id": "8",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -312,7 +297,7 @@
 },
 {
     "id": "38",
-    "nomcom": "OUÉLÉNI",
+    "nomcom": "OUELENI",
     "province_id": "8",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -328,7 +313,7 @@
 },
 {
     "id": "40",
-    "nomcom": "GUIBARÉ",
+    "nomcom": "GUIBARE",
     "province_id": "13",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -360,7 +345,7 @@
 },
 {
     "id": "44",
-    "nomcom": "MANÉ",
+    "nomcom": "MANE",
     "province_id": "15",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -424,7 +409,7 @@
 },
 {
     "id": "52",
-    "nomcom": "SABSÉ",
+    "nomcom": "SABSE",
     "province_id": "13",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -432,7 +417,7 @@
 },
 {
     "id": "53",
-    "nomcom": "TIKARÉ",
+    "nomcom": "TIKARE",
     "province_id": "13",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -496,7 +481,7 @@
 },
 {
     "id": "61",
-    "nomcom": "KOUPÈLA",
+    "nomcom": "KOUPELA",
     "province_id": "12",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -560,7 +545,7 @@
 },
 {
     "id": "69",
-    "nomcom": "BASKOURÉ",
+    "nomcom": "BASKOURE",
     "province_id": "12",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -576,7 +561,7 @@
 },
 {
     "id": "71",
-    "nomcom": "YONDÉ",
+    "nomcom": "YONDE",
     "province_id": "11",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -600,7 +585,7 @@
 },
 {
     "id": "74",
-    "nomcom": "ZONSÉ",
+    "nomcom": "ZONSE",
     "province_id": "10",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -624,7 +609,7 @@
 },
 {
     "id": "77",
-    "nomcom": "OUÔ",
+    "nomcom": "OUO",
     "province_id": "7",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -640,7 +625,7 @@
 },
 {
     "id": "79",
-    "nomcom": "ZABRÉ",
+    "nomcom": "ZABRE",
     "province_id": "10",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -648,7 +633,7 @@
 },
 {
     "id": "80",
-    "nomcom": "BAGRÉ",
+    "nomcom": "BAGRE",
     "province_id": "10",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -656,7 +641,7 @@
 },
 {
     "id": "81",
-    "nomcom": "PABRÉ",
+    "nomcom": "PABRE",
     "province_id": "9",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -664,7 +649,7 @@
 },
 {
     "id": "82",
-    "nomcom": "BÉGUÉDO",
+    "nomcom": "BEGUEDO",
     "province_id": "10",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -768,7 +753,7 @@
 },
 {
     "id": "95",
-    "nomcom": "TIÉFORA",
+    "nomcom": "TIEFORA",
     "province_id": "7",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -776,7 +761,7 @@
 },
 {
     "id": "96",
-    "nomcom": "SOUBAKANIÉDOUGOU",
+    "nomcom": "SOUBAKANIEDOUGOU",
     "province_id": "7",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -800,7 +785,7 @@
 },
 {
     "id": "99",
-    "nomcom": "BÉRÉGADOUGOU",
+    "nomcom": "BEREGADOUGOU",
     "province_id": "7",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -816,7 +801,7 @@
 },
 {
     "id": "101",
-    "nomcom": "TOÉNI",
+    "nomcom": "TOENI",
     "province_id": "6",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -824,7 +809,7 @@
 },
 {
     "id": "102",
-    "nomcom": "LANKOUÉ",
+    "nomcom": "LANKOUE",
     "province_id": "6",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -864,7 +849,7 @@
 },
 {
     "id": "107",
-    "nomcom": "YÉ",
+    "nomcom": "YE",
     "province_id": "5",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -896,7 +881,7 @@
 },
 {
     "id": "111",
-    "nomcom": "SAFANÉ",
+    "nomcom": "SAFANE",
     "province_id": "4",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1088,7 +1073,7 @@
 },
 {
     "id": "135",
-    "nomcom": "PIÉLA",
+    "nomcom": "PIELA",
     "province_id": "23",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1120,7 +1105,7 @@
 },
 {
     "id": "139",
-    "nomcom": "BAGARÉ",
+    "nomcom": "BAGARE",
     "province_id": "32",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1128,7 +1113,7 @@
 },
 {
     "id": "140",
-    "nomcom": "ARBOLLÉ",
+    "nomcom": "ARBOLLE",
     "province_id": "32",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1184,7 +1169,7 @@
 },
 {
     "id": "147",
-    "nomcom": "SOLLÉ",
+    "nomcom": "SOLLE",
     "province_id": "31",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1224,7 +1209,7 @@
 },
 {
     "id": "152",
-    "nomcom": "BÉRÉBA",
+    "nomcom": "BEREBA",
     "province_id": "30",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1240,7 +1225,7 @@
 },
 {
     "id": "154",
-    "nomcom": "NDÔRÔLA",
+    "nomcom": "NDOROLA",
     "province_id": "29",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1248,7 +1233,7 @@
 },
 {
     "id": "155",
-    "nomcom": "SAMÔGÔYIRI",
+    "nomcom": "SAMOGOYIRI",
     "province_id": "29",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1256,7 +1241,7 @@
 },
 {
     "id": "156",
-    "nomcom": "SAMÔGÔGOUAN",
+    "nomcom": "SAMOGOGOUAN",
     "province_id": "29",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1280,7 +1265,7 @@
 },
 {
     "id": "159",
-    "nomcom": "KÔLÔKÔ",
+    "nomcom": "KOLOKO",
     "province_id": "29",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1296,7 +1281,7 @@
 },
 {
     "id": "161",
-    "nomcom": "DANDÉ",
+    "nomcom": "DANDE",
     "province_id": "28",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1320,7 +1305,7 @@
 },
 {
     "id": "164",
-    "nomcom": "PÉNI",
+    "nomcom": "PENI",
     "province_id": "28",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1328,7 +1313,7 @@
 },
 {
     "id": "165",
-    "nomcom": "PADÉMA",
+    "nomcom": "PADEMA",
     "province_id": "28",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1352,7 +1337,7 @@
 },
 {
     "id": "168",
-    "nomcom": "KARANGASSO-VIGUÉ",
+    "nomcom": "KARANGASSO-VIGUE",
     "province_id": "28",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1424,7 +1409,7 @@
 },
 {
     "id": "177",
-    "nomcom": "LÔGBOU",
+    "nomcom": "LOGBOU",
     "province_id": "27",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1448,7 +1433,7 @@
 },
 {
     "id": "180",
-    "nomcom": "BARTIÉBOUGOU",
+    "nomcom": "BARTIEBOUGOU",
     "province_id": "25",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1480,7 +1465,7 @@
 },
 {
     "id": "184",
-    "nomcom": "GAYÉRI",
+    "nomcom": "GAYERI",
     "province_id": "25",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1536,7 +1521,7 @@
 },
 {
     "id": "191",
-    "nomcom": "ZÔRGHO",
+    "nomcom": "ZORGHO",
     "province_id": "35",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1544,7 +1529,7 @@
 },
 {
     "id": "192",
-    "nomcom": "ZINIARÉ",
+    "nomcom": "ZINIARE",
     "province_id": "37",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1552,7 +1537,7 @@
 },
 {
     "id": "193",
-    "nomcom": "DÉOU",
+    "nomcom": "DEOU",
     "province_id": "38",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1592,7 +1577,7 @@
 },
 {
     "id": "198",
-    "nomcom": "OURGOU-MANÉGA",
+    "nomcom": "OURGOU-MANEGA",
     "province_id": "37",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1600,7 +1585,7 @@
 },
 {
     "id": "199",
-    "nomcom": "NAGRÉONGO",
+    "nomcom": "NAGREONGO",
     "province_id": "37",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1672,7 +1657,7 @@
 },
 {
     "id": "208",
-    "nomcom": "MÉGUÉ",
+    "nomcom": "MEGUE",
     "province_id": "35",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1720,7 +1705,7 @@
 },
 {
     "id": "214",
-    "nomcom": "ZOGORÉ",
+    "nomcom": "ZOGORE",
     "province_id": "33",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1792,7 +1777,7 @@
 },
 {
     "id": "223",
-    "nomcom": "NOBÉRÉ",
+    "nomcom": "NOBERE",
     "province_id": "22",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1800,7 +1785,7 @@
 },
 {
     "id": "224",
-    "nomcom": "BÉRÉ",
+    "nomcom": "BERE",
     "province_id": "22",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1816,7 +1801,7 @@
 },
 {
     "id": "226",
-    "nomcom": "TIÉBÉLÉ",
+    "nomcom": "TIEBELE",
     "province_id": "21",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1824,7 +1809,7 @@
 },
 {
     "id": "227",
-    "nomcom": "ZENKÔ",
+    "nomcom": "ZENKO",
     "province_id": "21",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1832,7 +1817,7 @@
 },
 {
     "id": "228",
-    "nomcom": "SAPONÉ",
+    "nomcom": "SAPONE",
     "province_id": "20",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1840,7 +1825,7 @@
 },
 {
     "id": "229",
-    "nomcom": "TOÉCÉ",
+    "nomcom": "TOECE",
     "province_id": "20",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1848,7 +1833,7 @@
 },
 {
     "id": "230",
-    "nomcom": "IPELSÉ",
+    "nomcom": "IPELSE",
     "province_id": "20",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1872,7 +1857,7 @@
 },
 {
     "id": "233",
-    "nomcom": "GAÔ",
+    "nomcom": "GAO",
     "province_id": "19",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1880,7 +1865,7 @@
 },
 {
     "id": "234",
-    "nomcom": "DALÔ",
+    "nomcom": "DALO",
     "province_id": "19",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1896,7 +1881,7 @@
 },
 {
     "id": "236",
-    "nomcom": "NÉBIÉLIANAYOU",
+    "nomcom": "NEBIELIANAYOU",
     "province_id": "18",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1912,7 +1897,7 @@
 },
 {
     "id": "238",
-    "nomcom": "TÉNADO",
+    "nomcom": "TENADO",
     "province_id": "17",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1952,7 +1937,7 @@
 },
 {
     "id": "243",
-    "nomcom": "KORDIÉ",
+    "nomcom": "KORDIE",
     "province_id": "17",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -1984,7 +1969,7 @@
 },
 {
     "id": "247",
-    "nomcom": "BÉKUI",
+    "nomcom": "BEKUI",
     "province_id": "30",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2048,7 +2033,7 @@
 },
 {
     "id": "255",
-    "nomcom": "BINDÉ",
+    "nomcom": "BINDE",
     "province_id": "22",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2064,7 +2049,7 @@
 },
 {
     "id": "257",
-    "nomcom": "PIBAORÉ",
+    "nomcom": "PIBAORE",
     "province_id": "15",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2096,7 +2081,7 @@
 },
 {
     "id": "261",
-    "nomcom": "ZÉGUÉDÉGUEN",
+    "nomcom": "ZEGUEDEGUEN",
     "province_id": "14",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2144,7 +2129,7 @@
 },
 {
     "id": "267",
-    "nomcom": "NASSÉRÉ",
+    "nomcom": "NASSERE",
     "province_id": "13",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2192,7 +2177,7 @@
 },
 {
     "id": "273",
-    "nomcom": "BANÉ",
+    "nomcom": "BANE",
     "province_id": "10",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2208,7 +2193,7 @@
 },
 {
     "id": "275",
-    "nomcom": "SIDÉRADOUGOU",
+    "nomcom": "SIDERADOUGOU",
     "province_id": "7",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2216,7 +2201,7 @@
 },
 {
     "id": "276",
-    "nomcom": "NIANKÔRÔDOUGOU",
+    "nomcom": "NIANKORODOUGOU",
     "province_id": "8",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2248,7 +2233,7 @@
 },
 {
     "id": "280",
-    "nomcom": "TCHÉRIBA",
+    "nomcom": "TCHERIBA",
     "province_id": "4",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2320,7 +2305,7 @@
 },
 {
     "id": "290",
-    "nomcom": "RÉO",
+    "nomcom": "REO",
     "province_id": "17",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2328,7 +2313,7 @@
 },
 {
     "id": "291",
-    "nomcom": "LÉO",
+    "nomcom": "LEO",
     "province_id": "18",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2344,7 +2329,7 @@
 },
 {
     "id": "293",
-    "nomcom": "BOGANDÉ",
+    "nomcom": "BOGANDE",
     "province_id": "23",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2360,7 +2345,7 @@
 },
 {
     "id": "295",
-    "nomcom": "HOUNDÉ",
+    "nomcom": "HOUNDE",
     "province_id": "30",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2368,7 +2353,7 @@
 },
 {
     "id": "296",
-    "nomcom": "BOUSSÉ",
+    "nomcom": "BOUSSE",
     "province_id": "36",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2400,7 +2385,7 @@
 },
 {
     "id": "300",
-    "nomcom": "DIÉBOUGOU",
+    "nomcom": "DIEBOUGOU",
     "province_id": "42",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2416,7 +2401,7 @@
 },
 {
     "id": "302",
-    "nomcom": "BATIÉ",
+    "nomcom": "BATIE",
     "province_id": "44",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2432,7 +2417,7 @@
 },
 {
     "id": "304",
-    "nomcom": "PÉRIGBAN",
+    "nomcom": "PERIGBAN",
     "province_id": "45",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2456,7 +2441,7 @@
 },
 {
     "id": "307",
-    "nomcom": "LOROPÉNI",
+    "nomcom": "LOROPENI",
     "province_id": "45",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2488,7 +2473,7 @@
 },
 {
     "id": "311",
-    "nomcom": "BOUSSÉRA",
+    "nomcom": "BOUSSERA",
     "province_id": "45",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2520,7 +2505,7 @@
 },
 {
     "id": "315",
-    "nomcom": "KPUÉRÉ",
+    "nomcom": "KPUERE",
     "province_id": "44",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2544,7 +2529,7 @@
 },
 {
     "id": "318",
-    "nomcom": "OUÉSSA",
+    "nomcom": "OUESSA",
     "province_id": "43",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2560,7 +2545,7 @@
 },
 {
     "id": "320",
-    "nomcom": "NIÉGO",
+    "nomcom": "NIEGO",
     "province_id": "43",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2576,7 +2561,7 @@
 },
 {
     "id": "322",
-    "nomcom": "GUÉGUÉRÉ",
+    "nomcom": "GUEGUERE",
     "province_id": "43",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2600,7 +2585,7 @@
 },
 {
     "id": "325",
-    "nomcom": "IÔLÔNIÔRÔ",
+    "nomcom": "IOLONIORO",
     "province_id": "42",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2624,7 +2609,7 @@
 },
 {
     "id": "328",
-    "nomcom": "TITABÉ",
+    "nomcom": "TITABE",
     "province_id": "41",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2632,7 +2617,7 @@
 },
 {
     "id": "329",
-    "nomcom": "TANKOUGOUNADIÉ",
+    "nomcom": "TANKOUGOUNADIE",
     "province_id": "41",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2656,7 +2641,7 @@
 },
 {
     "id": "332",
-    "nomcom": "BOUNDORÉ",
+    "nomcom": "BOUNDORE",
     "province_id": "41",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2672,7 +2657,7 @@
 },
 {
     "id": "334",
-    "nomcom": "POBÉ-MENGAO",
+    "nomcom": "POBE-MENGAO",
     "province_id": "40",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2712,7 +2697,7 @@
 },
 {
     "id": "339",
-    "nomcom": "BARABOULÉ",
+    "nomcom": "BARABOULE",
     "province_id": "40",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2792,7 +2777,7 @@
 },
 {
     "id": "349",
-    "nomcom": "MÔGTÉDO",
+    "nomcom": "MOGTEDO",
     "province_id": "35",
     "id_2": null,
     "created": "2019-05-09 07:12:50",
@@ -2821,8 +2806,5 @@
     "id_2": null,
     "created": "2019-04-06 10:56:15",
     "modified": "2019-04-06 10:56:15"
-}
-]
-
 }
 ]

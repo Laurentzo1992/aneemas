@@ -56,6 +56,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "sigips.urls"
 
+
+# settings.py
+
+
+
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -204,7 +210,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 5
+    'PAGE_SIZE': 100
 }
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'

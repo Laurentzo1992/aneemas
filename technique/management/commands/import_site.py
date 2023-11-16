@@ -1,13 +1,6 @@
-from django.shortcuts import render
-from modules_externe.cours_or import get_data_by_url
-from django.http import JsonResponse
 from paramettre.models import Comsites, Provinces, Regions, Typesites, Statutsites
 import json
-import csv
 from datetime import datetime
-from datetime import date
-from itertools import islice
-import pathlib
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
@@ -19,7 +12,7 @@ class Command(BaseCommand):
         datafile = settings.BASE_DIR / 'data' / 'site.json'
         #json_file_path = options['json_file']
 
-        with open(datafile, 'r') as file:
+        with open(datafile, 'r', encoding='utf-8') as file:
             data = json.load(file)
 
         for entry in data:
@@ -85,11 +78,9 @@ class Command(BaseCommand):
             comsite.contact_resource1 = entry.get('contact_resource1')
             comsite.personne_resource2 = entry.get('personne_resource2')
             comsite.contact_resource2 = entry.get('contact_resource2')
-            comsite.zone = entry.get('zone')
-            comsite.longitude = entry.get('longitude')
-            comsite.latitude = entry.get('latitude')
-            comsite.longitude1 = entry.get('longitude1')
-            comsite.latitude1 = entry.get('latitude1')
+            comsite.zone = entry.get('zone', 30)
+            comsite.longitude = float(entry['longitude']) if entry.get('longitude') is not None else 0.0
+            comsite.latitude = float(entry['latitude']) if entry.get('latitude') is not None else 0.0
             comsite.etendu = entry.get('etendu')
             comsite.p_chimique = bool(entry.get('p_chimique'))
             comsite.p_explosif = bool(entry.get('p_explosif'))

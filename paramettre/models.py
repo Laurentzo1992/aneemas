@@ -2,19 +2,6 @@ from django.db import models
 from django.core.exceptions import ValidationError
 
 
-class Typaccidents(models.Model):
-    libelle = models.CharField(max_length=500, blank=True, null=True)
-    created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-    modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
-
-   
-    class Meta:
-        verbose_name = "Typaccidents"
-        verbose_name_plural = "Type d'accident"
-        
-    def __str__(self):
-        return self.libelle
-
 
 class Typautorisations(models.Model):
     libelle = models.CharField(max_length=1500, blank=True, null=True)
@@ -164,7 +151,7 @@ class Regions(models.Model):
 class Provinces(models.Model):
     numero = models.CharField(max_length=1000, blank=True, null=True)
     nomprov = models.CharField(max_length=500, blank=True, null=True)
-    region_id = models.ForeignKey(Regions, blank=True, null=True, on_delete=models.CASCADE)
+    region = models.ForeignKey(Regions, blank=True, null=True, on_delete=models.CASCADE)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 
@@ -258,8 +245,8 @@ class Categories(models.Model):
 
 
 class Communes(models.Model):
-    commune = models.CharField(max_length=1000, blank=True, null=True)
-    province_id = models.ForeignKey(Provinces, blank=True, null=True, on_delete=models.CASCADE)
+    nom_commune = models.CharField(max_length=1000, blank=True, null=True, verbose_name="Nom de la commune")
+    province = models.ForeignKey(Provinces, blank=True, null=True, on_delete=models.CASCADE)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
     
@@ -269,7 +256,7 @@ class Communes(models.Model):
         verbose_name_plural = "Commune"
         
     def __str__(self):
-        return self.commune
+        return self.nom_commune
 
 
 
@@ -285,8 +272,6 @@ class Comptoires(models.Model):
         
     def __str__(self):
         return self.nom_comptoire
-
-
 
 
 
@@ -310,10 +295,8 @@ class Comsites(models.Model):
     personne_resource2 = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Personne resource 2 (Nom et prenom)")
     contact_resource2 = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Personne resource 1(Contact)")
     zone = models.IntegerField(blank=True, null=True, verbose_name="Zone de projection")
-    longitude = models.CharField(max_length=2500, blank=True, null=True, verbose_name="X")
-    latitude = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Y")
-    longitude1 = models.CharField(max_length=2500, blank=True, null=True, verbose_name="X2")
-    latitude1 = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Y2")
+    longitude = models.FloatField(blank=True, null=True, verbose_name="X", default=0)
+    latitude = models.FloatField(blank=True, null=True, verbose_name="Y", default=0)
     etendu = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Etendu du site en (m)")
     p_chimique = models.BooleanField(blank=True, null=True, verbose_name="Presence de produit chimique")
     p_explosif = models.BooleanField(blank=True, null=True, verbose_name="Presence d'explosif")
@@ -333,7 +316,21 @@ class Comsites(models.Model):
     def __str__(self):
         return self.nom_site
 
-   
+
+class Legend(models.Model):
+    type = models.OneToOneField(Typesites, on_delete=models.CASCADE)
+    description = models.TextField()
+    image = models.ImageField(upload_to='legend_images/', help_text='La taille de l''image ne doit pas depassé 32x32 pixels.')
+
+    def get_image(self, obj):
+        return format_html('<img src="{}" style="max-width: 100px; max-height: 100px;" />', obj.image)
+
+    class Meta:
+        verbose_name = "Legende"
+        verbose_name_plural = "Legende"
+    
+    def __str__(self):
+        return self.type.libelle
     
 
 class Comzones(models.Model):
