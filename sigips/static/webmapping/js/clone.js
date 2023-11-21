@@ -1,17 +1,231 @@
 
-// gestion du boutton de panel
+MAPBOX_ACCESS_TOKEN = 'sk.eyJ1IjoibGF1cmVuem8xOTkyIiwiYSI6ImNscDZzOTNqNzF3dmgya3FvMjBjYzE1bTIifQ._Ux605Y4ItBDBVN5QkogQw'
+
+const MENU_WIDTH = 250;
+const DEFAULT_MAP_VIEW = [12.3569, -1.5352];
+const API_URL = "api/sites/";
+
+var selectedTypes = [];
+
+var markersCanvas; 
+
+
+$(document).ready(function () {
+    const isMobile = window.mobileAndTabletcheck();
+
+    if (isMobile) {
+        setMenuWidth(MENU_WIDTH);
+    }
+
+    //creation de la carte
+    const map = initializeMap();
+    markersCanvas = new L.LayerGroup();
+    markersCanvas.addTo(map);
+
+    const osm = createTileLayer();
+    osm.addTo(map);
+    
+    //Ajoutez l'événement de zoom à votre carte lors de l'initialisation
+    map.on('zoomend', handleZoomEvent);
+    ////////////////////////////////////////////////////////////////////////////////////
+    const satelliteLayer = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 200,
+        id: 'mapbox/satellite-streets-v12',
+        accessToken: MAPBOX_ACCESS_TOKEN
+    });
+
+    const satelliteLayer2 = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 200,
+        id: 'mapbox/streets-v12',
+        accessToken: MAPBOX_ACCESS_TOKEN
+    });
+
+
+    const humanitarianLayer = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.openstreetmap.fr/">OpenStreetMap France</a>'
+    });
+
+    const baseMaps = {
+        "OpenStreetMap": osm,
+        "Satellite": satelliteLayer,
+        "Satellite opt 2":satelliteLayer2,
+        "Humanitarian": humanitarianLayer
+    };
+
+    L.control.layers(baseMaps).addTo(map);
+    L.control.zoom({ position: 'topright' }).addTo(map);
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    const scaleControl = L.control.scale({ metric: true, imperial: false, position: 'bottomright' });
+    scaleControl.addTo(map);
+
+    const ctlZoomToFit = createZoomToFitControl(map);
+    ctlZoomToFit.addTo(map);
+
+    const ctlZoomBox = L.control.zoomBox({
+        modal: false,
+        position: "topright",
+        title: "Zoom vers une région spécifique"
+    });
+    map.addControl(ctlZoomBox);
+
+    // Faire une requête ajax pour récupérer les données
+    loadSites();
+
+    loadTypes();
+
+    
+    // Gérer les changements dans les filtres de type
+    $('#typeFilters').on('change', 'input[type="checkbox"]', function () {
+        updateMapMarkers();
+    });
+
+});
+
+// Fonction pour charger les types
+function loadTypes() {
+    $.ajax({
+        url: '/api/types/',
+        type: 'GET',
+        success: function (data) {
+            const types = data.results;
+            let checkboxHTML = '';
+            for (const type of types) {
+                checkboxHTML += `<div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="${type.id}" id="type-${type.id}">
+                  <label class="form-check-label" for="type-${type.id}">${type.libelle}</label>
+                </div>`;
+            }
+            $('#typeFilters').append(checkboxHTML);
+        },
+        error: function (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+}
+
+// Fonction pour charger les sites
+function loadSites() {
+    $.ajax({
+        url: API_URL + `?selectedTypes=${selectedTypes.join(',')}`,
+        type: "GET",
+        dataType: "json",
+        success: function (data) {
+            displayMarkers(data.results);
+        },
+        error: function (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+}
+
+// Fonction pour mettre à jour les marqueurs sur la carte en fonction des filtres de type
+function updateMapMarkers() {
+    selectedTypes = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(checkbox => checkbox.value);
+   
+    $.ajax({
+        url: API_URL + `?type_site=${selectedTypes.join(',')}`,
+        type: "GET",
+        dataType: "json",
+        data: { selectedTypes: selectedTypes },
+        success: function (data) {
+            markersCanvas.clearLayers();
+            displayMarkers(data.results);
+        },
+        error: function (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+}
+
+
+// Fonction pour afficher les marqueurs sur la carte
+function displayMarkers(results) {
+    results.forEach(result => {
+        const latitude = parseFloat(result.latitude);
+        const longitude = parseFloat(result.longitude);
+
+        if (!isNaN(latitude) && !isNaN(longitude) || selectedTypes.includes(result.typesite)) {
+            
+            const customIcon = L.icon({
+                iconUrl: "static/webmapping/img/cicrlce-green.png",
+                iconSize: [15, 15],
+                iconAnchor: [10, 5],
+            });
+
+            const markerContent = `
+                <br><b>Commune : </b>${result.commune}
+                <br><b>Village : </b>${result.village}
+                <br><b>Type de site : </b>${result.typesite}
+                <br><b>Status : </b>${result.statut ? result.statut_id : 'N/A'}
+                <br> <b>Nom du site : </b>${result.nom_site}
+                <br><b>Observation géologique du site : </b>${result.obs_geo}
+                <br> <b>Étendu : </b>${result.etendu}`;
+
+            L.marker([latitude, longitude], { icon: customIcon, siteName: result.nom_site }).addTo(markersCanvas).bindPopup(markerContent);
+        } else {
+            console.warn("Invalid coordinates or type not selected for:", result);
+        }
+    });
+}
+
+
+
+
+
+function setMenuWidth(width) {
+    $("#slide_menu").css('width', `${width}px`);
+}
+
+function initializeMap() {
+    return L.map('map', { maxZoom: 200, zoomControl: false }).setView(DEFAULT_MAP_VIEW, 6);
+}
+
+function createTileLayer() {
+    return new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+}
+
+function createZoomToFitControl(map) {
+    const ctlZoomToFit = L.control();
+
+    ctlZoomToFit.onAdd = function (map) {
+        this._div = L.DomUtil.create('div', 'zoomtofit leaflet-bar');
+        this._div.title = "Centrer la carte sur Ouagadougou";
+
+        this._div.onclick = function () {
+            map.setView(DEFAULT_MAP_VIEW, 9); // Center in Ouagadougou
+        };
+
+        L.DomEvent.on(this._div, 'click', function (ev) {
+            L.DomEvent.stopPropagation(ev);
+        });
+
+        return this._div;
+    };
+
+    return ctlZoomToFit;
+}
+
+
 
 function toggleLeftPane() {
-    if (window.mobileAndTabletcheck()) {
-        menu_width = 250; //Reduce menu width for portable devices
-        $("#slide_menu").css('width', '250px');
+    const isMobile = window.mobileAndTabletcheck();
+
+    if (isMobile) {
+        setMenuWidth(MENU_WIDTH);
     }
+
     $('#slide_menu').toggleClass('slide_menu_visible');
     $('#slide_button').toggleClass('slide_button_visible');
     $('#legend').toggleClass('legend_visible');
     $('#slide_button .fas').toggleClass('fa-rotate-180');
 }
-
 
 window.mobileAndTabletcheck = function () {
     var check = false;
@@ -22,101 +236,28 @@ window.mobileAndTabletcheck = function () {
 
 
 
-// initialisation de la carte
+function handleZoomEvent(e) {
+    const currentZoom = e.target.getZoom();
+    const zoomThreshold = 12;
 
-$(document).ready(function () {
-
-    if (window.mobileAndTabletcheck()) {
-        menu_width = 250; //Reduce menu width for portable devices
-        $("#slide_menu").css('width', '250px');
+    if (currentZoom >= zoomThreshold) {
+        showSiteNames();
+    } else {
+        hideSiteNames();
     }
-    map = (new L.map('map', { maxZoom: 100, zoomControl: false }));
+}
 
 
-    map.setView([12.3569, -1.5352], 6); //Coordinates and zoom level
-    //
-    // Create base layers objects
-    var osm = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 18
-        , attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+
+function showSiteNames() {
+    markersCanvas.eachLayer(layer => {
+        layer.bindTooltip(layer.options.siteName, { permanent: true, className: 'site-label' }).openTooltip();
     });
+}
 
-    (new L.Control.Zoom({ position: 'topright' })).addTo(map);
-
-    map.addLayer(osm);
-    
-    markersCanvas = new L.MarkersCanvas();
-    markersCanvas.addTo(map);
-
-    //Scale control
-    scaleControl = L.control.scale({ metric: true, imperial: false, position: 'bottomright' });
-    scaleControl.addTo(map);
-    //Zoom to fit control
-    var ctlZoomToFit = L.control();
-
-    ctlZoomToFit.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'zoomtofit leaflet-bar'); // create a div with a class "info"
-        this._div.title = "Centrer la carte sur Ouagadougou";
-
-        this._div.onclick = function () {
-            map.setView([12.3569, -1.5352], 9); //center in Ouagadougou
-        };
-        L.DomEvent.on(this._div, 'click', function (ev) {
-            L.DomEvent.stopPropagation(ev);
-        });
-        return this._div;
-    };
-    ctlZoomToFit.addTo(map);
-
-    //Zoom box control
-
-    var ctlZoomBox = L.control.zoomBox({
-        modal: false,  // If false (default), it deactivates after each use.
-        // If true, zoomBox control stays active until you click on the control to deactivate.
-        position: "topright",
-        // className: "customClass"  // Class to use to provide icon instead of Font Awesome
-        title: "Zoom vers une région spécifique" // a custom title
+function hideSiteNames() {
+    markersCanvas.eachLayer(layer => {
+        layer.closeTooltip();
     });
-    map.addControl(ctlZoomBox);
-
-    // Make an AJAX request to fetch data
-    $.ajax({
-        url: "http://127.0.0.1:8000/api/infrastructures/",
-        type: "GET",
-        dataType: "json",
-        success: function(response) {
-            const results = response.results;
-            console.log(results);
-    
-            // Vérifiez si le tableau de résultats est défini et n'est pas vide
-            if (results && results.length > 0) {
-                results.forEach(data => {
-                    // Assurez-vous que les coordonnées sont définies et sont des nombres
-                    const latitude = parseFloat(data.latitude);
-                    const longitude = parseFloat(data.longitude);
-    
-                    // Vérifiez si les coordonnées sont valides
-                    if (!isNaN(latitude) && !isNaN(longitude)) {
-                        // Utilisez le contenu de votre marqueur ici (vous pouvez personnaliser cela)
-                        const markerContent = `<b>${data.nom_site}</b><br>${data.obs_geo}`;
-    
-                        // Ajoutez le marqueur à la carte avec le contenu spécifié
-                        L.marker([latitude, longitude]).addTo(map).bindPopup(markerContent);
-                    } else {
-                        console.warn("Coordonnées non valides pour :", data);
-                    }
-                });
-            } else {
-                console.warn("Aucune donnée à afficher.");
-            }
-        },
-        error: function(error) {
-            console.error('Erreur lors de la récupération des données:', error);
-        }
-    });
-    
-
-});
-
-
+}
 

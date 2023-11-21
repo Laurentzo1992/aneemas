@@ -9,7 +9,7 @@ class Command(BaseCommand):
     help = 'Migrate data from JSON file to Comsites model'
 
     def handle(self, *args, **options):
-        datafile = settings.BASE_DIR / 'data' / 'site.json'
+        datafile = settings.BASE_DIR / 'data' / 'site2.json'
         #json_file_path = options['json_file']
 
         with open(datafile, 'r', encoding='utf-8') as file:
@@ -79,8 +79,8 @@ class Command(BaseCommand):
             comsite.personne_resource2 = entry.get('personne_resource2')
             comsite.contact_resource2 = entry.get('contact_resource2')
             comsite.zone = entry.get('zone', 30)
-            comsite.longitude = float(entry['longitude']) if entry.get('longitude') is not None else 0.0
-            comsite.latitude = float(entry['latitude']) if entry.get('latitude') is not None else 0.0
+            comsite.longitude = float(entry['X']) if entry.get('X') is not None else 0.0
+            comsite.latitude = float(entry['Y']) if entry.get('Y') is not None else 0.0
             comsite.etendu = entry.get('etendu')
             comsite.p_chimique = bool(entry.get('p_chimique'))
             comsite.p_explosif = bool(entry.get('p_explosif'))

@@ -1,11 +1,13 @@
 from django.urls import path, include
 from rest_framework import routers
 from  . import views
-from technique.views import ComsitesViewset
+from technique.views import ComsitesViewset, StatutsitesViewset, TypesitesViewset
 
 
 router = routers.SimpleRouter()
-router.register('infrastructures', ComsitesViewset, basename='infrastructures')
+router.register('sites', ComsitesViewset, basename='sites')
+router.register('statut', StatutsitesViewset, basename='statut')
+router.register('types', TypesitesViewset, basename='types')
 
 urlpatterns = [
     # gestion site

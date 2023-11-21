@@ -1,6 +1,5 @@
 from modules_externe.imports import *
-from technique.serializers import ComsitesSerializer
-
+from technique.serializers import *
 ##################################################################################################
 # Webmapping
 ##################################################################################################
@@ -14,10 +13,57 @@ def webmapp(request):
 
 
 
-class ComsitesViewset(ModelViewSet):
+
+class ComsitesViewset(viewsets.ModelViewSet):
     serializer_class = ComsitesSerializer
+
     def get_queryset(self):
-        return Comsites.objects.all()
+        # Récupérer les types de site depuis les paramètres de requête
+        selected_types = self.request.query_params.getlist('selectedTypes[]', [])
+
+        # Filtrer les sites en fonction des types de site
+        queryset = Comsites.objects.select_related(
+            'region',
+            'province',
+            'typesite',
+            'statut',
+            # Ajouter d'autres champs liés ici si nécessaire
+        )
+
+        if selected_types:
+            queryset = queryset.filter(typesite__id__in=selected_types)
+
+        return queryset.all()
+
+
+class TypesitesViewset(viewsets.ModelViewSet):
+    serializer_class = TypesitesSerializer
+
+    def get_queryset(self):
+        return Typesites.objects.all()
+
+
+
+
+
+class TypesitesViewset(viewsets.ModelViewSet):
+    serializer_class = TypesitesSerializer
+
+    def get_queryset(self):
+        return Typesites.objects.all()
+
+    
+    
+class StatutsitesViewset(ModelViewSet):
+    serializer_class = StatutsitesSerializer
+    def get_queryset(self):
+        return Statutsites.objects.all()
+
+
+
+
+
+
 
 
 ##################################################################################################
