@@ -1,0 +1,24 @@
+{% extends "commercial/admin/mouvement_change_list.html" %}
+{% load i18n %}
+{% block subtab %}
+<ul class="changeform-tabs">
+    {% if not cl.get_filters_params.etat__exact %}
+    <li class="changeform-tabs-item selected"><a
+            class="changeform-tabs-item-link" href="../fonte/?etat__exact=out">En cours</a>
+    </li>
+    {% else %}
+    <li
+        class="changeform-tabs-item   {% if cl.get_filters_params.etat__exact == 'out' %}selected{% endif %}">
+        <a class="changeform-tabs-item-link" href="../fonte/?etat__exact=out">En cours</a>
+    </li>
+    {% endif %}
+
+    <li class="changeform-tabs-item {% if cl.get_filters_params.etat__exact == 'in' %}selected{% endif %}"><a
+            class="changeform-tabs-item-link" href="../fonte/?etat__exact=in">Fondus</a>
+    </li>
+
+
+</ul>
+{% endblock %}
+
+{% block fonte_selected %}select{% endblock %}

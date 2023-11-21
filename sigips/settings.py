@@ -20,6 +20,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    "debug_toolbar",
     "dal",
     "dal_select2",
     "jet.dashboard",
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -210,23 +212,17 @@ JET_SIDE_MENU_COMPACT = True
 JET_SIDE_MENU_ITEMS = {
         'gesco': [
             {'label': 'Gestion', 'app_label': 'commerical', 'items': [
-                {'name': 'commercial.fichecontrol'},
-                {'name': 'commercial.fichetarification'},
-                {'name': 'commercial.factures'},
-                {'name': 'commercial.client'},
-                {'name': 'commercial.mouvementlingot'},
-                {'name': 'commercial.lingot'},
-                # {'name': 'commercial.paiement'},
-                {'name': 'commercial.fichecontrol'},
-                {'name': 'commercial.fonte'},
-            ]},
+                {'name': 'commercial.fichecontrol', 'label': 'Achat'},
+                {'name': 'commercial.fichetarification', 'label': 'Ventes'},
+                {'label': 'Paiement', 'url': "/gesco/commercial/transferedfichetarification", 'label': 'Mouvement Lingots'},
+            ]}, 
             {'label': 'Parametrage', 'app_label': 'commercial', 'items': [
-                {'name': 'commercial.typelingot'},
-                {'name': 'commercial.typeclient'},
+                {'name': 'commercial.typesubstance'},
+                {'name': 'commercial.typefournisseur'},
                 {'name': 'commercial.directionlingot'},
                 {'name': 'commercial.emplacementlingot'},
                 {'name': 'commercial.stragietarification'},
-                {'name': 'commercial.modepaiement'},
+                {'name': 'commercial.modepayement'},
             ]},
         ],
         'admin': [
@@ -254,4 +250,12 @@ JET_SIDE_MENU_ITEMS = {
             ]}
         ]
     }
-    
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
+
+
+# JET_INDEX_DASHBOARD = 'commercial.dashboard_modules.CustomIndexDashboard'
+# JET_INDEX_DASHBOARD = 'jet.dashboard.dashboard.CustomIndexDashboard'

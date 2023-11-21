@@ -1,0 +1,18 @@
+{% extends "commercial/admin/achat_change_list.html" %}
+{% load i18n %}
+{% block payement_selected %}selected{% endblock %}
+{% block subtab %}
+<ul class="changeform-tabs">
+    <li class="changeform-tabs-item  {% block transferedfichetarification_selected %}{% endblock %}"><a
+            class="changeform-tabs-item-link" href="../transferedfichetarification">Paiements en attentes</a>
+    </li>
+
+    <li class="changeform-tabs-item {% if cl.get_filters_params.archived__exact == '0' %}selected{% endif %}"><a class="changeform-tabs-item-link" href="../payement/?archived__exact=0">Payements EFFECTUES</a>
+    </li>
+
+    <li class="changeform-tabs-item {% if cl.get_filters_params.archived__exact == '1' %}selected{% endif %}"><a
+            class="changeform-tabs-item-link" href="../payement/?archived__exact=1">Archives</a></li>
+
+   
+</ul>
+{% endblock %}

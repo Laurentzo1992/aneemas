@@ -131,6 +131,20 @@
             border-radius: none;
             border: none;
         }
+
+        .selected-text {
+            font-weight: bold;
+        }
+
+        .selected-cell {
+            background-color: #f9fafb;
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+        
+       
     </style>
 
 </head>
@@ -164,7 +178,7 @@
                                         <li><strong>ANEMAS</strong></li>
                                         <li>TYPE CLIENT</li>
                                         <li>ADDRESS</li>
-                                        <li>EMAIL: user@user.com</li>
+                                        <li>EMAIL: user@user.com {{ user }}</li>
                                         <li>TEL: 00 00 00 00 / 00 00 00 00 </li>
                                     </ul>
                                 </div>
@@ -176,7 +190,7 @@
             <div class="ui segment cards">
                 <div class="ui card">
                     <div class="content">
-                        <div class="header">Informations Agent:</div>
+                        <div class="header">Info. controlleur:</div>
                     </div>
                     <div class="content">
                         <ul>
@@ -190,7 +204,7 @@
                 </div>
                 <div class="ui card customercard">
                     <div class="content">
-                        <div class="header">Informations Client:</div>
+                        <div class="header">Info. fournisseur:</div>
                     </div>
                     <div class="content">
                         <ul>
@@ -209,114 +223,83 @@
                             <thead>
                                 <tr>
                                     <th>Lingots No.</th>
-                                    <th class="text-center colfix">Pesee</th>
-                                    <th class="text-center colfix">Pds brut(g)</th>
-                                    <th class="text-center colfix">Pds immerge(g)</th>
-                                    <th class="text-center colfix">Ecart</th>
+                                    <th class="text-center colfix">Pesee #</th>
+                                    <th class="text-center colfix">Pds brut<br>(g)</th>
+                                    <th class="text-center colfix">Pds immerge<br>(g)</th>
+                                    <th class="text-center colfix">Ecart<br>(g)</th>
                                     <th class="text-center colfix">Densite</th>
-                                    <th class="text-center colfix">Titre</th>
-                                    <th class="text-center colfix">Qte or fin(g)</th>
+                                    <th class="text-center colfix">Titre<br>(carats)</th>
+                                    <th class="text-center colfix">Qte or fin<br>(g)</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for lingot in lingots %}
-                                <tr class="lingot-header">
-                                    <td>
-                                        No: {{ lingot.numero }}
-                                        <br>
-                                        <small class="text-muted">Pesees: {{ lingot.pesees|length }}</small>
-                                    </td>
-                                    <td class="text-right">
-                                        <span class="mono"></span>
-                                        <br>
-                                        <small class="text-muted"></small>
-                                    </td>
-                                    <td class="text-right">
-                                        <span class="mono">{{ lingot.poids_brut }}</span>
-                                        <br>
-                                        <small class="text-muted"></small>
-                                    </td>
-                                    <td class="text-right">
-                                        <span class="mono">{{ lingot.poids_immerge }}</span>
-                                        <br>
-                                        <small class="text-muted"></small>
-                                    </td>
-                                    <td class="text-right">
-                                        <span class="mono">{{ lingot.ecart }}</span>
-                                        <br>
-                                        <small class="text-muted"></small>
-                                    </td>
-                                    <td class="text-right">
-                                        <strong class="mono">{{ lingot.densite }}</strong>
-                                        <br>
-                                        <small class="text-muted mono"></small>
-                                    </td>
-                                    <td class="text-right">
-                                        <strong class="mono">{{ lingot.titre }}</strong>
-                                        <br>
-                                        <small class="text-muted mono"></small>
-                                    </td>
-                                    <td class="text-right">
-                                        <strong class="mono">{{ lingot.or_fin }}</strong>
-                                        <br>
-                                        <small class="text-muted mono"></small>
-                                    </td>
-                                </tr>
+                            {% for lingot in lingots %}
                                 {% for pesee in lingot.pesees %}
                                 <tr>
                                     {% if forloop.first %}
                                     <td rowspan="{{ lingot.pesees|length }}">
-                                        <span class="mono">Pesee #1 choisi</span>
+                                        <strong>No: {{ lingot.numero }}</strong>
+                                        <br>
+                                        <small class="text-muted">Pesees: {{ lingot.pesees|length }}</small><br>
+                                        {% for p in lingot.pesees %}
+                                            {% if p.actif %}
+                                                <span class="mono">Pesee choisi: #{{ forloop.counter }}</span>
+                                                
+                                            {% endif %}
+                                        {% endfor %}
                                         <br>
                                         <small class="text-muted"></small>
                                     </td>
                                     {% endif %}
-                                    <td class="text-right" style="border-left: 1px solid rgba(34,36,38,.1);">
+                                    <td class="text-right {% if pesee.actif %}selected-cell{% endif %}" style="border-left: 1px solid rgba(34,36,38,.1);">
                                         <span class="mono"></span>
                                         <br>
-                                        <small class="text-muted">Pesee #{{ forloop.counter }}</small>
+                                        <small class="text-muted  {% if pesee.actif %}selected-text{% endif %}">Pesee #{{ forloop.counter }}</small>
                                     </td>
-                                    <td class="text-right">
-                                        <span class="mono">{{ pesee.poids_brut }}</span>
+                                    <td class="text-right {% if pesee.actif %}selected-cell{% endif %}">
+                                        <span class="mono {% if pesee.actif %}selected-text{% endif %}">{{ pesee.poids_brut }}</span>
                                         <br>
                                         <small class="text-muted"></small>
                                     </td>
-                                    <td class="text-right">
-                                        <span class="mono">{{ pesee.poids_immerge }}</span>
+                                    <td class="text-right {% if pesee.actif %}selected-cell{% endif %}">
+                                        <span class="mono {% if pesee.actif %}selected-text{% endif %}">{{ pesee.poids_immerge }}</span>
                                         <br>
                                         <small class="text-muted"></small>
                                     </td>
-                                    <td class="text-right">
-                                        <span class="mono">{{ pesee.ecart }}</span>
+                                    <td class="text-right {% if pesee.actif %}selected-cell{% endif %}">
+                                        <span class="mono {% if pesee.actif %}selected-text{% endif %}">{{ pesee.ecart }}</span>
                                         <br>
                                         <small class="text-muted"></small>
                                     </td>
-                                    <td class="text-right">
-                                        <span class="mono">{{ pesee.densite }}</span>
+                                    <td class="text-right {% if pesee.actif %}selected-cell{% endif %}">
+                                        <span class="mono {% if pesee.actif %}selected-text{% endif %}">{{ pesee.densite|floatformat:10 }}</span>
                                         <br>
                                         <small class="text-muted"></small>
                                     </td>
-                                    <td class="text-right">
-                                        <strong class="mono">{{ pesee.titre }}</strong>
+                                    <td class="text-right {% if pesee.actif %}selected-cell{% endif %}">
+                                        <strong class="mono {% if pesee.actif %}selected-text{% endif %}">{{ pesee.titre }}</strong>
                                         <br>
                                         <small class="text-muted mono"></small>
                                     </td>
-                                    <td class="text-right">
-                                        <strong class="mono">{{ pesee.or_fin }}</strong>
+                                    <td class="text-right {% if pesee.actif %}selected-cell{% endif %}">
+                                        <strong class="mono {% if pesee.actif %}selected-text{% endif %}">{{ pesee.or_fin }}</strong>
                                         <br>
                                         <small class="text-muted mono"></small>
                                     </td>
+
                                 </tr>
                                 {% endfor %}
-                                {% endfor %}
+                            {% endfor %}
+                            
 
                             </tbody>
                             <tfoot class="full-width">
+                            
                                 <tr>
                                     <th><strong class="mono"> Total: </strong></th>
                                     <th colspan="1"><strong></strong></th>
-                                    <th colspan="1">-</th>
-                                    <th colspan="1">-</th>
+                                    <th colspan="1"><strong>{{ total.poids_brut }}</strong></th>
+                                    <th colspan="1"><strong>{{ total.poids_immerge }}</strong></th>
                                     <th colspan="1">-</th>
                                     <th colspan="1">-</th>
                                     <th colspan="1">-</th>
@@ -327,8 +310,14 @@
                         <div class="signature-section">
                             <div class="ui card signature-item">
                                 <div class="content center aligned text segment">
-                                    <small class="ui sub header"> Date d'impression: </small>
-                                    <small class="ui sub header"> Fiche Tarification No: </small>
+                                    <small class="ui sub header">
+                                        <div class="header selected-text">Fiche control no: </div> 
+                                        {{ numero }}
+                                    </small>
+                                    <small class="ui sub header">
+                                        <div class="header selected-text">Imprime le: </div>
+                                        {% now "d/m/Y H:i:s" %}
+                                    </small>
                                 </div>
                             </div>
                             <div class="ui card signature-item">
