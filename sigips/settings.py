@@ -1,12 +1,18 @@
 
 from pathlib import Path
 import os
+
+
+
+if os.name == 'nt':
+    VENV_BASE = os.environ['VIRTUAL_ENV']
+    os.environ['PATH'] = os.path.join(VENV_BASE, 'Lib\\site-packages\\osgeo') + ';' + os.environ['PATH']
+    os.environ['PROJ_LIB'] = os.path.join(VENV_BASE, 'Lib\\site-packages\\osgeo\\data\\proj') + ';' + os.environ['PATH']
+    
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+#GEOIP_PATH = os.path.join(BASE_DIR, 'geoip/')
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-jm8&!s!48@8kw@hhdkj2avw)_9e-+pl_qe)^3v#$z)3*e(czzb"
@@ -31,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.gis",
     "crispy_forms",
     "crispy_bootstrap5",
     "commercial",
@@ -40,6 +47,8 @@ INSTALLED_APPS = [
     "authentication",
     "rest_framework",
     "corsheaders",
+    "django_pandas",
+    "leaflet",
 ]
 
 MIDDLEWARE = [
@@ -56,6 +65,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "sigips.urls"
+
+
+# settings.py
+
+
+
 
 TEMPLATES = [
     {
@@ -118,7 +133,7 @@ DATABASES = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'sonasp',
         'USER': 'postgres',
         'PASSWORD': 'admin',
@@ -175,6 +190,26 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "sigips/static/media")
 
+
+
+LEAFLET_CONFIG = {
+
+    #you can use your own
+
+    "DEFAULT_CENTER" : (40.5, -0.09),
+
+    "DEFAULT_ZOOM" : 1,
+
+    "MAX_ZOOM" : 20,
+
+    "MIN_ZOOM" : 3,
+
+    "SCALE" : 'both',
+
+    "ATTRIBUTION_PREFIX" : "My Custome Leaflet map"
+
+}
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
@@ -187,6 +222,10 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 AUTH_USER_MODEL = 'authentication.User'
+
+LOGIN_URL = 'login'
+
+LOGIN_REDIRECT_URL = 'home'
 
 # Twillo credential
 TWILIO_ACCOUNT_SID = 'AC15fbce0675e82420dce584d408ca97ce'
@@ -201,7 +240,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 5
+    'PAGE_SIZE': 10000000000000
 }
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -225,7 +264,7 @@ JET_SIDE_MENU_ITEMS = {
                 {'name': 'commercial.modepayement'},
             ]},
         ],
-        'admin': [
+        'admin1': [
             {'label': 'Paramettre', 'app_label': 'paramettre', 'items': [
                 {'name': 'paramettre.burencadrements'},
                 {'name': 'paramettre.categories'},

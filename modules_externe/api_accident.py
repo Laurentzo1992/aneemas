@@ -5,7 +5,7 @@ from modules_externe.api_url import HEADER_TOKEN
 
 
 
-def get_data_by_api_accident(url):
+def get_data_by_api_accident(url):  # sourcery skip: extract-method
     results = []
     kobo = requests.get(url, headers=HEADER_TOKEN)
     if kobo.status_code == 200:
@@ -17,11 +17,9 @@ def get_data_by_api_accident(url):
                 result['identifiant'] = result.pop('_id')
                 result['submitted_by'] = result.pop('_submitted_by')
                 result['nom_localite'] = result.pop('labeled_select_group1/nom_localite')
-                result['nom_site'] = result.pop('labeled_select_group1/nom_site')
                 result['type_rapport'] = result.pop('labeled_select_group1/type_rapport')
                 result['question5'] = result.pop('labeled_select_group1/question5')
                 result['question6'] = result.pop('labeled_select_group1/question6')
-                result['type'] = result.pop('labeled_select_group1/type')
                 result['question'] = result.pop('labeled_select_group1/question')
                 result['question14'] = result.pop('labeled_select_group1/question14')
                 result['question7'] = result.pop('labeled_select_group1/question7')

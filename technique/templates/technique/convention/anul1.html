@@ -1,0 +1,25 @@
+
+  <!-- Modal -->
+  <div class="modal fade" id="annulModal{{result.id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="annulModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="annulModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Fermer</button>
+          <a href="{% url 'instruire_anull'  result.id %}" type="button" class="btn btn-success">Anuler l'instruction</a>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+ 
+       
+ 
+ 
+ 

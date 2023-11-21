@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Ajout analyse {% endblock %}
+
+
+
+{% block main %}
+
+      <div class="container-fluid">
+            <div class="row">
+                  <div class="col-6">
+                        <table class="table table-striped shadow-lg p-3 mt-3">
+                              <thead>
+                              <tr class="bg-success">
+                              <th scope="col">Id</th>
+                              <th scope="col">Cond</th>
+                              <th scope="col">ph</th>
+                              <th scope="col">Tds</th>
+                              <th scope="col">Buit</th>
+                              <th scope="col">action</th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              {% for result in page_obj %}
+                              <tr>
+                              <td>{{ result.id }}</td>
+                              <td>{{result.conductivite}}</td>
+                              <td>{{result.ph}}</td>
+                              <td>{{result.tds}}</td>
+                              <td>{{result.bruit}}</td>
+                              <td>
+                                    <a data-bs-toggle="modal" data-bs-target="#editModal{{result.id}}" title="supprimer">
+                                          <i class="fas fa-pen text-primary"></i> 
+                                    </a>
+
+                                    <a data-bs-toggle="modal" data-bs-target="#analyseModal{{result.id}}" title="supprimer">
+                                          <i class="fas fa-gear text-primary"></i> 
+                                    </a>
+
+                                    
+                              </td>
+                              </tr>
+
+                              </tbody>
+                        </table>
+                  </div>
+                  <div class="col-6">
+                        <form method="post" class="card p-3 mt-5 border border-primary" enctype="multipart/form-data">
+                  
+                              {% csrf_token %}
+
+                              {{ form|crispy }}
+
+
+                              <div class="mt-4" style="width: 100p%;">
+                                    <input type="submit" name="submit" value="Ajouter" class="btn btn-success" id="submit-id-submit" />
+                                    <a style= "font-size: 15px;" href="{% url 'add_analyse' %}" type="button" class="btn btn-outline-danger mb-3 ms-2" style="wdith: 50px;" title="Close">
+                                          <i class="fas fa-times"></i>
+                                    </a>
+                              </div>
+                        </form>
+                  </div>
+            </div>
+      </div>
+  
+
+{% endblock main %}
+
+

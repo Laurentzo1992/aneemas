@@ -1,0 +1,2810 @@
+[
+{
+    "id": "1",
+    "nomcom": "NAMISSIGUIMA",
+    "province_id": "15",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "2",
+    "nomcom": "SANABA",
+    "province_id": "2",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "3",
+    "nomcom": "THIOU",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "4",
+    "nomcom": "SOURGOU",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "5",
+    "nomcom": "SOA",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "6",
+    "nomcom": "SIGLE",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "7",
+    "nomcom": "SABOU",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "8",
+    "nomcom": "ROLLO",
+    "province_id": "13",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "9",
+    "nomcom": "POA",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "10",
+    "nomcom": "PÂ",
+    "province_id": "1",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "11",
+    "nomcom": "POURA",
+    "province_id": "1",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "12",
+    "nomcom": "SIBY",
+    "province_id": "1",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "13",
+    "nomcom": "YAHO",
+    "province_id": "1",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "14",
+    "nomcom": "ROUKO",
+    "province_id": "13",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "15",
+    "nomcom": "BALAVE",
+    "province_id": "2",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "16",
+    "nomcom": "KOUKA",
+    "province_id": "2",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "17",
+    "nomcom": "BOROMO",
+    "province_id": "1",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "18",
+    "nomcom": "FARA",
+    "province_id": "1",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "19",
+    "nomcom": "OURI",
+    "province_id": "1",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "20",
+    "nomcom": "NOUNA",
+    "province_id": "3",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "21",
+    "nomcom": "DEDOUGOU",
+    "province_id": "4",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "22",
+    "nomcom": "KONGOUSSI",
+    "province_id": "13",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "23",
+    "nomcom": "SAMI",
+    "province_id": "2",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "24",
+    "nomcom": "PELLA",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "25",
+    "nomcom": "NANORO",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "26",
+    "nomcom": "TOMA",
+    "province_id": "5",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "27",
+    "nomcom": "KOKOLOGO",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "28",
+    "nomcom": "KINDI",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "29",
+    "nomcom": "SONO",
+    "province_id": "3",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "30",
+    "nomcom": "TOUGAN",
+    "province_id": "6",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "31",
+    "nomcom": "KONA",
+    "province_id": "4",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "32",
+    "nomcom": "BONDOKUI",
+    "province_id": "4",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "33",
+    "nomcom": "IMASGHO",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "34",
+    "nomcom": "KASSOUM",
+    "province_id": "6",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "35",
+    "nomcom": "BINGO",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "36",
+    "nomcom": "ZIGA",
+    "province_id": "15",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "37",
+    "nomcom": "DAKORO",
+    "province_id": "8",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "38",
+    "nomcom": "OUELENI",
+    "province_id": "8",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "39",
+    "nomcom": "PISSILA",
+    "province_id": "15",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "40",
+    "nomcom": "GUIBARE",
+    "province_id": "13",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "41",
+    "nomcom": "PENSA",
+    "province_id": "15",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "42",
+    "nomcom": "NAMISSIGUIMA",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "43",
+    "nomcom": "KORSIMORO",
+    "province_id": "15",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "44",
+    "nomcom": "MANE",
+    "province_id": "15",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "45",
+    "nomcom": "BOUSSOUMA",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "46",
+    "nomcom": "BARSALOGHO",
+    "province_id": "15",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "47",
+    "nomcom": "YALGO",
+    "province_id": "14",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "48",
+    "nomcom": "TOUGOURI",
+    "province_id": "14",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "49",
+    "nomcom": "NAGBINGOU",
+    "province_id": "14",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "50",
+    "nomcom": "BOUROUM",
+    "province_id": "14",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "51",
+    "nomcom": "DARGO",
+    "province_id": "14",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "52",
+    "nomcom": "SABSE",
+    "province_id": "13",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "53",
+    "nomcom": "TIKARE",
+    "province_id": "13",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "54",
+    "nomcom": "BOALA",
+    "province_id": "14",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "55",
+    "nomcom": "ZIMTANGA",
+    "province_id": "13",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "56",
+    "nomcom": "BOURZANGA",
+    "province_id": "13",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "57",
+    "nomcom": "BANFORA",
+    "province_id": "7",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "58",
+    "nomcom": "SINDOU",
+    "province_id": "8",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "59",
+    "nomcom": "TENKODOGO",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "60",
+    "nomcom": "OUARGAYE",
+    "province_id": "11",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "61",
+    "nomcom": "KOUPELA",
+    "province_id": "12",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "62",
+    "nomcom": "KAYA",
+    "province_id": "15",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "63",
+    "nomcom": "KOUDOUGOU",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "64",
+    "nomcom": "YARGO",
+    "province_id": "12",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "65",
+    "nomcom": "POUYTENGA",
+    "province_id": "12",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "66",
+    "nomcom": "TENSOBENTENGA",
+    "province_id": "12",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "67",
+    "nomcom": "KANDO",
+    "province_id": "12",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "68",
+    "nomcom": "DIALGAYE",
+    "province_id": "12",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "69",
+    "nomcom": "BASKOURE",
+    "province_id": "12",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "70",
+    "nomcom": "ANDEMTENGA",
+    "province_id": "12",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "71",
+    "nomcom": "YONDE",
+    "province_id": "11",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "72",
+    "nomcom": "YARGATENGA",
+    "province_id": "11",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "73",
+    "nomcom": "ZOAGA",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "74",
+    "nomcom": "ZONSE",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "75",
+    "nomcom": "DOURTENGA",
+    "province_id": "11",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "76",
+    "nomcom": "LALGAYE",
+    "province_id": "11",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "77",
+    "nomcom": "OUO",
+    "province_id": "7",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "78",
+    "nomcom": "TANGUEN-DASSOURI",
+    "province_id": "9",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "79",
+    "nomcom": "ZABRE",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "80",
+    "nomcom": "BAGRE",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "81",
+    "nomcom": "PABRE",
+    "province_id": "9",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "82",
+    "nomcom": "BEGUEDO",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "83",
+    "nomcom": "BISSIGA",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "84",
+    "nomcom": "BITTOU",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-06 12:29:50"
+},
+{
+    "id": "85",
+    "nomcom": "BOUSSOUMA",
+    "province_id": "15",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "86",
+    "nomcom": "GARANGO",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "87",
+    "nomcom": "KOMTOÈGA",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "88",
+    "nomcom": "SAABA",
+    "province_id": "9",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "89",
+    "nomcom": "KOUBRI",
+    "province_id": "9",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "90",
+    "nomcom": "KOMSILGA",
+    "province_id": "9",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "91",
+    "nomcom": "KOMKI-IPALA",
+    "province_id": "9",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "92",
+    "nomcom": "LOUMANA",
+    "province_id": "8",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "93",
+    "nomcom": "KANKALABA",
+    "province_id": "8",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "94",
+    "nomcom": "DOUNA",
+    "province_id": "8",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "95",
+    "nomcom": "TIEFORA",
+    "province_id": "7",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "96",
+    "nomcom": "SOUBAKANIEDOUGOU",
+    "province_id": "7",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "97",
+    "nomcom": "NIANGOLOKO",
+    "province_id": "7",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "98",
+    "nomcom": "MOUSSODOUGOU",
+    "province_id": "7",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "99",
+    "nomcom": "BEREGADOUGOU",
+    "province_id": "7",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "100",
+    "nomcom": "MANGODARA",
+    "province_id": "7",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "101",
+    "nomcom": "TOENI",
+    "province_id": "6",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "102",
+    "nomcom": "LANKOUE",
+    "province_id": "6",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "103",
+    "nomcom": "LANFIÈRA",
+    "province_id": "6",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "104",
+    "nomcom": "KOUGNY",
+    "province_id": "5",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "105",
+    "nomcom": "DIIN",
+    "province_id": "6",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "106",
+    "nomcom": "YABA",
+    "province_id": "5",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "107",
+    "nomcom": "YE",
+    "province_id": "5",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "108",
+    "nomcom": "GOSSINA",
+    "province_id": "5",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "109",
+    "nomcom": "GASSAN",
+    "province_id": "5",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "110",
+    "nomcom": "MADOUBA",
+    "province_id": "3",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "111",
+    "nomcom": "SAFANE",
+    "province_id": "4",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "112",
+    "nomcom": "OUARKOYE",
+    "province_id": "4",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "113",
+    "nomcom": "DOUMBALA",
+    "province_id": "3",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "114",
+    "nomcom": "DOKUI",
+    "province_id": "3",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "115",
+    "nomcom": "DJIBASSO",
+    "province_id": "3",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "116",
+    "nomcom": "BOURASSO",
+    "province_id": "3",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "117",
+    "nomcom": "BOMBOROKUI",
+    "province_id": "3",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "118",
+    "nomcom": "BARANI",
+    "province_id": "3",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "119",
+    "nomcom": "OULA",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "120",
+    "nomcom": "SAPOUY",
+    "province_id": "19",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "121",
+    "nomcom": "ZAWARA",
+    "province_id": "17",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "122",
+    "nomcom": "KOUMBRI",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "123",
+    "nomcom": "TO",
+    "province_id": "18",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "124",
+    "nomcom": "SILLY",
+    "province_id": "18",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "125",
+    "nomcom": "KOSSOUKA",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "126",
+    "nomcom": "KALSAKA",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "127",
+    "nomcom": "KAÏN",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "128",
+    "nomcom": "GOGO",
+    "province_id": "22",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "129",
+    "nomcom": "GOMBOUSSOUGOU",
+    "province_id": "22",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "130",
+    "nomcom": "BARGA",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "131",
+    "nomcom": "SAMBA",
+    "province_id": "32",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "132",
+    "nomcom": "PILIMPIKOU",
+    "province_id": "32",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "133",
+    "nomcom": "LA-TODEN",
+    "province_id": "32",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "134",
+    "nomcom": "THION",
+    "province_id": "23",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "135",
+    "nomcom": "PIELA",
+    "province_id": "23",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "136",
+    "nomcom": "GOMPONSOM",
+    "province_id": "32",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "137",
+    "nomcom": "DIABO",
+    "province_id": "24",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "138",
+    "nomcom": "BOKEN",
+    "province_id": "32",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "139",
+    "nomcom": "BAGARE",
+    "province_id": "32",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "140",
+    "nomcom": "ARBOLLE",
+    "province_id": "32",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "141",
+    "nomcom": "KOUMBIA",
+    "province_id": "30",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "142",
+    "nomcom": "OUINDIGUI",
+    "province_id": "31",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "143",
+    "nomcom": "ORODARA",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "144",
+    "nomcom": "SATIRI",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "145",
+    "nomcom": "TOUSSIANA",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "146",
+    "nomcom": "MORLABA",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "147",
+    "nomcom": "SOLLE",
+    "province_id": "31",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "148",
+    "nomcom": "KOTI",
+    "province_id": "30",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "149",
+    "nomcom": "FOUNZAN",
+    "province_id": "30",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "150",
+    "nomcom": "YAKO",
+    "province_id": "32",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "151",
+    "nomcom": "BONI",
+    "province_id": "30",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "152",
+    "nomcom": "BEREBA",
+    "province_id": "30",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "153",
+    "nomcom": "SINDO",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "154",
+    "nomcom": "NDOROLA",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "155",
+    "nomcom": "SAMOGOYIRI",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "156",
+    "nomcom": "SAMOGOGOUAN",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "157",
+    "nomcom": "KOUROUMA",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "158",
+    "nomcom": "KAYAN",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "159",
+    "nomcom": "KOLOKO",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "160",
+    "nomcom": "KOURINION",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "161",
+    "nomcom": "DANDE",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "162",
+    "nomcom": "DJIGOUÈRA",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "163",
+    "nomcom": "BANZON",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "164",
+    "nomcom": "PENI",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "165",
+    "nomcom": "PADEMA",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "166",
+    "nomcom": "BOTOU",
+    "province_id": "27",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "167",
+    "nomcom": "KOUNDOUGOU",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "168",
+    "nomcom": "KARANGASSO-VIGUE",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "169",
+    "nomcom": "FO",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "170",
+    "nomcom": "KARANGASSO-SAMBLA",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "171",
+    "nomcom": "BAMA",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "172",
+    "nomcom": "FOUTOURI",
+    "province_id": "25",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "173",
+    "nomcom": "TAMBAGA",
+    "province_id": "27",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "174",
+    "nomcom": "PARTIAGA",
+    "province_id": "27",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "175",
+    "nomcom": "NAMOUNO",
+    "province_id": "27",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "176",
+    "nomcom": "KANTCHARI",
+    "province_id": "27",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "177",
+    "nomcom": "LOGBOU",
+    "province_id": "27",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "178",
+    "nomcom": "KOMPIENGA",
+    "province_id": "26",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "179",
+    "nomcom": "MADJOARI",
+    "province_id": "26",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "180",
+    "nomcom": "BARTIEBOUGOU",
+    "province_id": "25",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "181",
+    "nomcom": "KOMBISSIRI",
+    "province_id": "20",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "182",
+    "nomcom": "PO",
+    "province_id": "21",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "183",
+    "nomcom": "MANGA",
+    "province_id": "22",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "184",
+    "nomcom": "GAYERI",
+    "province_id": "25",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "185",
+    "nomcom": "PAMA",
+    "province_id": "26",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "186",
+    "nomcom": "DIAPAGA",
+    "province_id": "27",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "187",
+    "nomcom": "BOBO-DIOULASSO",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "188",
+    "nomcom": "TITAO",
+    "province_id": "31",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "189",
+    "nomcom": "OUAHIGOUYA",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "190",
+    "nomcom": "GOURSI",
+    "province_id": "34",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "191",
+    "nomcom": "ZORGHO",
+    "province_id": "35",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "192",
+    "nomcom": "ZINIARE",
+    "province_id": "37",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "193",
+    "nomcom": "DEOU",
+    "province_id": "38",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "194",
+    "nomcom": "GOROM-GOROM",
+    "province_id": "38",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "195",
+    "nomcom": "TIN-AKOFF",
+    "province_id": "38",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "196",
+    "nomcom": "MARKOYE",
+    "province_id": "38",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "197",
+    "nomcom": "ZITENGA",
+    "province_id": "37",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "198",
+    "nomcom": "OURGOU-MANEGA",
+    "province_id": "37",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "199",
+    "nomcom": "NAGREONGO",
+    "province_id": "37",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "200",
+    "nomcom": "DAPEOLGO",
+    "province_id": "37",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "201",
+    "nomcom": "ABSOUYA",
+    "province_id": "37",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-06 12:26:29"
+},
+{
+    "id": "202",
+    "nomcom": "TOÈGUEN",
+    "province_id": "36",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "203",
+    "nomcom": "SOURGOUBILA",
+    "province_id": "36",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "204",
+    "nomcom": "LAYE",
+    "province_id": "36",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "205",
+    "nomcom": "ZOUNGOU",
+    "province_id": "35",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "206",
+    "nomcom": "ZAM",
+    "province_id": "35",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "207",
+    "nomcom": "SAOLGO",
+    "province_id": "35",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "208",
+    "nomcom": "MEGUE",
+    "province_id": "35",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "209",
+    "nomcom": "KOGHO",
+    "province_id": "35",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "210",
+    "nomcom": "BOUDRI",
+    "province_id": "35",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "211",
+    "nomcom": "TOUGO",
+    "province_id": "34",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "212",
+    "nomcom": "BOUSSOU",
+    "province_id": "34",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "213",
+    "nomcom": "BASSI",
+    "province_id": "34",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "214",
+    "nomcom": "ZOGORE",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "215",
+    "nomcom": "THIOU",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "216",
+    "nomcom": "SENGUÈNÈGA",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "217",
+    "nomcom": "RAMBO",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "218",
+    "nomcom": "YAMBA",
+    "province_id": "24",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "219",
+    "nomcom": "MATIAKOALI",
+    "province_id": "24",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "220",
+    "nomcom": "DIAPANGOU",
+    "province_id": "24",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "221",
+    "nomcom": "MANI",
+    "province_id": "23",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "222",
+    "nomcom": "LIPTOUGOU",
+    "province_id": "23",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "223",
+    "nomcom": "NOBERE",
+    "province_id": "22",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "224",
+    "nomcom": "BERE",
+    "province_id": "22",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "225",
+    "nomcom": "ZIOU",
+    "province_id": "21",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "226",
+    "nomcom": "TIEBELE",
+    "province_id": "21",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "227",
+    "nomcom": "ZENKO",
+    "province_id": "21",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "228",
+    "nomcom": "SAPONE",
+    "province_id": "20",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "229",
+    "nomcom": "TOECE",
+    "province_id": "20",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "230",
+    "nomcom": "IPELSE",
+    "province_id": "20",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "231",
+    "nomcom": "DOULOUGOU",
+    "province_id": "20",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "232",
+    "nomcom": "GAONGO",
+    "province_id": "20",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "233",
+    "nomcom": "GAO",
+    "province_id": "19",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "234",
+    "nomcom": "DALO",
+    "province_id": "19",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "235",
+    "nomcom": "BOUGNOUNOU",
+    "province_id": "19",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "236",
+    "nomcom": "NEBIELIANAYOU",
+    "province_id": "18",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "237",
+    "nomcom": "NIABOURI",
+    "province_id": "18",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "238",
+    "nomcom": "TENADO",
+    "province_id": "17",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "239",
+    "nomcom": "BIEHA",
+    "province_id": "18",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "240",
+    "nomcom": "BOURA",
+    "province_id": "18",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "241",
+    "nomcom": "POUNI",
+    "province_id": "17",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "242",
+    "nomcom": "KYON",
+    "province_id": "17",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "243",
+    "nomcom": "KORDIE",
+    "province_id": "17",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "244",
+    "nomcom": "GODYR",
+    "province_id": "17",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "245",
+    "nomcom": "KIRSI",
+    "province_id": "32",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "246",
+    "nomcom": "BAHN",
+    "province_id": "31",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "247",
+    "nomcom": "BEKUI",
+    "province_id": "30",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "248",
+    "nomcom": "KANGALA",
+    "province_id": "29",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "249",
+    "nomcom": "LÈNA",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "250",
+    "nomcom": "FARAMANA",
+    "province_id": "28",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "251",
+    "nomcom": "TANSARGA",
+    "province_id": "27",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "252",
+    "nomcom": "TIBGA",
+    "province_id": "24",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "253",
+    "nomcom": "KOALA",
+    "province_id": "23",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "254",
+    "nomcom": "GUIBA",
+    "province_id": "22",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "255",
+    "nomcom": "BINDE",
+    "province_id": "22",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "256",
+    "nomcom": "GUIARO",
+    "province_id": "21",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "257",
+    "nomcom": "PIBAORE",
+    "province_id": "15",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "258",
+    "nomcom": "BAKATA",
+    "province_id": "19",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "259",
+    "nomcom": "KASSOU",
+    "province_id": "19",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "260",
+    "nomcom": "ZAMO",
+    "province_id": "17",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "261",
+    "nomcom": "ZEGUEDEGUEN",
+    "province_id": "14",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "262",
+    "nomcom": "RAMONGO",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "263",
+    "nomcom": "DASSA",
+    "province_id": "17",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "264",
+    "nomcom": "DIDYR",
+    "province_id": "17",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "265",
+    "nomcom": "NANDIALA",
+    "province_id": "16",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2018-05-15 13:04:13"
+},
+{
+    "id": "266",
+    "nomcom": "DABLO",
+    "province_id": "15",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "267",
+    "nomcom": "NASSERE",
+    "province_id": "13",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "268",
+    "nomcom": "GOUNGUEN",
+    "province_id": "12",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "269",
+    "nomcom": "SOUDOUGUI",
+    "province_id": "11",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "270",
+    "nomcom": "SANGHA",
+    "province_id": "11",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "271",
+    "nomcom": "KOMIN-YANGA",
+    "province_id": "11",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "272",
+    "nomcom": "NIAOGHO",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "273",
+    "nomcom": "BANE",
+    "province_id": "10",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "274",
+    "nomcom": "WOLONKOTO",
+    "province_id": "8",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "275",
+    "nomcom": "SIDERADOUGOU",
+    "province_id": "7",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "276",
+    "nomcom": "NIANKORODOUGOU",
+    "province_id": "8",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "277",
+    "nomcom": "GOMBORO",
+    "province_id": "6",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "278",
+    "nomcom": "KIEMBARA",
+    "province_id": "6",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "279",
+    "nomcom": "DOUROULA",
+    "province_id": "4",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "280",
+    "nomcom": "TCHERIBA",
+    "province_id": "4",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "281",
+    "nomcom": "TANSILA",
+    "province_id": "2",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "282",
+    "nomcom": "KOMBORI",
+    "province_id": "3",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "283",
+    "nomcom": "POMPOÏ",
+    "province_id": "1",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "285",
+    "nomcom": "BAGASSI",
+    "province_id": "1",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "286",
+    "nomcom": "BANA",
+    "province_id": "1",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "287",
+    "nomcom": "SOLENZO",
+    "province_id": "2",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "288",
+    "nomcom": "OUAGADOUGOU",
+    "province_id": "9",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "289",
+    "nomcom": "BOULSA",
+    "province_id": "14",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "290",
+    "nomcom": "REO",
+    "province_id": "17",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "291",
+    "nomcom": "LEO",
+    "province_id": "18",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "292",
+    "nomcom": "BILANGA",
+    "province_id": "23",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "293",
+    "nomcom": "BOGANDE",
+    "province_id": "23",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "294",
+    "nomcom": "FADA-NGOURMA",
+    "province_id": "24",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "295",
+    "nomcom": "HOUNDE",
+    "province_id": "30",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "296",
+    "nomcom": "BOUSSE",
+    "province_id": "36",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "297",
+    "nomcom": "DORI",
+    "province_id": "39",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "298",
+    "nomcom": "DJIBO",
+    "province_id": "40",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "299",
+    "nomcom": "SEBBA",
+    "province_id": "41",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "300",
+    "nomcom": "DIEBOUGOU",
+    "province_id": "42",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "301",
+    "nomcom": "DANO",
+    "province_id": "43",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "302",
+    "nomcom": "BATIE",
+    "province_id": "44",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "303",
+    "nomcom": "GAOUA",
+    "province_id": "45",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "304",
+    "nomcom": "PERIGBAN",
+    "province_id": "45",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "305",
+    "nomcom": "NAKO",
+    "province_id": "45",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "306",
+    "nomcom": "MALBA",
+    "province_id": "45",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "307",
+    "nomcom": "LOROPENI",
+    "province_id": "45",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "308",
+    "nomcom": "KAMPTI",
+    "province_id": "45",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "309",
+    "nomcom": "GBOMBLORA",
+    "province_id": "45",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "310",
+    "nomcom": "DJIGOUÈ",
+    "province_id": "45",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "311",
+    "nomcom": "BOUSSERA",
+    "province_id": "45",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "312",
+    "nomcom": "BOUROUM-BOUROUM",
+    "province_id": "45",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "313",
+    "nomcom": "MIDEBDO",
+    "province_id": "44",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "314",
+    "nomcom": "LEGMOIN",
+    "province_id": "44",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "315",
+    "nomcom": "KPUERE",
+    "province_id": "44",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "316",
+    "nomcom": "BOUSSOU-KOULA",
+    "province_id": "44",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "317",
+    "nomcom": "ZAMBO",
+    "province_id": "43",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "318",
+    "nomcom": "OUESSA",
+    "province_id": "43",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "319",
+    "nomcom": "ORONKUA",
+    "province_id": "43",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "320",
+    "nomcom": "NIEGO",
+    "province_id": "43",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "321",
+    "nomcom": "KOPER",
+    "province_id": "43",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "322",
+    "nomcom": "GUEGUERE",
+    "province_id": "43",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "323",
+    "nomcom": "DISSIHN",
+    "province_id": "43",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "324",
+    "nomcom": "TIANKOURA",
+    "province_id": "42",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "325",
+    "nomcom": "IOLONIORO",
+    "province_id": "42",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "326",
+    "nomcom": "DOLO",
+    "province_id": "42",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "327",
+    "nomcom": "GBONDJIGUI",
+    "province_id": "42",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "328",
+    "nomcom": "TITABE",
+    "province_id": "41",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "329",
+    "nomcom": "TANKOUGOUNADIE",
+    "province_id": "41",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "330",
+    "nomcom": "SOLHAN",
+    "province_id": "41",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "331",
+    "nomcom": "MANSILA",
+    "province_id": "41",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "332",
+    "nomcom": "BOUNDORE",
+    "province_id": "41",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "333",
+    "nomcom": "TONGOMAYEL",
+    "province_id": "40",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "334",
+    "nomcom": "POBE-MENGAO",
+    "province_id": "40",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "335",
+    "nomcom": "NASSOUMBOU",
+    "province_id": "40",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "336",
+    "nomcom": "KOUTOUGOU",
+    "province_id": "40",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "337",
+    "nomcom": "KELBO",
+    "province_id": "40",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "338",
+    "nomcom": "DIGUEL",
+    "province_id": "40",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "339",
+    "nomcom": "BARABOULE",
+    "province_id": "40",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "340",
+    "nomcom": "ARBINDA",
+    "province_id": "40",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2018-05-13 14:16:55"
+},
+{
+    "id": "341",
+    "nomcom": "SEYTENGA",
+    "province_id": "39",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "342",
+    "nomcom": "SAMPELGA",
+    "province_id": "39",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "343",
+    "nomcom": "GORGADJI",
+    "province_id": "39",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "344",
+    "nomcom": "FALAGOUNTOU",
+    "province_id": "39",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "345",
+    "nomcom": "BANI",
+    "province_id": "39",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "346",
+    "nomcom": "OURSI",
+    "province_id": "38",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "347",
+    "nomcom": "LOUMBILA",
+    "province_id": "37",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "348",
+    "nomcom": "NIOU",
+    "province_id": "36",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "349",
+    "nomcom": "MOGTEDO",
+    "province_id": "35",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "350",
+    "nomcom": "LÈBA",
+    "province_id": "34",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "351",
+    "nomcom": "TANGAYE",
+    "province_id": "33",
+    "id_2": null,
+    "created": "2019-05-09 07:12:50",
+    "modified": "2019-05-09 07:12:50"
+},
+{
+    "id": "352",
+    "nomcom": "KAYAO",
+    "province_id": "20",
+    "id_2": null,
+    "created": "2019-04-06 10:56:15",
+    "modified": "2019-04-06 10:56:15"
+}
+]

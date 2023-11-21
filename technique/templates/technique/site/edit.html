@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% crispy example_form example_form.helper %}
+{% block title %} Modifier site {% endblock %}
+
+{% comment %} {% load django_bootstrap5 %} {% endcomment %}
+
+
+{% block main %}
+
+
+<form method="post" class="card p-3 mt-5 border border-primary" enctype="multipart/form-data">
+   
+   {% csrf_token %}
+
+   {{ form|crispy }}
+
+
+   <div class="mt-4" style="width: 100p%;">
+      
+      <input type="submit" name="submit" value="Modifier" class="btn btn-success" id="submit-id-submit" />
+      <a style= "font-size: 15px;" href="{% url 'site' %}" type="button" class="btn btn-outline-danger mb-3 ms-2" style="wdith: 50px;" title="Close">
+            <i class="fas fa-times"></i>
+      </a>
+   
+  </div>
+</form>
+
+  
+
+{% endblock main %}
+
+
+{% block srcipts %}
+
+<script>
+  $("#id_region").select2({
+   placeholder: "selectionner la region",
+   allowClear: true
+  });
+  $("#id_province").select2({
+   placeholder: "selectionner la province",
+   allowClear: true
+  });
+</script>
+{% endblock srcipts %}

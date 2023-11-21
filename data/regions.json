@@ -1,0 +1,17 @@
+
+[
+{"id":"1","numero":"02","nomreg":"Boucle du Mouhoun","cheflieu":"Dédougou"},
+{"id":"2","numero":"12","nomreg":"Cascades","cheflieu":"Banfora"},
+{"id":"3","numero":"11","nomreg":"Centre","cheflieu":"Ouagadougou"},
+{"id":"4","numero":"10","nomreg":"Centre-est","cheflieu":"Tenkodogo"},
+{"id":"5","numero":"06","nomreg":"Centre-Nord","cheflieu":"Kaya"},
+{"id":"6","numero":"07","nomreg":"Centre-Ouest","cheflieu":"Koudougou"},
+{"id":"7","numero":"13","nomreg":"Centre-sud","cheflieu":"Manga"},
+{"id":"8","numero":"04","nomreg":"Est","cheflieu":"Fada N'Gourma"},
+{"id":"9","numero":"01","nomreg":"Hauts-Bassins","cheflieu":"Bobo-Dioulasso"},
+{"id":"10","numero":"09","nomreg":"Nord","cheflieu":"Ouahigouya"},
+{"id":"11","numero":"08","nomreg":"Plateau Central","cheflieu":"Ziniaré"},
+{"id":"12","numero":"03","nomreg":"Sahel","cheflieu":"Dori"},
+{"id":"13","numero":"05","nomreg":"Sud-ouest","cheflieu":"Gaoua"}
+]
+

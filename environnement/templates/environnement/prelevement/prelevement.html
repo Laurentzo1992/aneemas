@@ -4,15 +4,17 @@
 
 {% block add %}
 
-<a id="syncLink" href="{% url 'api_prelevement' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
-  Synchronisation <i class="fa-solid fa-group-arrows-rotate"></i>
-</a>
-
-
-<a href="{% url 'add' %}" class="text-decoration-none fw-bold text-success">
-    Ajouter <i class="fa fa-plus text-success"></i>
- </a>
-
+ <h4>
+  <a id="syncLink" href="{% url 'api_prelevement' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
+     <i class="fa-solid fa-group-arrows-rotate"></i>
+  </a>
+  
+  
+  <a href="{% url 'add_prelevement' %}" class="text-decoration-none fw-bold text-success">
+      <i class="fa fa-plus text-success"></i>
+   </a>
+  
+  </H4>
 {% endblock add %}
 
 
@@ -26,28 +28,33 @@
     <thead>
       <tr class="bg-success">
         <th scope="col">Id</th>
-        <th scope="col">Date prelevement</th>
+        <th scope="col">Date</th>
         <th scope="col">Commune</th>
-        <th scope="col">Point de premevement</th>
+        <th scope="col">Lieu</th>
         <th scope="col">Motif</th>
-        <th scope="col">Quantité</th>
+        <th scope="col">Preleveur</th>
+        <th scope="col">nature</th>
         <th scope="col">action</th>
       </tr>
     </thead>
     <tbody>
         {% for result in page_obj %}
       <tr>
-        <td>{{result.id }}</td>
+        <td>{{ result.id }}</td>
         <td>{{result.date_prelevement}}</td>
         <td>{{result.commune}}</td>
-        <td>{{result.point_prelevement}}</td>
+        <td>{{result.lieu}}</td>
         <td>{{result.motif}}</td>
-        <td>{{result.quantite}}</td>
+        <td>{{result.nom_preleveur}}</td>
+        <td>{{result.type_nature_echant}}</td>
         <td>
-          <a href="{% url 'edit' result.id %}" title="modifier">
-            <i class="fas fa-pen text-warning"></i> 
+          <a href="{% url 'add_analyse' result.id %}" title="ajouter resultat d'analyse">
+            <i class="fas fa-plus text-primary"></i> 
           </a>
 
+          <a href="{% url 'edit_prelevement' result.id %}" title="modifier">
+            <i class="fas fa-pen text-warning"></i> 
+          </a>
           <a data-bs-toggle="modal" data-bs-target="#deleteModal{{result.id}}" title="supprimer">
             <i class="fas fa-trash text-danger"></i> 
           </a>

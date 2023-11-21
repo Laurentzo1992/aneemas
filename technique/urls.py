@@ -1,7 +1,24 @@
-from  django.urls import  path
+from django.urls import path, include
+from rest_framework import routers
 from  . import views
+from technique.views import ComsitesViewset, StatutsitesViewset, TypesitesViewset
+
+
+router = routers.SimpleRouter()
+router.register('sites', ComsitesViewset, basename='sites')
+router.register('statut', StatutsitesViewset, basename='statut')
+router.register('types', TypesitesViewset, basename='types')
 
 urlpatterns = [
+    # gestion site
+    path('site', views.site, name='site'),
+    path('webmapp', views.webmapp, name='webmapp'),
+    path('api/', include(router.urls)),
+    
+    
+    path('site/add', views.add_site, name='add_site'),
+    path('site/edit/<int:id>', views.edit_site, name='edit_site'),
+    path('site/delete/<int:id>', views.delete_site, name='delete_site'),
     #Url de la fiche d'enrolment
     path('enrolement', views.index, name='list_enrolement'),
     path('enrolement/api_data', views.get_api_enrolement, name='api_enrolement'),
@@ -35,8 +52,15 @@ urlpatterns = [
    
     path('convention', views.index3, name='convention'),
     path('instruire/<int:id>', views.instruire, name='instruire'),
+    path('instruire_anull/<int:id>', views.instruire_anull, name='instruire_anull'),
+    path('signature_anull/<int:id>', views.signature_anull, name='signature_anull'),
+    path('signature_anull1/<int:id>', views.signature_anull1, name='signature_anull1'),
+    path('signature/<int:id>', views.signature, name='signature'),
+    path('signe/<int:id>', views.signe, name='signe'),
     path('convention/add', views.add_convention, name='add_convention'),
     path('convention/edit/<int:id>', views.edit_convention, name='edit_convention'),
+    path('convention/edit1/<int:id>', views.edit_convention1, name='edit_convention1'),
+    path('convention/edit2/<int:id>', views.edit_convention2, name='edit_convention2'),
     path('convention/delete/<int:id>', views.delete_convention, name='delete_convention'),
     
     

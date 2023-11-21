@@ -11,6 +11,8 @@ router.register(r'users', UserViewset, basename='users'),
 
 urlpatterns = [
     path('',  views.login_page, name='login'),
+    path('home', views.home, name='home'),
+    path('bi', views.bi, name='bi'),
     path('logout_user',  views.logout_user, name='logout_user'),
     path('api/login/', UserViewset.as_view({'post': 'login_user'}), name='user-login'),
     path('api/logout/', UserLogout.as_view(), name='user-logout'),
