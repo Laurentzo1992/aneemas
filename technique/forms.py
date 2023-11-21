@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.gis import forms
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Row, Column
 from paramettre.models import *
@@ -154,3 +155,4 @@ class ComsitesForm(forms.ModelForm):
             'date_deb_expl': forms.DateInput(attrs={'type': 'date'}),
             'date_fin_exp': forms.DateInput(attrs={'type': 'date'}),
         }
+        

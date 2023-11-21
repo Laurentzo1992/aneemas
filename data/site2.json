@@ -1,5 +1,7 @@
 [
  {
+   "X": "-0.206018607767494",
+   "Y": "13.5725004794742",
    "code_site": 1561,
    "date_creation": "30/03/2018",
    "nom_site": "Guiro",
@@ -31,6 +33,8 @@
    "obs_geo": "Volcano s�dimentaire/ Zone cisaillement"
  },
  {
+   "X": "-0.220330648064217",
+   "Y": "13.5914937578263",
    "code_site": 1582,
    "date_creation": "30/03/2018",
    "nom_site": "Pokiengpougo",
@@ -62,6 +66,8 @@
    "obs_geo": "Epandage de quartz / Veines et veinule de quartz, filon"
  },
  {
+   "X": "-0.197734052615363",
+   "Y": "13.5946909914208",
    "code_site": 1584,
    "date_creation": "28/03/2018",
    "nom_site": "Zone de test",
@@ -93,6 +99,8 @@
    "obs_geo": "Zone lat�ritique; �pandage de quartz"
  },
  {
+   "X": "-0.172047954419693",
+   "Y": "13.5952044747815",
    "code_site": 1585,
    "date_creation": "28/03/2018",
    "nom_site": "Binder P�t�",
@@ -124,6 +132,8 @@
    "obs_geo": "Volcano s�dimentaire encaissant diorit� alt�r�e"
  },
  {
+   "X": "-0.186033099734644",
+   "Y": "13.6073039277164",
    "code_site": 1597,
    "date_creation": "28/03/2018",
    "nom_site": "Binder",
@@ -155,6 +165,8 @@
    "obs_geo": "Volcano s�dimentaire, encaissant dioritique alt�r�"
  },
  {
+   "X": "-0.17399063616784",
+   "Y": "13.6236787173381",
    "code_site": 1607,
    "date_creation": "29/03/2018",
    "nom_site": "Guorgagui",
@@ -186,6 +198,8 @@
    "obs_geo": "Zone de grattage"
  },
  {
+   "X": "-0.198295049353732",
+   "Y": "13.6168542974648",
    "code_site": 1610,
    "date_creation": "28/03/2018",
    "nom_site": "Meodge",
@@ -217,6 +231,8 @@
    "obs_geo": "Zone de grattage/ Bloc volcano s�dimentaire basique/ Site alluvionnaire"
  },
  {
+   "X": "-0.174305125339024",
+   "Y": "13.6236371313862",
    "code_site": 1616,
    "date_creation": "29/03/2018",
    "nom_site": "Djoukoguioro",
@@ -248,6 +264,8 @@
    "obs_geo": "Zone de grattage/ Colline lat�ritique"
  },
  {
+   "X": "-0.19211366983604",
+   "Y": "13.6249409638709",
    "code_site": 1619,
    "date_creation": "28/03/2018",
    "nom_site": "Meodge 2",
@@ -279,6 +297,8 @@
    "obs_geo": "Volcano s�dimentaire basique/Colline"
  },
  {
+   "X": "-0.185227603334752",
+   "Y": "13.6340039524318",
    "code_site": 1627,
    "date_creation": "28/03/2018",
    "nom_site": "Gorgagui 4",
@@ -310,6 +330,8 @@
    "obs_geo": "Quartz fum�/ Grono diorite alt�r�"
  },
  {
+   "X": "-0.206248458063544",
+   "Y": "13.6418197209871",
    "code_site": 1633,
    "date_creation": "29/03/2018",
    "nom_site": "S�k�n�",
@@ -341,6 +363,8 @@
    "obs_geo": "Veines de quartz encaiss� dans une dioritique alt�r�e"
  },
  {
+   "X": "-0.1801298574546",
+   "Y": "13.6471967449952",
    "code_site": 1639,
    "date_creation": "28/03/2018",
    "nom_site": "Colline de Gorkagui",
@@ -372,6 +396,8 @@
    "obs_geo": "Zone de grattage alluvionnaire/ schiste vert volcano s�dimentaire"
  },
  {
+   "X": "-0.172017442126497",
+   "Y": "13.6451353465127",
    "code_site": 1642,
    "date_creation": "28/03/2018",
    "nom_site": "Gorgagui 3",
@@ -403,6 +429,8 @@
    "obs_geo": "Volcano s�dimentaire/ Saprolite/ �pandage de quartz fum�"
  },
  {
+   "X": "-0.213690189730326",
+   "Y": "13.6514780284711",
    "code_site": 1643,
    "date_creation": "29/03/2018",
    "nom_site": "Zone d'affleurement",
@@ -434,6 +462,8 @@
    "obs_geo": "Roche volcanique basique"
  },
  {
+   "X": "-0.178929213773137",
+   "Y": "13.6526296646897",
    "code_site": 1644,
    "date_creation": "28/03/2018",
    "nom_site": "Boata",
@@ -465,6 +495,8 @@
    "obs_geo": "Volcano s�dimentaire/ Schiste vert, alluvionnaire"
  },
  {
+   "X": "-0.208160628354258",
+   "Y": "13.6559231452444",
    "code_site": 1648,
    "date_creation": "29/03/2018",
    "nom_site": "Colline de Meodge",
@@ -496,6 +528,8 @@
    "obs_geo": "Epandage de quartz/ Colline de roches volcaniques"
  },
  {
+   "X": "-0.158805350018115",
+   "Y": "13.6617212913814",
    "code_site": 1654,
    "date_creation": "29/03/2018",
    "nom_site": "Ki�k�",
@@ -527,6 +561,8 @@
    "obs_geo": "Filon de quartz"
  },
  {
+   "X": "-0.157660369120467",
+   "Y": "13.677857903339",
    "code_site": 1671,
    "date_creation": "29/03/2018",
    "nom_site": "Baeldiaga",
@@ -558,6 +594,8 @@
    "obs_geo": "Zone de grattage/ Elluvionnaire/ Pr�sence de femmes et d'enfants sur le site"
  },
  {
+   "X": "-0.175470183302117",
+   "Y": "10.9848406001905",
    "code_site": 1688,
    "date_creation": "29/03/2018",
    "nom_site": "",
@@ -589,6 +627,8 @@
    "obs_geo": "Epandage de quartz/ Bloc de lat�rite"
  },
  {
+   "X": "0",
+   "Y": "0",
    "code_site": 1712,
    "date_creation": "29/03/2018",
    "nom_site": "Briquetterie",
@@ -620,6 +660,8 @@
    "obs_geo": "Schiste graphyte/ Argile pour confection de briques"
  },
  {
+   "X": "-0.176305908812693",
+   "Y": "13.7423548449563",
    "code_site": 1723,
    "date_creation": "29/03/2018",
    "nom_site": "",
@@ -651,6 +693,8 @@
    "obs_geo": "Grattage dans l'�lluvionnaire, Saprolite"
  },
  {
+   "X": "-0.171470755435264",
+   "Y": "13.7448916994711",
    "code_site": 1724,
    "date_creation": "29/03/2018",
    "nom_site": "",
@@ -682,6 +726,8 @@
    "obs_geo": "Zone de grattage/ Zone alluvionnaire"
  },
  {
+   "X": "-0.140915822152271",
+   "Y": "13.7470952627596",
    "code_site": 1726,
    "date_creation": "28/03/2018",
    "nom_site": "Colline de Guiougo",
@@ -713,6 +759,8 @@
    "obs_geo": "Zone lat�ritique/ Gravillonnaire, saprolite"
  },
  {
+   "X": "-0.114188547616108",
+   "Y": "13.751371963888",
    "code_site": 1728,
    "date_creation": "29/03/2018",
    "nom_site": "Manguima",
@@ -744,6 +792,8 @@
    "obs_geo": "Veines et veinules de quartz dans la saprolite, alluvionnaire"
  },
  {
+   "X": "-0.147050664204124",
+   "Y": "13.7638939412784",
    "code_site": 1734,
    "date_creation": "28/03/2018",
    "nom_site": "Guiougo 4",
@@ -775,6 +825,8 @@
    "obs_geo": "Roche volcano s�dimentaire/ Epandage de quartz"
  },
  {
+   "X": "-0.139050410474122",
+   "Y": "13.7675313526206",
    "code_site": 1741,
    "date_creation": "28/03/2018",
    "nom_site": "Colline de Guiougo 1",
@@ -806,6 +858,8 @@
    "obs_geo": "Volcano s�dimentaire , �pandage de quartz"
  },
  {
+   "X": "-0.113825142122494",
+   "Y": "13.7689438512544",
    "code_site": 1742,
    "date_creation": "28/03/2018",
    "nom_site": "Gongoli 1",
@@ -837,6 +891,8 @@
    "obs_geo": "Alluvionnaire, �pandage de quartz"
  },
  {
+   "X": "-0.16253970520518",
+   "Y": "13.7713891075269",
    "code_site": 1744,
    "date_creation": "29/03/2018",
    "nom_site": "",
@@ -868,6 +924,8 @@
    "obs_geo": "Zone de grattage/ zone alluvionnaire"
  },
  {
+   "X": "-0.133119942701798",
+   "Y": "13.7741912278606",
    "code_site": 1746,
    "date_creation": "29/03/2018",
    "nom_site": "",
@@ -899,6 +957,8 @@
    "obs_geo": "Zone de grattage dans l'alluvionnaire"
  },
  {
+   "X": "-0.126771069060852",
+   "Y": "13.7780099535126",
    "code_site": 1747,
    "date_creation": "29/03/2018",
    "nom_site": "",
@@ -930,6 +990,8 @@
    "obs_geo": "Grattage dans l'alluvionnaire"
  },
  {
+   "X": "-0.264173268357586",
+   "Y": "13.9874149540294",
    "code_site": 1821,
    "date_creation": "30/03/2018",
    "nom_site": "Tigou",
@@ -961,6 +1023,8 @@
    "obs_geo": "Filon de quartz/ Veines et veinules volcano s�dimentaire"
  },
  {
+   "X": "-0.112462894670752",
+   "Y": "13.7692620509994",
    "code_site": 0,
    "date_creation": "28/03/2018",
    "nom_site": "Gongoli nouveau",
@@ -992,6 +1056,8 @@
    "obs_geo": "Quartz fum�, saprolite alluvionnaire"
  },
  {
+   "X": "-0.120281235882472",
+   "Y": "13.7616403633211",
    "code_site": 0,
    "date_creation": "28/03/2018",
    "nom_site": "Guiougo 1",

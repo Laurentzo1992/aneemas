@@ -46,16 +46,21 @@
         <div class="row mb-2">
             <div class="ms-1">
                 <form method="get" action="{% url 'home' %}">
-                    <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
-                    <input type="date" value="{{date_depart}}"name="date_depart" id="date_depart" class="text-success font-italic font-weight-bold">
-                    <label for="" class="form-label font-italic font-weight-bold text-success">au</label>
-                    <input type="date" value="{{date_arrive}}" name="date_arrive" id="date_arrive" class="text-success font-italic font-weight-bold">
-                    &nbsp; &nbsp;
-                    <button type="submit" id="submit"><i class="fa fa-search"></i></button>
-                    &nbsp;  &nbsp;
-                    <a href="{% url 'home' %}?reset"><i class="fa fa-refresh"></i></a>
-                    &nbsp;  &nbsp;
-                    <a href="" id="export_image"><i class="fa fa-print"></i></a>
+                        <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
+                        <input type="date" value="{{date_depart}}"name="date_depart" id="date_depart" class="text-success font-italic font-weight-bold" required>
+                        <label for="" class="form-label font-italic font-weight-bold text-success">au</label>
+                        <input type="date" value="{{date_arrive}}" name="date_arrive" id="date_arrive" class="text-success font-italic font-weight-bold" required>
+                        &nbsp; &nbsp;
+                        <select name="type_rapport" id="type_rapport" required>
+                        <option value="">--Type de rapport--</option>
+                        <option value="accident">Accident</option>
+                        <option value="incident">Incident</option>
+                        </select>
+                        <button type="submit" id="submit"><i class="fa fa-search"></i></button>
+                        &nbsp;  &nbsp;
+                        <a href="{% url 'home' %}?reset"><i class="fa fa-refresh"></i></a>
+                        &nbsp;  &nbsp;
+                        <a href="" id="export_image"><i class="fa fa-file-image"></i></a>
                     
                  </form>
                

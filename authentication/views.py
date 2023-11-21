@@ -6,25 +6,22 @@ from django.utils.translation import gettext as _
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def home(request):
     try:
+        artisants = Cartartisants.objects.all().count()
+        collecteurs = Demandeconventions.objects.filter(statut="convention").order_by('created').count()
+        incidents = Formincidents.objects.filter(type_rapport="accident").count()
         # Récupérer les données venant du formulaire pour filtrer les dates
-        if request.method == 'POST':
-            date_depart = request.POST.get('date_depart')
-            date_arrive = request.POST.get('date_arrive')
-        else:
+        if request.method == 'GET':
             date_depart = request.GET.get('date_depart')
             date_arrive = request.GET.get('date_arrive')
+            type_rapport = request.GET.get('type_rapport')
 
         # Validation des dates (assurez-vous que vous avez des validations appropriées dans vos modèles)
         if date_depart and date_arrive:
             date_depart = Formincidents._meta.get_field('date_incident').to_python(date_depart)
             date_arrive = Formincidents._meta.get_field('date_incident').to_python(date_arrive)
 
-        artisants = Cartartisants.objects.all().count()
-        collecteurs = Demandeconventions.objects.filter(statut="convention").order_by('created').count()
-        incidents = Formincidents.objects.filter(type_rapport="accident", date_incident__range=[date_depart, date_arrive]).count()
-
         # Agréger les données par date
-        resultats = Formincidents.objects.filter(date_incident__range=[date_depart, date_arrive], type_rapport='accident')\
+        resultats = Formincidents.objects.filter(date_incident__range=[date_depart, date_arrive], type_rapport=type_rapport)\
             .values('date_incident')\
             .annotate(total_hommes=Sum('vict_hom'))\
             .annotate(total_femmes=Sum('vict_fem'))\
@@ -41,13 +38,13 @@ def home(request):
         plt.figure(figsize=(10, 4))
 
         # Créer les courbes d'évolution pour chaque série de données
-        plt.plot(dates, total_hommes, marker='x', linestyle='dashed', color='b', label='Hommes')
-        plt.plot(dates, total_femmes, marker="3", linestyle='solid', color='r', label='Femmes')
-        plt.plot(dates, total_enfants, marker='$f$', linestyle='dashdot', color='g', label='Enfants')
+        plt.plot(dates, total_hommes, marker='x', linestyle='dashed', color='#f7e80b', label='Hommes')
+        plt.plot(dates, total_femmes, marker="3", linestyle='solid', color='#a44430', label='Femmes')
+        plt.plot(dates, total_enfants, marker='$f$', linestyle='dashdot', color='#FFA500', label='Enfants')
 
         plt.xlabel("periode")
         plt.ylabel('Nombre total de victimes')
-        plt.title('Évolution du nombre de victimes des accidents par cat de personne')
+        plt.title('Évolution du nombre de victimes par cat de personne')
         plt.grid(True)
         # Ajouter une légende
         plt.legend()
@@ -116,7 +113,7 @@ def bi(request):
         # Créer les courbes d'évolution pour chaque série de données
         plt.plot(dates, total_hommes, marker='o', linestyle='-', color='b', label='Hommes')
         plt.plot(dates, total_femmes, marker='o', linestyle='-', color='r', label='Femmes')
-        plt.plot(dates, total_enfants, marker='o', linestyle='-', color='g', label='Enfants')
+        plt.plot(dates, total_enfants, marker='o', linestyle='-', color='#FFA500', label='Enfants')
 
         plt.xlabel("Date d'incident")
         plt.ylabel('Nombre total de victimes')
@@ -147,8 +144,6 @@ def bi(request):
     return render(request, 'authentication/bi/bi.html', context)
 
  
-
-
 
 
 

@@ -1,0 +1,10 @@
+[account]
+; Your account key is available in your customer section at https://db-ip.com/account/
+accountKey = INSERT_YOUR_ACCOUNT_KEY_HERE
+
+[database]
+; This is the PDO Data Source Name for your database instance, see http://php.net/manual/pdo.construct.php
+dataSourceName = "mysql:host=localhost;dbname=myapp"
+; dbUser and dbPassword are the database account credentials
+dbUser = myapp 
+dbPassword = myapp123

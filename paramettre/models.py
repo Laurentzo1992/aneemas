@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.gis.db import models
 from django.core.exceptions import ValidationError
 
 
@@ -295,8 +296,9 @@ class Comsites(models.Model):
     personne_resource2 = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Personne resource 2 (Nom et prenom)")
     contact_resource2 = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Personne resource 1(Contact)")
     zone = models.IntegerField(blank=True, null=True, verbose_name="Zone de projection")
-    longitude = models.FloatField(blank=True, null=True, verbose_name="X", default=0)
-    latitude = models.FloatField(blank=True, null=True, verbose_name="Y", default=0)
+    #point = models.PointField(blank=True, null=True, verbose_name="Coordonnées", srid=4326)
+    latitude = models.FloatField(blank=True, null=True, verbose_name="Latitude", default=0)
+    longitude = models.FloatField(blank=True, null=True, verbose_name="Longitude", default=0)
     etendu = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Etendu du site en (m)")
     p_chimique = models.BooleanField(blank=True, null=True, verbose_name="Presence de produit chimique")
     p_explosif = models.BooleanField(blank=True, null=True, verbose_name="Presence d'explosif")
@@ -314,7 +316,7 @@ class Comsites(models.Model):
         verbose_name_plural = "Site"
         
     def __str__(self):
-        return self.nom_site
+        return str(self.nom_site)
 
 
 class Legend(models.Model):
@@ -837,8 +839,7 @@ class Formincidents(models.Model):
     modified = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
 
     
-
-   
+    
 
 class Rapactivites(models.Model):
     

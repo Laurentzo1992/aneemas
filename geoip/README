@@ -1,0 +1,49 @@
+How to import a downloaded database into MySQL or MariaDB
+=========================================================
+
+
+0. Prerequisites
+----------------
+The recommended PHP version for dbip-update is PHP 7 and the minimum requirement is PHP 5.5 or greater.
+
+
+I. Create a database table
+--------------------------
+The first step is to create a new database table to hold the imported data.
+If you are updating an already populated and running database, it is recommended you create a new table and use an atomic rename to switch the old with the new once the import is finished.
+The table structure depends on the database edition you have downloaded, it is either IP to Country Lite, City Lite, Country, Location, ISP or Location + ISP.
+You will have to refer to our website and select the right database schema : https://db-ip.com/db/
+
+
+II. Use dbip-update.php to load the database
+--------------------------------------------
+dbip-update is the preferred way for loading and updating databases. It is bundled as dbip-update.php and is meant to be run on the command line.
+The command line arguments supported by dbip-update are :
+-l  list available items and exit
+-n  request new items only
+-z  fetch uncompressed file (default for mmdb format)
+-Z  fetch compressed file (default for csv format)
+-w  overwrite destination file if it already exists
+-b  PDO DSN for database update (ie. "mysql:host=localhost;dbname=dbip")
+  -u  database username (default 'root')
+  -p  database password (default '')
+  -t  name of database table (default 'dbip_lookup')
+-q  be quiet
+
+
+III. Use import.php to load the database
+----------------------------------------
+Another way is to manually import a CSV file using the bundled import tool.
+This package contains a PHP script named import.php, it is meant to be run on the command line and requires a PHP binary (either php-cli or php-cgi).
+The command line arguments for import.php are : 
+-f <filename.csv[.gz]>			the name of the downloaded database file
+-d <country-lite|city-lite|location|isp|full>	optional
+-b <database_name>			optional (default: dbip)
+-t <table_name>				optional (default: dbip_lookup)
+-u <username>                           optional (default: root)
+-p <password>                           optional
+
+Example command line for the IP to Country database :
+~# ./import.php -f dbip-country.csv.gz -d country -b myapp -t dbip_lookup
+
+The process can take some time depending on your database instance performance, a typical import of the full Location + ISP database takes less than 20 minutes.
