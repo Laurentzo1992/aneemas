@@ -1,0 +1,36 @@
+{% load static %}
+
+  <aside class="left-sidebar scrollable ps-container ps-theme-default ps-active-y" data-sidebarbg="skin5">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav" class="p-t-30">
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'bunsess:dashboard' %}" aria-expanded="false"><i class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'bunsess:charts' %}" aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Busness intelligence</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link waves-effect waves-dark sidebar-link" href="{% url 'webmapp' %}" aria-expanded="false"><i class="mdi mdi-map-marker"></i><span class="hide-menu">webmapping</span></a></li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span class="hide-menu">Environnement </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="{% url 'norme' %}" class="sidebar-link"><i class="mdi mdi-note-outline"></i><span class="hide-menu"> Normes</span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'prelevement' %}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> prelevement </span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'exploitation' %}" class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu"> Suivi artisanal </span></a></li>
+                            </ul>
+                        </li>
+                      
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-face"></i><span class="hide-menu"> Technique</span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="{% url 'site' %}" class="sidebar-link"><i class="mdi mdi-sitemap"></i><span class="hide-menu"> Sites </span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'convention' %}" class="sidebar-link"><i class="mdi mdi-book-open"></i><span class="hide-menu"> Convention </span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'incident' %}" class="sidebar-link"><i class="mdi mdi-message-alert"></i><span class="hide-menu"> Incident:Acccident </span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'visite_fiche' %}" class="sidebar-link"><i class="mdi mdi-account-edit"></i><span class="hide-menu"> Visite de site</span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'guide_fiche' %}" class="sidebar-link"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Guide autorité</span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'rapport' %}" class="sidebar-link"><i class="mdi mdi-account-edit"></i><span class="hide-menu"> Rapport d'activité</span></a></li>
+                                <li class="sidebar-item"><a href="{% url 'list_enrolement' %}" class="sidebar-link"><i class="mdi mdi-account-edit"></i><span class="hide-menu"> Enrolement</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>

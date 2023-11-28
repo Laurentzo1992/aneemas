@@ -1,13 +1,24 @@
-{% extends 'base.html' %}
+{% extends 'base1.html' %}
+
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+    <style xmlns="http://www.w3.org/1999/html">
+    </style>
+{% endblock %}
+{% block page_title %}
+ajout norme
+{% endblock %}
 {% load crispy_forms_tags %}
-{% block title %} Ajout norme {% endblock %}
+
 
 {% comment %} {% load django_bootstrap5 %} {% endcomment %}
 
 
-{% block main %}
+{% block content %}
 
-
+<div class="container-fluid">
+      
 <form method="post" class="card p-3 mt-5 border border-primary" enctype="multipart/form-data">
    
    {% csrf_token %}
@@ -25,8 +36,9 @@
 </div>
 </form>
 
-  
+</div>
 
-{% endblock main %}
+
+{% endblock content %}
 
 

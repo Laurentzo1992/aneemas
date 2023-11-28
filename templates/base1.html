@@ -1,0 +1,181 @@
+{% load static %}
+
+{% block html %}
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+{% block head %}
+   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" href="{% static 'media/app_img/favicon.ico' %}" type="image/x-icon">
+    {% block page_title %}
+    <title>Busness intelligence</title>
+    {% endblock %}
+            <link href="{% static 'dashboard/css/bootstrap.min.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/animation.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/asColorPicker.min.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/fullcalendar.min.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/calendar.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/fontawesome-all.min.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/jquery.gritter.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/jquery.minicolors.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/jquery.steps.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/magnific-popup.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/materialdesignicons.min.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/multicheck.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/perfect-scrollbar.min.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/quill.core.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/quill.snow.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/select2.min.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/steps.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/themify-icons.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/toastr.min.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/weather-icons.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/weather-icons.min.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/float-chart.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/style.min.css' %}" rel="stylesheet"/>
+            <link href="{% static 'dashboard/css/custom.css' %}" rel="stylesheet"/>
+
+
+            <!-- Our project just needs Font Awesome Free's Solid and Brand files -->
+            <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+            <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+            <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+            <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+            <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+            <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+            <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+            <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+           
+            
+            
+            
+            <link rel="stylesheet" type="text/css" href={% static "DataTables/datatables.min.css"%}/>
+            <!-- Our project just needs Font Awesome Free's Solid and Brand files -->
+            <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+            <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+            <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+            <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+            <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+            <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+            <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+            <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+       
+
+            
+    
+    <!-- HTML5 Shim and Respond.js' %} IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js' %} doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js' %}"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js' %}/1.4.2/respond.min.js' %}"></script>
+<![endif]-->
+   {% block extra_style %}{% endblock extra_style %}
+</head>
+{% endblock head %}
+   
+   {% block body %}
+   
+       <body>
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css' %} -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+         {% include 'bunsess/includes/header.html' %}
+         {% include 'bunsess/includes/sidebar.html' %}
+          <div class="page-wrapper">
+           {% block content %}{% endblock content %}
+           {% include 'bunsess/includes/footer.html' %}
+         </div>
+    </div>
+
+    {% block script %}
+    
+        <script src="{% static 'dashboard/js/jquery.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/popper.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/bootstrap.min.js' %}"></script>
+
+        <script src="{% static 'dashboard/js/perfect-scrollbar.jquery.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/sparkline.js' %}"></script>
+        <script src="{% static 'dashboard/js/waves.js' %}"></script>
+        <script src="{% static 'dashboard/js/sidebarmenu.js' %}"></script>
+        <script src="{% static 'dashboard/js/custom.min.js' %}"></script>
+
+        <script src="{% static 'dashboard/js/excanvas.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.flot.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.flot.pie.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.flot.time.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.flot.time.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.flot.stack.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.flot.crosshair.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.flot.tooltip.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/moment.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/chart-page-init.js' %}"></script>
+        <script src="{% static 'dashboard/js/app-style-switcher.js' %}"></script>
+        <script src="{% static 'dashboard/js/bootstrap-datepicker.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/datatable-checkbox-init.js' %}"></script>
+        <script src="{% static 'dashboard/js/datatables.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/dataTables.bootstrap4.min.js' %}"></script>
+        
+    
+        <script src="{% static 'dashboard/js/jquery.charts-sparkline.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.magnific-popup.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery-asColor.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery-asGradient.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery-asColorPicker.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.minicolors.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.multicheck.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.validate.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/toastr.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/select2.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/jquery.inputmask.bundle.min.js' %}"></script>
+        {% comment %} <script src="{% static 'dashboard/js/quill.min.js' %}"></script>
+        <script src="{% static 'dashboard/js/mask.init.js' %}"></script>
+        <script src="{% static 'dashboard/js/meg.init.js' %}"></script>
+        <script src="{% static 'dashboard/js/cal-init.js' %}"></script>
+         {% endcomment %}
+        
+
+        
+        <script>
+            
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('#zero_config').DataTable();
+            });
+        </script>
+
+    {% block extra_script %}{% endblock extra_script %}
+
+    
+    {% endblock script %}
+
+    </body>
+   {% endblock body %}
+
+
+{% endblock html %}
