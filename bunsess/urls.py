@@ -11,6 +11,7 @@ app_name = "bunsess"
 urlpatterns = [
     path("dashboard", views.dashboard, name="dashboard"),
     path("charts/", views.charts, name="charts"),
+    path("rapportMort/", views.rapportMort, name="rapportMort"),
     path("messages/", views.send_messages, name="messages"),
     path("messages_archives/", views.messages_archives, name="messages_archives"),
     path('api/', include((router.urls, 'app_name_bi')))

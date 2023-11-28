@@ -38,13 +38,22 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+                    <form method="get" id="filterRpport">
+                        <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
+                        <input type="date" value="{{start_date}}"name="start_date" id="start_date" class="text-success font-italic font-weight-bold" required>
+                        <label for="" class="form-label font-italic font-weight-bold text-success">au</label>
+                        <input type="date" value="{{end_date}}" name="end_date" id="end_date" class="text-success font-italic font-weight-bold" required>
+                        &nbsp; &nbsp;
+                        <select name="type_rapport" id="type_rapport" required class="filter-input">
+                        <option value="">--Type rapport--</option>
+                        <option value="accident">Accident</option>
+                        <option value="incident">Incident</option>
+                        </select> &nbsp;
+                        <button type="button" id="export-rapport"><i class="fa fa-file-image text-success"></i></button>
+                    </form>
                     <div class="card-body">
                         <h5 class="card-title">Evolution du nombre de mort par site</h5>
-                        <div id="real-time" style="height:400px;"></div>
-                      
-                        <input id="updateInterval" type="hidden" value="1000" style="text-align: right; width:5em">
-                           
-                        
+                        <canvas id="rapportMort" width="400" height="400"></canvas>
                     </div>
                 </div>
             </div>
@@ -72,15 +81,13 @@
                                     <option value="anuler">Anuler</option>
                                     <option value="convention">Validé</option>
                                     </select> &nbsp;
-                                    <button type="button" id="submit" onclick="updateChart()"><i class="fa fa-search"></i></button> &nbsp;
                                     <button type="button" id="export-btn"><i class="fa fa-file-image text-success"></i></button>
                                 </form>
                                 <div class="card-body">
-                                    <canvas id="convention" width="400" height="200"></canvas>
+                                    <canvas id="convention" width="400" height="400"></canvas>
                                 </div>
                             </div>
                         </div>
-                        <p id="choices" class="m-t-20"></p>
                     </div>
                 </div>
             </div>
@@ -95,80 +102,183 @@
   
     <script>
 
-    function getRandomColor() {
-        // Générer une couleur hexadécimale aléatoire
-        return '#' + Math.floor(Math.random()*16777215).toString(16);
-    }
-
-
-    function updateChart() {
-        var date_depart = $('#date_depart').val();
-        var date_arrive = $('#date_arrive').val();
-        var statut = $('#statut').val();
+        $(document).ready(function(){
+            // Fonction pour obtenir une couleur aléatoire
+            function getRandomColor() {
+                return '#' + Math.floor(Math.random()*16777215).toString(16);
+            }
+        
+            // Fonction pour mettre à jour le graphique
+            function updateChart1() {
+                var date_depart = $('#date_depart').val();
+                var date_arrive = $('#date_arrive').val();
+                var statut = $('#statut').val();
+                
+                if (!date_depart || !date_arrive) {
+                    console.error('Les dates ne sont pas correctement définies.');
+                    return;
+                }
+                // Envoyer la requête AJAX vers la vue Django avec les filtres
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url "bunsess:charts" %}',
+                    data: {
+                        'date_depart': date_depart,
+                        'date_arrive': date_arrive,
+                        'statut': statut,
+                    },
+                    success: function(data) {
+                        // Générer des couleurs aléatoires pour chaque région
+                        var colors = data.regions.map(function() {
+                            return getRandomColor();
+                        });
+        
+                        // Mettre à jour le graphique avec les nouvelles données
+                        var ctx = document.getElementById('convention').getContext('2d');
+                       
+                        convChart = new Chart(ctx, {
+                            type: 'bar', 
+                            data: {
+                                labels: data.regions,
+                                datasets: [
+                                    {
+                                        label: 'Nombre de demandes par région',
+                                        data: data.nombre_demandes,
+                                        backgroundColor: colors,
+                                    },
+                                ],
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                scales: {
+                                    x: {
+                                        beginAtZero: true,
+                                    },
+                                    y: {
+                                        beginAtZero: true,
+                                    },
+                                },
+                            },
+                        });
+                    },
+                    error: function(error) {
+                        console.log('Erreur AJAX:', error);
+                    }
+                });
+            }
+         // Ajouter des gestionnaires d'événements pour les changements dans le formulaire
+        $('#date_depart, #date_arrive, #statut').on('change', function() {
+            updateChart1();  // Mettre à jour le graphique lorsque les champs changent
+        });
     
-        // Envoyer la requête AJAX vers la vue Django avec les filtres
-        $.ajax({
-            type: 'GET',
-            url: '{% url "bunsess:charts" %}',
-            data: {
-                'date_depart': date_depart,
-                'date_arrive': date_arrive,
-                'statut': statut,
-            },
-            success: function(data) {
-
-            // Générer des couleurs aléatoires pour chaque région
-            var colors = data.regions.map(function() {
-                return getRandomColor();
+        // Appeler la fonction updateChart() pour charger le graphique au chargement initial
+        updateChart1();
+        
+        
+            // Export chart as image
+            document.getElementById('export-btn').addEventListener('click', function () {
+                var canvas = document.getElementById('convention');
+                var link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'DemandeConvention.png';
+                link.click();
             });
 
-
-                // Mettre à jour le graphique avec les nouvelles données
-               
-
-                var ctx = document.getElementById('convention').getContext('2d');
-                var convChart = new Chart(ctx, {
-                    type: 'bar', 
-                    data: {
-                        labels: data.regions,
-                        datasets: [
-                            {
-                                label: 'Nombre de demandes par regions',
-                                data: data.nombre_demandes,
-                                backgroundColor: colors,
-                            },
-                        ],
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            x: {
-                                beginAtZero: true,
-                            },
-                            y: {
-                                beginAtZero: true,
-                            },
-                        },
-                    },
-                });
-            },
-            error: function(error) {
-                console.log('Erreur AJAX:', error);
-            }
         });
-    }
-
-
-    // Export chart as image
-    document.getElementById('export-btn').addEventListener('click', function () {
-        var canvas = document.getElementById('convention');
-        var link = document.createElement('a');
-        link.href = canvas.toDataURL('image/png');
-        link.download = 'chart.png';
-        link.click();
-    });
-
+        
     </script>
     
+
+
+<script>
+    $(document).ready(function(){
+        // Fonction pour mettre à jour le graphique
+        function updateChart() {
+            var date_depart = $('#start_date').val(); 
+            var date_arrive = $('#end_date').val();    
+            var statut = $('#type_rapport').val();   
+              
+
+            $.ajax({
+                url: '{% url "bunsess:rapportMort" %}',
+                type: 'GET',
+                dataType: 'json',
+                data: $('#filterRpport').serialize(),  // Envoyer les données du formulaire
+                success: function(data) {
+                    if (data.error) {
+                        console.error('Erreur lors de la récupération des données:', data.error);
+                        return;
+                    }
+    
+                    if (!data.dates || !data.total_hommes || !data.total_femmes || !data.total_enfants) {
+                        console.error('Données manquantes pour créer le graphique.');
+                        return;
+                    }
+    
+                    // Créer le graphique en utilisant Chart.js
+                    var ctx = document.getElementById('rapportMort').getContext('2d');
+                    var mortRapp = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: data.dates,
+                            datasets: [
+                                {
+                                    label: 'Hommes',
+                                    data: data.total_hommes,
+                                    backgroundColor: '#ff5733',
+                                    borderColor: 'rgba(255, 99, 132, 1)',
+                                    borderWidth: 1,
+                                    fill: false
+                                },
+                                {
+                                    label: 'Femmes',
+                                    data: data.total_femmes,
+                                    backgroundColor: '#f5d017',
+                                    borderColor: 'rgba(54, 162, 235, 1)',
+                                    borderWidth: 1,
+                                    fill: false
+                                },
+                                {
+                                    label: 'Enfants',
+                                    data: data.total_enfants,
+                                    backgroundColor: '#f58317',
+                                    borderColor: 'rgba(255, 206, 86, 1)',
+                                    borderWidth: 1,
+                                    fill: false
+                                }
+                            ]
+                        }
+
+                        
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erreur lors de la requête AJAX:', status, error);
+                }
+            });
+        }
+    
+        // Ajouter des gestionnaires d'événements pour les changements dans le formulaire
+        $('#start_date, #end_date, #type_rapport').on('change', function() {
+            updateChart();  // Mettre à jour le graphique lorsque les champs changent
+        });
+    
+        // Appeler la fonction updateChart() pour charger le graphique au chargement initial
+        updateChart();
+
+
+        document.getElementById('export-rapport').addEventListener('click', function () {
+            var canvas = document.getElementById('rapportMort');
+            var link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'rapportMort.png';
+            link.click();
+        });
+    
+    });
+    
+</script>
+    
+
 {% endblock %}
