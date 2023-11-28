@@ -1,88 +1,115 @@
-{% extends 'base.html' %}
+{% extends 'base1.html' %}
+
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+    <style xmlns="http://www.w3.org/1999/html">
+    </style>
+    <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.min.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "DataTables/datatables.min.css"%}/>
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+{% endblock extra_css  %}
+
+{% block page_title %}
+site
+{% endblock %}
 
 
-
-{% block add %}
-<h4>
-
- 
-<a id="syncLink" href="{% url 'api_accident' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
-  <i class="fa-solid fa-group-arrows-rotate"></i>
-</a>
-
-
-<a href="{% url 'add_incident' %}" class="text-decoration-none fw-bold text-success">
-    <i class="fa fa-plus-circle text-success"></i>
- </a>
- 
-</H4>
-{% endblock add %}
-
-
-
-
-{% block main %}
-
-
-
-<table class="table table-striped shadow-lg p-3 mt-3">
-    <thead>
-      <tr class="bg-success">
-        <th scope="col">Id</th>
-        <th scope="col">Localité</th>
-        <th scope="col">Nom du site</th>
-        <th scope="col">Date</th>
-        <th scope="col">Heure</th>
-        <th scope="col">Lieu</th>
-        <th scope="col">Victime H</th>
-        <th scope="col">Victime F</th>
-        <th scope="col">Victime E</th>
-        <th scope="col">Mort H</th>
-        <th scope="col">Mort F</th>
-        <th scope="col">Mort E</th>
-        <th scope="col"><i class="fas fa-pen text-warning"></i></th>
-        <th scope="col"> <i class="fas fa-trash text-danger"></i></th>
-      </tr>
-    </thead>
-    <tbody>
-        {% for result in page_obj %}
-      <tr>
-        <tr>
-          <td>{{ result.id }}</td>
-          <td>{{result.nom_localite}}</td>
-          <td>{{result.nom_site}}</td>
-          <td>{{result.date_incident}}</td>
-          <td>{{result.heure_incident}}</td>
-          <td>{{result.lieu}}</td>
-          <td>{{result.vict_hom}}</td>
-          <td>{{result.vict_fem}}</td>
-          <td>{{result.vict_enf}}</td>
-          <td>{{result.mort_hom}}</td>
-          <td>{{result.mort_fem}}</td>
-          <td>{{result.mort_enf}}</td>
+{% block content %}
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-12 d-flex no-block align-items-center">
         
-        <td>
-          <a href="{% url 'edit_incident' result.id %}" title="modifier">
-            <i class="fas fa-pen text-warning"></i>
-          </a>
-        </td>
-        <td>
+        <a id="syncLink" href="{% url 'api_accident' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
+          <i class="fa-solid fa-group-arrows-rotate"></i>
+        </a>
+        
+        &nbsp; &nbsp;
+        <a href="{% url 'add_incident' %}" class="text-decoration-none fw-bold text-success">
+            <i class="fa fa-plus-circle text-success"></i>
+         </a>
+         
+       
+          <div class="ml-auto text-right">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Library</li>
+                  </ol>
+              </nav>
+          </div>
+      </div>
+  </div>
+</div>
 
-          <a data-bs-toggle="modal" data-bs-target="#accidentModal{{result.id}}" title="supprimer">
-            <i class="fas fa-trash text-danger"></i> 
-          </a>
-
-        </td>
-      </tr>
-
-    
-      {% include 'technique/accident/delete.html' %}
-
-      {% endfor %}
-    </tbody>
-  </table>
+<div class="container-fluid">
 
 
+  <table class="table table-striped shadow-lg p-3 mt-3">
+      <thead>
+        <tr class="bg-success">
+          <th scope="col">Id</th>
+          <th scope="col">Localité</th>
+          <th scope="col">Site</th>
+          <th scope="col">Date</th>
+          <th scope="col">Heure</th>
+          <th scope="col">Lieu</th>
+          <th scope="col">V-H</th>
+          <th scope="col">V-F</th>
+          <th scope="col">V-E</th>
+          <th scope="col">M-H</th>
+          <th scope="col">M-F</th>
+          <th scope="col">M-E</th>
+          <th scope="col"><i class="fas fa-pen text-warning"></i></th>
+          <th scope="col"> <i class="fas fa-trash text-danger"></i></th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for result in page_obj %}
+        <tr>
+          <tr>
+            <td>{{ result.id }}</td>
+            <td>{{result.nom_localite}}</td>
+            <td>{{result.nom_site}}</td>
+            <td>{{result.date_incident}}</td>
+            <td>{{result.heure_incident}}</td>
+            <td>{{result.lieu}}</td>
+            <td>{{result.vict_hom}}</td>
+            <td>{{result.vict_fem}}</td>
+            <td>{{result.vict_enf}}</td>
+            <td>{{result.mort_hom}}</td>
+            <td>{{result.mort_fem}}</td>
+            <td>{{result.mort_enf}}</td>
+          
+          <td>
+            <a href="{% url 'edit_incident' result.id %}" title="modifier">
+              <i class="fas fa-pen text-warning"></i>
+            </a>
+          </td>
+          <td>
+
+            <a data-bs-toggle="modal" data-bs-target="#accidentModal{{result.id}}" title="supprimer">
+              <i class="fas fa-trash text-danger"></i> 
+            </a>
+
+          </td>
+        </tr>
+
+      
+        {% include 'technique/accident/delete.html' %}
+
+        {% endfor %}
+      </tbody>
+    </table>
+
+</div>
 
   <div class="pagination">
     <span class="step-links">
@@ -123,4 +150,11 @@
 {% endfor%}
 
 
-{% endblock main %}
+{% endblock content %}
+
+
+{% block extra_script %}
+
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}" ></script>
+<script type="text/javascript" src="{% static 'DataTables/datatables.min.js' %}"></script>
+{% endblock extra_script %}

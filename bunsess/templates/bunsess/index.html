@@ -1,0 +1,193 @@
+{% extends "base1.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+    <style xmlns="http://www.w3.org/1999/html">
+    </style>
+{% endblock %}
+{% block page_title %}
+ dashboard
+{% endblock page_title %}
+
+    {% block content %}
+       
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+             <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">Dashboard</h4>
+                        <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Sales Cards  -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-cyan text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-view-dashboard"></i></h1>
+                                <h6 class="text-white fw-bold">Collecteur &nbsp;&nbsp;&nbsp;&nbsp; {{collecteurs}} </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-4 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-success text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-chart-areaspline"></i></h1>
+                                <h6 class="text-white fw-bold">Exploitant &nbsp;&nbsp;&nbsp;&nbsp; {{collecteurs}} </h6>
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Column -->
+                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-warning text-center">
+                                <h1 class="font-light text-white"><i class="mdi mdi-collage"></i></h1>
+                                <h6 class="text-white fw-bold">Cartes &nbsp;&nbsp;&nbsp;&nbsp; {{artisants}} </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-danger text-center">
+                                <h1 class="font-light text-white"><i class=" fa fa-person-falling"></i></h1>
+                                <h6 class="text-white  fw-bold">Accident &nbsp;&nbsp;&nbsp;&nbsp; {{incidents}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <div class="col-md-6 col-lg-2 col-xlg-3">
+                        <div class="card card-hover">
+                            <div class="box bg-info text-center">
+                                <h1 class="font-light text-white"><i class=" fa fa-person-falling"></i></h1>
+                                <h4 class="text-white fw-bold">Incident &nbsp; {{incidents}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                </div>
+                <!-- ============================================================== -->
+                <!-- Sales chart -->
+                <!-- ============================================================== -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-md-flex align-items-center">
+                                    <div>
+                                        <!-- date filter -->
+                                                <form method="get" action="{% url 'bunsess:dashboard' %}">
+                                                        <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
+                                                        <input type="date" value="{{date_depart}}"name="date_depart" id="date_depart" class="text-success font-italic font-weight-bold" required>
+                                                        <label for="" class="form-label font-italic font-weight-bold text-success">au</label>
+                                                        <input type="date" value="{{date_arrive}}" name="date_arrive" id="date_arrive" class="text-success font-italic font-weight-bold" required>
+                                                        &nbsp; &nbsp;
+                                                        <select name="type_rapport" id="type_rapport" required>
+                                                        <option value="">--Type de rapport--</option>
+                                                        <option value="accident">Accident</option>
+                                                        <option value="incident">Incident</option>
+                                                        </select>
+                                                        <select name="chart_type" id="chart_type" required>
+                                                            <option value="">--Grahique--</option>
+                                                            <option value="line">Courbe</option>
+                                                            <option value="histogram">Historgramme</option>
+                                                        </select>
+                                                        <button type="submit" id="submit"><i class="fa fa-search"></i></button>
+                                                        &nbsp;  &nbsp;
+                                                        <a href="{% url 'bunsess:dashboard' %}?reset"><i class="fa fa-refresh"></i></a>
+                                                        &nbsp;  &nbsp;
+                                                        <a href="" id="export_image"><i class="fa fa-file-image"></i></a>
+                                                </form>
+                                    </div>
+                                </div>
+                                <!-- date filter -->
+                                <div class="row">
+                                    <!-- column -->
+                                    <div class="col-lg-12">
+                                        <div class="flot-chart" id="fig">
+                                                {% if chart %}
+                                            <img src="data:image/png;base64, {{chart|safe}}" id="accident">
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <!-- column -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+                <!-- Sales chart -->
+                <!-- ============================================================== -->
+                <!-- ============================================================== -->
+                <!-- Recent comment and chats -->
+                <!-- ============================================================== -->
+                
+                <!-- ============================================================== -->
+                <!-- Recent comment and chats -->
+                <!-- ============================================================== -->
+            </div>
+           
+
+
+{% for message in messages %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+{% if message.tags == 'error' %}
+    <script>
+        var m = "{{ message }}";
+          swal("Refusé !", m, "error")
+    </script>
+          {% elif message.tags == 'success' %}
+    <script>
+          var m = "{{ message }}";
+          swal("success !", m, "success")
+    </script>
+
+    {% elif message.tags == 'warning' %}
+    <script>
+          var m = "{{ message }}";
+          swal("", m, "warning")
+    </script>
+{% endif %}   
+{% endfor%}
+
+    {% endblock content %} 
+       
+
+    {% block extra_script %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+          document.getElementById("export_image").addEventListener("click", function() {
+            var chartImage = document.getElementById("accident");
+      
+            if (chartImage) {
+              var downloadLink = document.createElement("a");
+              downloadLink.href = chartImage.src;
+              downloadLink.download = "chart_image.png";
+              downloadLink.click();
+            }
+          });
+        });
+    </script>
+{% endblock extra_script %}

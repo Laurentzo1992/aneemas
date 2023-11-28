@@ -1,7 +1,11 @@
 from rest_framework.serializers import ModelSerializer
-from paramettre.models import Comsites, Typesites, Statutsites
+from paramettre.models import *
 
-
+class RegionsSerializer(ModelSerializer):
+ 
+    class Meta:
+        model = Regions
+        fields = '__all__'
  
 class ComsitesSerializer(ModelSerializer):
  

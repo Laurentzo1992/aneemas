@@ -1,0 +1,174 @@
+{% extends "base1.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+    <style xmlns="http://www.w3.org/1999/html">
+    </style>
+{% endblock %}
+{% block page_title %}
+ Chart
+{% endblock page_title %}
+{% block content %}
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Buniness Intélligence</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">bi</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Container fluid  -->
+    <!-- ============================================================== -->
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <!-- Chart-1 -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Evolution du nombre de mort par site</h5>
+                        <div id="real-time" style="height:400px;"></div>
+                      
+                        <input id="updateInterval" type="hidden" value="1000" style="text-align: right; width:5em">
+                           
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ENd chart-1 -->
+        <!-- Chart-2 -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Gestion des conventions par regions</h5>
+                        <div id="placeholder" style="height: 400px;">
+                            <div class="card">
+                                <form method="get" id="filterForm">
+                                    <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
+                                    <input type="date" value="{{date_depart}}"name="date_depart" id="date_depart" class="text-success font-italic font-weight-bold" required>
+                                    <label for="" class="form-label font-italic font-weight-bold text-success">au</label>
+                                    <input type="date" value="{{date_arrive}}" name="date_arrive" id="date_arrive" class="text-success font-italic font-weight-bold" required>
+                                    &nbsp; &nbsp;
+                                    <select name="statut" id="statut" required class="filter-input">
+                                    <option value="">--Statut--</option>
+                                    <option value="demande">En Demande</option>
+                                    <option value="instruction">En instruction</option>
+                                    <option value="signature">En signature</option>
+                                    <option value="anuler">Anuler</option>
+                                    <option value="convention">Validé</option>
+                                    </select> &nbsp;
+                                    <button type="button" id="submit" onclick="updateChart()"><i class="fa fa-search"></i></button> &nbsp;
+                                    <button type="button" id="export-btn"><i class="fa fa-file-image text-success"></i></button>
+                                </form>
+                                <div class="card-body">
+                                    <canvas id="convention" width="400" height="200"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <p id="choices" class="m-t-20"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+  
+    <script>
+
+    function getRandomColor() {
+        // Générer une couleur hexadécimale aléatoire
+        return '#' + Math.floor(Math.random()*16777215).toString(16);
+    }
+
+
+    function updateChart() {
+        var date_depart = $('#date_depart').val();
+        var date_arrive = $('#date_arrive').val();
+        var statut = $('#statut').val();
+    
+        // Envoyer la requête AJAX vers la vue Django avec les filtres
+        $.ajax({
+            type: 'GET',
+            url: '{% url "bunsess:charts" %}',
+            data: {
+                'date_depart': date_depart,
+                'date_arrive': date_arrive,
+                'statut': statut,
+            },
+            success: function(data) {
+
+            // Générer des couleurs aléatoires pour chaque région
+            var colors = data.regions.map(function() {
+                return getRandomColor();
+            });
+
+
+                // Mettre à jour le graphique avec les nouvelles données
+               
+
+                var ctx = document.getElementById('convention').getContext('2d');
+                var convChart = new Chart(ctx, {
+                    type: 'bar', 
+                    data: {
+                        labels: data.regions,
+                        datasets: [
+                            {
+                                label: 'Nombre de demandes par regions',
+                                data: data.nombre_demandes,
+                                backgroundColor: colors,
+                            },
+                        ],
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                            },
+                            y: {
+                                beginAtZero: true,
+                            },
+                        },
+                    },
+                });
+            },
+            error: function(error) {
+                console.log('Erreur AJAX:', error);
+            }
+        });
+    }
+
+
+    // Export chart as image
+    document.getElementById('export-btn').addEventListener('click', function () {
+        var canvas = document.getElementById('convention');
+        var link = document.createElement('a');
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'chart.png';
+        link.click();
+    });
+
+    </script>
+    
+{% endblock %}

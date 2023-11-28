@@ -1,73 +1,98 @@
-{% extends 'base.html' %}
+{% extends 'base1.html' %}
+{% load i18n %}
+{% load static %}
+{% block page_title %}
+  convention
+{% endblock page_title %}
+
+{% block extra_css %}
+    <style xmlns="http://www.w3.org/1999/html">
+    </style>
+    <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.min.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "DataTables/datatables.min.css"%}/>
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+{% endblock extra_css  %}
 
 
 
-{% block add %}
+{% block content %}
 
-
- <h4>
-
- 
-  <a id="syncLink" href="{% url 'api_enrolement_conv' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
-    <i class="fa-solid fa-group-arrows-rotate"></i>
-  </a>
-  
-  
-  <a href="{% url 'add_convention' %}" class="text-decoration-none fw-bold text-success">
-      <i class="fa fa-plus-circle text-success"></i>
-   </a>
-   
-  </H4>
-
-{% endblock add %}
-
-
-{% block main %}
-
-
-
-<div id='slide_menu'>
-    <div class="container mt-3">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#types" role="tab" aria-controls="home" aria-selected="true">Demandes </a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#emplacement" role="tab" aria-controls="profile" aria-selected="false">En Instruction</a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" id="status-tab" data-bs-toggle="tab" href="#status" role="tab" aria-controls="result" aria-selected="false">En Signature</a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" id="valid-tab" data-bs-toggle="tab" href="#valid" role="tab" aria-controls="valid" aria-selected="false">conventions signées</a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" id="valid-tab" data-bs-toggle="tab" href="#anul" role="tab" aria-controls="valid" aria-selected="false">Conventions Anulées</a>
-          </li>
-        </ul>
-    
-        <div class="tab-content  mt-2" id="myTabContent">
-            <div class="tab-pane fade show active" id="types" role="tabpanel" aria-labelledby="home-tab">
-               {% include "technique/convention/demande.html" %}
-            </div>
-            <div class="tab-pane fade" id="emplacement" role="tabpanel" aria-labelledby="profile-tab">
-                {% include "technique/convention/instruction.html" %}
-            </div>
-            <div class="tab-pane fade" id="status" role="tabpanel" aria-labelledby="status-tab">
-                {% include "technique/convention/signature.html" %}
-            </div>
-
-            <div class="tab-pane fade" id="valid" role="tabpanel" aria-labelledby="valid-tab">
-                {% include "technique/convention/convention.html" %}
-            </div>
-
-            <div class="tab-pane fade" id="anul" role="tabpanel" aria-labelledby="anul-tab">
-              {% include "technique/convention/anul_conv.html" %}
+<div class="page-breadcrumb">
+  <div class="row">
+      <div class="col-12 d-flex no-block align-items-center">
+        <a id="syncLink" href="{% url 'api_enrolement_conv' %}" title="données du mobile" class="text-decoration-none fw-bold text-success">
+          <i class="fa-solid fa-group-arrows-rotate"></i>
+        </a>
+        &nbsp; &nbsp;
+        
+        <a href="{% url 'add_convention' %}" class="text-decoration-none fw-bold text-success">
+            <i class="fa fa-plus-circle text-success"></i>
+         </a>
+         
+       
+          <div class="ml-auto text-right">
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Home</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Library</li>
+                  </ol>
+              </nav>
           </div>
-
-        </div>
       </div>
-    
+  </div>
+</div>
+
+<div class="container-fluid">
+    <div id='slide_menu'>
+        <div class="container mt-3">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#types" role="tab" aria-controls="home" aria-selected="true">Demandes </a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#emplacement" role="tab" aria-controls="profile" aria-selected="false">En Instruction</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="status-tab" data-bs-toggle="tab" href="#status" role="tab" aria-controls="result" aria-selected="false">En Signature</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="valid-tab" data-bs-toggle="tab" href="#valid" role="tab" aria-controls="valid" aria-selected="false">conventions signées</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="valid-tab" data-bs-toggle="tab" href="#anul" role="tab" aria-controls="valid" aria-selected="false">Conventions Anulées</a>
+              </li>
+            </ul>
+        
+            <div class="tab-content  mt-2" id="myTabContent">
+                <div class="tab-pane fade show active" id="types" role="tabpanel" aria-labelledby="home-tab">
+                  {% include "technique/convention/demande.html" %}
+                </div>
+                <div class="tab-pane fade" id="emplacement" role="tabpanel" aria-labelledby="profile-tab">
+                    {% include "technique/convention/instruction.html" %}
+                </div>
+                <div class="tab-pane fade" id="status" role="tabpanel" aria-labelledby="status-tab">
+                    {% include "technique/convention/signature.html" %}
+                </div>
+
+                <div class="tab-pane fade" id="valid" role="tabpanel" aria-labelledby="valid-tab">
+                    {% include "technique/convention/convention.html" %}
+                </div>
+
+                <div class="tab-pane fade" id="anul" role="tabpanel" aria-labelledby="anul-tab">
+                  {% include "technique/convention/anul_conv.html" %}
+              </div>
+
+            </div>
+          </div>
+        
+    </div>
 </div>
 
 {% for message in messages %}
@@ -85,4 +110,38 @@
 {% endif %}   
 {% endfor%}
 
-{% endblock main %}
+{% endblock content %}
+
+
+
+{% block srcipts %}
+
+
+{% block extra_script %}
+
+<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}" ></script>
+<script type="text/javascript" src="{% static 'DataTables/datatables.min.js' %}"></script>
+<script src="{% static 'select2/dist/js/select2.min.js' %}"></script>
+<link href="{% static 'select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css">
+
+<script>
+  $("#id_region").select2({
+   placeholder: "selectionner la region",
+   allowClear: true
+  });
+  $("#id_province").select2({
+   placeholder: "selectionner la province",
+   allowClear: true
+  });
+
+
+  $("#id_commune").select2({
+    placeholder: "selectionner la Commune",
+    allowClear: true
+   });
+</script>
+
+{% endblock extra_script %}
+
+
+{% endblock srcipts %}

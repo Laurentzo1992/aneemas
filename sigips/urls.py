@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include('commercial.urls')),
     path('', include('environnement.urls')),
     path('', include('authentication.urls')),
+    path('', include('bunsess.urls')),
     path('api-auth/', include('rest_framework.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
 ]

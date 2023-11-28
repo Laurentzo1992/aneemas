@@ -14,8 +14,10 @@
 
       </div>
       <div class="modal-footer">
-          <a href="{% url 'delete_enrolement'  result.id %}" class="btn btn-outline-danger btn-sm btn-modal">Valider</a>
+          <a href="{% url 'delete_enrolement'  result.id %}" class="btn btn-danger btn-sm btn-modal">Valider</a>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Anuler</button>
       </div>
+      
     </div>
   </div>
 </div>

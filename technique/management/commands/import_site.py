@@ -1,71 +1,55 @@
-from paramettre.models import Comsites, Provinces, Regions, Typesites, Statutsites
+from paramettre.models import *
 import json
 from datetime import datetime
 from django.conf import settings
 from django.core.management.base import BaseCommand
-
 
 class Command(BaseCommand):
     help = 'Migrate data from JSON file to Comsites model'
 
     def handle(self, *args, **options):
         datafile = settings.BASE_DIR / 'data' / 'site2.json'
-        #json_file_path = options['json_file']
 
         with open(datafile, 'r', encoding='utf-8') as file:
             data = json.load(file)
 
         for entry in data:
-            
-            region = int(entry["region"])
+            region_id = int(entry["region"])
+            province_id = int(entry["province"])
+            commune_id = int(entry["commune"])
+            typesite_id = int(entry["typesite"])
+            statut_id = entry.get("statut")
+
             try:
-                region = Regions.objects.get(id=region)
-            except Regions.DoesNotExist:
-           
+                region = Regions.objects.get(id=region_id)
+                province = Provinces.objects.get(id=province_id)
+                commune = Communes.objects.get(id=commune_id)
+                typesite = Typesites.objects.get(id=typesite_id)
+                statut = Statutsites.objects.get(id=statut_id) if statut_id is not None else None
+            except (Regions.DoesNotExist, Provinces.DoesNotExist, Communes.DoesNotExist, Typesites.DoesNotExist, Statutsites.DoesNotExist):
+                self.stderr.write(self.style.ERROR(f'Invalid IDs for region, province, commune, typesite, or statut. Skipping entry.'))
                 continue
-            
-            province = int(entry["province"])
-            try:
-                province = Provinces.objects.get(id=province)
-            except Provinces.DoesNotExist:
-            
-                continue
-            
-            
-            typesite = int(entry["typesite"])
-            try:
-                typesite = Typesites.objects.get(id=typesite)
-            except Typesites.DoesNotExist:
-           
-                continue
-            
-            
-            
-            statut = entry.get("statut")
-            if statut is not None:
-                statut = int(statut)
-                try:
-                    statut = Statutsites.objects.get(id=statut)
-                except Statutsites.DoesNotExist:
-                    continue
-            else:
-                statut = None
-            
-            comsite, created = Comsites.objects.get_or_create(code_site=entry['code_site'])
-            date_creation_str = entry.get('date_creation', None)
-            
-            if date_creation_str:
-                try:
-                    date_creation = datetime.strptime(date_creation_str, '%d/%m/%Y').strftime('%Y-%m-%d')
-                except ValueError:
-                    self.stderr.write(self.style.ERROR(f'Invalid date format: {date_creation_str}'))
-                    continue
-                comsite.date_creation = date_creation
-            #comsite.date_creation = entry.get('date_creation', None)
-            comsite.nom_site = entry.get('nom_site')
+
+            #Génération du code du site
+            region_prefix = region.nomreg[:2].upper()
+            province_prefix = province.nomprov[:2].upper()
+            commune_prefix = commune.nom_commune[:2].upper()
+
+            # Numéro incrémental unique pour chaque combinaison de région, province et commune
+            num_incremental = Comsites.objects.filter(region=region, province=province, commune=commune).count() + 1
+
+            # Formatage du code du site avec un numéro incrémental de 4 chiffres
+            code_site = f"{region_prefix}{province_prefix}{commune_prefix}{num_incremental:04d}"
+
+            # Création ou mise à jour de l'objet Comsites
+            comsite, created = Comsites.objects.update_or_create(code_site=code_site)
+
+            # Affectation des valeurs
+            comsite.date_creation = datetime.strptime(entry.get('date_creation', ''), '%d/%m/%Y').strftime('%Y-%m-%d') if entry.get('date_creation') else None
+            comsite.nom_site = entry.get('nom_site') if entry.get('nom_site') else 'Site Anonyme'
             comsite.region = region
             comsite.province = province
-            comsite.commune = entry.get('commune')
+            comsite.commune = commune
             comsite.village = entry.get('village')
             comsite.typesite = typesite
             comsite.statut = statut
@@ -79,8 +63,8 @@ class Command(BaseCommand):
             comsite.personne_resource2 = entry.get('personne_resource2')
             comsite.contact_resource2 = entry.get('contact_resource2')
             comsite.zone = entry.get('zone', 30)
-            comsite.longitude = float(entry['X']) if entry.get('X') is not None else 0.0
-            comsite.latitude = float(entry['Y']) if entry.get('Y') is not None else 0.0
+            comsite.longitude = float(entry.get('X', 0.0))
+            comsite.latitude = float(entry.get('Y', 0.0))
             comsite.etendu = entry.get('etendu')
             comsite.p_chimique = bool(entry.get('p_chimique'))
             comsite.p_explosif = bool(entry.get('p_explosif'))
@@ -88,9 +72,10 @@ class Command(BaseCommand):
             comsite.conflit = bool(entry.get('conflit'))
             comsite.obs_geo = entry.get('obs_geo')
 
+            #Sauvegarde de l'objet Comsites
             comsite.save()
 
             if created:
-                self.stdout.write(self.style.SUCCESS(f'Comsite created: {comsite.code_site}'))
+                self.stdout.write(self.style.SUCCESS(f'Comsite created: {comsite.nom_site} Code : {comsite.code_site}'))
             else:
-                self.stdout.write(self.style.SUCCESS(f'Comsite updated: {comsite.code_site}'))
+                self.stdout.write(self.style.SUCCESS(f'Comsite updated:  {comsite.nom_site} Code : {comsite.code_site}'))

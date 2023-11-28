@@ -1,21 +1,29 @@
-{% extends 'base.html' %}
+{% extends 'base1.html' %}
+{% load i18n %}
+{% load static %}
+{% block page_title %}
+  enrolement
+{% endblock page_title %}
 
+{% block extra_css %}
+    <style xmlns="http://www.w3.org/1999/html">
+    </style>
+    <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.min.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "DataTables/datatables.min.css"%}/>
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+{% endblock extra_css  %}
 
+{% block content %}
 
-{% block add %}
-
-
-
-{% endblock add %}
-
-
-
-
-{% block main %}
-
-
-
-<table class="table table-striped shadow-lg p-3 mt-3">
+<div class="container-fluid">
+  <table class="table table-striped shadow-lg p-3 mt-3">
     <thead>
       <tr class="bg-success">
         <th scope="col">Id</th>
@@ -64,26 +72,27 @@
     </tbody>
   </table>
 
-
-
-  <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; debut</a>
-            <a href="?page={{ page_obj.previous_page_number }}">précédent</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">suivant</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">fin &raquo;</a>
-        {% endif %}
-    </span>
 </div>
 
 
+    <div class="pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a href="?page=1">&laquo; debut</a>
+              <a href="?page={{ page_obj.previous_page_number }}">précédent</a>
+          {% endif %}
 
-{% endblock main %}
+          <span class="current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          </span>
+
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">suivant</a>
+              <a href="?page={{ page_obj.paginator.num_pages }}">fin &raquo;</a>
+          {% endif %}
+      </span>
+  </div>
+
+
+
+{% endblock content %}

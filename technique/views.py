@@ -62,7 +62,10 @@ class StatutsitesViewset(ModelViewSet):
 
 
 
-
+class RegionsViewset(ModelViewSet):
+    serializer_class = RegionsSerializer
+    def get_queryset(self):
+        return Regions.objects.all()
 
 
 

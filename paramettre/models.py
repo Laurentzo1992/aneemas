@@ -1,6 +1,20 @@
 from django.db import models
 from django.contrib.gis.db import models
 from django.core.exceptions import ValidationError
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+from authentication.models import User
+
+
+class Message(models.Model):
+    phone_numbers = models.TextField()
+    message = models.TextField()
+    envoyeur = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    sent_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Message sent at {self.sent_at}"
+
 
 
 
@@ -282,7 +296,7 @@ class Comsites(models.Model):
     nom_site = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Nom du site")
     region = models.ForeignKey(Regions, on_delete=models.CASCADE , blank=True, null=True, verbose_name='Region')
     province = models.ForeignKey(Provinces, on_delete=models.CASCADE, blank=True, null=True, verbose_name='Province')
-    commune = models.CharField(max_length=2500, blank=True, null=True)
+    commune = models.ForeignKey(Communes, on_delete=models.CASCADE, blank=True, null=True)
     village = models.CharField(max_length=2500, blank=True, null=True, verbose_name="Village")
     typesite = models.ForeignKey(Typesites, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Type de site')
     statut = models.ForeignKey(Statutsites, blank=True, null=True,  on_delete=models.CASCADE, verbose_name="Stut de site")
@@ -457,7 +471,7 @@ class Fichenrolements(models.Model):
     telephone2 = models.CharField(max_length=150, blank=True, null=True)
     quittance = models.CharField(max_length=500, blank=True, null=True)
     engagement = models.CharField(max_length=500, blank=True, null=True)
-    num_carte = models.CharField(blank=True, null=True)
+    num_carte = models.CharField(max_length=1000, blank=True, null=True)
     observation = models.CharField(max_length=1000, blank=True, null=True)
     ref_piece = models.CharField(max_length=500, blank=True, null=True)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)
