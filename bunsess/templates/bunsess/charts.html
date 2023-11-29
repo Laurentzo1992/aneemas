@@ -36,7 +36,7 @@
         <!-- ============================================================== -->
         <!-- Chart-1 -->
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="card">
                     <form method="get" id="filterRpport">
                         <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
@@ -57,6 +57,74 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tableau de bord</h5>
+                        <div id="placeholder" style="height: 420px;">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="bg-success p-10 text-white text-center">
+                                       <i class="fa fa-user m-b-5 font-16"></i>
+                                       <h5 class="m-b-0 m-t-5">{{Users}}</h5>
+                                       <small class="font-light">Total Utilisateur</small>
+                                    </div>
+                                </div>
+                                 <div class="col-6">
+                                    <div class="bg-success p-10 text-white text-center">
+                                       <i class="fa fa-plus m-b-5 font-16"></i>
+                                       <h5 class="m-b-0 m-t-5">{{Carte}}</h5>
+                                       <small class="font-light">Total Carte</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 m-t-15">
+                                    <div class="bg-success p-10 text-white text-center">
+                                       <i class="fa fa-cart-plus m-b-5 font-16"></i>
+                                       <h5 class="m-b-0 m-t-5">{{Visites}}</h5>
+                                       <small class="font-light">Total Visite de site</small>
+                                    </div>
+                                </div>
+                                 <div class="col-6 m-t-15">
+                                    <div class="bg-success p-10 text-white text-center">
+                                       <i class="fa fa-tag m-b-5 font-16"></i>
+                                       <h5 class="m-b-0 m-t-5">{{Prelevements}}</h5>
+                                       <small class="font-light">Total Prelevement</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 m-t-15">
+                                    <div class="bg-success p-10 text-white text-center">
+                                       <i class="fa fa-table m-b-5 font-16"></i>
+                                       <h5 class="m-b-0 m-t-5">{{Bureaux}}</h5>
+                                       <small class="font-light">Total BE</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 m-t-15">
+                                    <div class="bg-success p-10 text-white text-center">
+                                       <i class="fa fa-globe m-b-5 font-16"></i>
+                                       <h5 class="m-b-0 m-t-5">{{Guides}}</h5>
+                                       <small class="font-light">Total Guide</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 m-t-15">
+                                    <div class="bg-success p-10 text-white text-center">
+                                       <i class="fa fa-globe m-b-5 font-16"></i>
+                                       <h5 class="m-b-0 m-t-5">{{rapportActivites}}</h5>
+                                       <small class="font-light">Total Rapport</small>
+                                    </div>
+                                </div>
+                                <div class="col-6 m-t-15">
+                                    <div class="bg-success p-10 text-white text-center">
+                                       <i class="fa fa-globe m-b-5 font-16"></i>
+                                       <h5 class="m-b-0 m-t-5">{{Sites}}</h5>
+                                       <small class="font-light">Total Sites</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p id="choices" class="m-t-20"></p>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- ENd chart-1 -->
         <!-- Chart-2 -->
@@ -66,7 +134,6 @@
                     <div class="card-body">
                         <h5 class="card-title">Gestion des conventions par regions</h5>
                         <div id="placeholder" style="height: 400px;">
-                            <div class="card">
                                 <form method="get" id="filterForm">
                                     <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
                                     <input type="date" value="{{date_depart}}"name="date_depart" id="date_depart" class="text-success font-italic font-weight-bold" required>
@@ -86,7 +153,6 @@
                                 <div class="card-body">
                                     <canvas id="convention" width="400" height="400"></canvas>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>

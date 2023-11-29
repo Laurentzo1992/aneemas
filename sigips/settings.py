@@ -230,7 +230,7 @@ LOGIN_REDIRECT_URL = 'home'
 # Twillo credential
 TWILIO_ACCOUNT_SID = 'AC15fbce0675e82420dce584d408ca97ce'
 
-TWILIO_AUTH_TOKEN = '95ad8e6b42a587695b8671783213a408'
+TWILIO_AUTH_TOKEN = 'ce8bc149e7b00b6253fdfff807e7a923'
 
 # Pour retirer le slash à la fin
 

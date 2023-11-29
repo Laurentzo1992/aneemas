@@ -98,7 +98,7 @@
         
                 // Ajouter l'indicatif et le numéro à la zone de texte
                 const formattedNumber = `${phoneNumber}`;
-                numbersTextArea.value += formattedNumber + '\n';
+                numbersTextArea.value += formattedNumber + ';';
         
                 // Afficher le message "Numéro ajouté" pendant 2 secondes
                 info.style.display = "";
@@ -108,8 +108,9 @@
         
                 setTimeout(() => {
                     info.style.display = "none";
-                }, 1000);
-            } else {
+                }, 2000);
+            } 
+            else {
                 // Si le numéro n'est pas valide, afficher un message d'erreur
                 info.style.display = "";
                 info.classList.remove("alert-success");  // Supprimer la classe de succès
@@ -119,59 +120,9 @@
                 // Masquer le message d'erreur après 2 secondes
                 setTimeout(() => {
                     info.style.display = "none";
-                }, 1000);
+                }, 2000);
             }
         }
-
-        
-    /**
-        function process(event) {
-            // Supprimez ou commentez la ligne suivante pour permettre la soumission du formulaire
-            // event.preventDefault();
-    
-            // Récupérer le formulaire
-            const form = document.getElementById("login");
-    
-            // Récupérer les données du formulaire avec FormData
-            const formData = new FormData(form);
-    
-            // Effectuer une requête POST asynchrone
-            fetch("{% url 'bunsess:messages' %}", {
-                method: "POST",
-                body: formData,
-            })
-            .then(response => response.json())
-            .then(data => {
-                // Traiter la réponse si nécessaire
-                console.log(data);
-                if (data.success) {
-                    // Afficher un message de succès si la requête est réussie
-                    info.style.display = "";
-                    info.classList.remove("alert-danger");
-                    info.classList.add("alert-success");
-                    info.innerHTML = data.message;
-    
-                    setTimeout(() => {
-                        info.style.display = "none";
-                    }, 1000);
-                } else {
-                    // Afficher un message d'erreur en cas d'échec
-                    info.style.display = "";
-                    info.classList.remove("alert-success");
-                    info.classList.add("alert-danger");
-                    info.innerHTML = data.message;
-    
-                    setTimeout(() => {
-                        info.style.display = "none";
-                    }, 1000);
-                }
-            })
-            .catch(error => {
-                console.error('Erreur lors de la requête:', error);
-            });
-        }
-   **/
-        
 
         function getIp(callback) {
             fetch('https://ipinfo.io/json?token=d276c0763f0eaa', { headers: { 'Accept': 'application/json' }})
@@ -183,19 +134,13 @@
               })
               .then((resp) => callback(resp.country));
            }
-           
-
 
            $("#phone").select2({
             placeholder: "Téléphone",
             allowClear: true
            });
-
-
     </script>
 
-
-    
 {% endblock content %}
 
 

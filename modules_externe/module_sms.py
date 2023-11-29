@@ -8,24 +8,21 @@ def envoyer_message(message, *dest):
     # Initialiser le client Twilio
     client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
 
-    # Variable pour stocker les résultats de l'envoi
-    result_list = []
+    # Liste pour stocker les destinataires ayant réussi l'envoi
+    destinataires_reussis = []
 
     # Envoyer le message à chaque destinataire
     for destinataire in dest:
         try:
             message_envoye = client.messages.create(
                 body=message,
-                from_='+18159348590',
+                from_='+18159348590',  # Votre numéro Twilio ici
                 to=destinataire
             )
             print(f"Message envoyé à {destinataire}: {message_envoye.sid}")
-            result_list.append(f"Message envoyé à {destinataire}")
+            destinataires_reussis.append(destinataire)
         except TwilioRestException as e:
             print(f"Erreur lors de l'envoi du message à {destinataire}: {str(e)}")
-            result_list.append(f"Erreur lors de l'envoi du message à {destinataire}")
 
-    # Retourner le résultat global
-    return result_list
-
+    return destinataires_reussis
 

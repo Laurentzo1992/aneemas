@@ -92,6 +92,14 @@ def dashboard(request):
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def charts(request):
+    Users = User.objects.all().count()
+    Carte = Fichenrolements.objects.all().count()
+    Visites = Fichevisites.objects.all().count()
+    Prelevements = Ficheprelevements.objects.all().count()
+    Bureaux = Burencadrements.objects.all().count()
+    Guides = Formguidautorites.objects.all().count()
+    rapportActivites = Rapactivites.objects.all().count()
+    Sites = Comsites.objects.all().count()
     if request.method == 'GET':
         date_depart = request.GET.get('date_depart')
         date_arrive = request.GET.get('date_arrive')
@@ -120,9 +128,17 @@ def charts(request):
             # Gérer l'erreur de validation des dates
             context = {
                 "error_message": _('Erreur de validation des dates.'),
+                "Users":Users,
+                "Carte":Carte,
+                "Visites":Visites,
+                "Prelevements":Prelevements,
+                "Bureaux":Bureaux,
+                "Guides":Guides,
+                "rapportActivites":rapportActivites,
+                "Sites":Sites,
             }
             return render(request, 'bunsess/charts.html', context)
-    return render(request, 'bunsess/charts.html', context)
+    return render(request, 'bunsess/charts.html')
 
 
 
@@ -242,37 +258,36 @@ def send_messages(request):
         numbers = request.POST.get('numbers')
         datas = request.POST.get('datas')
 
-        #Convertissez les numéros en une liste
-        dest = [num.strip() for num in numbers.split('\n') if num.strip()]
+        # Convertissez les numéros en une liste
+        dest = set([num.strip() for num in numbers.split(';') if num.strip()])
 
-        
         # Assurez-vous que l'utilisateur est authentifié avant d'enregistrer le message
-        if request.user.is_authenticated:
-            envoyeur = request.user
-        else:
-            envoyeur = None
+        envoyeur = request.user if request.user.is_authenticated else None
 
         # Appelez la fonction pour envoyer les messages
-        result = envoyer_message(datas, *dest)
+        destinataires_reussis = envoyer_message(datas, *dest)
 
-        # Enregistrez les données dans le modèle
-        if result:
+        # Enregistrez les données dans le modèle pour les destinataires réussis
+        for destinataire in destinataires_reussis:
             message = Message.objects.create(
-                phone_numbers=dest,
+                phone_numbers=destinataire,
                 message=datas,
-                envoyeur = envoyeur
+                envoyeur=envoyeur
             )
             message.save()
 
+        if destinataires_reussis:
             messages.success(request, 'Message envoyé avec succès')
             return redirect('bunsess:messages_archives')
-            #return JsonResponse({'success': True, 'message': 'Message envoyé avec succès'})
         else:
-            messages.error(request, 'Échec de l\'envoi du message')
+            messages.error(request, "Échec du message")
             return redirect('bunsess:messages')
-            #return JsonResponse({'success': False, 'message': 'Échec de l\'envoi du message'})
 
     return render(request, 'bunsess/form_basic.html')
+
+
+
+
 
 
 
