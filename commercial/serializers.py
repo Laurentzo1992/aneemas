@@ -6,7 +6,7 @@ from .models import Fichecontrol, Lingot, Pesee
 class PeseeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Pesee
-        fields = ['numero', 'poids_brut', 'poids_immerge', 'ecart', 'densite', 'titre', 'or_fin']  # Replace with actual field names
+        fields = ['numero', 'poids_brut', 'poids_immerge', 'ecart', 'densite', 'titre', 'or_fin', 'actif']  # Replace with actual field names
 
 class LingotSerializer(serializers.ModelSerializer):
     pesees = PeseeSerializer(many=True, read_only=True, source="pesee_set")

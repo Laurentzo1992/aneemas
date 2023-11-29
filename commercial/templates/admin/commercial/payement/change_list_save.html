@@ -1,0 +1,211 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+{% block object-tools-items %}
+<!-- Add your custom tabs here -->
+{{ block.super }}
+<style>
+    .changeform-tabs {
+        margin: 0;
+        border-bottom: 2px solid #eff6f5;
+        border-bottom: 0.14286rem solid #eff6f5;
+        background-color: #fff;
+        border-radius: 4px 4px 0 0;
+        border-radius: 0.28571rem 0.28571rem 0 0;
+        margin-left: 0px !important;
+    }
+
+    #tabbed-wrapper {}
+
+    #tabbed-wrapper.tab {
+        background-color: #fff;
+        border-radius: 4px;
+        border-radius: 0.28571rem;
+        padding: 14px;
+        padding: 1rem;
+        border: 0;
+    }
+
+    #tabbed-wrapper.tab.selected {
+        display: block !important;
+    }
+
+    #tabbed-wrapper>.tab {
+        background: white !important;
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+    }
+
+    .results {
+        padding-top: 10px;
+    }
+
+    .tab {
+        display: none;
+    }
+
+    .tab.selected {
+        display: block !important;
+    }
+
+    table thead th {
+        background: #f9cc1c;
+        color: #fff;
+        text-transform: uppercase;
+        transition: background-color .1s;
+    }
+</style>
+<script>
+    function showTab(t, e) {
+        var i = this.$changeform.find('.changeform-tabs-item'),
+            n = this.getContentWrappers(),
+            o = this.getHashSelector(t);
+        if (e || null != o) {
+            null != o &&
+                0 != o.length ||
+                (
+                    o = this.getHashSelector(i.first().find('.changeform-tabs-item-link').attr('href'))
+                );
+            var s = n.filter('.' + o),
+                r = i.find('.changeform-tabs-item-link[href="#/tab/' + o + '/"]').closest('.changeform-tabs-item');
+            i.removeClass('selected'),
+                r.addClass('selected'),
+                n.removeClass('selected'),
+                s.addClass('selected')
+        }
+    }
+
+    function mshowTab(t, e) {
+        var i = this.$changeform.find('.changeform-tabs-item'),
+            n = this.getContentWrappers(),
+            o = this.getHashSelector(t);
+        if (e || null != o) {
+            null != o &&
+                0 != o.length ||
+                (
+                    o = this.getHashSelector(i.first().find('.changeform-tabs-item-link').attr('href'))
+                );
+            var s = n.filter('.' + o),
+                r = i.find('.changeform-tabs-item-link[href="#/tab/' + o + '/"]').closest('.changeform-tabs-item');
+            i.removeClass('selected'),
+                r.addClass('selected'),
+                n.removeClass('selected'),
+                s.addClass('selected')
+        }
+    }
+
+    function initTabs() {
+        var t = this;
+        n(window).on('hashchange', function () {
+            t.showTab(location.hash, !1)
+        }),
+            this.showTab(location.hash, !0)
+    }
+
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var tabLinks = document.querySelectorAll('.changeform-tabs-item-link');
+
+        tabLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                document.querySelectorAll('.changeform-tabs-item').forEach(function (tab) {
+                    tab.classList.remove('selected');
+                });
+                this.closest('.changeform-tabs-item').classList.add('selected');
+                var href = this.getAttribute('href');
+                var parts = href.split("/");
+
+                var pattern = /\/([^/]+)\/?$/;
+                var match = pattern.exec(href);
+                var tab_name = parts[parts.length - 1]
+                if (match) {
+                    showTab(match[match.length - 1]);
+                }
+            });
+        });
+
+        function showTab(tabClass) {
+            // Your code to show the tab goes here
+            var selectedTab = document.querySelector('.' + tabClass);
+            if (selectedTab) {
+                var tabs = document.querySelectorAll('.tab');
+
+                // Remove the 'selected' class from all tabs
+                tabs.forEach(function (tab) {
+                    tab.classList.remove('selected');
+                });
+
+                selectedTab.classList.add('selected');
+            }
+            console.log('Showing tab with ID:', tabClass);
+        }
+
+        window.addEventListener('hashchange', function () {
+            // Your code here to handle the hashchange event
+            showTab(location.hash)
+            var parts = location.hash.split("#");
+            console.log('Hash changed:', parts);
+            console.log('me');
+        });
+    });
+</script>
+
+
+{% endblock %}
+
+{% block result_list %}
+<div id="tabbed-wrapper">
+    <ul class="changeform-tabs">
+        <li class="changeform-tabs-item selected"><a class="changeform-tabs-item-link" href="#/tab/tab_0/">EN
+                ATTENTE</a>
+        </li>
+        <li class="changeform-tabs-item"><a class="changeform-tabs-item-link" href="#/tab/tab_1/">EFFECTUE</a></li>
+        <li class="changeform-tabs-item"><a class="changeform-tabs-item-link" href="#/tab/tab_2/">ARCHIVES</a></li>
+    </ul>
+    <div class="tab tab_0 selected">
+        {{ block.super }}
+    </div>
+    <div class="tab tab_1">
+        {{ block.super }}
+        {% if results %}
+        <div class="results">
+            <table id="result_list">
+                <thead>
+                    <tr>
+                        {% for header in result_headers %}
+                        <th scope="col" {{ header.class_attrib }}>
+                            {% if header.sortable and header.sort_priority > 0 %}
+                            <div class="sortoptions">
+                                <a class="sortremove" href="{{ header.url_remove }}" title="{% translate " Remove from
+                                    sorting" %}"></a>
+                                {% if num_sorted_fields > 1 %}<span class="sortpriority"
+                                    title="{% blocktranslate with priority_number=header.sort_priority %}Sorting priority: {{ priority_number }}{% endblocktranslate %}">{{ header.sort_priority }}</span>{% endif %}
+                                <a href="{{ header.url_toggle }}"
+                                    class="toggle {{ header.ascending|yesno:'ascending,descending' }}"
+                                    title="{% translate " Toggle sorting" %}"></a>
+                            </div>
+                            {% endif %}
+                            <div class="text">{% if header.sortable %}<a href="{{ header.url_primary }}">{{ sheader.text|capfirst }}</a>{% else %}<span>{{ header.text|capfirst }}</span>{% endif %}</div>
+                            <div class="clear"></div>
+                        </th>{% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                    {% if result.form and result.form.non_field_errors %}
+                    <tr>
+                        <td colspan="{{ result|length }}">{{ result.form.non_field_errors }}</td>
+                    </tr>
+                    {% endif %}
+                    <tr>{% for item in result %}{{ item }}{% endfor %}</tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+    <div class="tab tab_2">
+    </div>
+</div>
+{% endblock %}

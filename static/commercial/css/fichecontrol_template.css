@@ -1,0 +1,63 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ccc;
+}
+
+th,
+td {
+    padding: 2px;
+    text-align: left;
+}
+
+th {
+    background-color: #2e5955;
+    /* Green header background */
+    color: white;
+}
+
+.category-row {
+    background-color: #e0e0e0;
+    /* Light gray background for category rows */
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.entete {
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+.colonne {
+    flex: 1;
+    padding: 10px;
+}
+.colonne:last-child {
+    border-right: none; /* Suppression de la bordure de la dernière colonne */
+}
+.adresse p {
+    margin: 0;
+    text-align: center;
+}
+.logo {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+.nom-pays {
+    font-weight: bold;
+    text-align: center;
+}
+.devise {
+    text-align: center;
+}

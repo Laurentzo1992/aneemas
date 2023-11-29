@@ -1,0 +1,207 @@
+{% load static %}
+
+<div class="content-main custom-content">
+    <div id="widget-container">
+        <div class="column" id="column1">
+            <iframe src="https://or.fr/widget/live/XAU?currency=XOF&height=320" frameborder="0" width="100%"
+                height="320" style="border: 0; overflow: scroll;"></iframe>
+        </div>
+        <div class="column" id="column2">
+            <iframe src="https://ifcharts.kitco.com/KitcoChartsIF/index.jsp" frameborder="0" width="100%" height="320"
+                style="border: 0; overflow: scroll;"></iframe>
+        </div>
+        <div class="column" id="column3">
+            <form id="proxys-form" action="https://us20.proxysite.com/includes/process.php?action=update" method="post"
+                target="proxys-iframe">
+                <input type="hidden" name="server-option" value="us20">
+                <input type="hidden" name="d" value="https://fr.bullion-rates.com/gold/XOF/spot-price.htm">
+                <input type="hidden" name="allowCookies" value="on">
+            </form>
+            <iframe name="proxys-iframe" id="proxys-iframe" frameborder="0" width="100%" height="320"
+                style="border: 0; overflow: scroll;"></iframe>
+            <script>
+                document.getElementById('proxys-form').submit();
+            </script>
+        </div>
+    </div>
+    <div id="currency-converter">
+        <label>
+            <select id="sourceCurrency">
+                <!-- Options seront ajoutées dynamiquement via JavaScript -->
+            </select>
+            <input type="number" id="sourceAmount" step="0.01" value="1.00">
+        </label>
+
+        <label>
+            <select id="targetCurrency">
+                <!-- Options seront ajoutées dynamiquement via JavaScript -->
+            </select>
+            <input type="text" id="targetAmount" readonly>
+        </label>
+        <button id="toggleButton">Toggle Collapse</button>
+        <button id="refreshButton">Raffraichir</button>
+        <script>
+            // Obtenez les sélecteurs d'éléments
+            const sourceCurrencySelect = document.getElementById('sourceCurrency');
+            const targetCurrencySelect = document.getElementById('targetCurrency');
+            const sourceAmountInput = document.getElementById('sourceAmount');
+            const targetAmountInput = document.getElementById('targetAmount');
+
+            // URL de l'API des taux de change
+            const apiUrl = 'https://api.exchangerate-api.com/v4/latest/';
+
+            // La fonction de rappel à exécuter lorsqu'une mutation est détectée
+            function mutationCallback(mutationsList, observer) {
+                mutationsList.forEach(mutation => {
+                    // Manipulez ici les changements détectés
+                    convertCurrency()
+                });
+            }
+
+            // Options de configuration pour le Mutation Observer
+            const observerConfig = { attributes: true, childList: true, subtree: true };
+
+            // Créez une instance de Mutation Observer avec la fonction de rappel et les options de configuration
+            const mutationObserver = new MutationObserver(mutationCallback);
+
+            // L'élément cible à observer
+            const observee = document.getElementById('currency-converter');
+
+            // Commencez à observer l'élément cible avec les options de configuration
+            mutationObserver.observe(observee, observerConfig);
+
+            // Fonction pour mettre à jour les options de sélection avec les devises disponibles
+            function updateCurrencyOptions() {
+                // Réduire les devises sources à EURO, XOF, et USD
+                const currencies = ['USD', 'EUR', 'XOF'];
+
+                // Mettez à jour les options des sélecteurs de devises
+                currencies.forEach(currency => {
+                    const option1 = document.createElement('option');
+                    const option2 = document.createElement('option');
+                    option1.value = currency;
+                    option2.value = currency;
+                    option1.textContent = currency;
+                    option2.textContent = currency;
+                    sourceCurrencySelect.appendChild(option1);
+                    targetCurrencySelect.appendChild(option2);
+                    targetCurrencySelect.value = 'XOF'
+                });
+
+                // Ajoutez un gestionnaire d'événements pour les changements de devise ou de montant source
+                sourceCurrencySelect.addEventListener('change', convertCurrency);
+                targetCurrencySelect.addEventListener('change', convertCurrency);
+                sourceAmountInput.addEventListener('input', convertCurrency);
+
+                // Initialisez la conversion avec les valeurs par défaut
+                convertCurrency();
+            }
+
+            // Fonction pour effectuer la conversion de devise
+            function convertCurrency() {
+                const sourceCurrency = sourceCurrencySelect.value;
+                const targetCurrency = targetCurrencySelect.value;
+                const sourceAmount = sourceAmountInput.value;
+
+                // Effectuez la requête AJAX pour obtenir les taux de change
+                fetch(apiUrl + sourceCurrency)
+                    .then(response => response.json())
+                    .then(data => {
+                        const exchangeRate = data.rates[targetCurrency] / data.rates[sourceCurrency];
+                        const targetAmount = (sourceAmount * exchangeRate).toFixed(4);
+
+                        // Mettez à jour le champ du montant cible
+                        targetAmountInput.value = targetAmount;
+                        document.getElementById('id_cours').value = targetAmount
+                    })
+                    .catch(error => console.error('Erreur lors de la conversion de la devise:', error));
+            }
+
+            // Appelez la fonction pour initialiser les options de sélection
+            updateCurrencyOptions();
+        </script>
+    </div>
+    
+</div>
+
+{% block extrastyle %}
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+    }
+
+    #widget-container {
+        display: flex;
+        width: 100%;
+    }
+
+    .column {
+        flex: 1;
+        overflow: hidden;
+        transition: flex 0.5s;
+        overflow-x: auto;
+    }
+
+    iframe {
+        width: 100%;
+        border: none;
+        height: 320px;
+    }
+
+    #toggleButton {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1;
+        padding: 10px;
+        cursor: pointer;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        display: none;
+    }
+
+    #refreshButton {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 1;
+        padding: 10px;
+        cursor: pointer;
+        background-color: #3498db;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        display: none;
+    }
+
+
+    #loading-overlay {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.8);
+        z-index: 9999;
+        text-align: center;
+    }
+
+    #proxys-iframe {
+        overflow-x: scroll;
+    }
+
+    @media only screen and (max-width: 767px) {
+
+        /* Styles for smartphones */
+        #widget-container {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block extrajs %}
+
+{% endblock %}
