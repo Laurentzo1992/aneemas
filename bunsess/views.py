@@ -92,6 +92,14 @@ def dashboard(request):
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def charts(request):
+    Users = User.objects.all().count()
+    Carte = Fichenrolements.objects.all().count()
+    Visites = Fichevisites.objects.all().count()
+    Prelevements = Ficheprelevements.objects.all().count()
+    Bureaux = Burencadrements.objects.all().count()
+    Guides = Formguidautorites.objects.all().count()
+    rapportActivites = Rapactivites.objects.all().count()
+    Sites = Comsites.objects.all().count()
     if request.method == 'GET':
         date_depart = request.GET.get('date_depart')
         date_arrive = request.GET.get('date_arrive')
@@ -120,15 +128,64 @@ def charts(request):
             # Gérer l'erreur de validation des dates
             context = {
                 "error_message": _('Erreur de validation des dates.'),
+                "Users":Users,
+                "Carte":Carte,
+                "Visites":Visites,
+                "Prelevements":Prelevements,
+                "Bureaux":Bureaux,
+                "Guides":Guides,
+                "rapportActivites":rapportActivites,
+                "Sites":Sites,
             }
             return render(request, 'bunsess/charts.html', context)
-    return render(request, 'bunsess/charts.html', context)
+    return render(request, 'bunsess/charts.html')
 
 
 
 
+def rapportMort(request):
+    if request.method == 'GET':
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+        type_rapport = request.GET.get('type_rapport')
+
+        # Validation des dates
+        try:
+            if start_date and end_date:
+                start_date = Formincidents._meta.get_field('date_incident').to_python(start_date)
+                end_date = Formincidents._meta.get_field('date_incident').to_python(end_date)
+        except ValidationError as e:
+            return JsonResponse({'error': str(e)})
+
+        # Agréger les données par date
+        resultats = Formincidents.objects.filter(date_incident__range=[start_date, end_date], type_rapport=type_rapport)\
+            .values('date_incident')\
+            .annotate(total_hommes=Sum('mort_hom'))\
+            .annotate(total_femmes=Sum('mort_fem'))\
+            .annotate(total_enfants=Sum('mort_enf'))\
+            .order_by('date_incident')
+
+        # Créer des listes pour les données du graphique
+        dates = [resultat['date_incident'] for resultat in resultats]
+        total_hommes = [resultat['total_hommes'] for resultat in resultats]
+        total_femmes = [resultat['total_femmes'] for resultat in resultats]
+        total_enfants = [resultat['total_enfants'] for resultat in resultats]
+
+        # Créer un dictionnaire de données
+        data = {
+            'dates': dates,
+            'total_hommes': total_hommes,
+            'total_femmes': total_femmes,
+            'total_enfants': total_enfants,
+        }
+
+        # Renvoyer la réponse JSON
+        return JsonResponse(data)
 
 
+
+  
+  
 
 
 
@@ -202,37 +259,35 @@ def send_messages(request):
         datas = request.POST.get('datas')
 
         # Convertissez les numéros en une liste
-        #dest = list([num.strip() for num in numbers.split(';') if num.strip()])
-        dest = list(set([num.strip() for num in numbers.split(';') if num.strip()]))
+        dest = set([num.strip() for num in numbers.split(';') if num.strip()])
 
-        
         # Assurez-vous que l'utilisateur est authentifié avant d'enregistrer le message
-        if request.user.is_authenticated:
-            envoyeur = request.user
-        else:
-            envoyeur = None
+        envoyeur = request.user if request.user.is_authenticated else None
 
         # Appelez la fonction pour envoyer les messages
-        result = envoyer_message(datas, *dest)
+        destinataires_reussis = envoyer_message(datas, *dest)
 
-        # Enregistrez les données dans le modèle
-        if result:
+        # Enregistrez les données dans le modèle pour les destinataires réussis
+        for destinataire in destinataires_reussis:
             message = Message.objects.create(
-                phone_numbers=dest,
+                phone_numbers=destinataire,
                 message=datas,
-                envoyeur = envoyeur
+                envoyeur=envoyeur
             )
             message.save()
 
+        if destinataires_reussis:
             messages.success(request, 'Message envoyé avec succès')
             return redirect('bunsess:messages_archives')
-            #return JsonResponse({'success': True, 'message': 'Message envoyé avec succès'})
         else:
-            messages.error(request, 'Échec de l\'envoi du message')
+            messages.error(request, "Échec du message")
             return redirect('bunsess:messages')
-            #return JsonResponse({'success': False, 'message': 'Échec de l\'envoi du message'})
 
     return render(request, 'bunsess/form_basic.html')
+
+
+
+
 
 
 

@@ -54,26 +54,20 @@
         <td><i class="fa-brands fa-discord"></i></td>
         {% endif %}
         <td>
-          
           <a href="{% url 'syn' result.identifiant %}" title="validé">
             <i class="fas fa-check-circle text-danger"></i>
           </a>
           &nbsp;
-
-          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{result.identifiant}}">
-            <i class="fas fa-eye text-secondary"></i>
+          <a href="{% url 'syn_detail' result.identifiant %}" title="detail">
+            <i class="fas fa-eye text-success"></i>
           </a>
-
         </td>
       </tr>
-
-      {% include 'technique/enrolement/detail.html' %}
       {% endfor %}
     </tbody>
   </table>
 
 </div>
-
 
     <div class="pagination">
       <span class="step-links">
@@ -92,7 +86,6 @@
           {% endif %}
       </span>
   </div>
-
 
 
 {% endblock content %}
