@@ -48,14 +48,12 @@ fiche visite
         <thead>
           <tr class="bg-success">
             <th scope="col">Id</th>
-            <th scope="col">Type de site</th>
-            <th scope="col">Commune</th>
-            <th scope="col">Village</th>
-            <th scope="col">Nom du site</th>
-            <th scope="col">Statut</th>
-            <th scope="col">Autorité</th>
-            <th scope="col">Nom et Prenom du Guide</th>
-            <th scope="col">Date de la Visite</th>
+            <th scope="col">Bureau</th>
+            <th scope="col">Nbr de Convention</th>
+            br<th scope="col">Nbr de coop</th>
+            <th scope="col">Site fermés</th>
+            <th scope="col">Sites réacrive</th>
+            <th scope="col">Sites Réhabilité</th>
             <th scope="col">action</th>
           </tr>
         </thead>
@@ -63,16 +61,14 @@ fiche visite
             {% for result in page_obj %}
           <tr>
             <td>{{result.id }}</td>
-            <td>{{result.com_site}}</td>
-            <td>{{result.commune}}</td>
-            <td>{{result.village_site}}</td>
-            <td>{{result.nom_site}}</td>
-            <td>{{result.statut_site}}</td>
-            <td>{{result.nom_prenom_autorite }}</td>
-            <td>{{result.nom_prenom_enqueteur}}</td>
-            <td>{{result.date_visite}}</td>
+            <td>{{result.burencadrement_id.libelle}}</td>
+            <td>{{result.nbr_coop}}</td>
+            <td>{{result.nbr_conv}}</td>
+            <td>{{result.site_ferme}}</td>
+            <td>{{result.site_reactive}}</td>
+            <td>{{result.site_rehabilite }}</td>
             <td>
-              <a href="{% url 'edit_guide' result.id %}" title="modifier">
+              <a href="{% url 'edit_rapport' result.id %}" title="modifier">
                 <i class="fas fa-pen text-warning"></i>
               </a>
     

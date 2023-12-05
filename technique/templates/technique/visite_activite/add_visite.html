@@ -1,57 +1,74 @@
-{% extends 'base.html' %}
+{% extends 'base1.html' %}
 {% load crispy_forms_tags %}
-{% block title %} Ajout viste de site  {% endblock %}
+{% crispy example_form example_form.helper %}
+{% load i18n %}
+{% load static %}
+{% block page_title %}
+ajout visite
+{% endblock %}
 
-{% comment %} {% load django_bootstrap5 %} {% endcomment %}
+{% block extra_css %}
+    <style xmlns="http://www.w3.org/1999/html">
+    </style>
+    <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.min.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "DataTables/datatables.min.css"%}/>
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+{% endblock extra_css  %}
 
 
-{% block main %}
+{% block content %}
 
 
-
-   <div class="container mt-3 w-80">
-      
-      <form method="POST" class="card p-3 mt-5 border border-primary"  action="{% url 'add_visite' %}" autocomplete="on" enctype="multipart/form-data"> 
+<div class="container-fluid">
+      <form method="POST" class="card p-3 mt-5"  action="{% url 'add_visite' %}" autocomplete="on" enctype="multipart/form-data"> 
             {% csrf_token %}
 
             {% comment %} {% bootstrap_form form %} {% endcomment %}
 
-         <div class="row">
-            <div class="col-6">{{form.bureau|as_crispy_field}}</div>
-            <div class="col-6">{{form.date_visite|as_crispy_field}}</div>
-         </div>
-
-         <div class="row">
-            <div class="col-4">{{form.qualite|as_crispy_field}}</div>
-            <div class="col-4">{{form.service|as_crispy_field}}</div>
-            <div class="col-4">{{form.date_miss|as_crispy_field}}</div>
-         </div>
-
-         <div class="row">
-            <div class="col-4">{{form.com_region|as_crispy_field}}</div>
-            <div class="col-4">{{form.com_province|as_crispy_field}}</div>
-            <div class="col-4">{{form.commune|as_crispy_field}}</div>
-        </div>
-
-
-
-        <div class="row">
-            <div class="col-3">{{form.latitude|as_crispy_field}}</div>
-            <div class="col-3">{{form.longitude|as_crispy_field}}</div>
-            <div class="col-3">{{form.altitude|as_crispy_field}}</div>
-            <div class="col-3">{{form.precision|as_crispy_field}}</div>
-        </div>
-
-        <div class="row">
-            <div class="col-3">{{form.com_site|as_crispy_field}}</div>
-            <div class="col-3">{{form.nbr_hom|as_crispy_field}}</div>
-            <div class="col-3">{{form.nbr_fem|as_crispy_field}}</div>
-            <div class="col-3">{{form.nbr_enfant|as_crispy_field}}</div>
-         </div>
-
-         <div class="row">
-            <div class="col-12">{{form.nom_des_visiteurs|as_crispy_field}}</div>
-         </div>
+         
+            <div class="row">
+               <div class="col-6">{{form.bureau|as_crispy_field}}</div>
+               <div class="col-6">{{form.date_visite|as_crispy_field}}</div>
+            </div>
+   
+            <div class="row">
+               <div class="col-4">{{form.qualite|as_crispy_field}}</div>
+               <div class="col-4">{{form.service|as_crispy_field}}</div>
+               <div class="col-4">{{form.date_miss|as_crispy_field}}</div>
+            </div>
+   
+            <div class="row">
+               <div class="col-4">{{form.com_region|as_crispy_field}}</div>
+               <div class="col-4">{{form.com_province|as_crispy_field}}</div>
+               <div class="col-4">{{form.commune|as_crispy_field}}</div>
+           </div>
+   
+   
+   
+           <div class="row">
+               <div class="col-3">{{form.latitude|as_crispy_field}}</div>
+               <div class="col-3">{{form.longitude|as_crispy_field}}</div>
+               <div class="col-3">{{form.altitude|as_crispy_field}}</div>
+               <div class="col-3">{{form.precision|as_crispy_field}}</div>
+           </div>
+   
+           <div class="row">
+               <div class="col-3">{{form.com_site|as_crispy_field}}</div>
+               <div class="col-3">{{form.nbr_hom|as_crispy_field}}</div>
+               <div class="col-3">{{form.nbr_fem|as_crispy_field}}</div>
+               <div class="col-3">{{form.nbr_enfant|as_crispy_field}}</div>
+            </div>
+   
+            <div class="row">
+               <div class="col-12">{{form.nom_des_visiteurs|as_crispy_field}}</div>
+            </div>
 
 
          <div class="mt-4" style="width: 100p%;">
@@ -64,8 +81,53 @@
          </div> 
           
       </form>
-   </div>
+</div>
 
-{% endblock main %}
+   {% endblock content %}
 
+
+   {% block srcipts %}
+   
+   
+   {% block extra_script %}
+   
+   <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}" ></script>
+   <script type="text/javascript" src="{% static 'DataTables/datatables.min.js' %}"></script>
+   <script src="{% static 'select2/dist/js/select2.min.js' %}"></script>
+   <link href="{% static 'select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css">
+   
+   <script>
+     $("#id_region").select2({
+      placeholder: "selectionner la region",
+      allowClear: true
+     });
+     $("#id_province").select2({
+      placeholder: "selectionner la province",
+      allowClear: true
+     });
+   
+   
+     $("#id_commune").select2({
+       placeholder: "selectionner la Commune",
+       allowClear: true
+      });
+   
+   
+      $("#id_region_demandeur").select2({
+         placeholder: "selectionner la region du demandeur",
+         allowClear: true
+        });
+   
+   
+        $("#id_province_demandeur").select2({
+         placeholder: "selectionner la province du demandeur",
+         allowClear: true
+        });
+        
+   </script>
+   
+   {% endblock extra_script %}
+   
+   
+   {% endblock srcipts %}
 

@@ -1,17 +1,24 @@
 from modules_externe.imports import *
 from django.utils.translation import gettext as _
 from modules_externe.module_sms import envoyer_message 
-
+from django.contrib.sessions.models import Session
+from django.utils import timezone
 
 
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def dashboard(request):
     try:
+        collecteur_id = 5
+        exploitant_id = 1
         artisants = Cartartisants.objects.all().count()
-        collecteurs = Demandeconventions.objects.filter(statut="convention").order_by('created').count()
-        exploitants = Demandeconventions.objects.filter(statut="convention").order_by('created').count()
-        incidents = Formincidents.objects.filter(type_rapport="accident").count()
+        #collecteurs = Demandeconventions.objects.filter(statut="convention").order_by('created').count()
+        #exploitants = Demandeconventions.objects.filter(statut="convention").order_by('created').count()
+        collecteurs = Demandeconventions.objects.filter(statut="convention", lignetypeautorisation__autorisation_id=collecteur_id).count()
+        exploitants = Demandeconventions.objects.filter(statut="convention", lignetypeautorisation__autorisation_id=exploitant_id).count()
+
+        incidents = Formincidents.objects.filter(type_rapport="incident").count()
+        accidents = Formincidents.objects.filter(type_rapport="accident").count()
         # Récupérer les données venant du formulaire pour filtrer les dates
         if request.method == 'GET':
             date_depart = request.GET.get('date_depart')
@@ -75,6 +82,7 @@ def dashboard(request):
             "collecteurs": collecteurs,
             "exploitants":exploitants,
             "incidents": incidents,
+            "accidents": accidents,
             "chart": chart,
         }
 
@@ -92,7 +100,6 @@ def dashboard(request):
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def charts(request):
-    Users = User.objects.all().count()
     Carte = Fichenrolements.objects.all().count()
     Visites = Fichevisites.objects.all().count()
     Prelevements = Ficheprelevements.objects.all().count()
@@ -100,10 +107,23 @@ def charts(request):
     Guides = Formguidautorites.objects.all().count()
     rapportActivites = Rapactivites.objects.all().count()
     Sites = Comsites.objects.all().count()
+    
+    active_sessions = Session.objects.filter(expire_date__gt=timezone.now())
+    # Obtenez les identifiants uniques des utilisateurs actifs
+    active_users_ids = [session.get_decoded().get('_auth_user_id') for session in active_sessions]
+    # Filtrez les identifiants nuls (utilisateurs non authentifiés)
+    active_users_ids = list(filter(None, active_users_ids))
+    # Obtenez le nombre d'utilisateurs uniques actifs
+    active_users_count = len(set(active_users_ids))
+    
+    # recuperation des types
+    
+    types = Typesites.objects.all()
+    
     if request.method == 'GET':
         date_depart = request.GET.get('date_depart')
         date_arrive = request.GET.get('date_arrive')
-        statut = request.GET.get('statut')
+        status = request.GET.get('statut')
 
         # Validation des dates (assurez-vous que vous avez des validations appropriées dans vos modèles)
         if date_depart and date_arrive:
@@ -111,7 +131,7 @@ def charts(request):
             date_arrive = Demandeconventions._meta.get_field('date_depot').to_python(date_arrive)
 
             # Agréger les données par région
-            resultats = Demandeconventions.objects.filter(date_depot__range=[date_depart, date_arrive], statut=statut)
+            resultats = Demandeconventions.objects.filter(date_depot__range=[date_depart, date_arrive], statut=status)
 
             # Calculer le nombre de demandes par région
             demandes_par_region = resultats.values('region__nomreg').annotate(nombre_demandes=Count('id'))
@@ -128,7 +148,6 @@ def charts(request):
             # Gérer l'erreur de validation des dates
             context = {
                 "error_message": _('Erreur de validation des dates.'),
-                "Users":Users,
                 "Carte":Carte,
                 "Visites":Visites,
                 "Prelevements":Prelevements,
@@ -136,6 +155,8 @@ def charts(request):
                 "Guides":Guides,
                 "rapportActivites":rapportActivites,
                 "Sites":Sites,
+                "active_users_count":active_users_count,
+                "types":types
             }
             return render(request, 'bunsess/charts.html', context)
     return render(request, 'bunsess/charts.html')
@@ -181,6 +202,90 @@ def rapportMort(request):
 
         # Renvoyer la réponse JSON
         return JsonResponse(data)
+    
+    
+    
+
+
+def boadConvention(request):
+    if request.method == 'GET':
+        dep = request.GET.get('dep')
+        arr = request.GET.get('arr')
+        
+        try:
+            if dep and arr:
+                dep = Demandeconventions._meta.get_field('date_signature').to_python(dep)
+                arr = Demandeconventions._meta.get_field('date_signature').to_python(arr)
+        except ValidationError as e:
+            return JsonResponse({'error': str(e)})
+        
+        conventions = Demandeconventions.objects.filter(statut='convention', date_signature__range=[dep, arr]).prefetch_related ('type_autorisation')
+
+        # Préparer les données pour le graphique
+        data = {}
+        for convention in conventions:
+            types_autorisation = convention.type_autorisation.all()
+            
+            for type_autorisation in types_autorisation:
+                type_autorisation_id = type_autorisation.id
+                type_autorisation_libelle = type_autorisation.libelle
+
+                if type_autorisation_id not in data:
+                    data[type_autorisation_id] = {
+                        'libelle': type_autorisation_libelle,
+                        'count': 0
+                    }
+
+                data[type_autorisation_id]['count'] += 1
+
+        # Convertir les données en listes pour les utiliser dans le template
+        labels = [item['libelle'] for item in data.values()]
+        counts = [item['count'] for item in data.values()]
+
+        # Retourner les données JSON
+        response_data = {
+            "labels": labels,
+            "counts": counts,
+        }
+
+        return JsonResponse(response_data)
+    
+    
+    
+    
+def guideAutorite(request):
+    if request.method == 'GET':
+        d1 = request.GET.get('d1')
+        d2 = request.GET.get('d2')
+        type_site = request.GET.get('type_site')
+
+        try:
+            if d1 and d2:
+                d1 = Formguidautorites._meta.get_field('date_visite').to_python(d1)
+                d2 = Formguidautorites._meta.get_field('date_visite').to_python(d2)
+        except ValidationError as e:
+            return JsonResponse({'error': str(e)})
+
+        guides = Formguidautorites.objects.filter(com_site__id=type_site, date_visite__range=[d1, d2])
+
+        # Regroupement par type de site et comptage
+        site_counts = {}
+        for guide in guides:
+            libelle = guide.com_site.libelle
+            site_counts[libelle] = site_counts.get(libelle, 0) + 1
+
+        # Retourner les données JSON
+        response_data = {
+            "labels": list(site_counts.keys()),
+            "counts": list(site_counts.values()),
+        }
+
+        return JsonResponse(response_data)
+
+
+
+
+
 
 
 

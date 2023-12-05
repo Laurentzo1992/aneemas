@@ -40,9 +40,9 @@
                 <div class="card">
                     <form method="get" id="filterRpport">
                         <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
-                        <input type="date" value="{{start_date}}"name="start_date" id="start_date" class="text-success font-italic font-weight-bold" required>
+                        <input type="date" name="start_date" id="start_date" class="text-success font-italic font-weight-bold" required>
                         <label for="" class="form-label font-italic font-weight-bold text-success">au</label>
-                        <input type="date" value="{{end_date}}" name="end_date" id="end_date" class="text-success font-italic font-weight-bold" required>
+                        <input type="date" name="end_date" id="end_date" class="text-success font-italic font-weight-bold" required>
                         &nbsp; &nbsp;
                         <select name="type_rapport" id="type_rapport" required class="filter-input">
                         <option value="">--Type rapport--</option>
@@ -66,7 +66,7 @@
                                 <div class="col-6">
                                     <div class="bg-success p-10 text-white text-center">
                                        <i class="fa fa-user m-b-5 font-16"></i>
-                                       <h5 class="m-b-0 m-t-5">{{Users}}</h5>
+                                       <h5 class="m-b-0 m-t-5">{{active_users_count}}</h5>
                                        <small class="font-light">Total Utilisateur</small>
                                     </div>
                                 </div>
@@ -129,16 +129,16 @@
         <!-- ENd chart-1 -->
         <!-- Chart-2 -->
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Gestion des conventions par regions</h5>
-                        <div id="placeholder" style="height: 400px;">
+                        <div id="placeholder">
                                 <form method="get" id="filterForm">
                                     <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
-                                    <input type="date" value="{{date_depart}}"name="date_depart" id="date_depart" class="text-success font-italic font-weight-bold" required>
+                                    <input type="date" name="date_depart" id="date_depart" class="text-success font-italic font-weight-bold" required>
                                     <label for="" class="form-label font-italic font-weight-bold text-success">au</label>
-                                    <input type="date" value="{{date_arrive}}" name="date_arrive" id="date_arrive" class="text-success font-italic font-weight-bold" required>
+                                    <input type="date" name="date_arrive" id="date_arrive" class="text-success font-italic font-weight-bold" required>
                                     &nbsp; &nbsp;
                                     <select name="statut" id="statut" required class="filter-input">
                                     <option value="">--Statut--</option>
@@ -151,13 +151,63 @@
                                     <button type="button" id="export-btn"><i class="fa fa-file-image text-success"></i></button>
                                 </form>
                                 <div class="card-body">
-                                    <canvas id="convention" width="400" height="400"></canvas>
+                                    <canvas id="convention" width="300" height="300"></canvas>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Guide autorité par type de site</h5>
+                        <div id="placeholder">
+                                <form method="get" id="guide">
+                                    <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
+                                    <input type="date" name="d1" id="d1" class="text-success font-italic font-weight-bold" required>
+                                    <label for="" class="form-label font-italic font-weight-bold text-success">au</label>
+                                    <input type="date" name="d2" id="d2" class="text-success font-italic font-weight-bold" required>
+                                    &nbsp; &nbsp;
+                                    <select name="type_site" id="type_site" required class="filter-input">
+                                    <option value="">--Type de site--</option>
+                                    {% for type_site in types %}
+                                    <option value="{{type_site.id}}">{{type_site.libelle}}</option>
+                                    {% endfor %}
+                                    </select> &nbsp;
+                                    <button type="button" id="exp1"><i class="fa fa-file-image text-success"></i></button>
+                                </form>
+                                <div class="card-body">
+                                    <canvas id="chart1" width="300" height="250"></canvas>
                                 </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- ENd chart-2 -->
+        <!-- Chart-3 -->
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre de covention signé par type d'autorisation</h5>
+                        <div id="placeholder">
+                                <form method="get" id="filterConv">
+                                    <label for="" class="form-label font-italic font-weight-bold text-success">du</label>
+                                    <input type="date" name="dep" id="dep" class="text-success font-italic font-weight-bold" required>
+                                    <label for="" class="form-label font-italic font-weight-bold text-success">au</label>
+                                    <input type="date" name="arr" id="arr" class="text-success font-italic font-weight-bold" required>
+                                    &nbsp; &nbsp;
+                                    <button type="button" id="btn1"><i class="fa fa-file-image text-success"></i></button>
+                                </form>
+                                <canvas id="boadConvention" width="200" height="200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ENd chart-3 -->
     </div>
 
 
@@ -165,7 +215,7 @@
 
 
 
-  
+   <!-- START chart-1 -->
     <script>
 
         $(document).ready(function(){
@@ -200,9 +250,9 @@
                         });
         
                         // Mettre à jour le graphique avec les nouvelles données
-                        var ctx = document.getElementById('convention').getContext('2d');
+                        var ctxConv = document.getElementById('convention').getContext('2d');
                        
-                        convChart = new Chart(ctx, {
+                        convChart = new Chart(ctxConv, {
                             type: 'bar', 
                             data: {
                                 labels: data.regions,
@@ -255,8 +305,10 @@
         
     </script>
     
+ <!-- ENd chart-1 -->
 
 
+  <!-- START chart-2 -->
 <script>
     $(document).ready(function(){
         // Fonction pour mettre à jour le graphique
@@ -283,8 +335,8 @@
                     }
     
                     // Créer le graphique en utilisant Chart.js
-                    var ctx = document.getElementById('rapportMort').getContext('2d');
-                    var mortRapp = new Chart(ctx, {
+                    var ctxRapp = document.getElementById('rapportMort').getContext('2d');
+                    var mortRapp = new Chart(ctxRapp, {
                         type: 'line',
                         data: {
                             labels: data.dates,
@@ -346,5 +398,160 @@
     
 </script>
     
+ <!-- ENd chart-2 -->
+
+
+ <!-- START chart-3 -->
+
+ <script>
+    $(document).ready(function(){
+        // Fonction pour mettre à jour le graphique
+        function updateChartconv() {
+            var date_depart = $('#dep').val(); 
+            var date_arrive = $('#arr').val();       
+              
+
+            $.ajax({
+                url: '{% url "bunsess:boadConvention" %}',
+                type: 'GET',
+                dataType: 'json',
+                data: $('#filterConv').serialize(),  // Envoyer les données du formulaire
+                success: function(data) {
+                    console.log(data)
+                    if (data.error) {
+                        console.error('Erreur lors de la récupération des données:', data.error);
+                        return;
+                    }
+    
+                    if (!data.labels || !data.counts) {
+                        console.error('Données manquantes pour créer le graphique.');
+                        return;
+                    }
+
+                    // Mettre à jour le graphique en utilisant Chart.js
+                    var ctxBoadConv = document.getElementById('boadConvention').getContext('2d');
+                   
+                    var boadConv = new Chart(ctxBoadConv, {
+                        type: 'bar',
+                        data: {
+                            labels: data.labels,
+                            datasets: [
+                                {
+                                    label: 'Nombre de Conventions par Type d\'Autorisation',
+                                    data: data.counts,  // Utiliser data.counts au lieu de data.total_hommes
+                                    backgroundColor: ['#ff5733', '#36a2eb', '#ffcc29'], // Couleurs pour chaque segment
+                                    borderColor: 'rgba(255, 99, 132, 1)',
+                                    borderWidth: 1,
+                                    fill: false
+                                },
+                            ]
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erreur lors de la requête AJAX:', status, error);
+                }
+            });
+        }
+    
+        // Ajouter des gestionnaires d'événements pour les changements dans le formulaire
+        $('#dep, #arr').on('change', function() {
+            updateChartconv();  // Mettre à jour le graphique lorsque les champs changent
+        });
+    
+        // Appeler la fonction updateChart() pour charger le graphique au chargement initial
+        updateChartconv();
+
+
+        document.getElementById('btn1').addEventListener('click', function () {
+            var canvas = document.getElementById('boadConvention');
+            var link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'boadConvention.png';
+            link.click();
+        });
+    
+    });
+</script>
+
+ <!-- ENd chart-3 -->
+
+
+
+ <!-- START chart-4 -->
+<script>
+
+    $(document).ready(function () {
+        // Fonction pour mettre à jour le graphique
+        function updateChartGuide() {
+            var d1 = $('#d1').val();
+            var d2 = $('#d2').val();
+    
+            $.ajax({
+                url: '{% url "bunsess:guideAutorite" %}',
+                type: 'GET',
+                dataType: 'json',
+                data: $('#guide').serialize(),
+                success: function (data) {
+                    console.log(data);
+                    if (data.error) {
+                        console.error('Erreur lors de la récupération des données:', data.error);
+                        return;
+                    }
+    
+                    if (!data.labels || !data.counts) {
+                        console.error('Données manquantes pour créer le graphique.');
+                        return;
+                    }
+    
+                    // Mettre à jour le graphique en utilisant Chart.js
+                    var guideAut = document.getElementById('chart1').getContext('2d');
+                   
+                    var guideChart = new Chart(guideAut, {
+                        type: 'bar',
+                        data: {
+                            labels: data.labels,
+                            datasets: [
+                                {
+                                    label: "Nombre de visite d'autorité par type de site",
+                                    data: data.counts,
+                                    backgroundColor: ['#ff5733', '#36a2eb', '#ffcc29'],
+                                    borderColor: 'rgba(255, 99, 132, 1)',
+                                    borderWidth: 1,
+                                    fill: false
+                                },
+                            ]
+                        }
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error('Erreur lors de la requête AJAX:', status, error);
+                }
+            });
+        }
+    
+        // Ajouter des gestionnaires d'événements pour les changements dans le formulaire
+        $('#dep, #arr, #type_site').on('change', function () {
+            updateChartGuide();  // Mettre à jour le graphique lorsque les champs changent
+        });
+    
+        // Appeler la fonction updateChart() pour charger le graphique au chargement initial
+        updateChartGuide();
+    
+        // Ajouter un gestionnaire d'événements pour le bouton d'export
+        $('#exp1').on('click', function () {
+            var canvas = document.getElementById('chart1');
+            var link = document.createElement('a');
+            link.href = canvas.toDataURL('image/png');
+            link.download = 'updateChartGuide.png';
+            link.click();
+        });
+    });
+    
+
+</script>
+
+
+ <!-- ENd chart-4-->
 
 {% endblock %}
