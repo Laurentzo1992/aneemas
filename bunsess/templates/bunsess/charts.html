@@ -188,6 +188,7 @@
         <!-- ENd chart-2 -->
         <!-- Chart-3 -->
         <div class="row mt-3">
+            <!-- start col- -->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
@@ -206,6 +207,31 @@
                     </div>
                 </div>
             </div>
+            <!-- ENd col- -->
+             <!-- START col- -->
+            <div class="col-md-6">
+                <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Export de données</h5>
+                            <a type="button" href="{% url 'bunsess:export_conv_csv' %}" class="btn btn-success btn-sm">Liste des conventions en CSV</a>
+                            <a type="button" href="{% url 'bunsess:export_site_csv' %}" class="btn btn-primary btn-sm">Liste des sites en CSV</a>
+                           
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Export de données</h5>
+                            <a type="button" href="{% url 'bunsess:export_conv_csv' %}" class="btn btn-success btn-sm">Liste des prelements en CSV</a>
+                            <a type="button" href="{% url 'bunsess:export_site_csv' %}" class="btn btn-primary btn-sm">Lites des guide en CSV</a>
+                           
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Export de données</h5>
+                            <a type="button" href="{% url 'bunsess:export_conv_csv' %}" class="btn btn-success btn-sm">Liste des rapport d'accident-incident en CSV</a>
+                            <a type="button" href="{% url 'bunsess:export_site_csv' %}" class="btn btn-primary btn-sm">Liste des normes en CSV</a>
+                           
+                        </div>
+                </div>
+            </div>
+            <!-- ENd col- -->
         </div>
         <!-- ENd chart-3 -->
     </div>
@@ -522,6 +548,7 @@
                                 },
                             ]
                         }
+                        
                     });
                 },
                 error: function (xhr, status, error) {

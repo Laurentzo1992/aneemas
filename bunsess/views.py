@@ -405,7 +405,41 @@ def messages_archives(request):
 
 
 
+class ExportConventionCSVView(View):
+    
+    def get(self, request, *args, **kwargs):
+        conventions = Demandeconventions.objects.filter(statut='convention')
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="convention.csv"'
 
+        writer = csv.writer(response, delimiter=';')
+        writer.writerow(['ID', 'num_ordre', 'nombre_hectare', 'commune', 'nom_demandeur', 'ref_piece'])
+
+        for convention in conventions:
+            writer.writerow([convention.id, convention.num_ordre, convention.nombre_hectare, convention.commune, convention.nom_demandeur, convention.ref_piece])
+
+        return response
+    
+    
+    
+class ExportSitesCSVView(View):
+    
+    def get(self, request, *args, **kwargs):
+        sites = Comsites.objects.all()
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="sites.csv"'
+
+        writer = csv.writer(response, delimiter=';')
+        writer.writerow(['ID', 'code_site', 'date_creation', 'nom_site', 'typesite', 'statut'])
+
+        for site in sites:
+            # Vérifiez si typesite et statut sont None, remplacez-les par une chaîne vide
+            typesite_libelle = site.typesite.libelle if site.typesite else ''
+            statut_libelle = site.statut.libelle if site.statut else ''
+
+            writer.writerow([site.id, site.code_site, site.date_creation, site.nom_site, typesite_libelle, statut_libelle])
+
+        return response
 
 
 

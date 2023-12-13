@@ -1,69 +1,130 @@
-{% extends 'base.html' %}
+{% extends 'base1.html' %}
 {% load crispy_forms_tags %}
-{% block title %} Ajout analyse {% endblock %}
+{% crispy example_form example_form.helper %}
+{% load i18n %}
+{% load static %}
+{% block page_title %}
+ajout prelement
+{% endblock %}
+
+{% block extra_css %}
+
+    <style xmlns="http://www.w3.org/1999/html">
+    </style>
+    <link rel="stylesheet" type="text/css" href={% static "css/bootstrap.min.css"%}>
+    <link rel="stylesheet" type="text/css" href={% static "DataTables/datatables.min.css"%}/>
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    <script src="{% static 'fontawesomefree/js/fontawesome.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/solid.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/brands.js' %}"></script>
+    <script src="{% static 'fontawesomefree/js/all.min.js' %}"></script>
+    <link href="{% static 'fontawesomefree/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+{% endblock extra_css  %}
 
 
+{% block content %}
 
-{% block main %}
+<div class="container-fluid">
+      <div class="row">
+            <div class="col-6">
+                  <table class="table table-striped shadow-lg p-3 mt-3">
+                        <thead>
+                        <tr class="bg-success">
+                        <th scope="col">Id</th>
+                        <th scope="col">Cond</th>
+                        <th scope="col">ph</th>
+                        <th scope="col">Tds</th>
+                        <th scope="col">Buit</th>
+                        <th scope="col">action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for result in page_obj %}
+                        <tr>
+                        <td>{{ result.id }}</td>
+                        <td>{{result.conductivite}}</td>
+                        <td>{{result.ph}}</td>
+                        <td>{{result.tds}}</td>
+                        <td>{{result.bruit}}</td>
+                        <td>
+                              <a href="{% url 'edit_analyse' result.id %}" title="modifier">
+                                    <i class="fas fa-pen text-warning"></i> 
+                              </a>
 
-      <div class="container-fluid">
-            <div class="row">
-                  <div class="col-6">
-                        <table class="table table-striped shadow-lg p-3 mt-3">
-                              <thead>
-                              <tr class="bg-success">
-                              <th scope="col">Id</th>
-                              <th scope="col">Cond</th>
-                              <th scope="col">ph</th>
-                              <th scope="col">Tds</th>
-                              <th scope="col">Buit</th>
-                              <th scope="col">action</th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              {% for result in page_obj %}
-                              <tr>
-                              <td>{{ result.id }}</td>
-                              <td>{{result.conductivite}}</td>
-                              <td>{{result.ph}}</td>
-                              <td>{{result.tds}}</td>
-                              <td>{{result.bruit}}</td>
-                              <td>
-                                    <a data-bs-toggle="modal" data-bs-target="#editModal{{result.id}}" title="supprimer">
-                                          <i class="fas fa-pen text-primary"></i> 
-                                    </a>
-
-                                    <a data-bs-toggle="modal" data-bs-target="#analyseModal{{result.id}}" title="supprimer">
-                                          <i class="fas fa-gear text-primary"></i> 
-                                    </a>
-
-                                    
-                              </td>
-                              </tr>
-
-                              </tbody>
-                        </table>
-                  </div>
-                  <div class="col-6">
-                        <form method="post" class="card p-3 mt-5 border border-primary" enctype="multipart/form-data">
-                  
-                              {% csrf_token %}
-
-                              {{ form|crispy }}
-
-
-                              <div class="mt-4" style="width: 100p%;">
-                                    <input type="submit" name="submit" value="Ajouter" class="btn btn-success" id="submit-id-submit" />
-                                    <a style= "font-size: 15px;" href="{% url 'add_analyse' %}" type="button" class="btn btn-outline-danger mb-3 ms-2" style="wdith: 50px;" title="Close">
-                                          <i class="fas fa-times"></i>
-                                    </a>
-                              </div>
-                        </form>
-                  </div>
+                              <a data-bs-toggle="modal" data-bs-target="#analyseModal{{result.id}}" title="supprimer">
+                                    <i class="fas fa-gear text-primary"></i> 
+                              </a>
+                        </td>
+                        </tr>
+                        {% include 'environnement/prelevement/resultat.html' %}
+                        {% endfor %}
+                        </tbody>
+                  </table>
+            </div>
+            <div class="col-6">
+                  <form method="post" class="card p-3 mt-5 border border-primary" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <div class="mt-4" style="width: 100p%;">
+                              <input type="submit" name="submit" value="modifier" class="btn btn-warning" id="submit-id-submit" />
+                              <a style= "font-size: 15px;" href="{% url 'prelevement' %}" type="button" class="btn btn-outline-danger mb-3 ms-2" style="wdith: 50px;" title="Close">
+                                    <i class="fas fa-times"></i>
+                              </a>
+                        </div>
+                  </form>
             </div>
       </div>
-  
+</div>
 
-{% endblock main %}
 
+{% endblock content %}
+
+
+   {% block srcipts %}
+   
+   
+   {% block extra_script %}
+   
+   <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}" ></script>
+   <script type="text/javascript" src="{% static 'DataTables/datatables.min.js' %}"></script>
+   <script src="{% static 'select2/dist/js/select2.min.js' %}"></script>
+   <link href="{% static 'select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css">
+   
+   <script>
+     $("#id_region").select2({
+      placeholder: "selectionner la region",
+      allowClear: true
+     });
+     $("#id_province").select2({
+      placeholder: "selectionner la province",
+      allowClear: true
+     });
+   
+   
+     $("#id_commune").select2({
+       placeholder: "selectionner la Commune",
+       allowClear: true
+      });
+   
+   
+      $("#id_region_demandeur").select2({
+         placeholder: "selectionner la region du demandeur",
+         allowClear: true
+        });
+   
+   
+        $("#id_province_demandeur").select2({
+         placeholder: "selectionner la province du demandeur",
+         allowClear: true
+        });
+        
+   </script>
+   
+   {% endblock extra_script %}
+   
+   
+   {% endblock srcipts %}
 
