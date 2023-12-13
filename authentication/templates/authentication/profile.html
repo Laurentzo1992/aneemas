@@ -1,0 +1,61 @@
+{% extends "base1.html" %}
+{% load i18n %}
+{% load static %}
+{% block extra_css %}
+    <style xmlns="http://www.w3.org/1999/html"></style>
+{% endblock extra_css %}
+{% block page_title %}
+
+{% endblock page_title%}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body bg-success">
+                    <h4 class="card-title m-b-0">Mon profile</h4>
+                </div>
+                <div class="comment-widgets scrollable">
+                    <!-- Comment Row -->
+                    <div class="d-flex flex-row comment-row m-t-0">
+                        <div class="p-2"><img src="{% static 'dashboard/images/users/1.jpg' %}" alt="user" width="50" class="rounded-circle"></div>
+                        <div class="comment-text w-100">
+                            <h6 class="font-medium">{{profile}}</h6>
+                            <form method="post" id="login">
+                                {% csrf_token %}
+                                {{form.as_div}}
+                                <div class="comment-footer">
+                                    <button type="submit" class="btn btn-cyan btn-sm">Mise à Jour</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% for message in messages %}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {% if message.tags == 'error' %}
+        <script>
+            var m = "{{ message }}";
+              swal("Refusé !", m, "error");
+        </script>
+              {% elif message.tags == 'success' %};
+        <script>
+              var m = "{{ message }}";
+              swal("success !", m, "success");
+        </script>
+    {% endif %}   
+    {% endfor%}
+
+
+{% endblock content %}
+
+
+
+
+

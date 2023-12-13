@@ -61,9 +61,9 @@ class User(AbstractBaseUser):
     max_length=255,
     unique=True,
     )
-    phone = models.CharField(max_length=100, default="345656")
-    first_name = models.CharField(max_length=100, null=True, blank=True)
-    last_name = models.CharField(max_length=100, null=True, blank=True)
+    phone = models.CharField(max_length=100, default="345656", verbose_name='Téléphone')
+    first_name = models.CharField(max_length=100, null=True, blank=True, verbose_name='Prenom')
+    last_name = models.CharField(max_length=100, null=True, blank=True, verbose_name='Nom')
     is_active = models.BooleanField(default=True)
     staff = models.BooleanField(default=True) # a admin user; non super-user
     admin = models.BooleanField(default=True) # a superuser

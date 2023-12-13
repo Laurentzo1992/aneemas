@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from modules_externe.cours_or import get_data_by_url
 from django.http import JsonResponse
-from paramettre.models import Comsites, Provinces, Regions, Typesites, Statutsites
+from paramettre.models import *
 import json
 import csv
 from datetime import datetime
@@ -19,7 +19,7 @@ class Command(BaseCommand):
         datafile = settings.BASE_DIR / 'data' / 'regions.json'
         #json_file_path = options['json_file']
 
-        with open(datafile, 'r') as file:
+        with open(datafile, 'r', encoding='utf-8') as file:
             data = json.load(file)
             
             for item in data:
