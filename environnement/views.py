@@ -392,18 +392,41 @@ def add_analyse(request, id):
 
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
-def edit_analyse(request, prelevement_id, analyse_id):
-    prelevement = get_object_or_404(Ficheprelevements, id=prelevement_id)
-    analyse = get_object_or_404(Analyse, id=analyse_id, prelevement_id=prelevement)
-
+def edit_analyse(request, id_analyse):
+    result = get_object_or_404(Analyse, id=id_analyse)
     if request.method == "POST":
-        form = AnalyseForm(request.POST, instance=analyse)
+        form = AnalyseForm(request.POST, instance=result)
         if form.is_valid():
             form.save()
             messages.success(request, "Modification effectuée !")
             return redirect('prelevement')
         else:
-            return render(request, 'environnement/prelevement/edit_analyse.html', {"form": form, "prelevement": prelevement, "analyse": analyse})
+            return render(request, 'environnement/prelevement/edit_analyse.html', {"form": form})
     else:
-        form = AnalyseForm(instance=analyse)
-        return render(request, 'environnement/prelevement/edit_analyse.html', {"form": form, "prelevement": prelevement, "analyse": analyse})
+        form = AnalyseForm(instance=result)
+        return render(request, 'environnement/prelevement/edit_analyse.html', {"form": form})
+
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def interpretation(request, id_analyse):
+    analyse = get_object_or_404(Analyse, id=id_analyse)
+    prelevement = analyse.prelevement
+
+    # Ajoutez ici la logique d'interprétation en fonction du taux de pH
+    interpretation = ""
+    if analyse.taux_ph > prelevement.taux_ph:
+        interpretation = "Le taux de pH de l'analyse est supérieur à celui du prélèvement."
+    elif analyse.taux_ph < prelevement.taux_ph:
+        interpretation = "Le taux de pH de l'analyse est inférieur à celui du prélèvement."
+    else:
+        interpretation = "Les taux de pH sont égaux."
+
+    context = {
+        'analyse': analyse,
+        'prelevement': prelevement,
+        'interpretation': interpretation,
+    }
+
+    return render(request, 'environnement/prelevement/interpretation.html', context)

@@ -25,9 +25,9 @@
         {% if result.statut == "convention" %}
         <td class="fw-bold text-success">Signé <i class="fa-solid fa-circle-check"></i>&nbsp;</td>
         {% endif %}
-        {% if result.docs %}
+        {% if result.dossiers %}
         <td>
-          <a href="{{result.docs.url}}" title="lire">
+          <a href="{{result.dossiers.url}}" title="lire">
             <i class="fas fa-folder-open text-warning"></i>
         </a>
         </td>

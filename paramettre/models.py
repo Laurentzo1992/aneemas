@@ -444,7 +444,7 @@ class Demandeconventions(models.Model):
     date_premier_vers = models.DateField(blank=True, null=True)
     date_relance = models.DateField(blank=True, null=True)
     
-    dossiers = models.FileField(upload_to='uploads', blank=True, null=True, verbose_name="Document Annexes à l'instruction")
+    dossiers = models.FileField(upload_to='uploads', blank=True, null=True, verbose_name="Document Annexes à la signature")
    
     statut = models.CharField(max_length=100, blank=True, null=True)
     created = models.DateField(blank=True, null=True, auto_created=True, auto_now_add=True)

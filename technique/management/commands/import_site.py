@@ -4,21 +4,41 @@ from datetime import datetime
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
+
+
+
 class Command(BaseCommand):
     help = 'Migrate data from JSON file to Comsites model'
 
     def handle(self, *args, **options):
-        datafile = settings.BASE_DIR / 'data' / 'site2.json'
+        datafile = settings.BASE_DIR / 'data' / 'site3.json'
 
         with open(datafile, 'r', encoding='utf-8') as file:
             data = json.load(file)
 
         for entry in data:
-            region_id = int(entry["region"])
-            province_id = int(entry["province"])
-            commune_id = int(entry["commune"])
-            typesite_id = int(entry["typesite"])
+            region_id = entry.get("region")
+            province_id = entry.get("province")
+            commune_id = entry.get("commune")
+            typesite_id = entry.get("typesite")
             statut_id = entry.get("statut")
+
+            # Check for None or empty string values
+            if (
+                region_id is None or not str(region_id).isdigit() or
+                province_id is None or not str(province_id).isdigit() or
+                commune_id is None or not str(commune_id).isdigit() or
+                typesite_id is None or not str(typesite_id).isdigit() or
+                statut_id is not None and not str(statut_id).isdigit()
+            ):
+                self.stderr.write(self.style.ERROR('Invalid ID(s). Skipping entry.'))
+                continue
+
+            region_id = int(region_id)
+            province_id = int(province_id)
+            commune_id = int(commune_id)
+            typesite_id = int(typesite_id)
+            statut_id = int(statut_id) if statut_id is not None else None
 
             try:
                 region = Regions.objects.get(id=region_id)
@@ -26,10 +46,12 @@ class Command(BaseCommand):
                 commune = Communes.objects.get(id=commune_id)
                 typesite = Typesites.objects.get(id=typesite_id)
                 statut = Statutsites.objects.get(id=statut_id) if statut_id is not None else None
+                # ... (rest of your code remains unchanged)
             except (Regions.DoesNotExist, Provinces.DoesNotExist, Communes.DoesNotExist, Typesites.DoesNotExist, Statutsites.DoesNotExist):
-                self.stderr.write(self.style.ERROR(f'Invalid IDs for region, province, commune, typesite, or statut. Skipping entry.'))
+                self.stderr.write(self.style.ERROR(f'Invalid IDs. Skipping entry.'))
                 continue
-
+            
+            
             #Génération du code du site
             region_prefix = region.nomreg[:2].upper()
             province_prefix = province.nomprov[:2].upper()
@@ -79,3 +101,7 @@ class Command(BaseCommand):
                 self.stdout.write(self.style.SUCCESS(f'Comsite created: {comsite.nom_site} Code : {comsite.code_site}'))
             else:
                 self.stdout.write(self.style.SUCCESS(f'Comsite updated:  {comsite.nom_site} Code : {comsite.code_site}'))
+
+
+
+            

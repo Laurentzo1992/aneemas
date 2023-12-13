@@ -36,7 +36,8 @@ urlpatterns = [
      # url norme
     
     path('prelevement/analyse/<int:id>', views.add_analyse, name='add_analyse'),
-    #path('prelevement/<int:prelevement_id>/edit_analyse/<int:analyse_id>/', views.edit_analyse, name='edit_analyse'),
+    path('edit_analyse/<int:id_analyse>/', views.edit_analyse, name='edit_analyse'),
+    path('prelevement/analyse/<int:id>', views.interpretation, name='interpretation'),
 
     
 ]

@@ -39,3 +39,7 @@ def get_api_data_id_convention(url, identifiant):
     desired_result = next(filter(lambda result: result['identifiant'] == identifiant, results), None)
     # Si un élément correspondant est trouvé
     return desired_result
+
+
+
+
