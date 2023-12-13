@@ -57,6 +57,10 @@ class FormguidautoritesForm(forms.ModelForm):
         model = Formguidautorites
         fields = '__all__'
         
+        widgets = {
+            'date_visite': forms.DateInput(attrs={'type': 'date'}),
+        }
+        
         
         
 class DemandeconventionsForm(forms.ModelForm):

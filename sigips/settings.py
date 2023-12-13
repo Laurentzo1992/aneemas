@@ -11,12 +11,14 @@ if os.name == 'nt':
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-#GEOIP_PATH = os.path.join(BASE_DIR, 'geoip/')
+GEOIP_PATH = os.path.join(BASE_DIR, 'geoip/')
 
 # SECURITY WARNING: keep the secret key used in production secret!
+
 SECRET_KEY = "django-insecure-jm8&!s!48@8kw@hhdkj2avw)_9e-+pl_qe)^3v#$z)3*e(czzb"
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
@@ -50,6 +52,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "django_pandas",
     "leaflet",
+    "bunsess",
 ]
 
 MIDDLEWARE = [
@@ -229,8 +232,8 @@ LOGIN_REDIRECT_URL = 'home'
 
 # Twillo credential
 TWILIO_ACCOUNT_SID = 'AC15fbce0675e82420dce584d408ca97ce'
-#TWILIO_AUTH_TOKEN = '98bc0aa5112826c36639f84627a189ba'
-TWILIO_AUTH_TOKEN = 'ea62f51392a38eb31091d4261af275c1'
+
+TWILIO_AUTH_TOKEN = 'ce8bc149e7b00b6253fdfff807e7a923'
 
 # Pour retirer le slash à la fin
 

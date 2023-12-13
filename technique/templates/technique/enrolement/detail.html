@@ -1,13 +1,30 @@
+{% extends 'base1.html' %}
+{% load i18n %}
+{% load static %}
+{% block page_title %}
+  enrolement
+{% endblock page_title %}
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop{{result.identifiant}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-   <div class="modal-dialog">
-     <div class="modal-content">
-       <div class="modal-header">
-         <h1 class="modal-title fs-5" id="staticBackdropLabel">Fiche de M {{result.nom}} {{result.prenom}} </h1>
-         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-       </div>
-         <div class="modal-body">  
+
+{% block content %}
+<div class="page-breadcrumb">
+    <div class="row">
+        <div class="col-12 d-flex no-block align-items-center">
+            <h4 class="page-title">Detail data api enrolment</h4>
+            <div class="ml-auto text-right">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">api data detail</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+        <div class="card"> 
             <div class="row">
                <div class="col-6">
                   <div class="input-group mb-1">
@@ -68,15 +85,14 @@
                   </div>
                </div>
             </div>
-         </div>
-       <div class="modal-footer">
-         <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-       </div>
-     </div>
-   </div>
- </div>
+        </div>
+        <a class="btn btn-success" href="{% url 'syn' result.identifiant %}" title="validé">
+            <i class="fas fa-check-circle"></i>
+        </a>
+        <a class="btn btn-warning" href="{% url 'api_enrolement' %}" title="validé">
+            <i class="fas fa-close"></i>
+        </a>
+</div>
 
 
-      
-
-
+{% endblock content %}
