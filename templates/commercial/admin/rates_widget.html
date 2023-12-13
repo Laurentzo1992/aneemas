@@ -71,7 +71,7 @@
             mutationObserver.observe(observee, observerConfig);
 
             // Fonction pour mettre à jour les options de sélection avec les devises disponibles
-            function updateCurrencyOptions() {
+            function updateCurrencyOptions(firstCall) {
                 // Réduire les devises sources à EURO, XOF, et USD
                 const currencies = ['USD', 'EUR', 'XOF'];
 
@@ -94,11 +94,11 @@
                 sourceAmountInput.addEventListener('input', convertCurrency);
 
                 // Initialisez la conversion avec les valeurs par défaut
-                convertCurrency();
+                convertCurrency(true);
             }
 
             // Fonction pour effectuer la conversion de devise
-            function convertCurrency() {
+            function convertCurrency(firstCall=true) {
                 const sourceCurrency = sourceCurrencySelect.value;
                 const targetCurrency = targetCurrencySelect.value;
                 const sourceAmount = sourceAmountInput.value;
@@ -112,13 +112,16 @@
 
                         // Mettez à jour le champ du montant cible
                         targetAmountInput.value = targetAmount;
-                        document.getElementById('id_cours').value = targetAmount
+                        return targetAmount;
                     })
-                    .catch(error => console.error('Erreur lors de la conversion de la devise:', error));
+                    .catch(error => {
+                        return 'error';
+                        console.error('Erreur lors de la conversion de la devise:', error)
+                });
             }
 
             // Appelez la fonction pour initialiser les options de sélection
-            updateCurrencyOptions();
+            updateCurrencyOptions(true);
         </script>
     </div>
     
@@ -203,5 +206,5 @@
 {% endblock %}
 
 {% block extrajs %}
-
+{% include 'commercial/admin/fullscreen_widget.html' %}
 {% endblock %}

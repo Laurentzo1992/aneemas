@@ -1,0 +1,116 @@
+{% extends 'admin/commercial/facture/print.html' %}
+{% load static %}
+
+
+{% block content %}
+{{ block.super }}
+{% endblock %}
+{% block print-params %}
+<div class="ui segment">
+  <div class="content">
+    <div class="styled-form-container">
+      <form action="{% url 'gesco:commercial_facture_view' id %}" method="get">
+        <label for="unitsSelect">Selectionner les unités a inclure:</label>
+        <select id="units" name="u" multiple>
+          <option value="ounce">Oz</option>
+          <option value="ounce_troy">Oz/t</option>
+          <!-- Add more options as needed -->
+        </select>
+        <br>
+        <div>
+          <input type="submit" value="Actualiser">
+          <a class="button default print-button" data-url="{% url 'gesco:commercial_facture_generate' id %}" href="#">Imprimer</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var buttons = document.querySelectorAll('.print-button');
+    buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Replace '/view' with '/generate' in the current window's URL
+            var currentUrl = window.location.href;
+            var url = currentUrl.replace('/view', '/generate');
+
+            var iframe = document.createElement('iframe');
+            iframe.src = url;
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+
+            iframe.onload = function() {
+                iframe.contentWindow.print();
+            };
+        });
+    });
+});
+</script>
+
+
+<style>
+  .styled-form-container {
+    background-color: #eff6f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .styled-form-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .styled-form-container label {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  .styled-form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+  }
+
+  .styled-form-container input[type="submit"] {
+    background-color: #7FB1DC;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .button {
+    background-color: #cceae4;
+    color: #62a29c;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .styled-form-container input[type="submit"]:hover {
+    background-color: #3c706b;
+    /* Darker green on hover */
+  }
+
+  .styled-form-container select option:checked {
+    background-color: #cceae4;
+    /* Selected color */
+    color: #62a29c;
+    /* Text color for selected option */
+  }
+
+  .styled-form-container option:focus {
+    background-color: #45a049;
+    /* Selected color */
+    color: #62a29c;
+    /* Text color for selected option */
+  }
+</style>
+
+{% endblock %}

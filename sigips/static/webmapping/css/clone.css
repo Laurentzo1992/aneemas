@@ -87,7 +87,7 @@ body {
   width: 100%;
   height: 50px;
   z-index: -1;
-  background-color: #87c846 !important;
+  background-color: #048B9A !important;
 }
 
 button.accordion {
@@ -383,20 +383,12 @@ input[type=range]:focus::-ms-fill-upper {
   max-width: 400px;
   max-height: 350px;
   overflow: auto;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_butto {
+  padding: none !important;
+}
+
+div.dataTables_wrapper div.dataTables_paginate {
+  white-space: none !important;
 }/*# sourceMappingURL=clone.css.map */
-
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-  padding: inherit !important;
-}
-
-.notoggle:after {
-  display: none;
-}
-
-.navbar-brand {
-  color: white !important;
-}
-
-.navbar-brand .fa-map {
-  color: #ffb53a;
-}

@@ -27,11 +27,13 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
-    "debug_toolbar",
+    "django_extensions",
+    "django.contrib.humanize",
+    "django_countries", 
     "dal",
     "dal_select2",
-    "jet.dashboard",
     "jet",
+    "jet.dashboard",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -54,7 +56,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -252,18 +253,20 @@ JET_SIDE_MENU_COMPACT = True
 
 JET_SIDE_MENU_ITEMS = {
         'gesco': [
+            {'label': "Dashboard", 'url': {'type': 'reverse','name': 'gesco:module-bi'}, 'items': []},
             {'label': 'Gestion', 'app_label': 'commerical', 'items': [
-                {'name': 'commercial.fichecontrol', 'label': 'Achat'},
-                {'name': 'commercial.fichetarification', 'label': 'Ventes'},
-                {'label': 'Paiement', 'url': "/gesco/commercial/transferedfichetarification", 'label': 'Mouvement Lingots'},
+                {'url': '/gesco/commercial/fichecontrol/?tarified=no', 'label': 'Achat'},
+                {'url': {'type': 'reverse','name': 'gesco:lingots_disponibles_pour_vente_changelist'}, 'label': 'Ventes'},
+                {'url': "/gesco/commercial/lingot", 'label': 'Mouvement Lingots'},
             ]}, 
             {'label': 'Parametrage', 'app_label': 'commercial', 'items': [
                 {'name': 'commercial.typesubstance'},
                 {'name': 'commercial.typefournisseur'},
-                {'name': 'commercial.directionlingot'},
-                {'name': 'commercial.emplacementlingot'},
-                {'name': 'commercial.stragietarification'},
+                # {'name': 'commercial.directionlingot'},
+                {'name': 'commercial.emplacementlingot', 'label': 'Autres emplacements Lingots'},
+                # {'name': 'commercial.stragietarification'},
                 {'name': 'commercial.modepayement'},
+                {'url': {'type': 'reverse','name': 'admin:authentication_user_changelist'}, 'label': 'Utilisateurs'},
             ]},
         ],
         'admin1': [
@@ -297,6 +300,11 @@ INTERNAL_IPS = [
     # ...
 ]
 
-
 # JET_INDEX_DASHBOARD = 'commercial.dashboard_modules.CustomIndexDashboard'
-# JET_INDEX_DASHBOARD = 'jet.dashboard.dashboard.CustomIndexDashboard'
+# JET_INDEX_DASHBOARD = 'jet.dashboard.dashboard.MyDashboard'
+JET_INDEX_DASHBOARD = 'commercial.custom_dashboard.CustomIndexDashboard'
+
+# Twillo credential
+TWILIO_ACCOUNT_SID = 'AC15fbce0675e82420dce584d408ca97ce'
+
+TWILIO_AUTH_TOKEN = 'ce8bc149e7b00b6253fdfff807e7a923'

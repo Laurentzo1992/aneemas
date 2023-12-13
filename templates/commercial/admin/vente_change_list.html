@@ -1,0 +1,36 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block extrahead %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'js/custom_admin.js' %}"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/commercial_style.css' %}" />
+
+{% endblock %}
+
+{% block content %}
+<div id="tabbed-wrapper">
+    <ul class="changeform-tabs">
+        <li class="changeform-tabs-item {% block lingotsdisponiblespourvente_selected %}{% endblock %}"><a
+                class="changeform-tabs-item-link" href="{% url 'gesco:lingots_disponibles_pour_vente_changelist' %}">Stock</a>
+        </li>
+
+        <li class="changeform-tabs-item {% block vente_selected %}{% endblock %}"><a
+                class="changeform-tabs-item-link" href="{% url 'gesco:commercial_vente_changelist' %}">Ventes</a></li>
+
+        <li class="changeform-tabs-item {% block client_selected %}{% endblock %}"><a class="changeform-tabs-item-link"
+                href="{% url 'gesco:commercial_client_changelist' %}">Client</a></li>
+    </ul>
+    {% block subtab %}
+    {% endblock %}
+    <div class="tab tab_0 selected">
+        {{ block.super }}
+    </div>
+    <div class="tab tab_1">
+
+    </div>
+    <div class="tab tab_2">
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "commercial/admin/vente_change_list.html" %}
+{% load i18n %}
+{% block vente_selected %}selected{% endblock %}
+{% block subtab %}
+{% block object-tools-items %}
+{% endblock %}
+
+<ul class="changeform-tabs">
+    {% if not cl.get_filters_params.conclu__exact %}
+    <li class="changeform-tabs-item {% if not cl.get_filters_params.archive__exact %}selected{% endif %}"><a
+            class="changeform-tabs-item-link" href="/gesco/commercial/vente/?conclu__exact=0">En cours</a>
+    </li>
+    {% else %}
+    <li
+        class="changeform-tabs-item   {% if cl.get_filters_params.conclu__exact == '0' %}selected{% endif %}">
+        <a class="changeform-tabs-item-link" href="/gesco/commercial/vente/?conclu__exact=0">En cours</a>
+    </li>
+    {% endif %}
+
+    <li class="changeform-tabs-item {% if cl.get_filters_params.conclu__exact == '1' %}selected{% endif %}"><a
+            class="changeform-tabs-item-link" href="/gesco/commercial/vente/?conclu__exact=1">EFFECTUES</a>
+    </li>
+    <li class="changeform-tabs-item {% if cl.get_filters_params.archive__exact == '1' %}selected{% endif %}"><a
+        class="changeform-tabs-item-link" href="/gesco/commercial/vente/?archive__exact=1">ARCHIVES</a>
+</li>
+</ul>
+{% endblock %}
+
+{% block fonte_selected %}select{% endblock %}

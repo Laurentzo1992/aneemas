@@ -1,7 +1,11 @@
 {% extends "commercial/admin/mouvement_change_list.html" %}
 {% load i18n %}
 
-{% block stock_selected %}selected{% endblock %}
+{% block stock_selected %}
+    {% if not cl.get_filters_params.vente__conclu__exact %}
+        selected
+    {% endif %}
+{% endblock %}
 
 {% block object-tools-items %}
 {% endblock %}

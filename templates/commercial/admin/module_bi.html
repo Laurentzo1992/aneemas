@@ -1,0 +1,286 @@
+{% extends 'commercial/custom_base.html' %}
+{% block content %}
+{{ block.super }}
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<div id="myContainer" class="fullscreen-item">
+    <div id="filterPane">
+        <div style="padding: 8px;">
+            <label for="updateChart">Live</label>
+            <input type="checkbox" value="true" name="updateChart">
+        </div>
+    </div>
+    <div class="chart-container">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+{% include 'commercial/admin/fullscreen_widget.html' %}
+
+<style>
+    #content {
+        padding: 0px;
+    }
+    .breadcrumbs a {
+        display: none;
+    }
+    .chart-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        margin: auto;
+        height: 80vh;
+        width: 80vw;
+    }
+
+    #myContainer {
+        position: relative;
+        margin: auto;
+        height: 90vh;
+        width: 95vw;
+        display: flex;
+        /* background: #d6ece7; */
+        background: #dcece8;
+        border-radius: 8px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    #filterPane {
+        float: left;
+        padding: 8px;
+        flex-direction: column;
+        display: flex;
+    }
+
+    #filterPane>select {
+        margin-bottom: 4px !important;
+        margin-right: 4px !important;
+    }
+
+    #filterPane>label {
+        font-size: 1rem;
+        margin-left: 5px;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+
+        path = [0];
+        level = 0;
+        var selectedData;
+        var update = true;
+        var updatingChartData = false;
+
+        // Initialize the chart
+        var selectedChartType = 'pie';
+        var myChart;
+        function updateChart(chartType, selectedData) {
+            var ctx = document.getElementById('myChart');
+            myChart = new Chart(ctx, {
+                type: chartType,
+                data: selectedData,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        datalabels: {
+                            anchor: 'end', // Position of the labels ('end' is on top of the bars)
+                            align: 'end',  // Alignment of the labels
+                            display: function (context) {
+                                return context.dataset.data[context.dataIndex] > 0; // Display labels only for non-zero values
+                            },
+                            formatter: Math.round // Format the label (you can customize this function)
+                        },
+                        title: {
+                            display: true,
+                            text: selectedData.label ? selectedData.label : 'Graphique',
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+        }
+
+        function sendPathToBackend(path, firstTime=false) {
+            $.ajax({
+                url: '/gesco/commercial/bi-data/?be=e',
+                type: 'POST',
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                data: { path: path },
+                success: function (response) {
+                    // Handle the response from the backend
+                    selectedData = response;
+                    if (myChart) {
+                        myChart.destroy();
+                    }
+                    console.log(selectedData);
+                    updateChart(selectedChartType, selectedData);
+                    if(firstTime)
+                        $('#filterPane').append(buildSelect(selectedData, level));
+                    buildChildSelect(selectedData.children, level);
+                    if (update && !updatingChartData) {
+                        updatingChartData = true
+                        updateChartData();
+                    }
+                    return selectedData;
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                    reject('Error occurred.');
+                },
+            });
+        }
+
+        function updateChartData() {
+            $.ajax({
+                url: '/gesco/commercial/bi-data/',
+                type: 'POST',
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    'X-CSRFToken': '{{ csrf_token }}',
+                },
+                data: { path: path },
+                success: function (response) {
+                    // Handle the response from the backend
+                    selectedData = response;
+                    if ($('#unique_checkbox_id_0').is(':checked')) {
+                        console.log('called update');
+                        if (update) {
+                            myChart.data = selectedData;
+                            myChart.update('none');
+                            setTimeout(updateChartData, 1000);
+                        }
+                    }
+                    return selectedData;
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                    reject('Error occurred.');
+                },
+            });
+        }
+
+        // Create a select element
+        var chartTypeSelect = $('<select>').attr('id', 'chartTypeSelector');
+
+        // Array of Chart.js types
+        var chartTypes = ['pie', 'line', 'bar', 'radar', 'doughnut', 'polarArea'];
+
+        // Populate options based on Chart.js types
+        $.each(chartTypes, function (index, chartType) {
+            chartTypeSelect.append($('<option>', {
+                value: chartType,
+                text: chartType.charAt(0).toUpperCase() + chartType.slice(1) // Capitalize first letter
+            }));
+        });
+
+
+        var label1 = $('<label>').attr('for', 'chartTypeSelect').text('Graphique:');
+        // Append the dynamic select to the container
+        $('#filterPane').append(label1);
+        $('#filterPane').append(chartTypeSelect);
+
+        // var label2 = $('<label>').attr('for', 'updateChart').text('Live');
+        // var liveCheckBox = $('input').attr('type', 'checkbox').attr('id', 'updateChart');
+        // var mydiv = $('<div>').append(label2).append(liveCheckBox);
+        // $('#filterPane').append(mydiv);
+
+        var label3 = $('<label>').attr('for', 'chartDataSelect0').text('Donnees:');
+        $('#filterPane').append(label3);
+        
+
+    
+        sendPathToBackend(path, firstTime=true);
+
+        $('#chartTypeSelector').change(function () {
+            selectedChartType = $(this).val();
+            // Destroy the existing chart before updating with the new type
+            myChart.destroy();
+            updateChart(selectedChartType, selectedData);
+        });
+
+        function dataSelectChangeCallback () {
+            level = $(this).data('level');
+            selectedIndex = $(this).val();
+            $(this).nextAll().remove();
+            console.log('level: ' + level);
+            console.log('selectedIndex: ' + selectedIndex);
+            console.log(path);
+            if (selectedIndex == 'all') {
+                level = level-1;
+                if (level == 0) selectedIndex = 0;
+                $(this).prevAll('select').first().nextAll().remove()
+                console.log($(this).prevAll('select').first());
+            } else {
+                selectedIndex = parseInt(selectedIndex, 10)
+            }
+            path = path.splice(0, level);
+            console.log(path);
+            path.push(selectedIndex)
+            sendPathToBackend(path);
+        }
+
+        function buildSelect(selectedData, level) {
+            var mainSelect = $('<select>').attr('id', 'chartDataSelect' + level).attr('data-level', level);
+            var selectOptions;
+            if (level > 0) 
+                selectOptions += '<option data-index="" value="all">Tout</option>';
+            $.each(selectedData.items, function (index, item) {
+                selectOptions += '<option value="' + index + '">' + item + '</option>';
+            });
+            $(mainSelect).change(dataSelectChangeCallback);
+            return $(mainSelect).append(selectOptions);
+        }
+
+        function buildChildSelect(childItems, level) {
+            if (!childItems || childItems.length === 0) return;
+
+            // Create a select element
+            var childSelect = $('<select>').attr('id', 'chartDataSelect' + (level + 1)).attr('data-level', (level + 1));
+            childSelect.data('level', level + 1);
+
+            // Create an arrow element
+            var arrow = $('<i>').html('&#x2193;').css({
+                'font-family': "'Arial', sans-serif",
+                'margin-bottom': '4px',
+                'text-align': 'center'
+            });
+
+            var selectOptions = '<option data-index="" value="all">Tout</option>';
+
+            $.each(childItems, function (index, item) {
+                selectOptions += '<option value="' + index + '">' + item + '</option>';
+            });
+
+            // Append the dynamic select to the container
+            childSelect.append(selectOptions);
+
+            // Assuming you want to append both the arrow and the select to the same container
+            $('#filterPane').append(arrow).append(childSelect);
+
+            $(childSelect).change(dataSelectChangeCallback);
+            // Return the select element if needed
+            return childSelect;
+        }
+
+        $('#unique_checkbox_id_0').change(function () {
+            if($(this).is(':checked')) {
+                console.log('changed..;');
+                update = true;
+                updateChartData();
+            } else {
+                update = false;
+                updatingChartData = false;
+            }
+        })
+
+    });
+</script>
+{% endblock %}

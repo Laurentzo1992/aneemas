@@ -4,119 +4,7 @@
 {% block extrahead %}
 {{ block.super }}
 <script type="text/javascript" src="{% static 'js/custom_admin.js' %}"></script>
-<style>
-    .changeform-tabs {
-        margin: 0;
-        border-bottom: 2px solid #eff6f5;
-        border-bottom: 0.14286rem solid #eff6f5;
-        background-color: #fff;
-        border-radius: 4px 4px 0 0;
-        border-radius: 0.28571rem 0.28571rem 0 0;
-        margin-left: 0px !important;
-    }
-
-    #tabbed-wrapper {}
-
-    #tabbed-wrapper.tab {
-        background-color: #fff;
-        border-radius: 4px;
-        border-radius: 0.28571rem;
-        padding: 14px;
-        padding: 1rem;
-        border: 0;
-    }
-
-    #tabbed-wrapper.tab.selected {
-        display: block !important;
-    }
-
-    #tabbed-wrapper>.tab {
-        background: white !important;
-        padding-left: 5px !important;
-        padding-right: 5px !important;
-    }
-
-    .results {
-        padding-top: 10px;
-    }
-
-    .tab {
-        display: none;
-    }
-
-    .tab.selected {
-        display: block !important;
-    }
-
-    table thead th {
-        background: #f9cc1c;
-        color: #fff;
-        text-transform: uppercase;
-        transition: background-color .1s;
-    }
-
-    #content {
-        background-color: white;
-    }
-
-    #changelist {
-        padding-top: 10px;
-    }
-
-    ul.object-tools {
-        top: 10px;
-    }
-
-    .changelist-footer {
-        background-color: white;
-    }
-    .changeform-tabs-item.selected a, .changeform-tabs-item.selected a:hover, .changeform-tabs-item.selected a:visited {
-        color: #7faaaa;
-        border-color: #7FB1DC;
-    }
-    .sidebar-right {
-        display: none;
-    }
-    .disabled-link {
-        pointer-events: none;
-        /* You can also add additional styles to visually indicate that the link is disabled */
-        color: #b9b4b4 !important;
-        background-color: rgba(123, 134, 134, 0.28) !important;
-        text-decoration: none;
-        cursor: not-allowed;
-    }
-
-    .button.default, input[type="submit"].default, input[type="button"].default, .object-tools a.default {
-        font-weight: lighter;
-        background-color: #44b78b;
-        color: #fff;
-        text-transform: uppercase;
-        margin: 0 8px 0 0;
-        margin: 0 0.57143rem 0 0;
-        padding: 0 20px;
-        padding: 0 1.42857rem;
-    }
-
-    .button.btn-yellow, input[type="submit"].btn-yellow, input[type="button"].btn-yellow, .object-tools a.btn-yellow {
-        font-weight: lighter;
-        background-color: #44b78b;
-        color: #fff;
-        text-transform: uppercase;
-        margin: 0 8px 0 0;
-        margin: 0 0.57143rem 0 0;
-        padding: 0 20px;
-        padding: 0 1.42857rem;
-    }
-
-    .eye-icon::before {
-        content: "\1F441";
-    }
-
-    .bg-none {
-        background-color: none !important;
-    }
-</style>
-
+<link rel="stylesheet" type="text/css" href="{% static 'css/commercial_style.css' %}" />
 {% endblock %}
 
 {% block content %}
@@ -131,10 +19,10 @@
 
         <li class="changeform-tabs-item {% block controlbumigeb_selected %}{% endblock %}"><a
                 class="changeform-tabs-item-link" href="../controlbumigeb/?etat__exact=out">Control BUMIGEB</a></li>
-        <li class="changeform-tabs-item {% block fournisseur_selected %}{% endblock %}"><a
-            class="changeform-tabs-item-link" href="../lingot">VENDUS</a></li>
-        <li class="changeform-tabs-item "><a
-                class="changeform-tabs-item-link" href="../lingot">AUTRES</a></li>
+        <li class="changeform-tabs-item {% block vente_conclu_selected %}{% endblock %}{% if cl.get_filters_params.vente__conclu__exact == '1' %}selected{% endif %}"><a
+            class="changeform-tabs-item-link" href="../lingot/?vente__conclu__exact=1">VENDUS</a></li>
+        <li class="changeform-tabs-item {% block transferedlingot_selected %}{% endblock %}"><a
+                class="changeform-tabs-item-link" href="../transferedlingot">AUTRES</a></li>
     </ul>
     {% block subtab %}
     {% endblock %}

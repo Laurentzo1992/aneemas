@@ -1,0 +1,109 @@
+<div id="staticContainer">
+    <canvas id="myChart"></canvas>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+    integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css"
+    integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        data = {
+            labels: [{% for t in tarification %}'{{ t.numero }}', {% endfor %}],
+            datasets: [
+                {
+                    label: 'FCFA',
+                    data: [{% for t in tarification %}{{ t.total_price }}, {% endfor %}],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                },
+                {
+                    label: 'USERS',
+                    data: [50000000, 80000000, 25000000, 10000000, 6000000],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }
+            ]
+        };
+
+        // Initial chart type
+        var initialChartType = 'line';
+
+        // Function to update the chart based on the selected type
+        var myChart
+        function updateChart(chartType) {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: chartType,
+                data: data,
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+        // Create a select element
+        var chartTypeSelect = $('<select>').attr('id', 'chartTypeSelector');
+                
+        // Array of Chart.js types
+        var chartTypes = ['line', 'bar', 'radar', 'doughnut', 'polarArea', 'bubble', 'scatter'];
+
+        // Populate options based on Chart.js types
+        $.each(chartTypes, function(index, chartType) {
+            chartTypeSelect.append($('<option>', {
+                value: chartType,
+                text: chartType.charAt(0).toUpperCase() + chartType.slice(1) // Capitalize first letter
+            }));
+        });
+
+        // Append the dynamic select to the container
+        $('#staticContainer').prepend(chartTypeSelect);
+        // Initialize the chart with the initial chart type
+        updateChart(initialChartType);
+        // $('#chartTypeSelector').prop('disabled', true);
+        // Event listener to handle chart type selection changes
+        $('#staticContainer').on('selecte2:change', '#chartTypeSelector', function() {
+            var selectedChartType = $(this).val();
+            // Destroy the existing chart before updating with the new type
+            myChart.destroy();
+            updateChart(selectedChartType);
+        });
+        $('#chartTypeSelector').change(function () {
+            var selectedChartType = $(this).val();
+            // Perform actions based on the selected chart type
+            console.log('Selected Chart Type:', selectedChartType);
+            // Example: Create or update Chart.js chart based on the selected type
+            var selectedChartType = $(this).val();
+            // Destroy the existing chart before updating with the new type
+            myChart.destroy();
+            updateChart(selectedChartType);
+        });
+    });
+</script>

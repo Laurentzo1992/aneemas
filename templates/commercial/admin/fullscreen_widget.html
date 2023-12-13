@@ -1,0 +1,94 @@
+<script>
+    const fullscreenItems = document.querySelectorAll('.fullscreen-item');
+
+    fullscreenItems.forEach(item => {
+        const fullscreenButton = document.createElement('button');
+        fullscreenButton.className = 'fullscreen-button';
+        fullscreenButton.innerHTML = `
+                <svg height="100%" version="1.1" viewBox="0 0 36 36" width="100%">
+                    <g class="ytp-fullscreen-button-corner-0">
+                        <use class="ytp-svg-shadow" xlink:href="#ytp-id-606"></use>
+                        <path class="ytp-svg-fill" d="m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z" id="ytp-id-606"></path>
+                    </g>
+                    <g class="ytp-fullscreen-button-corner-1">
+                        <use class="ytp-svg-shadow" xlink:href="#ytp-id-607"></use>
+                        <path class="ytp-svg-fill" d="m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z" id="ytp-id-607"></path>
+                    </g>
+                    <g class="ytp-fullscreen-button-corner-2">
+                        <use class="ytp-svg-shadow" xlink:href="#ytp-id-608"></use>
+                        <path class="ytp-svg-fill" d="m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z" id="ytp-id-608"></path>
+                    </g>
+                    <g class="ytp-fullscreen-button-corner-3">
+                        <use class="ytp-svg-shadow" xlink:href="#ytp-id-609"></use>
+                        <path class="ytp-svg-fill" d="M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z" id="ytp-id-609"></path>
+                    </g>
+                </svg>
+            `;
+        fullscreenButton.style.position = 'absolute';
+        fullscreenButton.style.top = '10px';
+        fullscreenButton.style.right = '10px';
+
+        fullscreenButton.addEventListener('click', () => {
+            toggleFullscreen(item);
+        });
+        console.log(item);
+        item.appendChild(fullscreenButton);
+    });
+
+    function toggleFullscreen(elem) {
+        if (document.fullscreenElement === elem || document.webkitFullscreenElement === elem || document.msFullscreenElement === elem) {
+            exitFullscreen();
+        } else {
+            openFullscreen(elem);
+        }
+    }
+
+    function openFullscreen(elem) {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.webkitRequestFullscreen) { /* Safari */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE11 */
+            elem.msRequestFullscreen();
+        }
+    }
+
+    function exitFullscreen() {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
+        }
+    }
+
+    document.addEventListener('fullscreenchange', () => {
+        updateButtonVisibility(container);
+    });
+    document.addEventListener('webkitfullscreenchange', updateButtonVisibility);
+    document.addEventListener('msfullscreenchange', updateButtonVisibility);
+
+    function updateButtonVisibility(container) {
+        const fullscreenButton = container.querySelector('.fullscreen-button');
+        if (document.fullscreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+            fullscreenButton.style.display = 'none';
+        } else {
+            fullscreenButton.style.display = 'inline-block';
+        }
+    }
+</script>
+<style>
+    .fullscreen-button {
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    .fullscreen-button svg {
+        fill: #62a29c;
+        width: 24px; /* Adjust the size as needed */
+        height: 24px; /* Adjust the size as needed */
+    }
+</style>

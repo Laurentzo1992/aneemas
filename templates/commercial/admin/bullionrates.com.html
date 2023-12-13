@@ -1,0 +1,11 @@
+<form id="proxys-form" action="https://us20.proxysite.com/includes/process.php?action=update" method="post"
+    target="proxys-iframe">
+    <input type="hidden" name="server-option" value="us20">
+    <input type="hidden" name="d" value="https://fr.bullion-rates.com/gold/XOF/spot-price.htm">
+    <input type="hidden" name="allowCookies" value="on">
+</form>
+<iframe name="proxys-iframe" id="proxys-iframe" frameborder="0" width="100%" height="320"
+    style="border: 0; overflow: scroll;"></iframe>
+<script>
+    document.getElementById('proxys-form').submit();
+</script>

@@ -1,0 +1,42 @@
+{% extends 'admin/commercial/change_form.html' %}
+{% load static %}
+
+{% block content %}
+{% include 'commercial/admin/rates_widget.html' %}
+{{ block.super }}
+
+{% endblock %}
+
+{% block object-tools-items %}
+    <span class="form-row my-form-row button">
+
+            <select style="display: none;" name="fonte" id="id_fonte" tabindex="-1"
+                class="select2-hidden-accessible" aria-hidden="true">
+            </select>
+            <a class="related-widget-wrapper-link add-related button" id="add_id_fonte" data-popup="yes"
+                href="{% url 'gesco:commercial_facture_view' pk=original.id %}"
+                title="Voir la facture">Voir</a>
+
+    </span>
+    <a class="button default print-button" href="#" data-url="{% url 'gesco:commercial_facture_generate' pk=original.id %}">Imprimer</a>
+    <script type="text/javascript" src="{% static 'js/custom_admin.js' %}"></script>
+{% endblock %}
+
+    
+{% block extrahead %}
+{{ bloc.super }}
+<style>
+  .my-form-row {
+    display: inline-block !important;
+    padding: 0 20px;
+  }
+
+  .my-form-row .select2 {
+    display: none;
+  }
+
+  .my-form-row .button {
+    margin-top: 0;
+  }
+</style>
+{% endblock %}

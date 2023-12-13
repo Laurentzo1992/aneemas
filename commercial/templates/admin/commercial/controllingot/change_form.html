@@ -1,0 +1,68 @@
+{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+  {{ block.super }}
+  <script type="text/javascript">
+    // Your JavaScript code here
+    document.addEventListener('DOMContentLoaded', function () {
+      
+
+      function setDefaultSelectedLingot(selectId, value) {
+        var selectElement = document.getElementById(selectId);
+
+        // Remove 'selected' attribute from all options
+        for (var i = 0; i < selectElement.options.length; i++) {
+          selectElement.options[i].removeAttribute('selected');
+        }
+
+        // Set the 'selected' attribute for the desired option
+        for (var i = 0; i < selectElement.options.length; i++) {
+          if (selectElement.options[i].value === value) {
+            selectElement.options[i].setAttribute('selected', 'selected');
+            break;
+          }
+        }
+      }
+
+      function setDefaultLingot(selectElements, selectedLingot) {
+        for (var i = 0; i < selectElements.length; i++) {
+          var selectElement = selectElements[i];
+
+          // Remove 'selected' attribute from all options
+          for (var j = 0; j < selectElement.options.length; j++) {
+            selectElement.options[j].removeAttribute('selected');
+          }
+
+          // Set the 'selected' attribute for the desired option
+          for (var j = 0; j < selectElement.options.length; j++) {
+            if (selectElement.options[j].value === selectedLingot) {
+              selectElement.options[j].setAttribute('selected', 'selected');
+              selectElement.value = selectedLingot
+              break;
+            }
+          }
+        }
+      }
+
+      var selectedLingot = '{{ original.lingot.id }}';
+      var selectId = 'id_pourcentagesubstancecontrollingot_set-__prefix__-lingot';
+      // Definir le lingot concerné par le control comme lingot par defaut
+      setDefaultSelectedLingot(selectId, selectedLingot);
+
+      var pourcentagesLingotSelects = document.querySelectorAll('[id^="id_pourcentagesubstancecontrollingot_set-"][id$="-lingot"]');
+      setDefaultLingot(pourcentagesLingotSelects, selectedLingot)
+    });
+  </script>
+{% endblock %}
+{% block extrastyle %}
+{{ block.super }}
+<style>
+    .column-lingot {
+        display: none !important;
+    }
+
+    .field-lingot {
+        display: none !important;
+    }
+</style>
+{% endblock %}
