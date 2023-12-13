@@ -9,4 +9,4 @@ def fichetarification_pre_save(sender, instance, **kwargs):
     #     year = instance.created.year
     #     last_two_digits_of_year = str(year)[-2:]
     #     instance.numero = f"FTR{str(instance.id).zfill(6)}-{last_two_digits_of_year}3"
-    print(f"Performing pre-save actions for {instance}")
+    pass

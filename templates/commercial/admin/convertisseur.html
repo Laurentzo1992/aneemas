@@ -1,0 +1,92 @@
+<div id="currency-converter">
+    <label>
+        <select id="sourceCurrency">
+            <!-- Options seront ajoutées dynamiquement via JavaScript -->
+        </select>
+        <input type="number" id="sourceAmount" step="0.01" value="1.00">
+    </label>
+
+    <label>
+        <select id="targetCurrency">
+            <!-- Options seront ajoutées dynamiquement via JavaScript -->
+        </select>
+        <input type="text" id="targetAmount" readonly>
+    </label>
+    <script>
+        // Obtenez les sélecteurs d'éléments
+        const sourceCurrencySelect = document.getElementById('sourceCurrency');
+        const targetCurrencySelect = document.getElementById('targetCurrency');
+        const sourceAmountInput = document.getElementById('sourceAmount');
+        const targetAmountInput = document.getElementById('targetAmount');
+
+        // URL de l'API des taux de change
+        const apiUrl = 'https://api.exchangerate-api.com/v4/latest/';
+
+        // La fonction de rappel à exécuter lorsqu'une mutation est détectée
+        function mutationCallback(mutationsList, observer) {
+            convertCurrency()
+        }
+
+        // Options de configuration pour le Mutation Observer
+        const observerConfig = { attributes: true, childList: true, subtree: true };
+
+        // Créez une instance de Mutation Observer avec la fonction de rappel et les options de configuration
+        const mutationObserver = new MutationObserver(mutationCallback);
+
+        // L'élément cible à observer
+        const observee = document.getElementById('currency-converter');
+
+        // Commencez à observer l'élément cible avec les options de configuration
+        mutationObserver.observe(observee, observerConfig);
+
+        // Fonction pour mettre à jour les options de sélection avec les devises disponibles
+        function updateCurrencyOptions() {
+            // Réduire les devises sources à EURO, XOF, et USD
+            const currencies = ['USD', 'EUR', 'XOF'];
+
+            // Mettez à jour les options des sélecteurs de devises
+            currencies.forEach(currency => {
+                const option1 = document.createElement('option');
+                const option2 = document.createElement('option');
+                option1.value = currency;
+                option2.value = currency;
+                option1.textContent = currency;
+                option2.textContent = currency;
+                sourceCurrencySelect.appendChild(option1);
+                targetCurrencySelect.appendChild(option2);
+                targetCurrencySelect.value = 'XOF'
+            });
+
+            // Ajoutez un gestionnaire d'événements pour les changements de devise ou de montant source
+            sourceCurrencySelect.addEventListener('change', convertCurrency);
+            targetCurrencySelect.addEventListener('change', convertCurrency);
+            sourceAmountInput.addEventListener('input', convertCurrency);
+
+            // Initialisez la conversion avec les valeurs par défaut
+            convertCurrency();
+        }
+
+        // Fonction pour effectuer la conversion de devise
+        function convertCurrency() {
+            const sourceCurrency = sourceCurrencySelect.value;
+            const targetCurrency = targetCurrencySelect.value;
+            const sourceAmount = sourceAmountInput.value;
+
+            // Effectuez la requête AJAX pour obtenir les taux de change
+            fetch(apiUrl + sourceCurrency)
+                .then(response => response.json())
+                .then(data => {
+                    const exchangeRate = data.rates[targetCurrency] / data.rates[sourceCurrency];
+                    const targetAmount = (sourceAmount * exchangeRate).toFixed(4);
+
+                    // Mettez à jour le champ du montant cible
+                    targetAmountInput.value = targetAmount;
+                    // document.getElementById('id_cours').value = targetAmount
+                })
+                .catch(error => console.error('Erreur lors de la conversion de la devise:', error));
+        }
+
+        // Appelez la fonction pour initialiser les options de sélection
+        updateCurrencyOptions();
+    </script>
+</div>

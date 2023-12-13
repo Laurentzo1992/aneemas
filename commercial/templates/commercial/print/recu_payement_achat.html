@@ -1,0 +1,364 @@
+{% load static %}
+{% load l10n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Recu de paiement</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+        href="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% static 'commercial/lib//meyer-reset/2.0/reset.min.css' %}" />
+    <link rel="stylesheet"
+        href="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% static 'commercial/lib/semantic-ui/2.2.9/semantic.min.css' %}" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        @media print {
+
+            html,
+            body {
+                width: 210mm;
+                height: 297mm;
+            }
+
+            /* ... the rest of the rules ... */
+        }
+
+        body {
+            background: #EEE;
+            /* font-size:0.9em !important; */
+        }
+
+        .bigfont {
+            font-size: 3rem !important;
+        }
+
+        .invoice {
+            width: 970px !important;
+            margin: 50px auto;
+        }
+
+        .logo {
+            float: left;
+            padding-right: 10px;
+            margin: 10px auto;
+        }
+
+        dt {
+            float: left;
+        }
+
+        dd {
+            float: left;
+            clear: right;
+        }
+
+        .customercard {
+            min-width: 65%;
+        }
+
+        .itemscard {
+            min-width: 98.5%;
+            margin-left: 0.5%;
+        }
+
+        .logo {
+            max-width: 5rem;
+            margin-top: -0.25rem;
+        }
+
+        .invDetails {
+            margin-top: 0rem;
+        }
+
+        .pageTitle {
+            margin-bottom: -1rem;
+        }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .signature-item {
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
+        }
+
+        @media print {
+            header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 50px;
+                text-align: center;
+            }
+
+            footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 50px;
+                background-color: #f0f0f0;
+                text-align: center;
+            }
+
+            main {
+                margin-top: 70px;
+                /* Adjusted to accommodate header */
+                margin-bottom: 70px;
+                /* Adjusted to accommodate footer */
+            }
+
+            .signature-section {
+                margin-top: 4rem;
+            }
+        }
+
+        .main .segment {
+            box-shadow: none;
+            border-radius: none;
+            border: none;
+        }
+
+        .selected-text {
+            font-weight: bold;
+        }
+
+        .selected-cell {
+            background-color: #f9fafb;
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+        
+       
+    </style>
+
+</head>
+
+<body translate="no">
+
+    <header>
+        <p>Header Content</p>
+    </header>
+    <main>
+        <div class="container main invoice">
+            <div class="invoice-header">
+                <div class="ui left aligned">
+                    <div class="row ui segment cards">
+                        <div class="left floated left aligned six wide column">
+                            <div class="ui">
+                                <h1 class="ui header pageTitle">
+                                    RECU DE PAIEMENT
+                                    <small class="ui sub header">
+                                        No. {{ paiement.numero }}
+                                    </small>
+                                </h1>
+                                <h4 class="ui sub header invDetails">Fiche tarification No. {{ fichecontrol.numero }}  <br>Du: {{ fichetarification.date_tarification }}</h4>
+                            </div>
+                        </div>
+                        <!-- <div class="right floated left aligned six wide column">
+                            <div class="ui">
+                                <div class="content">
+                                    <div class="header">Info. fournisseur:</div>
+                                </div>
+                                <div class="content">
+                                    <ul>
+                                        <li> <strong> Nom: </strong> {{ fichecontrol.fournisseur.nom|default:"-" }}</li>
+                                        <li><strong> Prenom: </strong> {{ fichecontrol.fournisseur.prenom|default:"-" }}</li>
+                                        <li><strong> Phone: </strong> {{ fichecontrol.fournisseur.telephone|default:"-" }}</li>
+                                        <li><strong> Email: </strong> {{ fichecontrol.fournisseur.email|default:"-" }}</li>
+                                        <li><strong> Carte: </strong> {{ fichecontrol.fournisseur.numero_carte|default:"-" }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+            
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="ui segment cards">
+                <div class="ui card">
+                    <div class="content">
+                        <div class="header">Info. Agent:</div>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li> <strong> Prenom: </strong>{{ fichetarification.user.first_name|default:"-" }}</li>
+                            <li><strong> Nom: </strong> {{ fichetarification.user.last_name|default:"-" }}</li>
+                            <li><strong> Phone: </strong> {{ fichetarification.user.telephone|default:"-" }}</li>
+                            <li><strong> Email: </strong> {{ fichetarification.user.email }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ui card {% if not representant %}customercard{% endif %}">
+                    <div class="content">
+                        <div class="header">Info. fournisseur:</div>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li> <strong> Nom: </strong> {{ fichetarification.fichecontrol.fournisseur.nom|default:"-" }}</li>
+                            <li><strong> Prenom: </strong> {{ fichetarification.fichecontrol.fournisseur.prenom|default:"-" }}</li>
+                            <li><strong> Phone: </strong> {{ fichetarification.fichecontrol.fournisseur.telephone|default:"-" }}</li>
+                            <li><strong> Email: </strong> {{ fichetarification.fichecontrol.fournisseur.email|default:"-" }}</li>
+                            <li><strong> Carte: </strong> {{ fichetarification.fichecontrol.fournisseur.numero_carte|default:"-" }}</li>
+                            <li><strong> CNIB: </strong> {{ fichetarification.fichecontrol.fournisseur.numero_carte|default:"-" }}</li>
+                        </ul>
+                    </div>
+                </div>
+                {% if fichetarification.reprensentant %}
+                <div class="ui card">
+                    <div class="content">
+                        <div class="header">Info. fournisseur:</div>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li> <strong> Nom: </strong> {{ fichetarification.reprensentant.nom|default:"-" }}</li>
+                            <li><strong> Prenom: </strong> {{ fichetarification.reprensentant.prenom|default:"-" }}</li>
+                            <li><strong> Phone: </strong> {{ fichetarification.reprensentant.telephone|default:"-" }}</li>
+                            <li><strong> Email: </strong> {{ fichetarification.reprensentant.email|default:"-" }}</li>
+                            <li><strong> CNIB: </strong> {{ fichetarification.reprensentant.email|default:"-" }}</li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="ui itemscard">
+                    <div class="content">
+                        <table class="ui celled table">
+                            <thead>
+                                <tr>
+                                    <th>Payement No.</th>
+                                    <th class="text-center colfix">Montant<br>(FCFA)</th>
+                                    <th class="text-center colfix">Reste<br>(FCFA)</th>
+                                    <th class="text-center colfix">Date<br></th>
+                                    <th class="text-center colfix">Observation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-right" style="border-left: 1px solid rgba(34,36,38,.1);">
+                                        <span class="mono">(payement(s) precedents)</span>
+                                        <br>
+                                        {% for paiement_precedent in paiement_precedents %}
+                                        <small class="text-muted">{{ paiement_precedent.numero }}</small>
+                                        {% endfor %}
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="mono">{{ total_precedent }}</span>
+                                        <br>
+                                        <small class="text-muted"></small>
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="mono">{{ reste_initial }}</span>
+                                        <br>
+                                        <small class="text-muted"></small>
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="mono"></span>
+                                        <br>
+                                        {% for paiement_precedent in paiement_precedents %}
+                                        <small class="text-muted">{{ paiement_precedent.created }}</small>
+                                        {% endfor %}
+                                    </td>
+                                    <td class="text-right {% if pesee.actif %}selected-cell{% endif %}">
+                                        <strong class="mono {% if pesee.actif %}selected-text{% endif %}">{{ paiement_precedent.Observation }}</strong>
+                                        <br>
+                                        <small class="text-muted mono"></small>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right" style="border-left: 1px solid rgba(34,36,38,.1);">
+                                        <span class="mono">(payement actuel)</span>
+                                        <br>
+                                        <small class="text-muted">{{ paiement.numero }}</small>
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="mono">{{ paiement.montant }}</span>
+                                        <br>
+                                        <small class="text-muted"></small>
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="mono">{{ reste_actuel }}</span>
+                                        <br>
+                                        <small class="text-muted"></small>
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="mono">{{ reste_actuel }}</span>
+                                        <br>
+                                        <small class="text-muted"></small>
+                                    </td>
+                                    <td class="text-right {% if pesee.actif %}selected-cell{% endif %}">
+                                        <strong class="mono {% if pesee.actif %}selected-text{% endif %}">{{ paiement.Observation }}</strong>
+                                        <br>
+                                        <small class="text-muted mono"></small>
+                                    </td>
+                                </tr>
+                                
+
+                            </tbody>
+                            <tfoot class="full-width">
+                            
+                                <tr>
+                                    <th><strong class="mono"> Total: </strong></th>
+                                    <th colspan="1"><strong>{{ total_payer }}</strong></th>
+                                    <th colspan="1"><strong>{{ reste_actuel }}</strong></th>
+                                    <th colspan="1"><strong>{{ total.poids_brut }}</strong></th>
+                                    <th colspan="1">-</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                        <div class="signature-section">
+                            <div class="ui card signature-item">
+                                <div class="content center aligned text segment">
+                                    <small class="ui sub header">
+                                        <div class="header selected-text">Fiche control no: </div> 
+                                        {{ ft.fichecontrol.numero }}
+                                    </small>
+                                    <small class="ui sub header">
+                                        <div class="header selected-text">Imprime le: </div>
+                                        {% now "d/m/Y H:i:s" %}
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="ui card signature-item">
+                                <div class="content">
+                                    <div class="header">Le client</div>
+                                </div>
+                                <div class="content" style="min-height: 5rem">
+
+                                </div>
+                            </div>
+                            <div class="ui card signature-item">
+                                <div class="content">
+                                    <div class="header">Le controleur</div>
+                                </div>
+                                <div class="content" style="min-height: 5rem">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Footer Content</p>
+    </footer>
+</body>
+
+</html>

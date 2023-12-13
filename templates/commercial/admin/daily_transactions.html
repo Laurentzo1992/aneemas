@@ -1,0 +1,58 @@
+<!-- myapp/templates/commercial/admin/daily_transactions.html -->
+<div class="module-content">
+    <form method="get" action="" id="daily-transactions-form">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                    </th>
+                    <th><strong>Qantité (KG): </strong></th>
+                    <th><strong>Prix: </strong></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Achats: </strong></td>
+                    <td>{{ total_purchase_grams|default:0 }}</td>
+                    <td>{{ total_purchase_currency|default:0 }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Ventes: </strong></td>
+                    <td>{{ total_sale_grams|default:0 }}</td>
+                    <td>{{ total_sale_currency|default:0 }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <style>
+        table thead th {
+            background: #cceae4;
+            color: #62a29c;
+            text-transform: uppercase;
+            transition: background-color 0.1s;
+            padding: 0px;
+            padding-left: 2px;
+        }
+    </style>
+
+    <script>
+        // Function to update the table content
+        function updateTable() {
+            $.ajax({
+                url: $('#daily-transactions-form').attr('action'),
+                type: 'GET',
+                data: $('#daily-transactions-form').serialize(),
+                success: function (data) {
+                    // Update the table content with the response
+                    var tableBody = $(data).find('.module-content tbody');
+                    $('.module-content tbody').html(tableBody.html());
+                }
+            });
+        }
+
+        // Automatically update the table every 10 seconds
+        setInterval(updateTable, 10000);
+    </script>
+</div>

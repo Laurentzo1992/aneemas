@@ -3,6 +3,8 @@ from  .views import *
 from django.urls import path, include
 from .adminsite import commercial_admin
 
+from commercial.dashboard import views
+
 urlpatterns = [
    path(r'jet/', include('jet.urls', 'jet')),  # Django JET URLS
    path(r'jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')), # Django JET dashboard URLS
@@ -12,7 +14,6 @@ urlpatterns = [
    # path('commercial/lingot/<pk>/update/', update_lingot, name="update-lingot"),
    # path('commercial/lingot/<pk>/delete/', delete_lingot, name="delete-lingot"),
    # path('commercial/create-lingot-form/', add_lingot_form, name='add-lingot-form'),
-
-   path('commercial/fiche-control/<pk>/generate/', commercial_admin.admin_view(generate_fiche_control), name='generate-fiche-control'),
+   
    
 ]

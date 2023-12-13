@@ -1,0 +1,411 @@
+{% load static %}
+{% load l10n %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Facture Proforma</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet"
+        href="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% static 'commercial/lib//meyer-reset/2.0/reset.min.css' %}" />
+    <link rel="stylesheet"
+        href="{% if request.is_secure %}https://{% else %}http://{% endif %}{{ request.get_host }}{% static 'commercial/lib/semantic-ui/2.2.9/semantic.min.css' %}" />
+
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+
+        body {
+            background: #EEE;
+            /* font-size:0.9em !important; */
+        }
+
+        .bigfont {
+            font-size: 3rem !important;
+        }
+
+        .invoice {
+            width: 970px !important;
+            margin: 50px auto;
+        }
+
+        .logo {
+            float: left;
+            padding-right: 10px;
+            margin: 10px auto;
+        }
+
+        dt {
+            float: left;
+        }
+
+        dd {
+            float: left;
+            clear: right;
+        }
+
+        .customercard {
+            min-width: 65%;
+        }
+
+        .itemscard {
+            min-width: 98.5%;
+            margin-left: 0.5%;
+        }
+
+        .logo {
+            max-width: 5rem;
+            margin-top: -0.25rem;
+        }
+
+        .invDetails {
+            margin-top: 0rem;
+        }
+
+        .pageTitle {
+            margin-bottom: -1rem;
+        }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .signature-item {
+            margin-top: 0px !important;
+            margin-bottom: 0px !important;
+        }
+        
+       
+
+        @media print {
+
+            html,
+            body {
+                width: 210mm;
+                height: 297mm;
+            }
+
+            header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 50px;
+                text-align: center;
+            }
+
+            footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 50px;
+                background-color: #f0f0f0;
+                text-align: center;
+            }
+
+            main {
+                margin-top: 6cm;
+                /* Adjusted to accommodate header */
+                margin-bottom: 3cm;
+                /* Adjusted to accommodate footer */
+                margin-left: 2.5cm;
+                margin-right: 2.5cm;
+            }
+
+            .signature-section {
+                margin-top: 4rem;
+            }
+
+            .ui.table thead th,  .ui.table tfoot th {
+                background: #f3f4f4
+            }
+
+        }
+
+        .main .segment {
+            box-shadow: none;
+            border-radius: none;
+            border: none;
+        }
+
+        .selected-text {
+            font-weight: bold;
+        }
+
+        .selected-cell {
+            background-color: #f9fafb;
+        }
+
+        .text-center {
+            text-align: center !important;
+        }
+
+        .ui.table td {
+            padding: .38571429em .38571429em;
+        }
+
+        .ui.card > .content, .ui.cards > .card > .content {
+            padding: .38571429em .38571429em;
+        }
+
+        .ui.table {
+            margin-top: .38571429em;
+            border: 1px solid  #796b6b;
+        }
+
+        .cours-dollar {
+            text-align: center;
+        }
+
+        .ui.celled.table tr td, .ui.celled.table tr th {
+            border-left: 1px solid #796b6b;
+        }
+
+        .ui.table tfoot th {
+            border-top: 1px solid #796b6b;
+        }
+
+        .ui.card, .ui.cards > .card {
+            box-shadow: 0 1px 3px 0 #d4d4d5,0 0 0 2px #796b6b;
+        }
+
+        .ui.table thead th,  .ui.table tfoot th {
+            background: #f3f4f4
+        }
+
+
+    </style>
+
+</head>
+
+<body translate="no">
+
+    <!-- <header>
+        <p>Entete</p>
+    </header> -->
+    <main>
+        <div class="container main invoice">
+            <div class="invoice-header">
+                <div class="ui left aligned">
+                    <div class="row ui segment cards" style="align-content: center;align-items: center;justify-content: center;text-align: center;">
+                        <div class="left floated left aligned six wide column">
+                            <div class="ui">
+                                <h1 class="ui header pageTitle">
+                                    FACTURE PRO FORMA
+                                    <small class="ui sub header">
+                                        No. {{ numero }}
+                                    </small>
+                                </h1>
+                                <h4 class="ui sub header invDetails">Vente No. {{ vente.numero }}  <br>Du: {{ vente.date|naturalday}}</h4>
+                            </div>
+                        </div>
+                        <!-- <div class="right floated left aligned six wide column">
+                            <div class="ui">
+                                <div class="content">
+                                    <div class="header">Info. fournisseur:</div>
+                                </div>
+                                <div class="content">
+                                    <ul>
+                                        <li> <strong> Nom: </strong> {{ fichecontrol.fournisseur.nom|default:"-" }}</li>
+                                        <li><strong> Prenom: </strong> {{ fichecontrol.fournisseur.prenom|default:"-" }}</li>
+                                        <li><strong> Phone: </strong> {{ fichecontrol.fournisseur.telephone|default:"-" }}</li>
+                                        <li><strong> Email: </strong> {{ fichecontrol.fournisseur.email|default:"-" }}</li>
+                                        <li><strong> Carte: </strong> {{ fichecontrol.fournisseur.numero_carte|default:"-" }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="ui segment cards">
+                <div class="ui card">
+                    <div class="content">
+                        <div class="header">Doit: {{ vente.client.societe|default:"-" }}</div>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li><strong> Societe: </strong> {{ vente.client.societe|default:"-" }}</li>
+                            <li> <strong> Nom: </strong>{{ vente.client.nom|default:"-" }}</li>
+                            <li><strong> Ref. Societe: </strong> {{ vente.client.references_societe|default:"-" }}</li>
+                            <li><strong> Email: </strong> {{ vente.client.email }}</li>
+                            <li><strong> Telephone: </strong> {{ vente.client.telephone }}</li>
+                            <li><strong> TypeClient: </strong> {{ vente.client.type_de_client.libelle|default:"-"  }}</li>
+                            <li><strong> Pays: </strong> {{ vente.client.pays  }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ui card {% if not representant %}customercard{% endif %}">
+                    {% if cours_du_dollar %}
+                    <div class="content cours-dollar">
+                        <div class="header">Cours du dollar: {{ cours_du_dollar }} FCFA</div>
+                    </div>
+                    {% endif %}
+                    <table class="ui black table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Cours (FCFA)</th>
+                                {% if cours_du_dollar  %}<th>Cours ($)</th>{% endif %}
+                                {% if cours_en_euro %}<th>Cours (€)</th>{% endif %}
+                                <th>Reduction commercial</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in prix_des_substances %}
+                            <tr>
+                                <td>{{ p.type_de_substance.libelle }}</td>
+                                <td>{{ p.cours_de_substance|default:"-" }}</td>
+                                {% if cours_du_dollar  %}<td>{{ p.cours_en_dollar|default:"-" }}</td>{% endif %}
+                                {% if cours_en_euro %}<td>{{ p.cours_en_euro|default:"-" }}</td>{% endif %}
+                                <td style="font-size: 0.9rem">
+                                        -
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% if reprensentant %}
+                <div class="ui card">
+                    <div class="content">
+                        <div class="header">Info. fournisseur:</div>
+                    </div>
+                    <div class="content">
+                        <ul>
+                            <li> <strong> Nom: </strong> {{ reprensentant.nom|default:"-" }}</li>
+                            <li><strong> Prenom: </strong> {{ reprensentant.prenom|default:"-" }}</li>
+                            <li><strong> Phone: </strong> {{ reprensentant.telephone|default:"-" }}</li>
+                            <li><strong> Email: </strong> {{ reprensentant.email|default:"-" }}</li>
+                            <li><strong> CNIB: </strong> {{ reprensentant.email|default:"-" }}</li>
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="ui itemscard">
+                    <div class="content">
+                        <table class="ui celled black table">
+                            <thead>
+                                <tr>
+                                    <th>No. d'ordre</th>
+                                    <th class="text-center colfix">Designation</th>
+                                    <th class="text-center colfix">Poids contenu<br>(en gramme) (a)</th>
+                                    <th class="text-center colfix">PU/gramme<br>(b)</th>
+                                    <th class="text-center colfix">Prix Total<br>(a*b)</th>
+                                    <th class="text-center colfix">Devise</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for p in prix_des_substances %}
+                                <tr>
+                                    <td class="text-right" style="border-left: 1px solid rgba(34,36,38,.1);">
+                                        <span class="mono"></span>
+                                        <br>
+                                        <small class="text-muted">{{ forloop.counter }}</small>
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="mono">{{ p.type_de_substance.libelle|upper }}</span>
+                                        <br>
+                                        <small class="text-muted"></small>
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="mono">{{ p.poids }}</span>
+                                        <br>
+                                        <small class="text-muted"></small>
+                                    </td>
+                                    <td class="text-right {% if pesee.actif %}selected-cell{% endif %}">
+                                        <span class="mono {% if pesee.actif %}selected-text{% endif %}">{{ p.cours_de_substance }}</span>
+                                        <br>
+                                        <small class="text-muted"></small>
+                                    </td>
+                                    <td class="text-right {% if pesee.actif %}selected-cell{% endif %}">
+                                        <span class="mono {% if pesee.actif %}selected-text{% endif %}">{{ p.prix }}</span>
+                                        <br>
+                                        <small class="text-muted"></small>
+                                    </td>
+                                    <td class="text-right {% if pesee.actif %}selected-cell{% endif %}">
+                                        <strong class="mono {% if pesee.actif %}selected-text{% endif %}"></strong>
+                                        <br>
+                                        <small class="text-muted mono"></small>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+
+
+                            </tbody>
+                            <tfoot class="full-width">
+
+                                <tr>
+                                    <th rowspan="{{ total.rows }}"><strong class="mono"></strong></th>
+                                    <th rowspan="{{ total.rows }}"><strong>Total</strong></th>
+                                    <th rowspan="{{ total.rows }}"><strong>{{ total.poids|intcomma }}</strong></th>
+                                    <th rowspan="{{ total.rows }}"><strong></strong></th>
+                                    <th colspan="1"><strong>{{ total.prix|intcomma }}</strong></th>
+                                    <th colspan="1"><strong>FCFA</strong></th>
+                                </tr>
+                                {% if cours_du_dollar %}
+                                <tr>
+                                    <th style="border-left: 1px solid #796b6b;"><strong>{{ total.prix_dollar|intcomma }}</strong></th>
+                                    <th><strong>$</strong></th>
+                                </tr>
+                                {% endif %}
+                                {% if cours_en_euro %}
+                                <tr>
+                                    <th style="border-left: 1px solid #796b6b;;"><strong>{{total.prix_euro|intcomma}}</strong></th>
+                                    <th><strong>€</strong></th>
+                                </tr>
+                                {% endif %}
+                            </tfoot>
+                        </table>
+                        <p style="padding: 2rem; padding-left: 5rem; padding-right: 5rem; text-align: center; font-size: 1.2rem;">Arrete la presente facture à la somme de: <strong>{{total.letter}} francs CFA</strong></p>
+                        <div class="signature-section">
+                            <div class="ui card signature-item">
+                                <div class="content center aligned text segment">
+                                    <small class="ui sub header">
+                                        <div class="header selected-text">Vente no: </div>
+                                        {{ vente.numero }}
+                                    </small>
+                                    <small class="ui sub header">
+                                        <div class="header selected-text">Imprime le: </div>
+                                        {% now "d/m/Y H:i:s" %}
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="ui card signature-item">
+                                <div class="content">
+                                    <div class=""><strong>Le Directeur de suivi de la Règlementation, de l'Achat et de la Commercialisation</strong></div>
+                                </div>
+                                <div class="content" style="min-height: 5rem">
+
+                                </div>
+                            </div>
+                            <div class="ui card signature-item">
+                                <div class="content">
+                                    <div class="header">Le Directeur Général</div>
+                                </div>
+                                <div class="content" style="min-height: 5rem">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- <footer>
+        <p>Footer Content</p>
+    </footer> -->
+</body>
+
+</html>
