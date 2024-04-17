@@ -15,9 +15,7 @@ FICHE_SUVI_EXPLOIATION_URL = "https://kf.kobotoolbox.org/api/v2/assets/a9FDuHSBH
 
 FICHE_CONVENTION_URL = "https://kf.kobotoolbox.org/api/v2/assets/aEGBo6e235W3ix3inr6SC7/data.json"
 
-FICHE_GUIDE_URL = "https://kf.kobotoolbox.org/api/v2/assets/a6qQZRxxmCLPXwE88TMWXJ/data.json"
-
-FICHE_VISITE_URL = "https://kf.kobotoolbox.org/api/v2/assets/a6qQZRxxmCLPXwE88TMWXJ/data.json"
+FICHE_GUIDE_URL = "https://kf.kobotoolbox.org/api/v2/assets/aJ5368KrmxhEkaMqQG9bH2/data.json"
 
 
 FICHE_ACCIDENT_URL = "https://kf.kobotoolbox.org/api/v2/assets/aKE5jtyUgd7GrDwx9GTUQP/data.json"

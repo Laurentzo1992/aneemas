@@ -62,7 +62,7 @@ def save_api_data_to_database_prelevement(request, identifiant):
             identifiant=result['identifiant'],
             date_prelevement = result['date_prelev'],
             commune = result['commune'],
-            #point_prelevement =result['point'],
+            point_prelevement =result['point'],
             coordonnees = result['coordonnees'],
             coordonnees_manu = result['coordonnees_manu'],
             lieu = result['lieu'],

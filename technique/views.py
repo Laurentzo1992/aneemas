@@ -1,3 +1,4 @@
+from modules_externe.api_url import FICHE_GUIDE_URL
 from modules_externe.imports import *
 from technique.serializers import *
 ##################################################################################################
@@ -218,7 +219,7 @@ def index(request):
 def carte(request, id):
     result  = get_object_or_404(Fichenrolements, id=id)
     fiche = LigneTypeCarte.objects.filter(fiche=result)
-    return render(request, 'technique/enrolement/carte.html', {'result': result, 'types_de_carte': types_de_carte})
+    return render(request, 'technique/enrolement/carte.html', {'result': result})
     
 
 @login_required
@@ -269,6 +270,78 @@ def delete(request, id):
 #########################################################################
 # Fiche guide guide autorité
 #########################################################################
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def get_api_guide(request):
+    #recuperer les données de l'api 
+    data = get_data_by_api_guide(FICHE_GUIDE_URL)
+    #recuperer les données existant dans la base de données
+    existing_ids = Formguidautorites.objects.values_list('identifiant', flat=True)
+    #Filtrer les données qui existent pas dans la base
+    new_data = [item for item in data if item['identifiant'] not in existing_ids]
+    paginator = Paginator(new_data, 8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    context = {"page_obj":page_obj}
+    return render(request, 'technique/visite_activite/api_data1.html', context)
+
+
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def save_api_data_to_database_guide(request, identifiant):
+    # Vérifiez si l'identifiant existe déjà dans la base de données
+    if Formguidautorites.objects.filter(identifiant=identifiant).exists():
+        messages.error(request, "Données déjà synchronisées !")
+        return redirect('list_enrolement')
+    
+    # Obtenir l'élément de l'API en fonction de l'ID
+    result = get_api_data_id_guide(FICHE_GUIDE_URL, identifiant)
+
+    if result:
+        # Créez une instance de votre modèle avec les données de l'API
+        fiche = Formguidautorites(
+            identifiant=result['identifiant'],
+            com_site=result['nom'],
+            com_region=result['prenom'],
+            com_province=result['date'],
+            commune=result['localite'],
+            nom_prenom_enqueteur=result['telephone'],
+            nom_prenom_autorite=result['telephone2'],
+            village_site=result['quittance'],
+            nom_site=result['engagement'],
+            nom_prenom_ressouce=result['num_carte'],
+            date_visite=result['observation'],
+            statut_site=result['ref_piece']
+        )
+
+        # Enregistrez l'instance dans la base de données
+        fiche.save()
+        
+        for type_carte_api_id in result['type_carte']:
+            type_carte_id = Typecarte.objects.get(id=type_carte_api_id)
+            LigneTypeCarte.objects.create(carte=type_carte_id, fiche=fiche)
+
+        # Redirigez vers la page liste des enrolments
+        messages.success(request, "Données enregistrées avec succès !")
+        return redirect('guide_fiche')
+    else:
+        # Gérer le cas où l'ID spécifié n'est pas trouvé
+        messages.error(request, "ID non trouvé !")
+        return redirect('api_guide')
+ 
+
+@login_required
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def syn_detail_guide(request, identifiant):
+    result = get_api_data_id_guide(FICHE_GUIDE_URL, identifiant)
+    if result:
+        return render(request, 'technique/visite_activite/detail_guide.html', {"result":result})
+    else:
+        return render(request, 'technique/visite_activite/erreur_guide.html', {'message': 'ID non trouvé'})
+
+
+
 @login_required
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def index1(request):
@@ -418,16 +491,16 @@ def save_api_data_to_database_conv(request, identifiant):
         province2 = Provinces.objects.get(id=int(result['com_province2']))
         # Créez une instance de votre modèle avec les données de l'API
         demande = Demandeconventions(
-            identifiant=result['identifiant'],
-            nombre_hectare=result['q2'],
-            localite=result['localite_demande'],
+            identifiant=result.get('identifiant', ''),
+            nombre_hectare=result.get('q2', 0),
+            localite=result.get('localite_demande', ''),
             region=region1,
             province=province1,
             commune=result['commune1'],
             identifiaction=result['q4'],
             demande=result['q5'],
             nom_demandeur=result['nom_personne'],
-            ref_piece=result['ref'],
+            ref_piece=result.get('ref', ''),
             localite_demandeur=result['nom_localite2'],
             region_demandeur=region2,
             province_demandeur=province2,
