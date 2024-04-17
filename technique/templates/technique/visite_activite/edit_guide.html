@@ -33,32 +33,7 @@ modifier guide
             {% comment %} {% bootstrap_form form %} {% endcomment %}
 
          
-            <div class="row">
-               <div class="col-4">{{form.com_region|as_crispy_field}}</div>
-               <div class="col-4">{{form.com_province|as_crispy_field}}</div>
-               <div class="col-4">{{form.commune|as_crispy_field}}</div>
-            </div>
-   
-            <div class="row">
-             
-               <div class="col-4">{{form.com_site|as_crispy_field}}</div>
-               <div class="col-4">{{form.nom_prenom_enqueteur|as_crispy_field}}</div>
-               <div class="col-4">{{form.nom_prenom_autorite|as_crispy_field}}</div>
-              
-            </div>
-   
-   
-            <div class="row">
-               <div class="col-4">{{form.village_site|as_crispy_field}}</div>
-               <div class="col-4">{{form.nom_site|as_crispy_field}}</div>
-               <div class="col-4">{{form.nom_prenom_ressouce|as_crispy_field}}</div>
-           
-            </div>
-   
-            <div class="row">
-               <div class="col-12">{{form.date_visite|as_crispy_field}}</div>
-               <div class="col-12">{{form.statut_site|as_crispy_field}}</div>
-           </div>
+            {{ form|crispy }}
            
 
          <div class="mt-4" style="width: 100p%;">
@@ -87,33 +62,46 @@ modifier guide
    <link href="{% static 'select2/dist/css/select2.min.css' %}" rel="stylesheet" type="text/css">
    
    <script>
-     $("#id_region").select2({
-      placeholder: "selectionner la region",
-      allowClear: true
-     });
-     $("#id_province").select2({
-      placeholder: "selectionner la province",
-      allowClear: true
-     });
-   
-   
-     $("#id_commune").select2({
-       placeholder: "selectionner la Commune",
-       allowClear: true
-      });
-   
-   
-      $("#id_region_demandeur").select2({
-         placeholder: "selectionner la region du demandeur",
+      $("#id_region").select2({
+         placeholder: "selectionner la region",
          allowClear: true
         });
-   
-   
-        $("#id_province_demandeur").select2({
-         placeholder: "selectionner la province du demandeur",
+        $("#id_province").select2({
+         placeholder: "selectionner la province",
          allowClear: true
         });
-        
+      
+      
+        $("#id_commune").select2({
+          placeholder: "selectionner la Commune",
+          allowClear: true
+         });
+      
+      
+         $("#id_com_province").select2({
+            placeholder: "Province",
+            allowClear: true
+           });
+      
+      
+           $("#id_com_region").select2({
+            placeholder: "Region",
+            allowClear: true
+           });
+           $("#id_bureau_enc").select2({
+            placeholder: "Region",
+            allowClear: true
+           });
+   
+           $("#id_com_site").select2({
+            placeholder: "Region",
+            allowClear: true
+           });
+   
+           $("#id_nom_site").select2({
+            placeholder: "Region",
+            allowClear: true
+           });
    </script>
    
    {% endblock extra_script %}

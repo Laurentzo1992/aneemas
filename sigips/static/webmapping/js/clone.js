@@ -157,9 +157,9 @@ function displayMarkers(results) {
             });
 
             const markerContent = `
-                <br><b>Commune : </b>${result.commune}
+                <br><b>Commune : </b>${result.commune.nom_commune}
                 <br><b>Village : </b>${result.village}
-                <br><b>Type de site : </b>${result.typesite}
+                <br><b>Type de site : </b>${result.typesite.libelle}
                 <br><b>Status : </b>${result.statut ? result.statut_id : 'N/A'}
                 <br> <b>Nom du site : </b>${result.nom_site}
                 <br><b>Observation géologique du site : </b>${result.obs_geo}

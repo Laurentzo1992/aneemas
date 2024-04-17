@@ -30,36 +30,8 @@ ajout guide
       <form method="POST" class="card p-3 mt-5"  action="{% url 'add_guide' %}" autocomplete="on" enctype="multipart/form-data"> 
             {% csrf_token %}
 
-            {% comment %} {% bootstrap_form form %} {% endcomment %}
 
-         
-            <div class="row">
-               <div class="col-4">{{form.com_region|as_crispy_field}}</div>
-               <div class="col-4">{{form.com_province|as_crispy_field}}</div>
-               <div class="col-4">{{form.commune|as_crispy_field}}</div>
-            </div>
-   
-            <div class="row">
-             
-               <div class="col-4">{{form.com_site|as_crispy_field}}</div>
-               <div class="col-4">{{form.nom_prenom_enqueteur|as_crispy_field}}</div>
-               <div class="col-4">{{form.nom_prenom_autorite|as_crispy_field}}</div>
-              
-            </div>
-   
-   
-            <div class="row">
-               <div class="col-4">{{form.village_site|as_crispy_field}}</div>
-               <div class="col-4">{{form.nom_site|as_crispy_field}}</div>
-               <div class="col-4">{{form.nom_prenom_ressouce|as_crispy_field}}</div>
-           
-            </div>
-   
-            <div class="row">
-               <div class="col-12">{{form.date_visite|as_crispy_field}}</div>
-               <div class="col-12">{{form.statut_site|as_crispy_field}}</div>
-           </div>
-
+            {{ form|crispy }}
 
          <div class="mt-4" style="width: 100p%;">
             <button style= "font-size: 15px;" type="submit" class="btn btn-success mb-3">
@@ -103,16 +75,31 @@ ajout guide
       });
    
    
-      $("#id_region_demandeur").select2({
-         placeholder: "selectionner la region du demandeur",
+      $("#id_com_province").select2({
+         placeholder: "Province",
          allowClear: true
         });
    
    
-        $("#id_province_demandeur").select2({
-         placeholder: "selectionner la province du demandeur",
+        $("#id_com_region").select2({
+         placeholder: "Region",
          allowClear: true
         });
+        $("#id_bureau_enc").select2({
+         placeholder: "Region",
+         allowClear: true
+        });
+
+        $("#id_com_site").select2({
+         placeholder: "Region",
+         allowClear: true
+        });
+
+        $("#id_nom_site").select2({
+         placeholder: "Region",
+         allowClear: true
+        });
+        
         
    </script>
    

@@ -39,6 +39,7 @@ from modules_externe.api_enrolment import get_data_by_api_enrolement, get_api_da
 from modules_externe.api_convention import get_data_by_api_convention, get_api_data_id_convention
 from modules_externe.api_accident import get_data_by_api_accident, get_api_data_id_accident
 from modules_externe.api_rapport import get_data_by_api_rapport, get_api_data_id_rapport
+from modules_externe.api_guide import get_api_data_id_guide, get_data_by_api_guide
 from modules_externe.api_url import FICHE_ENROLMENT_URL, FICHE_CONVENTION_URL, FICHE_ACCIDENT_URL, FICHE_RAPPORT_URL
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage

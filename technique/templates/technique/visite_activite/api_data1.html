@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load static %}
 {% block page_title %}
-  rapport d'activité
+  Guide autorité
 {% endblock page_title %}
 
 {% block extra_css %}
@@ -27,12 +27,12 @@
     <thead>
       <tr class="bg-success">
         <th scope="col">Id</th>
-        <th scope="col">Nom</th>
-        <th scope="col">Prenom</th>
-        <th scope="col">Localite</th>
-        <th scope="col">ref_piece</th>
-        <th scope="col">Enrolé le</th>
-        <th scope="col">BE</th>
+        <th scope="col">Bureaux</th>
+        <th scope="col">Date visite</th>
+        <th scope="col">Site</th>
+        <th scope="col">Coordonnées</th>
+        <th scope="col">Date de mission</th>
+        <th scope="col">Envoyeur</th>
         <th scope="col">
           action &nbsp;
         </th>
@@ -41,25 +41,23 @@
     <tbody>
         {% for result in page_obj %}
       <tr>
-        <td>{{ result.identifiant }}</td>
-        <td>{{result.nom}}</td>
-        <td>{{result.prenom}}</td>
-        <td>{{result.localite}}</td>
-        <td>{{result.ref_piece}}</td>
-        <td>{{result.date}}</td>
+        <td>{{ result.identifiant}}</td>
+        <td>{{result.bureau_enc}}</td>
+        <td>{{result.date_visite}}</td>
+        <td>{{result.com_site}}</td>
+        <td>{{result.point1}}</td>
+        <td>{{result.date_miss}}</td>
         {% if result.submitted_by %}
         <td>{{result.submitted_by}}</td>
         {% else %}
         <td><i class="fa-brands fa-discord"></i></td>
         {% endif %}
         <td>
-          <a href="{% url 'syn3' result.identifiant %}" title="validé">
+          <a href="{% url 'syn_detail_guide' result.identifiant %}" title="validé">
             <i class="fas fa-check-circle text-danger"></i>
           </a>
           &nbsp;
-          <a data-bs-toggle="modal" data-bs-target="#staticBackdrop{{result.identifiant}}">
-            <i class="fas fa-eye text-secondary"></i>
-          </a>
+          
         </td>
       </tr>
       {% include 'technique/visite_activite/detail_guide.html' %}

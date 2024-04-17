@@ -59,6 +59,10 @@ class FormguidautoritesForm(forms.ModelForm):
         
         widgets = {
             'date_visite': forms.DateInput(attrs={'type': 'date'}),
+            'date_miss': forms.DateInput(attrs={'type': 'date'}),
+            'personne': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'personne2': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+            'adresse': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
         }
         
         

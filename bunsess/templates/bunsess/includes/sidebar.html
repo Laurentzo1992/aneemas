@@ -22,8 +22,8 @@
                                 <li class="sidebar-item"><a href="{% url 'site' %}" class="sidebar-link"><i class="mdi mdi-sitemap"></i><span class="hide-menu"> Sites </span></a></li>
                                 <li class="sidebar-item"><a href="{% url 'convention' %}" class="sidebar-link"><i class="mdi mdi-book-open"></i><span class="hide-menu"> Convention </span></a></li>
                                 <li class="sidebar-item"><a href="{% url 'incident' %}" class="sidebar-link"><i class="mdi mdi-message-alert"></i><span class="hide-menu"> Incident:Acccident </span></a></li>
-                                <li class="sidebar-item"><a href="{% url 'visite_fiche' %}" class="sidebar-link"><i class="mdi mdi-account-edit"></i><span class="hide-menu"> Visite de site</span></a></li>
-                                <li class="sidebar-item"><a href="{% url 'guide_fiche' %}" class="sidebar-link"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Guide autorité</span></a></li>
+                                {% comment %} <li class="sidebar-item"><a href="{% url 'visite_fiche' %}" class="sidebar-link"><i class="mdi mdi-account-edit"></i><span class="hide-menu"> Visite</span></a></li> {% endcomment %}
+                                <li class="sidebar-item"><a href="{% url 'guide_fiche' %}" class="sidebar-link"><i class="mdi mdi-account-edit"></i><span class="hide-menu">Visite site</span></a></li>
                                 <li class="sidebar-item"><a href="{% url 'rapport' %}" class="sidebar-link"><i class="mdi mdi-account-edit"></i><span class="hide-menu"> Rapport d'activité</span></a></li>
                                 <li class="sidebar-item"><a href="{% url 'list_enrolement' %}" class="sidebar-link"><i class="mdi mdi-account-edit"></i><span class="hide-menu"> Enrolement</span></a></li>
                             </ul>
