@@ -19,7 +19,9 @@ SECRET_KEY = "django-insecure-jm8&!s!48@8kw@hhdkj2avw)_9e-+pl_qe)^3v#$z)3*e(czzb
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = True
+DEBUG = False
+
+#DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -177,7 +179,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+""" STATIC_URL = "static/"
 
 
 STATIC_ROOT = BASE_DIR / 'static'
@@ -188,8 +190,23 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "sigips/static/media")
+MEDIA_ROOT = os.path.join(BASE_DIR, "sigips/static/media") """
 
+
+#####PRODUCTION"
+
+STATIC_URL = "static/"
+
+
+STATIC_ROOT = BASE_DIR / 'static'
+
+
+STATICFILES_DIRS = BASE_DIR / 'static'
+
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = BASE_DIR / 'media'
 
 
 LEAFLET_CONFIG = {
